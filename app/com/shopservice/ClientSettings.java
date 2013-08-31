@@ -1,5 +1,8 @@
 package com.shopservice;
 
+import play.db.ebean.Model;
+
+import javax.persistence.Id;
 import java.util.List;
 
 /**
