@@ -2,9 +2,12 @@ package com.shopservice.refreshers;
 
 import com.shopservice.PriceListType;
 import com.shopservice.Services;
+import com.shopservice.Util;
+import com.shopservice.domain.Product;
+import com.shopservice.pricelist.models.price.Catalog;
 import com.shopservice.pricelist.models.price.Item;
 import com.shopservice.pricelist.models.price.Price;
-import com.shopservice.queries.ItemQueryById;
+import com.shopservice.queries.ProductQueryById;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -15,6 +18,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static com.shopservice.Services.clientSettings;
+import static com.shopservice.Util.save;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,30 +32,32 @@ public class PriceFormatRefresher implements PriceListRefresher {
     public void refresh(String clientId) throws SQLException, JAXBException, FileNotFoundException {
         List<String> productIds = clientSettings.getProductIds(clientId);
 
+        Catalog catalog = new Catalog();
         Price price = new Price();
         price.setName(clientSettings.getSiteName(clientId));
         price.setUrl(clientSettings.getSiteUrl(clientId));
 
         for (String productId : productIds) {
-            Item item = Services.getDataBaseManager(clientId).executeQueryForOne( new ItemQueryById(clientId,productId) );
-            price.addItem(item);
+            Product product = Services.getDataBaseManager(clientId).executeQueryForOne( new ProductQueryById( clientId,productId ) );
+            price.addItem( createItem(product, catalog) );
         }
+
+        price.setCatalog(catalog.getCategories());
 
         save(price, PriceListType.price.getFileName(clientId));
     }
 
-    public void  save (Price price, String filePath) throws JAXBException, FileNotFoundException {
-        JAXBContext context = JAXBContext.newInstance( Price.class );
+    private Item createItem(Product product, Catalog catalog) {
+        if (product.url == null);
+        //todo ;
 
-        // marshall into XML via System.out
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, true );
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, "windows-1251");
+        if (product.imageUrl == null);
+        //todo ;
 
-        FileOutputStream outputStream = new FileOutputStream(filePath);
+        String categoryId = catalog.getManufacturerId(product.categoryName, product.manufacturer);
 
-
-        marshaller.marshal( price, outputStream);
-
+        return new Item(product.id, product.name, product.url, product.price, categoryId, product.manufacturer, product.imageUrl, product.description );
     }
+
+
 }

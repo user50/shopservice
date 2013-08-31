@@ -14,10 +14,10 @@ import java.util.Map;
  */
 public class Catalog {
 
-    public static int count = 1;
-    public static HashMap<String,Category> categoryHashMap = new HashMap<String, Category>();
+    public int count = 1;
+    public HashMap<String,Category> categoryHashMap = new HashMap<String, Category>();
 
-    public static String getManufacturerId(String categoryName, String manufacturerName){
+    public String getManufacturerId(String categoryName, String manufacturerName){
         if (!categoryHashMap.keySet().contains(categoryName))
             categoryHashMap.put(categoryName,new Category(categoryName));
 
@@ -27,8 +27,8 @@ public class Catalog {
         return categoryHashMap.get(categoryName).manufacturersMap.get(manufacturerName).id;
     }
 
-    public static List<com.shopservice.pricelist.models.price.Category>   getCategories(){
-        List<com.shopservice.pricelist.models.price.Category> listCategories = new ArrayList<>();
+    public List<com.shopservice.pricelist.models.price.Category>   getCategories(){
+        List<com.shopservice.pricelist.models.price.Category> listCategories = new ArrayList<com.shopservice.pricelist.models.price.Category>();
         for(Category category: categoryHashMap.values()){
             listCategories.add(new com.shopservice.pricelist.models.price.Category(category.id, category.name));
             for(Manufacturer manufacturer: category.manufacturersMap.values())
@@ -39,7 +39,7 @@ public class Catalog {
         return listCategories;
     }
 
-    private static class Manufacturer{
+    private class Manufacturer{
 
         String name;
         String id;
@@ -50,7 +50,7 @@ public class Catalog {
         }
     }
 
-    private  static  class Category{
+    private  class Category{
 
         String id;
         String name;
@@ -69,10 +69,4 @@ public class Catalog {
             return manufacturersMap.keySet().contains(manufacturerName);
         }
     }
-
-    public static void clear(){
-        categoryHashMap.clear();
-    }
-
-
 }
