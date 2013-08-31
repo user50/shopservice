@@ -81,4 +81,8 @@ public class DatabaseManager {
             connectionPool.releaseConnection(connection);
         }
     }
+
+    public void setConnectionPool(ConnectionPool connectionPool) {
+        this.connectionPool = connectionPool;
+    }
 }

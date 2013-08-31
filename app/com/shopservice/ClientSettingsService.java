@@ -147,4 +147,8 @@ public class ClientSettingsService {
             return resultSet.getString("result");
         }
     }
+
+    public DatabaseManager getDatabaseManager() {
+        return databaseManager;
+    }
 }
