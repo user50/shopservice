@@ -11,11 +11,7 @@ import java.sql.SQLException;
  * Time: 14:43
  * To change this template use File | Settings | File Templates.
  */
-public interface Query<T> {
-
-    public String getRawSql();
-
-    public void prepare(PreparedStatement statement) throws SQLException;
+public interface Query<T> extends SqlOperation {
 
     public T fill(ResultSet resultSet) throws SQLException;
 }

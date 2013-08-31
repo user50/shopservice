@@ -1,6 +1,7 @@
 package com.shopservice;
 
 import com.shopservice.queries.Query;
+import com.shopservice.queries.Update;
 import play.db.DB;
 
 import java.sql.Connection;
@@ -32,7 +33,7 @@ public class ClientSettings {
                 try {
                     connection.close();
                 } catch (SQLException e) {
-                    // todo log connection does not close
+                    // todo log that the connection does not close
                     e.printStackTrace();
                 }
             }
@@ -60,9 +61,42 @@ public class ClientSettings {
 
     }
 
-    public void setProductIds(List<String> productIds)
-    {
-        //todo
+    public void setProductIds(String clientId, List<String> productIds) throws SQLException {
+        removeProductIds(clientId);
+
+        for (String productId : productIds)
+            addProductId(clientId, productId);
+
+    }
+
+    private void addProductId(final String clientId, final String productId) throws SQLException {
+        databaseManager.executeUpdate(new Update() {
+            @Override
+            public String getRawSql() {
+                return "INSERT INTO `ProductIDs` (`productIds`, `clientSettingsId`) VALUES (?, ?);";
+            }
+
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setObject(1, productId);
+                statement.setObject(2, clientId);
+            }
+        });
+    }
+
+    private void removeProductIds(final String clientId) throws SQLException {
+        databaseManager.executeUpdate(new Update() {
+            @Override
+            public String getRawSql() {
+                return "DELETE ProductIDs.* FROM ProductIDs " +
+                        "WHERE clientSettingsId = ?";
+            }
+
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setObject(1, clientId);
+            }
+        });
     }
 
     public String getSiteName(String clientId) throws SQLException {
@@ -80,6 +114,16 @@ public class ClientSettings {
             @Override
             public String getRawSql() {
                 return "SELECT siteUrl AS result FROM ClientSettings " +
+                        "WHERE id = ?";
+            }
+        });
+    }
+
+    public String getDatabaseUrl(String clientId) throws SQLException {
+        return databaseManager.executeQueryForOne(new ClientSettingsQuery(clientId) {
+            @Override
+            public String getRawSql() {
+                return "SELECT databaseUrl AS result FROM ClientSettings " +
                         "WHERE id = ?";
             }
         });

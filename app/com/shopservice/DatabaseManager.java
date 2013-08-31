@@ -1,6 +1,7 @@
 package com.shopservice;
 
 import com.shopservice.queries.Query;
+import com.shopservice.queries.Update;
 import sun.jdbc.odbc.ee.ConnectionPoolFactory;
 
 import java.sql.Connection;
@@ -62,5 +63,23 @@ public class DatabaseManager {
             throw new RuntimeException("Ambiguity during executing query.");
 
         return list.isEmpty()? null:list.get(0);
+    }
+
+    public int executeUpdate(Update update) throws SQLException {
+        Connection connection = connectionPool.getConnection();
+        PreparedStatement preparedStatement = null;
+        try {
+            String rawSql = update.getRawSql();
+            preparedStatement = connection.prepareStatement(rawSql);
+            update.prepare(connection.prepareStatement(rawSql));
+
+            return preparedStatement.executeUpdate();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            connectionPool.releaseConnection(connection);
+        }
     }
 }

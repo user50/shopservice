@@ -15,6 +15,7 @@ CREATE  TABLE IF NOT EXISTS `shopservice`.`ClientSettings` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `siteName` VARCHAR(100) NULL ,
   `siteUrl` VARCHAR(100) NULL ,
+  `databaseUrl` VARCHAR(200) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
