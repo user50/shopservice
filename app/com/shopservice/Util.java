@@ -13,7 +13,7 @@ public class Util {
 
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, true );
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, "windows-1251");
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, "utf-8");
 
         FileOutputStream outputStream = new FileOutputStream(filePath);
 

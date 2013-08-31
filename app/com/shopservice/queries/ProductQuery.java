@@ -1,7 +1,6 @@
 package com.shopservice.queries;
 
 import com.shopservice.domain.Product;
-import com.shopservice.pricelist.models.price.Item;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,10 +27,11 @@ public abstract class ProductQuery implements Query<Product> {
         product.categoryName = resultSet.getString("categoryName");
         product.manufacturer = resultSet.getString("manufacturer");
         product.name = resultSet.getString("name");
-        product.available = resultSet.getBoolean("available");
+        product.price = resultSet.getDouble("price");
+        //product.available = resultSet.getBoolean("available");
         product.shortDescription = resultSet.getString("shortDescription");
         product.description = resultSet.getString("description");
-        product.warranty = resultSet.getString("warranty");
+        //product.warranty = resultSet.getString("warranty");
         product.url = resultSet.getString("url");
         product.imageUrl = resultSet.getString("imageUrl");
 

@@ -44,7 +44,7 @@ public class ClientSettingsService {
         return databaseManager.executeQueryForList(new Query<String>() {
             @Override
             public String getRawSql() {
-                return "SELECT productIds FROM ProductIDs " +
+                return "SELECT productIds FROM productiDs " +
                         "WHERE clientSettingsId =  ?";
             }
 
@@ -104,7 +104,7 @@ public class ClientSettingsService {
 
             @Override
             public String fill(ResultSet resultSet) throws SQLException {
-                return resultSet.getString("siteName");
+                return resultSet.getString("result");
             }
 
             @Override
@@ -125,7 +125,7 @@ public class ClientSettingsService {
 
             @Override
             public String fill(ResultSet resultSet) throws SQLException {
-                return resultSet.getString("siteUrl");
+                return resultSet.getString("result");
             }
 
             @Override
@@ -146,7 +146,7 @@ public class ClientSettingsService {
 
             @Override
             public String fill(ResultSet resultSet) throws SQLException {
-                return resultSet.getString("databaseUrl");
+                return resultSet.getString("result");
             }
 
             @Override
