@@ -1,7 +1,6 @@
 package com.shopservice;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -20,6 +19,7 @@ public class Queries {
     private XPath xPath;
 
     private static final String CONFIGURATION_FILE = "conf" + File.separator + "queries.conf";
+    private static final String EMPTY = "";
 
     public Queries(){
         try {
@@ -37,17 +37,15 @@ public class Queries {
         xPath =  XPathFactory.newInstance().newXPath();
     }
 
-    public String getProductQueriesById(String clientId){
+    public String getProductQueriesById(String clientId) {
         String expression = "/root/client[@id='"+clientId+"']/item/byId";
-        System.out.println(expression);
-        Node node = null;
         try {
-            node = (Node) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+            return ((String) xPath.compile(expression).evaluate(document, XPathConstants.STRING)).trim();
         } catch (XPathExpressionException e) {
-            e.printStackTrace();
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
-        return node.getFirstChild().getNodeValue();
+        return EMPTY;
     }
 
 }
