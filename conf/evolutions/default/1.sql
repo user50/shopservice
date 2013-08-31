@@ -11,13 +11,20 @@ USE `shopservice` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `shopservice`.`ClientSettings` ;
 
+
+
+
+
+
+
+
 CREATE  TABLE IF NOT EXISTS `shopservice`.`ClientSettings` (
   `id` VARCHAR(100) NOT NULL ,
   `siteName` VARCHAR(100) NULL ,
   `siteUrl` VARCHAR(100) NULL ,
   `databaseUrl` VARCHAR(200) NULL ,
   PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+  ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
