@@ -2,22 +2,18 @@ package com.shopservice.refreshers;
 
 import com.shopservice.PriceListType;
 import com.shopservice.Services;
-import com.shopservice.Util;
 import com.shopservice.domain.Product;
 import com.shopservice.pricelist.models.price.Catalog;
 import com.shopservice.pricelist.models.price.Item;
 import com.shopservice.pricelist.models.price.Price;
 import com.shopservice.queries.ProductQueryById;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.util.List;
 
-import static com.shopservice.Services.clientSettings;
+import static com.shopservice.Services.CLIENT_SETTINGS_SERVICE;
 import static com.shopservice.Util.save;
 
 /**
@@ -30,12 +26,12 @@ import static com.shopservice.Util.save;
 public class PriceFormatRefresher implements PriceListRefresher {
     @Override
     public void refresh(String clientId) throws SQLException, JAXBException, FileNotFoundException {
-        List<String> productIds = clientSettings.getProductIds(clientId);
+        List<String> productIds = CLIENT_SETTINGS_SERVICE.getProductIds(clientId);
 
         Catalog catalog = new Catalog();
         Price price = new Price();
-        price.setName(clientSettings.getSiteName(clientId));
-        price.setUrl(clientSettings.getSiteUrl(clientId));
+        price.setName(CLIENT_SETTINGS_SERVICE.getSiteName(clientId));
+        price.setUrl(CLIENT_SETTINGS_SERVICE.getSiteUrl(clientId));
 
         for (String productId : productIds) {
             Product product = Services.getDataBaseManager(clientId).executeQueryForOne( new ProductQueryById( clientId,productId ) );

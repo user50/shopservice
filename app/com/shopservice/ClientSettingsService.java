@@ -17,11 +17,11 @@ import java.util.List;
  * Time: 13:28
  * To change this template use File | Settings | File Templates.
  */
-public class ClientSettings {
+public class ClientSettingsService {
 
     private DatabaseManager databaseManager;
 
-    public ClientSettings() {
+    public ClientSettingsService() {
         databaseManager = new DatabaseManager(new ConnectionPool() {
             @Override
             public Connection getConnection() {

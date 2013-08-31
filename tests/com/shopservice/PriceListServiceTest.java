@@ -2,6 +2,7 @@ package com.shopservice;
 
 import org.junit.Assert;
 import org.junit.Test;
+import play.db.DB;
 
 import java.io.File;
 
@@ -29,6 +30,5 @@ public class PriceListServiceTest extends Assert {
 
         assertNull(priceList);
     }
-
 
 }

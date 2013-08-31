@@ -9,7 +9,7 @@ package com.shopservice;
  */
 public class Services {
 
-    public static final ClientSettings clientSettings = new ClientSettings();
+    public static final ClientSettingsService CLIENT_SETTINGS_SERVICE = new ClientSettingsService();
 
     public static final PriceListService priceListService = new PriceListService();
 
