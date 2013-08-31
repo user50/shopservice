@@ -99,32 +99,65 @@ public class ClientSettingsService {
         });
     }
 
-    public String getSiteName(String clientId) throws SQLException {
-        return databaseManager.executeQueryForOne(new ClientSettingsQuery(clientId) {
+    public String getSiteName(final String clientId) throws SQLException {
+        return databaseManager.executeQueryForOne(new Query<String>(){
+
+            @Override
+            public String fill(ResultSet resultSet) throws SQLException {
+                return resultSet.getString("siteName");
+            }
+
             @Override
             public String getRawSql() {
-                return "SELECT SiteName AS result FROM ClientSettings " +
+                return "SELECT siteName AS result FROM ClientSettings " +
                         "WHERE id = ?";
+            }
+
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setObject(1, clientId);
             }
         });
     }
 
-    public String getSiteUrl(String clientId) throws SQLException {
-        return databaseManager.executeQueryForOne(new ClientSettingsQuery(clientId) {
+    public String getSiteUrl(final String clientId) throws SQLException {
+        return databaseManager.executeQueryForOne(new Query<String>(){
+
+            @Override
+            public String fill(ResultSet resultSet) throws SQLException {
+                return resultSet.getString("siteUrl");
+            }
+
             @Override
             public String getRawSql() {
                 return "SELECT siteUrl AS result FROM ClientSettings " +
                         "WHERE id = ?";
             }
+
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setObject(1, clientId);
+            }
         });
     }
 
-    public String getDatabaseUrl(String clientId) throws SQLException {
-        return databaseManager.executeQueryForOne(new ClientSettingsQuery(clientId) {
+    public String getDatabaseUrl(final String clientId) throws SQLException {
+        return databaseManager.executeQueryForOne(new Query<String>(){
+
+            @Override
+            public String fill(ResultSet resultSet) throws SQLException {
+                return resultSet.getString("databaseUrl");
+            }
+
             @Override
             public String getRawSql() {
                 return "SELECT databaseUrl AS result FROM ClientSettings " +
                         "WHERE id = ?";
+            }
+
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setObject(1, clientId);
             }
         });
     }
