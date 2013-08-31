@@ -32,7 +32,7 @@ public class DatabaseManager {
         try {
             String rawSql = query.getRawSql();
             preparedStatement = connection.prepareStatement(rawSql);
-            query.prepare(connection.prepareStatement(rawSql));
+            query.prepare(preparedStatement);
 
             resultSet = preparedStatement.executeQuery();
 

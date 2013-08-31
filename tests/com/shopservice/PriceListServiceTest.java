@@ -2,9 +2,11 @@ package com.shopservice;
 
 import org.junit.Assert;
 import org.junit.Test;
-import play.db.DB;
 
+import javax.xml.bind.JAXBException;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,6 +31,12 @@ public class PriceListServiceTest extends Assert {
         File priceList = priceListService.getPriceList("client2", PriceListType.price);
 
         assertNull(priceList);
+    }
+
+    @Test
+    public void testRefresh() throws JAXBException, FileNotFoundException, SQLException {
+        PriceListService priceListService = new PriceListService();
+        priceListService.refreshPriceList("client1",PriceListType.price);
     }
 
 }
