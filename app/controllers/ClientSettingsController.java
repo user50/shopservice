@@ -24,4 +24,9 @@ public class ClientSettingsController extends Controller {
     {
         return TODO;
     }
+
+    public static Result getProductIds(String id)
+    {
+        return TODO;
+    }
 }

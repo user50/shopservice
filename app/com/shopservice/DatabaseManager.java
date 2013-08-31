@@ -2,7 +2,6 @@ package com.shopservice;
 
 import com.shopservice.queries.Query;
 import com.shopservice.queries.Update;
-import sun.jdbc.odbc.ee.ConnectionPoolFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
