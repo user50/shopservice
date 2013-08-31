@@ -13,6 +13,8 @@ public class Services {
 
     public static final PriceListService priceListService = new PriceListService();
 
+    public static final Queries queries = new Queries();
+
     public static DatabaseManager getDataBaseManager(String clientId) {
         //todo
         return null;

@@ -1,5 +1,7 @@
 package com.shopservice.queries;
 
+import com.shopservice.Services;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -24,16 +26,11 @@ public class ProductQueryById extends ProductQuery {
 
     @Override
     public String getRawSql() {
-        return getQuery(clientId);
+        return Services.queries.getProductQueriesById(clientId);
     }
 
     @Override
     public void prepare(PreparedStatement statement) throws SQLException {
         statement.setObject(1, productId);
-    }
-
-    private String getQuery(String clientId)
-    {
-        return null;//TODO
     }
 }

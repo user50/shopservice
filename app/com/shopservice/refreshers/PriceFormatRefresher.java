@@ -45,10 +45,10 @@ public class PriceFormatRefresher implements PriceListRefresher {
 
     private Item createItem(Product product, Catalog catalog) {
         if (product.url == null);
-        //todo ;
+        //todo get url ;
 
         if (product.imageUrl == null);
-        //todo ;
+        //todo get imageUrl  ;
 
         String categoryId = catalog.getManufacturerId(product.categoryName, product.manufacturer);
 
