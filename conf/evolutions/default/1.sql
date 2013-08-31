@@ -7,11 +7,11 @@ CREATE SCHEMA IF NOT EXISTS `shopservice` DEFAULT CHARACTER SET latin1 COLLATE l
 USE `shopservice` ;
 
 -- -----------------------------------------------------
--- Table `shopservice`.`ClinetSettings`
+-- Table `shopservice`.`ClientSettings`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `shopservice`.`ClinetSettings` ;
+DROP TABLE IF EXISTS `shopservice`.`ClientSettings` ;
 
-CREATE  TABLE IF NOT EXISTS `shopservice`.`ClinetSettings` (
+CREATE  TABLE IF NOT EXISTS `shopservice`.`ClientSettings` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `siteName` VARCHAR(100) NULL ,
   `siteUrl` VARCHAR(100) NULL ,
@@ -32,7 +32,7 @@ CREATE  TABLE IF NOT EXISTS `shopservice`.`ProductIDs` (
   INDEX `fk_ProductIDs_ClinetSettings_idx` (`clientSettingsId` ASC) ,
   CONSTRAINT `fk_ProductIDs_ClinetSettings`
     FOREIGN KEY (`clientSettingsId` )
-    REFERENCES `shopservice`.`ClinetSettings` (`id` )
+    REFERENCES `shopservice`.`ClientSettings` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

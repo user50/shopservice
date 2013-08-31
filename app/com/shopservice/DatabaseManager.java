@@ -1,6 +1,7 @@
 package com.shopservice;
 
 import com.shopservice.queries.Query;
+import sun.jdbc.odbc.ee.ConnectionPoolFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,15 +19,20 @@ import java.util.List;
  */
 public class DatabaseManager {
 
-    private String dbUrl = "jdbc:mysql://localhost/domosed_backup?userName=...&password";
+    private ConnectionPool connectionPool;
+
+    public DatabaseManager(ConnectionPool connectionPool) {
+        this.connectionPool = connectionPool;
+    }
 
     public <T> List<T> executeQueryForList(Query<T> query) throws SQLException {
+        Connection connection = connectionPool.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             String rawSql = query.getRawSql();
-            preparedStatement = getConnection().prepareStatement(rawSql);
-            query.prepare(getConnection().prepareStatement(rawSql));
+            preparedStatement = connection.prepareStatement(rawSql);
+            query.prepare(connection.prepareStatement(rawSql));
 
             resultSet = preparedStatement.executeQuery();
 
@@ -44,6 +50,8 @@ public class DatabaseManager {
             if (preparedStatement != null) {
                 preparedStatement.close();
             }
+
+            connectionPool.releaseConnection(connection);
         }
     }
 
@@ -54,11 +62,5 @@ public class DatabaseManager {
             throw new RuntimeException("Ambiguity during executing query.");
 
         return list.isEmpty()? null:list.get(0);
-    }
-
-    public Connection getConnection()
-    {
-        //TODO
-        return null;
     }
 }
