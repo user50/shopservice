@@ -13,13 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created with IntelliJ IDEA.
- * User: neuser50
- * Date: 26.08.13
- * Time: 13:28
- * To change this template use File | Settings | File Templates.
- */
+
 public class ClientSettingsService {
 
     private DatabaseManager databaseManager;
@@ -53,9 +47,9 @@ public class ClientSettingsService {
                 clientSettings.databaseUrl = resultSet.getString("databaseUrl");
                 clientSettings.siteName = resultSet.getString("siteName");
                 clientSettings.siteUrl = resultSet.getString("siteUrl");
-                clientSettings.pathToProductPage = resultSet.getString("pathToProductPage");
                 clientSettings.pathToProductImage = resultSet.getString("pathToProductImage");
-                
+                clientSettings.pathToProductPage = resultSet.getString("pathToProductPage");
+
                 if (resultSet.getString("products") != null)
                     clientSettings.productIds = Arrays.asList( resultSet.getString("products").split(",") );
 
@@ -98,6 +92,8 @@ public class ClientSettingsService {
                 statement.setObject(2, clientSettings.siteUrl);
                 statement.setObject(3, clientSettings.databaseUrl);
                 statement.setObject(4, clientSettings.id);
+                statement.setObject(5, clientSettings.pathToProductPage);
+                statement.setObject(6, clientSettings.pathToProductImage);
             }
         });
     }
@@ -112,7 +108,7 @@ public class ClientSettingsService {
         databaseManager.executeUpdate(new Update() {
             @Override
             public String getRawSql() {
-                return "INSERT INTO `ClientSettings` (`id`, `siteName`, `siteUrl`, `databaseUrl`) VALUES (?, ?, ?, ?);";
+                return "INSERT INTO `ClientSettings` (`id`, `siteName`, `siteUrl`, `databaseUrl`, `pathToProductPage`, `pathToProductImage` ) VALUES (?, ?, ?, ?, ?, ?);";
             }
 
             @Override
@@ -121,17 +117,34 @@ public class ClientSettingsService {
                 statement.setObject(2, clientSettings.siteName);
                 statement.setObject(3, clientSettings.siteUrl);
                 statement.setObject(4, clientSettings.databaseUrl);
+                statement.setObject(5, clientSettings.pathToProductPage);
+                statement.setObject(6, clientSettings.pathToProductImage);
             }
         });
 
         return clientSettings;
     }
 
+    public void removeClientSettings(final String id) throws SQLException {
+        databaseManager.executeUpdate(new Update() {
+            @Override
+            public String getRawSql() {
+                return "DELETE FROM `ClientSettings` WHERE `id`=?;";
+            }
+
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setObject(1, id);
+            }
+        });
+    }
+
+
     public List<String> getProductIds(final String clientId) throws SQLException {
         return databaseManager.executeQueryForList(new Query<String>() {
             @Override
             public String getRawSql() {
-                return "SELECT productIds FROM productiDs " +
+                return "SELECT productIds FROM ProductIDs " +
                         "WHERE clientSettingsId =  ?";
             }
 
