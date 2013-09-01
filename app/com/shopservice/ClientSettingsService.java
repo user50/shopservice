@@ -91,9 +91,10 @@ public class ClientSettingsService {
                 statement.setObject(1, clientSettings.siteName);
                 statement.setObject(2, clientSettings.siteUrl);
                 statement.setObject(3, clientSettings.databaseUrl);
-                statement.setObject(4, clientSettings.id);
-                statement.setObject(5, clientSettings.pathToProductPage);
-                statement.setObject(6, clientSettings.pathToProductImage);
+                statement.setObject(4, clientSettings.pathToProductPage);
+                statement.setObject(5, clientSettings.pathToProductImage);
+                statement.setObject(6, clientSettings.id);
+
             }
         });
     }

@@ -27,7 +27,7 @@ public class ClientSettingsController extends Controller {
     public static Result createClientSettings() throws SQLException {
         ClientSettings clientSettings = Json.fromJson(request().body().asJson(), ClientSettings.class);
 
-        return ok(service.createClientSettings(clientSettings).id);
+        return ok(Json.toJson(service.createClientSettings(clientSettings)));
     }
 
     public static Result updateClientSettings(String id) throws SQLException {
