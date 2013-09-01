@@ -61,6 +61,9 @@ public class DatabaseManager {
         if (list.size() > 1)
             throw new RuntimeException("Ambiguity during executing query.");
 
+        if (list.size() == 1 && list.get(0) == null)
+            return null;
+
         return list.isEmpty()? null:list.get(0);
     }
 
@@ -70,7 +73,7 @@ public class DatabaseManager {
         try {
             String rawSql = update.getRawSql();
             preparedStatement = connection.prepareStatement(rawSql);
-            update.prepare(connection.prepareStatement(rawSql));
+            update.prepare(preparedStatement);
 
             return preparedStatement.executeUpdate();
         } finally {

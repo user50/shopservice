@@ -27,8 +27,8 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `shopservice`.`ProductIDs` (
   `productIds` VARCHAR(100) NULL ,
   `clientSettingsId` VARCHAR(100) NOT NULL ,
-  `id` INT NOT NULL ,
-  PRIMARY KEY (`clientSettingsId`, `id`) ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`id`, `clientSettingsId`) ,
   INDEX `fk_ProductIDs_ClinetSettings_idx` (`clientSettingsId` ASC) ,
   CONSTRAINT `fk_ProductIDs_ClinetSettings`
     FOREIGN KEY (`clientSettingsId` )
@@ -36,6 +36,7 @@ CREATE  TABLE IF NOT EXISTS `shopservice`.`ProductIDs` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 
 
 
