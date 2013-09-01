@@ -22,7 +22,7 @@ public class Services {
 
     public static DatabaseManager getDataBaseManager(String clientId) throws SQLException {
         if (!databaseManagers.containsKey(clientId))
-            databaseManagers.put(clientId, new DatabaseManager(new StupidConnectionPool(CLIENT_SETTINGS_SERVICE.getDatabaseUrl(clientId))));
+            databaseManagers.put(clientId, new DatabaseManager(new StupidConnectionPool(CLIENT_SETTINGS_SERVICE.getClientSettings(clientId).databaseUrl)));
 
         return databaseManagers.get(clientId);
     }

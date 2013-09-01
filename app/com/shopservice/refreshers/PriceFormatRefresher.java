@@ -30,8 +30,8 @@ public class PriceFormatRefresher implements PriceListRefresher {
 
         Catalog catalog = new Catalog();
         Price price = new Price();
-        price.setName(CLIENT_SETTINGS_SERVICE.getSiteName(clientId));
-        price.setUrl(CLIENT_SETTINGS_SERVICE.getSiteUrl(clientId));
+        price.setName( CLIENT_SETTINGS_SERVICE.getClientSettings(clientId).siteName ) ;
+        price.setUrl( CLIENT_SETTINGS_SERVICE.getClientSettings(clientId).siteUrl );
 
         for (String productId : productIds) {
             Product product = Services.getDataBaseManager(clientId).executeQueryForOne( new ProductQueryById( clientId,productId ) );

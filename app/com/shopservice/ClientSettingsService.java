@@ -1,5 +1,6 @@
 package com.shopservice;
 
+import com.shopservice.domain.ClientSettings;
 import com.shopservice.queries.Query;
 import com.shopservice.queries.Update;
 import play.db.DB;
@@ -8,7 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created with IntelliJ IDEA.
@@ -40,6 +43,83 @@ public class ClientSettingsService {
         });
     }
 
+    public ClientSettings getClientSettings(final String id) throws SQLException {
+        return databaseManager.executeQueryForOne(new Query<ClientSettings>() {
+            @Override
+            public ClientSettings fill(ResultSet resultSet) throws SQLException {
+                ClientSettings clientSettings = new ClientSettings();
+
+                clientSettings.id = resultSet.getString("id");
+                clientSettings.databaseUrl = resultSet.getString("databaseUrl");
+                clientSettings.siteName = resultSet.getString("siteName");
+                clientSettings.siteUrl = resultSet.getString("siteUrl");
+                clientSettings.productIds = Arrays.asList( resultSet.getString("products").split(",") );
+
+                return clientSettings;
+            }
+
+            @Override
+            public String getRawSql() {
+                return "SELECT ClientSettings.*, GROUP_CONCAT(`productIds`) AS products FROM ClientSettings " +
+                        "JOIN ProductIDs ON ProductIDs.clientSettingsId = ClientSettings.id " +
+                        "WHERE ClientSettings.id = ?";
+            }
+
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setObject(1, id);
+            }
+        });
+    }
+
+    public void updateClientSettings(final ClientSettings clientSettings) throws SQLException {
+        if (clientSettings.id == null)
+            throw new IllegalStateException("The field 'ClientSetting.id' can not be null for update operation");
+
+        if (getClientSettings(clientSettings.id) == null)
+            throw new IllegalStateException("A ClientSettings with specified id does not exist");
+
+        databaseManager.executeUpdate(new Update() {
+            @Override
+            public String getRawSql() {
+                return "UPDATE `ClientSettings` SET `siteName`=?, `siteUrl`=?, `databaseUrl`=? WHERE `id`=?;";
+            }
+
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setObject(1, clientSettings.siteName);
+                statement.setObject(2, clientSettings.siteUrl);
+                statement.setObject(3, clientSettings.databaseUrl);
+                statement.setObject(4, clientSettings.id);
+            }
+        });
+    }
+
+    public ClientSettings createClientSettings(final ClientSettings clientSettings) throws SQLException {
+        if (clientSettings.id != null && getClientSettings(clientSettings.id) != null)
+            throw new IllegalStateException("A ClientSettings with specified id already exists");
+
+        if (clientSettings.id == null)
+            clientSettings.id = UUID.randomUUID().toString();
+
+        databaseManager.executeUpdate(new Update() {
+            @Override
+            public String getRawSql() {
+                return "INSERT INTO `ClientSettings` (`id`, `siteName`, `siteUrl`, `databaseUrl`) VALUES (?, ?, ?, ?);";
+            }
+
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setObject(1, clientSettings.id);
+                statement.setObject(2, clientSettings.siteName);
+                statement.setObject(3, clientSettings.siteUrl);
+                statement.setObject(4, clientSettings.databaseUrl);
+            }
+        });
+
+        return clientSettings;
+    }
+
     public List<String> getProductIds(final String clientId) throws SQLException {
         return databaseManager.executeQueryForList(new Query<String>() {
             @Override
@@ -62,6 +142,9 @@ public class ClientSettingsService {
     }
 
     public void setProductIds(String clientId, List<String> productIds) throws SQLException {
+        if (getClientSettings(clientId) == null)
+            throw new IllegalStateException("A ClientSettings with specified id does not exist");
+
         removeProductIds(clientId);
 
         for (String productId : productIds)
@@ -97,88 +180,6 @@ public class ClientSettingsService {
                 statement.setObject(1, clientId);
             }
         });
-    }
-
-    public String getSiteName(final String clientId) throws SQLException {
-        return databaseManager.executeQueryForOne(new Query<String>(){
-
-            @Override
-            public String fill(ResultSet resultSet) throws SQLException {
-                return resultSet.getString("result");
-            }
-
-            @Override
-            public String getRawSql() {
-                return "SELECT siteName AS result FROM ClientSettings " +
-                        "WHERE id = ?";
-            }
-
-            @Override
-            public void prepare(PreparedStatement statement) throws SQLException {
-                statement.setObject(1, clientId);
-            }
-        });
-    }
-
-    public String getSiteUrl(final String clientId) throws SQLException {
-        return databaseManager.executeQueryForOne(new Query<String>(){
-
-            @Override
-            public String fill(ResultSet resultSet) throws SQLException {
-                return resultSet.getString("result");
-            }
-
-            @Override
-            public String getRawSql() {
-                return "SELECT siteUrl AS result FROM ClientSettings " +
-                        "WHERE id = ?";
-            }
-
-            @Override
-            public void prepare(PreparedStatement statement) throws SQLException {
-                statement.setObject(1, clientId);
-            }
-        });
-    }
-
-    public String getDatabaseUrl(final String clientId) throws SQLException {
-        return databaseManager.executeQueryForOne(new Query<String>(){
-
-            @Override
-            public String fill(ResultSet resultSet) throws SQLException {
-                return resultSet.getString("result");
-            }
-
-            @Override
-            public String getRawSql() {
-                return "SELECT databaseUrl AS result FROM ClientSettings " +
-                        "WHERE id = ?";
-            }
-
-            @Override
-            public void prepare(PreparedStatement statement) throws SQLException {
-                statement.setObject(1, clientId);
-            }
-        });
-    }
-
-    private abstract static class ClientSettingsQuery implements Query<String>
-    {
-        private String clientId;
-
-        protected ClientSettingsQuery(String clientId) {
-            this.clientId = clientId;
-        }
-
-        @Override
-        public void prepare(PreparedStatement statement) throws SQLException {
-            statement.setObject(1, clientId);
-        }
-
-        @Override
-        public String fill(ResultSet resultSet) throws SQLException {
-            return resultSet.getString("result");
-        }
     }
 
     public DatabaseManager getDatabaseManager() {
