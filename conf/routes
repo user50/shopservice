@@ -5,5 +5,15 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# ClientSettingsController
+GET     /clients/:id                    controllers.ClientSettingsController.getClientSettings(id)
+POST    /clients                        controllers.ClientSettingsController.createClientSettings()
+PUT     /clients/:id                    controllers.ClientSettingsController.updateClientSettings(id)
+DELETE  /clients/:id                    controllers.ClientSettingsController.deleteClientSettings(id)
+GET     /clients/:id/products           controllers.ClientSettingsController.getProductIds(id)
+PUT     /clients/:id/products           controllers.ClientSettingsController.updateProductIds(id)

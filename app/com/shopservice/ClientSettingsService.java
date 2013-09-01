@@ -47,6 +47,8 @@ public class ClientSettingsService {
                 clientSettings.databaseUrl = resultSet.getString("databaseUrl");
                 clientSettings.siteName = resultSet.getString("siteName");
                 clientSettings.siteUrl = resultSet.getString("siteUrl");
+                clientSettings.pathToProductImage = resultSet.getString("pathToProductImage");
+                clientSettings.pathToProductPage = resultSet.getString("pathToProductPage");
 
                 if (resultSet.getString("products") != null)
                     clientSettings.productIds = Arrays.asList( resultSet.getString("products").split(",") );
@@ -81,7 +83,7 @@ public class ClientSettingsService {
         databaseManager.executeUpdate(new Update() {
             @Override
             public String getRawSql() {
-                return "UPDATE `ClientSettings` SET `siteName`=?, `siteUrl`=?, `databaseUrl`=? WHERE `id`=?;";
+                return "UPDATE `ClientSettings` SET `siteName`=?, `siteUrl`=?, `databaseUrl`=?, `pathToProductPage`=? , `pathToProductImage`=? WHERE `id`=?;";
             }
 
             @Override
@@ -90,6 +92,8 @@ public class ClientSettingsService {
                 statement.setObject(2, clientSettings.siteUrl);
                 statement.setObject(3, clientSettings.databaseUrl);
                 statement.setObject(4, clientSettings.id);
+                statement.setObject(5, clientSettings.pathToProductPage);
+                statement.setObject(6, clientSettings.pathToProductImage);
             }
         });
     }
@@ -104,7 +108,7 @@ public class ClientSettingsService {
         databaseManager.executeUpdate(new Update() {
             @Override
             public String getRawSql() {
-                return "INSERT INTO `ClientSettings` (`id`, `siteName`, `siteUrl`, `databaseUrl`) VALUES (?, ?, ?, ?);";
+                return "INSERT INTO `ClientSettings` (`id`, `siteName`, `siteUrl`, `databaseUrl`, `pathToProductPage`, `pathToProductImage` ) VALUES (?, ?, ?, ?, ?, ?);";
             }
 
             @Override
@@ -113,6 +117,8 @@ public class ClientSettingsService {
                 statement.setObject(2, clientSettings.siteName);
                 statement.setObject(3, clientSettings.siteUrl);
                 statement.setObject(4, clientSettings.databaseUrl);
+                statement.setObject(5, clientSettings.pathToProductPage);
+                statement.setObject(6, clientSettings.pathToProductImage);
             }
         });
 
