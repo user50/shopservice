@@ -16,6 +16,11 @@ public class ClientSettingsController extends Controller {
     private static ClientSettingsService service = Services.CLIENT_SETTINGS_SERVICE;
 
     public static Result getClientSettings(String id) throws SQLException {
+        Object response = service.getClientSettings(id);
+
+        if (response == null)
+            return status(404);
+
         return ok(Json.toJson(service.getClientSettings(id)));
     }
 
