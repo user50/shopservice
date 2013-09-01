@@ -2,8 +2,9 @@ package com.shopservice.refreshers;
 
 import com.shopservice.PriceListType;
 import com.shopservice.Services;
-import com.shopservice.Util;
+import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.Product;
+import com.shopservice.domain.ProductIdEntry;
 import com.shopservice.pricelist.models.price.Catalog;
 import com.shopservice.pricelist.models.price.Item;
 import com.shopservice.pricelist.models.price.Price;
@@ -14,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
-import static com.shopservice.Services.CLIENT_SETTINGS_SERVICE;
 import static com.shopservice.Util.save;
 
 /**
@@ -27,16 +27,17 @@ import static com.shopservice.Util.save;
 public class PriceFormatRefresher implements PriceListRefresher {
     @Override
     public void refresh(String clientId) throws SQLException, JAXBException, FileNotFoundException {
-        List<String> productIds = CLIENT_SETTINGS_SERVICE.getProductIds(clientId);
+        List<String> productIds = ProductIdEntry.find(clientId);
+        ClientSettings clientSettings = ClientSettings.findById(clientId);
 
         Catalog catalog = new Catalog();
         Price price = new Price();
-        price.setName( CLIENT_SETTINGS_SERVICE.getClientSettings(clientId).siteName ) ;
-        price.setUrl( CLIENT_SETTINGS_SERVICE.getClientSettings(clientId).siteUrl );
+        price.setName( clientSettings.siteName ) ;
+        price.setUrl( clientSettings.siteUrl );
 
         for (String productId : productIds) {
             Product product = Services.getDataBaseManager(clientId).executeQueryForOne( new ProductQueryById( clientId,productId ) );
-            price.addItem( createItem(clientId, product, catalog) );
+            price.addItem( createItem(product, catalog) );
         }
 
         price.setCatalog(catalog.getCategories());
@@ -44,9 +45,12 @@ public class PriceFormatRefresher implements PriceListRefresher {
         save(price, PriceListType.price.getFileName(clientId));
     }
 
-    private Item createItem(String clientId, Product product, Catalog catalog) throws SQLException {
-        Util.modifyUrl(clientId, product);
-        Util.modifyImageUrl(clientId, product);
+    private Item createItem(Product product, Catalog catalog) {
+        if (product.url == null);
+        //todo get url ;
+
+        if (product.imageUrl == null);
+        //todo get imageUrl  ;
 
         String categoryId = catalog.getManufacturerId(product.categoryName, product.manufacturer);
 

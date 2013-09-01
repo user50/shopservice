@@ -1,61 +1,37 @@
+# --- Created by Ebean DDL
+# To stop Ebean DDL generation, remove this comment and start using Evolutions
+
 # --- !Ups
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+create table client_settings (
+  id                        varchar(255) not null,
+  site_name                 varchar(255),
+  site_url                  varchar(255),
+  database_url              varchar(255),
+  path_to_product_page      varchar(255),
+  path_to_product_image     varchar(255),
+  constraint pk_client_settings primary key (id))
+;
 
--- -----------------------------------------------------
--- Table `shopservice`.`ClientSettings`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `ClientSettings` ;
+create table product_id_entry (
+  id                        varchar(255) not null,
+  client_settings_id        varchar(255) not null,
+  product_id                varchar(255),
+  constraint pk_product_id_entry primary key (id))
+;
 
-CREATE  TABLE IF NOT EXISTS `ClientSettings` (
-  `id` VARCHAR(100) NOT NULL ,
-  `siteName` VARCHAR(100) NULL ,
-  `siteUrl` VARCHAR(100) NULL ,
-  `databaseUrl` VARCHAR(200) NULL ,
-  `pathToProductImage` VARCHAR(200) NULL ,
-  `pathToProductPage` VARCHAR(200) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `shopservice`.`ProductIDs`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `ProductIDs` ;
-
-CREATE  TABLE IF NOT EXISTS `ProductIDs` (
-  `productIds` VARCHAR(100) NULL ,
-  `clientSettingsId` VARCHAR(100) NOT NULL ,
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  PRIMARY KEY (`id`, `clientSettingsId`) ,
-  INDEX `fk_ProductIDs_ClinetSettings_idx` (`clientSettingsId` ASC) ,
-  CONSTRAINT `fk_ProductIDs_ClinetSettings`
-    FOREIGN KEY (`clientSettingsId` )
-    REFERENCES `shopservice`.`ClientSettings` (`id` )
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+alter table product_id_entry add constraint fk_product_id_entry_client_settings_1 foreign key (client_settings_id) references client_settings (id) on delete restrict on update restrict;
+create index ix_product_id_entry_client_settings_1 on product_id_entry (client_settings_id);
 
 
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 # --- !Downs
 
+SET FOREIGN_KEY_CHECKS=0;
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+drop table client_settings;
 
-DROP TABLE IF EXISTS `ClientSettings` ;
+drop table product_id_entry;
 
-DROP TABLE IF EXISTS `ProductIDs` ;
+SET FOREIGN_KEY_CHECKS=1;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

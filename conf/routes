@@ -11,9 +11,12 @@ GET     /                           controllers.Application.index()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # ClientSettingsController
-GET     /clients/:id                    controllers.ClientSettingsController.getClientSettings(id)
+GET     /clients                        controllers.ClientSettingsController.getClientSettings()
+GET     /clients/:id                    controllers.ClientSettingsController.getClientSetting(id)
 POST    /clients                        controllers.ClientSettingsController.createClientSettings()
 PUT     /clients/:id                    controllers.ClientSettingsController.updateClientSettings(id)
 DELETE  /clients/:id                    controllers.ClientSettingsController.deleteClientSettings(id)
-GET     /clients/:id/products           controllers.ClientSettingsController.getProductIds(id)
-PUT     /clients/:id/products           controllers.ClientSettingsController.updateProductIds(id)
+
+# ProductIdEntryController
+GET     /clients/:id/products           controllers.ProductIdEntryController.getProductIdEntities(id)
+PUT     /clients/:id/products           controllers.ProductIdEntryController.updateProductIdEntries(id)

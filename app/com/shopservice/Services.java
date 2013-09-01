@@ -1,5 +1,7 @@
 package com.shopservice;
 
+import com.shopservice.domain.ClientSettings;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 
@@ -14,15 +16,13 @@ public class Services {
 
     private static HashMap<String, DatabaseManager> databaseManagers = new HashMap<String, DatabaseManager>();
 
-    public static final ClientSettingsService CLIENT_SETTINGS_SERVICE = new ClientSettingsService();
-
     public static final PriceListService priceListService = new PriceListService();
 
     public static final Queries queries = new Queries();
 
     public static DatabaseManager getDataBaseManager(String clientId) throws SQLException {
         if (!databaseManagers.containsKey(clientId))
-            databaseManagers.put(clientId, new DatabaseManager(new StupidConnectionPool(CLIENT_SETTINGS_SERVICE.getClientSettings(clientId).databaseUrl)));
+            databaseManagers.put(clientId, new DatabaseManager(new StupidConnectionPool(ClientSettings.findById(clientId).databaseUrl)));
 
         return databaseManagers.get(clientId);
     }
