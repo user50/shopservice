@@ -54,7 +54,8 @@ public class ClientSettingsService {
                 clientSettings.siteName = resultSet.getString("siteName");
                 clientSettings.siteUrl = resultSet.getString("siteUrl");
                 clientSettings.productIds = Arrays.asList( resultSet.getString("products").split(",") );
-
+                clientSettings.pathToProductPage = resultSet.getString("pathToProductPage");
+                clientSettings.pathToProductImage = resultSet.getString("pathToProductImage");
                 return clientSettings;
             }
 

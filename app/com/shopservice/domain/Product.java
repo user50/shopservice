@@ -14,4 +14,12 @@ public class Product {
     public String warranty;
     public String url;
     public String imageUrl;
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

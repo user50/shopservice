@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<price date="2013-08-31 09:57">
+<price date="2013-09-01 12:37">
     <name>DomoSed</name>
     <url>http://domosed.ua</url>
     <currency code="UAH"/>
@@ -12,10 +12,10 @@
     <items>
         <item id="23">
             <name>Диван угловой Глория (Fola)</name>
-            <url>divan-uglovoy-gloria-fola.html</url>
+            <url>http://domosed.ua/divan-uglovoy-gloria-fola.html</url>
             <price>4369.0</price>
             <categoryId>2</categoryId>
-            <image>23_0.png</image>
+            <image>http://domosed.ua/images/product_images/popup_images/23_0.png</image>
             <description>&lt;p&gt;Габариты (ш/в): 2500х1700 (2500х2400; 2900х1700; 2900х2400)/1000.&lt;/p&gt;
 &lt;p&gt;Спальное место: 2000/1250.&lt;/p&gt;
 &lt;p&gt;Ниша для белья: есть.&lt;/p&gt;
@@ -25,10 +25,10 @@
         </item>
         <item id="24">
             <name>Диван Лаура (Fola)</name>
-            <url>divan-laura-fola.html</url>
+            <url>http://domosed.ua/divan-laura-fola.html</url>
             <price>2867.0</price>
             <categoryId>4</categoryId>
-            <image>24_0.png</image>
+            <image>http://domosed.ua/images/product_images/popup_images/24_0.png</image>
             <description>&lt;p&gt;Габариты (ш/в/г): 2250/1000/900.&lt;/p&gt;
 &lt;p&gt;Спальное место: 1850/1250.&lt;/p&gt;
 &lt;p&gt;Ниша для белья: нет.&lt;/p&gt;
@@ -38,10 +38,10 @@
         </item>
         <item id="25">
             <name>Диван угловой Лаура (Fola)</name>
-            <url>divan-uglovoy-laura-fola.html</url>
+            <url>http://domosed.ua/divan-uglovoy-laura-fola.html</url>
             <price>4369.0</price>
             <categoryId>2</categoryId>
-            <image>25_0.png</image>
+            <image>http://domosed.ua/images/product_images/popup_images/25_0.png</image>
             <description>&lt;p&gt;Габариты (ш/в): 2500х1700 (2500х2400; 2900х1700; 2900х2400)/1000.&lt;/p&gt;
 &lt;p&gt;Спальное место: 2000/1250.&lt;/p&gt;
 &lt;p&gt;Ниша для белья: есть.&lt;/p&gt;

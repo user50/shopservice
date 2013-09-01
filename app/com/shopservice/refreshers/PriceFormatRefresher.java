@@ -2,6 +2,7 @@ package com.shopservice.refreshers;
 
 import com.shopservice.PriceListType;
 import com.shopservice.Services;
+import com.shopservice.Util;
 import com.shopservice.domain.Product;
 import com.shopservice.pricelist.models.price.Catalog;
 import com.shopservice.pricelist.models.price.Item;
@@ -35,7 +36,7 @@ public class PriceFormatRefresher implements PriceListRefresher {
 
         for (String productId : productIds) {
             Product product = Services.getDataBaseManager(clientId).executeQueryForOne( new ProductQueryById( clientId,productId ) );
-            price.addItem( createItem(product, catalog) );
+            price.addItem( createItem(clientId, product, catalog) );
         }
 
         price.setCatalog(catalog.getCategories());
@@ -43,12 +44,9 @@ public class PriceFormatRefresher implements PriceListRefresher {
         save(price, PriceListType.price.getFileName(clientId));
     }
 
-    private Item createItem(Product product, Catalog catalog) {
-        if (product.url == null);
-        //todo get url ;
-
-        if (product.imageUrl == null);
-        //todo get imageUrl  ;
+    private Item createItem(String clientId, Product product, Catalog catalog) throws SQLException {
+        Util.modifyUrl(clientId, product);
+        Util.modifyImageUrl(clientId, product);
 
         String categoryId = catalog.getManufacturerId(product.categoryName, product.manufacturer);
 

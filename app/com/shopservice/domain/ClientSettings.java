@@ -9,4 +9,6 @@ public class ClientSettings {
     public String siteUrl;
     public String databaseUrl;
     public List<String> productIds = new ArrayList<String>();
+    public String pathToProductPage;
+    public String pathToProductImage;
 }
