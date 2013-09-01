@@ -7,17 +7,17 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE SCHEMA IF NOT EXISTS `shopservice` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 USE `shopservice` ;
 
+
 -- -----------------------------------------------------
 -- Table `shopservice`.`ClientSettings`
 -- -----------------------------------------------------
-
 CREATE  TABLE IF NOT EXISTS `shopservice`.`ClientSettings` (
   `id` VARCHAR(100) NOT NULL ,
   `siteName` VARCHAR(100) NULL ,
   `siteUrl` VARCHAR(100) NULL ,
   `databaseUrl` VARCHAR(200) NULL ,
   PRIMARY KEY (`id`) )
-  ENGINE = InnoDB;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -33,7 +33,7 @@ CREATE  TABLE IF NOT EXISTS `shopservice`.`ProductIDs` (
   CONSTRAINT `fk_ProductIDs_ClinetSettings`
     FOREIGN KEY (`clientSettingsId` )
     REFERENCES `shopservice`.`ClientSettings` (`id` )
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 

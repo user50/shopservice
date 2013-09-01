@@ -13,13 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created with IntelliJ IDEA.
- * User: neuser50
- * Date: 26.08.13
- * Time: 13:28
- * To change this template use File | Settings | File Templates.
- */
+
 public class ClientSettingsService {
 
     private DatabaseManager databaseManager;
@@ -120,11 +114,26 @@ public class ClientSettingsService {
         return clientSettings;
     }
 
+    public void removeClientSettings(final String id) throws SQLException {
+        databaseManager.executeUpdate(new Update() {
+            @Override
+            public String getRawSql() {
+                return "DELETE FROM `ClientSettings` WHERE `id`=?;";
+            }
+
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setObject(1, id);
+            }
+        });
+    }
+
+
     public List<String> getProductIds(final String clientId) throws SQLException {
         return databaseManager.executeQueryForList(new Query<String>() {
             @Override
             public String getRawSql() {
-                return "SELECT productIds FROM productiDs " +
+                return "SELECT productIds FROM ProductIDs " +
                         "WHERE clientSettingsId =  ?";
             }
 
