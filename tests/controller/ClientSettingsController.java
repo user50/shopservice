@@ -12,6 +12,6 @@ public class ClientSettingsController {
     @Test
     public void testGetClientSetting() {
         Result result = routeAndCall(fakeRequest("GET", "/clients/1"));
-        assertThat(result).isNotNull();                                                           Cli
+        assertThat(result).isNotNull();
     }
 }
