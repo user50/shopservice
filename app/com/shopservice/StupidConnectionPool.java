@@ -1,5 +1,7 @@
 package com.shopservice;
 
+import play.db.DB;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,6 +16,7 @@ public class StupidConnectionPool implements ConnectionPool {
     @Override
     public Connection getConnection() {
         try {
+
             return DriverManager.getConnection(url);
         } catch (SQLException e) {
             e.printStackTrace();
