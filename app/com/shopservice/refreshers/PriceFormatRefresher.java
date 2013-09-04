@@ -29,7 +29,7 @@ import static com.shopservice.Util.save;
  * Time: 14:05
  * To change this template use File | Settings | File Templates.
  */
-public class PriceFormatRefresher implements PriceListRefresher {
+public class PriceFormatRefresher extends AbstractPriceListRefresher {
     @Override
     public void refresh(String clientId) throws SQLException, JAXBException, FileNotFoundException {
         List<ProductEntry> entries = ProductEntry.find(clientId);
@@ -48,22 +48,6 @@ public class PriceFormatRefresher implements PriceListRefresher {
         price.setCatalog(catalog.getCategories());
 
         save(price, PriceListType.price.getFileName(clientId));
-    }
-
-    private Set<String> getProductIds(String clientId) throws SQLException {
-        Set<String> setOfProductIds = new HashSet<String>();
-
-        for (ProductEntry productEntry : ProductEntry.find(clientId))
-            setOfProductIds.add(productEntry.productId);
-
-        Set<String> setOfCategoryIds = new HashSet<String>();
-        for (CategoryEntry categoryEntry : CategoryEntry.find(clientId))
-            setOfCategoryIds.add( categoryEntry.categoryId );
-
-        for (Product product : Services.getDataBaseManager(clientId).executeQueryForList(new ProductQueryByCategories(clientId, setOfCategoryIds)))
-            setOfProductIds.add(product.id);
-
-        return setOfCategoryIds;
     }
 
     private Item createItem(Product product, Catalog catalog) {
