@@ -30,3 +30,6 @@ DELETE  /clients/:id/categoryentries/:categoryEntryId    controllers.CategoryEnt
 # Category operations
 GET     /clients/:id/categories                          controllers.CategoryController.getCategories(id)
 
+# Product operations
+GET     /clients/:id/categories/:categoryId/products     controllers.ProductController.getProducts(id, categoryId)
+
