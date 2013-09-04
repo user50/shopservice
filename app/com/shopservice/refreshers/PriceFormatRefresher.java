@@ -2,18 +2,23 @@ package com.shopservice.refreshers;
 
 import com.shopservice.PriceListType;
 import com.shopservice.Services;
+import com.shopservice.domain.CategoryEntry;
 import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.Product;
-import com.shopservice.domain.ProductIdEntry;
+import com.shopservice.domain.ProductEntry;
 import com.shopservice.pricelist.models.price.Catalog;
 import com.shopservice.pricelist.models.price.Item;
 import com.shopservice.pricelist.models.price.Price;
+import com.shopservice.queries.ProductQueryByCategories;
 import com.shopservice.queries.ProductQueryById;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.shopservice.Util.save;
 
@@ -24,10 +29,10 @@ import static com.shopservice.Util.save;
  * Time: 14:05
  * To change this template use File | Settings | File Templates.
  */
-public class PriceFormatRefresher implements PriceListRefresher {
+public class PriceFormatRefresher extends AbstractPriceListRefresher {
     @Override
     public void refresh(String clientId) throws SQLException, JAXBException, FileNotFoundException {
-        List<String> productIds = ProductIdEntry.find(clientId);
+        List<ProductEntry> entries = ProductEntry.find(clientId);
         ClientSettings clientSettings = ClientSettings.findById(clientId);
 
         Catalog catalog = new Catalog();
@@ -35,8 +40,8 @@ public class PriceFormatRefresher implements PriceListRefresher {
         price.setName( clientSettings.siteName ) ;
         price.setUrl( clientSettings.siteUrl );
 
-        for (String productId : productIds) {
-            Product product = Services.getDataBaseManager(clientId).executeQueryForOne( new ProductQueryById( clientId,productId ) );
+        for (String productId : getProductIds(clientId)) {
+            Product product = Services.getDataBaseManager(clientId).executeQueryForOne( new ProductQueryById( clientId, productId ) );
             price.addItem( createItem(product, catalog) );
         }
 

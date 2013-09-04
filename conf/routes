@@ -10,13 +10,26 @@ GET     /                           controllers.Application.index()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
-# ClientSettingsController
-GET     /clients                        controllers.ClientSettingsController.getClientSettings()
-GET     /clients/:id                    controllers.ClientSettingsController.getClientSetting(id)
-POST    /clients                        controllers.ClientSettingsController.createClientSettings()
-PUT     /clients/:id                    controllers.ClientSettingsController.updateClientSettings(id)
-DELETE  /clients/:id                    controllers.ClientSettingsController.deleteClientSettings(id)
+# ClientSettings operations
+GET     /clients                                        controllers.ClientSettingsController.getClientSettings()
+GET     /clients/:id                                    controllers.ClientSettingsController.getClientSetting(id)
+POST    /clients                                        controllers.ClientSettingsController.createClientSettings()
+PUT     /clients/:id                                    controllers.ClientSettingsController.updateClientSettings(id)
+DELETE  /clients/:id                                    controllers.ClientSettingsController.deleteClientSettings(id)
 
-# ProductIdEntryController
-GET     /clients/:id/products           controllers.ProductIdEntryController.getProductIdEntities(id)
-PUT     /clients/:id/products           controllers.ProductIdEntryController.updateProductIdEntries(id)
+# ProductEntry operations
+GET     /clients/:id/productentries                     controllers.ProductEntryController.getProductIdEntities(id)
+POST    /clients/:id/productentries                     controllers.ProductEntryController.createProductIdEntry(id)
+DELETE  /clients/:id/productentries/:productId          controllers.ProductEntryController.deleteProductIdEntry(id, productId)
+
+# CategoryEntry operations
+GET     /clients/:id/categoryentries                     controllers.CategoryEntryController.getCategoryEntries(id)
+POST    /clients/:id/categoryentries                     controllers.CategoryEntryController.createCategoryEntry(id)
+DELETE  /clients/:id/categoryentries/:categoryEntryId    controllers.CategoryEntryController.deleteCategoryEntry(id, categoryEntryId)
+
+# Category operations
+GET     /clients/:id/categories                          controllers.CategoryController.getCategories(id)
+
+# Product operations
+GET     /clients/:id/categories/:categoryId/products     controllers.ProductController.getProducts(id, categoryId)
+

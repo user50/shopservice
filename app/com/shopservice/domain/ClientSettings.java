@@ -18,7 +18,10 @@ public class ClientSettings {
     public String pathToProductImage;
 
     @OneToMany(cascade = CascadeType.ALL)
-    public List<ProductIdEntry> productIds = new ArrayList<ProductIdEntry>();
+    public List<ProductEntry> productEntries = new ArrayList<ProductEntry>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<CategoryEntry> categoryEntries = new ArrayList<CategoryEntry>();
 
     public static ClientSettings findById(String id)
     {
