@@ -12,7 +12,6 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Queries {
@@ -39,14 +38,24 @@ public class Queries {
     }
 
     public String getProductQueriesById(String clientId) {
-        String expression = "/root/client[@id='"+clientId+"']/item/byId";
+        String expression = "/root/client[@id='"+clientId+"']/product/byId";
         try {
             return ((String) xPath.compile(expression).evaluate(document, XPathConstants.STRING)).trim();
         } catch (XPathExpressionException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
         return EMPTY;
     }
 
+    public String getCategoriesQuery(String clientId) {
+        String expression = "/root/client[@id='"+clientId+"']/categories";
+        try {
+            return ((String) xPath.compile(expression).evaluate(document, XPathConstants.STRING)).trim();
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        }
+
+        return EMPTY;
+    }
 }

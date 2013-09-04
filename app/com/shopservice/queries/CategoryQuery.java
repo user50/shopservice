@@ -1,5 +1,6 @@
 package com.shopservice.queries;
 
+import com.shopservice.Services;
 import com.shopservice.domain.Category;
 
 import java.sql.PreparedStatement;
@@ -26,11 +27,10 @@ public class CategoryQuery implements Query<Category> {
 
     @Override
     public String getRawSql() {
-        return null;
+        return Services.queries.getCategoriesQuery(clientId);
     }
 
     @Override
     public void prepare(PreparedStatement statement) throws SQLException {
-
     }
 }

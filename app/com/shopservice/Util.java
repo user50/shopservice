@@ -1,5 +1,6 @@
 package com.shopservice;
 
+import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.Product;
 
 import javax.xml.bind.JAXBContext;
@@ -27,7 +28,7 @@ public class Util {
         if (product.url == null){
             //todo get url;
         } else {
-            product.setUrl(Services.CLIENT_SETTINGS_SERVICE.getClientSettings(clientId).pathToProductPage + product.url);
+            product.setUrl(ClientSettings.findById(clientId).pathToProductPage + product.url);
         }
     }
 
@@ -35,7 +36,7 @@ public class Util {
         if (product.url == null){
             //todo get url;
         } else {
-            product.setImageUrl(Services.CLIENT_SETTINGS_SERVICE.getClientSettings(clientId).pathToProductImage + product.imageUrl);
+            product.setImageUrl(ClientSettings.findById(clientId).pathToProductImage + product.imageUrl);
         }
     }
 }
