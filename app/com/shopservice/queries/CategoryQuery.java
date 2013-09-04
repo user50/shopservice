@@ -8,6 +8,13 @@ import java.sql.SQLException;
 
 //TODO This query allow to get all client's categories
 public class CategoryQuery implements Query<Category> {
+
+    private String clientId;
+
+    public CategoryQuery(String clientId) {
+        this.clientId = clientId;
+    }
+
     @Override
     public Category fill(ResultSet resultSet) throws SQLException {
         Category category = new Category();

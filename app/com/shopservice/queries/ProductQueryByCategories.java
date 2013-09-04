@@ -3,7 +3,6 @@ package com.shopservice.queries;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.List;
 
 //TODO this query allow to get clients's products by a collection of client's categories
 public class ProductQueryByCategories extends ProductQuery {
