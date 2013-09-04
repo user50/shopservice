@@ -16,7 +16,7 @@ public class ProductEntry {
 
     public static List<ProductEntry> find(String clientSettingsId)
     {
-        return Ebean.find(ProductEntry.class).findList();
+        return Ebean.find(ProductEntry.class).where().eq("client_settings_id", clientSettingsId).findList();
     }
 
 }

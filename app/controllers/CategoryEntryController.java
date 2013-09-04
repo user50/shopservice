@@ -13,7 +13,7 @@ public class CategoryEntryController extends Controller {
 
     public static Result getCategoryEntries(String clientId)
     {
-        return ok(Json.toJson( Ebean.find(CategoryEntry.class).findList() ));
+        return ok(Json.toJson( CategoryEntry.find(clientId) ));
     }
 
     public static Result createCategoryEntry(String clientId)
