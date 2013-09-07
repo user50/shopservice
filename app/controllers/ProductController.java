@@ -1,19 +1,36 @@
 package controllers;
 
-import com.shopservice.Services;
-import com.shopservice.queries.ProductQueryByCategories;
+import com.avaje.ebean.Ebean;
+import com.shopservice.domain.ProductEntry;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 
 public class ProductController extends Controller {
 
     public static Result getProducts(String clientId, String categoryId) throws SQLException {
-        Object response = Services.getDataBaseManager(clientId).executeQueryForList(new ProductQueryByCategories(clientId, Arrays.asList(categoryId)));
+        return ok(Json.toJson( ProductEntry.find(clientId, categoryId) ));
+    }
 
-        return ok(Json.toJson(response));
+    public static Result updateProduct(String clientId, String categoryId, String productId, Boolean checked)
+    {
+        ProductEntry productEntry = Ebean.find(ProductEntry.class, productId);
+        productEntry.checked = checked;
+        Ebean.save(productEntry);
+
+        return ok();
+    }
+
+    public static Result updateProducts(String clientId, String categoryId, Boolean checked)
+    {
+        Ebean.createSqlUpdate("UPDATE product_entry SET `checked`=:checked " +
+                "WHERE client_settings_id = :clientSettings AND category_id = :categoryId")
+                .setParameter("checked", checked)
+                .setParameter("clientSettings", clientId)
+                .setParameter("categoryId", categoryId).execute();
+
+        return ok();
     }
 }

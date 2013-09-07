@@ -20,9 +20,6 @@ public class ClientSettings {
     @OneToMany(cascade = CascadeType.ALL)
     public List<ProductEntry> productEntries = new ArrayList<ProductEntry>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    public List<CategoryEntry> categoryEntries = new ArrayList<CategoryEntry>();
-
     public static ClientSettings findById(String id)
     {
         return Ebean.find(ClientSettings.class, id);

@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class StupidConnectionPool implements ConnectionPool {
-    private String url = "jdbc:mysql://127.0.0.1:3306/shopservice";
+    private String url = "jdbc:mysql://127.0.0.1:3306/domosed";
 
     public StupidConnectionPool(String url) {
         this.url = url;
@@ -16,7 +16,6 @@ public class StupidConnectionPool implements ConnectionPool {
     @Override
     public Connection getConnection() {
         try {
-
             return DriverManager.getConnection(url);
         } catch (SQLException e) {
             e.printStackTrace();

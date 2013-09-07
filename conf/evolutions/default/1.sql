@@ -13,15 +13,18 @@ create table client_settings (
   constraint pk_client_settings primary key (id))
 ;
 
-create table product_id_entry (
+create table product_entry (
   id                        varchar(255) not null,
   client_settings_id        varchar(255) not null,
   product_id                varchar(255),
-  constraint pk_product_id_entry primary key (id))
+  product_name              varchar(255),
+  category_id               varchar(255),
+  checked                   tinyint(1) default 0,
+  constraint pk_product_entry primary key (id))
 ;
 
-alter table product_id_entry add constraint fk_product_id_entry_client_settings_1 foreign key (client_settings_id) references client_settings (id) on delete restrict on update restrict;
-create index ix_product_id_entry_client_settings_1 on product_id_entry (client_settings_id);
+alter table product_entry add constraint fk_product_entry_client_settings_1 foreign key (client_settings_id) references client_settings (id) on delete restrict on update restrict;
+create index ix_product_entry_client_settings_1 on product_entry (client_settings_id);
 
 
 
@@ -31,7 +34,7 @@ SET FOREIGN_KEY_CHECKS=0;
 
 drop table client_settings;
 
-drop table product_id_entry;
+drop table product_entry;
 
 SET FOREIGN_KEY_CHECKS=1;
 

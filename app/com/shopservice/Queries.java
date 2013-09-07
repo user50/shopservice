@@ -49,13 +49,23 @@ public class Queries {
     }
 
     public String getCategoriesQuery(String clientId) {
-        String expression = "/root/client[@id='"+clientId+"']/categories";
+        return getValue("/root/client[@id='"+clientId+"']/categories");
+    }
+
+    public String getProductQueryByCategory(String clientId) {
+        return getValue("/root/client[@id='"+clientId+"']/product/byCategoryId");
+    }
+
+    private String getValue(String XPathQuery)
+    {
         try {
-            return ((String) xPath.compile(expression).evaluate(document, XPathConstants.STRING)).trim();
+            return ((String) xPath.compile(XPathQuery).evaluate(document, XPathConstants.STRING)).trim();
         } catch (XPathExpressionException e) {
             e.printStackTrace();
         }
 
         return EMPTY;
     }
+
+
 }

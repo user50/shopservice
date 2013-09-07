@@ -18,18 +18,10 @@ PUT     /clients/:id                                    controllers.ClientSettin
 DELETE  /clients/:id                                    controllers.ClientSettingsController.deleteClientSettings(id)
 
 # ProductEntry operations
-GET     /clients/:id/productentries                     controllers.ProductEntryController.getProductIdEntities(id)
-POST    /clients/:id/productentries                     controllers.ProductEntryController.createProductIdEntry(id)
-DELETE  /clients/:id/productentries/:productId          controllers.ProductEntryController.deleteProductIdEntry(id, productId)
-
-# CategoryEntry operations
-GET     /clients/:id/categoryentries                     controllers.CategoryEntryController.getCategoryEntries(id)
-POST    /clients/:id/categoryentries                     controllers.CategoryEntryController.createCategoryEntry(id)
-DELETE  /clients/:id/categoryentries/:categoryEntryId    controllers.CategoryEntryController.deleteCategoryEntry(id, categoryEntryId)
+GET     /clients/:id/categories/:categoryId/products                controllers.ProductController.getProducts(id, categoryId)
+PUT     /clients/:id/categories/:categoryId/products/:productId     controllers.ProductController.updateProduct(id, categoryId, productId, checked: java.lang.Boolean )
+PUT     /clients/:id/categories/:categoryId/products                controllers.ProductController.updateProducts(id, categoryId, checked: java.lang.Boolean)
 
 # Category operations
 GET     /clients/:id/categories                          controllers.CategoryController.getCategories(id)
-
-# Product operations
-GET     /clients/:id/categories/:categoryId/products     controllers.ProductController.getProducts(id, categoryId)
 

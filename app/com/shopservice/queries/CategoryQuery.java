@@ -32,5 +32,6 @@ public class CategoryQuery implements Query<Category> {
 
     @Override
     public void prepare(PreparedStatement statement) throws SQLException {
+
     }
 }

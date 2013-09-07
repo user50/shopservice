@@ -2,6 +2,7 @@ package com.shopservice.queries;
 
 import com.shopservice.domain.Product;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -26,7 +27,12 @@ public abstract class ProductQuery implements Query<Product> {
         product.id = resultSet.getString("id");
         product.categoryName = resultSet.getString("categoryName");
         product.manufacturer = resultSet.getString("manufacturer");
-        product.name = resultSet.getString("name");
+//        product.name = resultSet.getString("name");
+        try {
+            product.name = new String(resultSet.getBytes("name"), "windows-1251");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         product.price = resultSet.getDouble("price");
         //product.available = resultSet.getBoolean("available");
         product.shortDescription = resultSet.getString("shortDescription");
@@ -34,6 +40,7 @@ public abstract class ProductQuery implements Query<Product> {
         //product.warranty = resultSet.getString("warranty");
         product.url = resultSet.getString("url");
         product.imageUrl = resultSet.getString("imageUrl");
+        product.categoryId = resultSet.getString("categoryId");
 
         return product;
     }
