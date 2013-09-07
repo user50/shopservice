@@ -10,7 +10,9 @@ import java.util.List;
 public class CategoriesTest {
     @Test
     public void testGetCategories() throws SQLException {
-        List<Category> categories = Services.getDataBaseManager("client1").executeQueryForList(new CategoryQuery("client1"));
-        System.out.println(categories.toString());
+        DatabaseManager manager = new DatabaseManager(new ConnectionPool4Tests());
+        List<Category> categories = manager.executeQueryForList(new CategoryQuery("client1"));
+        for (Category category: categories)
+        System.out.println(category.toString());
     }
 }

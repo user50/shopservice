@@ -6,13 +6,14 @@ import java.sql.SQLException;
 
 public class ConnectionPool4Tests implements ConnectionPool {
     private final String URL_TO_TEST_DATABASE = "jdbc:mysql://127.0.0.1:3306/shopservice";
+    private final String URL_TO_CLIENT_DATABASE = "jdbc:mysql://127.0.0.1:3306/domosed_backup2";
     private final String USER = "root";
-    private final String PASSWORD = "neuser50";
+    private final String PASSWORD = "root";
 
     @Override
     public Connection getConnection() {
         try {
-            return DriverManager.getConnection(URL_TO_TEST_DATABASE, USER, PASSWORD);
+            return DriverManager.getConnection(URL_TO_CLIENT_DATABASE, USER, PASSWORD);
         } catch (SQLException e) {
             e.printStackTrace();
         }
