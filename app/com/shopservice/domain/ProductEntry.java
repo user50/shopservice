@@ -4,6 +4,7 @@ import com.avaje.ebean.Ebean;
 import com.google.common.collect.Sets;
 import com.shopservice.Services;
 import com.shopservice.queries.ProductQueryByCategory;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import tyrex.services.UUID;
 
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ public class ProductEntry {
 
     @Id
     public String id;
+
+    @JsonIgnore
     public String productId;
     public String productName;
     public String categoryId;
