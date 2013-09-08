@@ -16,10 +16,10 @@ public class ProductController extends Controller {
 
     public static Result updateProduct(String clientId, String categoryId, String productId, Boolean checked)
     {
-        ProductEntry productEntry = Ebean.find(ProductEntry.class, productId);
-        productEntry.checked = checked;
-        Ebean.save(productEntry);
-
+        Ebean.createSqlUpdate("UPDATE product_entry SET `checked`=:checked " +
+                "WHERE id=:id")
+                .setParameter("checked", checked)
+                .setParameter("id", productId).execute();
         return ok();
     }
 
