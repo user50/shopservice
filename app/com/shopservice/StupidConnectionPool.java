@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class StupidConnectionPool implements ConnectionPool {
-    private String url = "jdbc:mysql://127.0.0.1:3306/domosed";
+    private String url = "jdbc:mysql://127.0.0.1:3306/domosed_dum";
 
     public StupidConnectionPool(String url) {
         this.url = url;

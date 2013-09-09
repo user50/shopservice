@@ -3,7 +3,11 @@ function getURLParameter(name) {
 }
 
 function downloadPrice(){
-  alert("Hello!");
+  alert("Download!");
+}
+
+function generatePrice(){
+    alert("Generate!");
 }
 
 function showCategories(){
@@ -15,6 +19,8 @@ function showCategories(){
 function displayCategories(categories){
     var categoriesUrl = "/clients/"+clientId+"/categories/";
     var form = document.getElementById("updateForm");
+    form.innerHTML = "";
+    form = document.getElementById("categories");
     form.innerHTML = "";
 
     for (i=0; i<categories.length; i++) {
@@ -28,6 +34,8 @@ function displayCategories(categories){
         form.appendChild(document.createElement("br"));
     }
 
+    var buttons = document.getElementById("selectButtons");
+    buttons.style.display = 'none';
 }
 
 function showProducts(categoryId){
@@ -36,10 +44,13 @@ function showProducts(categoryId){
 }
 
 function displayProducts(products){
-    var form = document.getElementById("updateForm");
+    var form = document.getElementById("categories");
+    form.innerHTML = "";
+    form = document.getElementById("updateForm");
     form.innerHTML = "";
     for (i=0; i<products.length; i++) {
         var product = products[i];
+        categoryId = product.categoryId;
         var input = document.createElement("input");
         input.setAttribute("id", product.id);
         input.setAttribute("categoryId", product.categoryId);
@@ -47,7 +58,7 @@ function displayProducts(products){
         if(product.checked == true){
             input.setAttribute("checked","checked");
         }
-        input.setAttribute("onChange", "updateChecked(this.id,"+product.categoryId+")");
+        input.setAttribute("onChange", "updateChecked(this.id,"+categoryId+")");
         form.appendChild(input);
 
         var span = document.createElement("span");
@@ -57,20 +68,24 @@ function displayProducts(products){
         form.appendChild(span);
         form.appendChild(document.createElement("br"));
     }
+    var selectButtons = document.getElementById("selectButtons");
+    selectButtons.style.display = 'block';
+
+    var updateButton = document.getElementsByClassName("updateButton");
 }
 
-function updateChecked(productId, categoryId){
+function updateChecked(productId){
     input = document.getElementById(productId);
     if (input.getAttribute("checked") == null){
-        addProduct(productId, categoryId);
+        addProduct(productId);
         input.setAttribute("checked","checked");
     } else  {
-        deleteProduct(productId, categoryId);
+        deleteProduct(productId);
         input.removeAttribute("checked");
     }
 }
 
-function addProduct(productId, categoryId){
+function addProduct(productId){
     var url = "/clients/"+clientId+"/categories/"+categoryId+"/products/"+productId+"?checked=true";
     jQuery.ajax({
         url: url,
@@ -78,10 +93,38 @@ function addProduct(productId, categoryId){
     })
 }
 
-function deleteProduct(productId, categoryId){
+function deleteProduct(productId){
     var url = "/clients/"+clientId+"/categories/"+categoryId+"/products/"+productId+"?checked=false";
     jQuery.ajax({
         url:url,
         type:"put"
     })
 }
+
+function selectAllProductsForCategory(){
+    var url = "/clients/"+clientId+"/categories/"+categoryId+"/products?checked=true";
+    jQuery.ajax({
+        url:url,
+        type:"put"
+    });
+    var inputs = document.getElementById('updateForm').getElementsByTagName('input');
+    for (i=0; i<inputs.length;i++){
+        var input = inputs[i];
+        var checked = input.getAttribute("checked");
+        if (checked==null)
+            input.setAttribute("checked", "true");
+    }
+}
+
+//function cancelAllProductsForCategory(){
+//    var url = "/clients/"+clientId+"/categories/"+categoryId+"/products?checked=false";
+//    jQuery.ajax({
+//        url:url,
+//        type:"put"
+//    });
+//    var inputs = document.getElementById('updateForm').getElementsByTagName('input');
+//    for (i=0; i<inputs.length;i++){
+//        var input = inputs[i];
+//        input.removeAttribute("checked");
+//    }
+//}
