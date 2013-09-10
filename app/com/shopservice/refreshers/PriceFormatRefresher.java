@@ -28,7 +28,6 @@ import static com.shopservice.Util.save;
 public class PriceFormatRefresher extends AbstractPriceListRefresher {
     @Override
     public void refresh(String clientId) throws SQLException, JAXBException, FileNotFoundException {
-        List<ProductEntry> entries = ProductEntry.find(clientId);
         ClientSettings clientSettings = ClientSettings.findById(clientId);
 
         Catalog catalog = new Catalog();

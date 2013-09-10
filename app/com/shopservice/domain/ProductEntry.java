@@ -56,8 +56,12 @@ public class ProductEntry {
 
     public static List<ProductEntry> find(String clientSettingsId)
     {
-
         return Ebean.find(ProductEntry.class).where().eq("client_settings_id", clientSettingsId).findList();
+    }
+
+    public static List<ProductEntry> findSelected(String clientSettingsId)
+    {
+        return Ebean.find(ProductEntry.class).where().eq("client_settings_id", clientSettingsId).eq("checked",true).findList();
     }
 
     public static List<ProductEntry> find(String clientId, String categoryId) throws SQLException {

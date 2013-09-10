@@ -30,7 +30,9 @@ public class ClientSettingsController extends Controller {
 
     public static Result createClientSettings() throws SQLException {
         ClientSettings clientSettings = Json.fromJson(request().body().asJson(), ClientSettings.class);
-        clientSettings.id = UUID.create();
+
+        if (clientSettings.id == null)
+            clientSettings.id = UUID.create();
         clientSettings.save();
 
         return ok(Json.toJson(clientSettings));

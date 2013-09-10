@@ -11,7 +11,7 @@ public abstract class AbstractPriceListRefresher implements PriceListRefresher {
     protected Set<String> getProductIds(String clientId) throws SQLException {
         Set<String> setOfProductIds = new HashSet<String>();
 
-        for (ProductEntry productEntry : ProductEntry.find(clientId))
+        for (ProductEntry productEntry : ProductEntry.findSelected(clientId))
             setOfProductIds.add(productEntry.productId);
 
         return setOfProductIds;
