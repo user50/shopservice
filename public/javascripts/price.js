@@ -5,7 +5,8 @@ function getURLParameter(name) {
 function downloadPrice(){
     clientId = getURLParameter('clientId');
     var url = "/client/"+clientId+"/formats/price/pricelist";
-    jQuery.get(url);
+    var href = document.getElementById("downloadHref").setAttribute("href",url);
+    href.click();
 }
 
 function generatePrice(){
