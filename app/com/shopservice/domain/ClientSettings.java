@@ -1,6 +1,7 @@
 package com.shopservice.domain;
 
 import com.avaje.ebean.Ebean;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class ClientSettings {
     public String pathToProductPage;
     public String pathToProductImage;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     public List<ProductEntry> productEntries = new ArrayList<ProductEntry>();
 
