@@ -25,7 +25,7 @@ PUT     /clients/:id/categories/:categoryId/products                controllers.
 # Category operations
 GET     /clients/:id/categories                          controllers.CategoryController.getCategories(id)
 
-# Category operations
+# PriceList operations
 GET    /client/:id/formats/:format/pricelist                            controllers.PriceListController.getPriceList( id, format )
 POST   /client/:id/formats/:format/pricelist                            controllers.PriceListController.refreshPriceList( id, format )
 GET    /client/:id/formats                                              controllers.PriceListController.getPriceListFormats( id )

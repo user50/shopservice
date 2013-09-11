@@ -3,11 +3,15 @@ function getURLParameter(name) {
 }
 
 function downloadPrice(){
-  alert("Download!");
+    clientId = getURLParameter('clientId');
+    var url = "/client/"+clientId+"/formats/price/pricelist";
+    jQuery.get(url);
 }
 
 function generatePrice(){
-    alert("Generate!");
+    clientId = getURLParameter('clientId');
+    var url = "/client/"+clientId+"/formats/price/pricelist";
+    jQuery.post(url);
 }
 
 function showCategories(){
