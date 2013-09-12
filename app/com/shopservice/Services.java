@@ -20,6 +20,8 @@ public class Services {
 
     public static final Queries queries = new Queries();
 
+    public static final ProductEntryService productEntryService = new PersistenceProductEntityService();
+
     public static DatabaseManager getDataBaseManager(String clientId) throws SQLException {
         if (!databaseManagers.containsKey(clientId))
             databaseManagers.put(clientId, new DatabaseManager(new StupidConnectionPool(ClientSettings.findById(clientId).databaseUrl)));

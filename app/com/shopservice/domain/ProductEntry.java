@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import java.sql.SQLException;
 import java.util.*;
 
+import static com.shopservice.Services.productEntryService;
+
 @Entity
 public class ProductEntry {
 
@@ -54,17 +56,7 @@ public class ProductEntry {
         categoryId = product.categoryId;
     }
 
-    public static List<ProductEntry> find(String clientSettingsId)
-    {
-        return Ebean.find(ProductEntry.class).where().eq("client_settings_id", clientSettingsId).findList();
-    }
-
-    public static List<ProductEntry> findSelected(String clientSettingsId)
-    {
-        return Ebean.find(ProductEntry.class).where().eq("client_settings_id", clientSettingsId).eq("checked",true).findList();
-    }
-
-    public static List<ProductEntry> find(String clientId, String categoryId) throws SQLException {
+    public static Collection<ProductEntry> find(String clientId, String categoryId) throws SQLException {
         List<Product> products = Services.getDataBaseManager(clientId)
                         .executeQueryForList(new ProductQueryByCategory(clientId, categoryId));
 
@@ -72,25 +64,12 @@ public class ProductEntry {
         for (Product product : products)
             productEntriesFromClient.add(new ProductEntry(product));
 
-        Set<ProductEntry> productEntriesFromSettings = Ebean.find(ProductEntry.class)
-                                .where().eq("client_settings_id", clientId).eq("category_id",categoryId).findSet();
+        Set<ProductEntry> productEntriesFromSettings = new HashSet<ProductEntry>( productEntryService.get(clientId, categoryId) );
 
-        delete(Sets.difference(productEntriesFromSettings,productEntriesFromClient));
+        productEntryService.delete(Sets.difference(productEntriesFromSettings,productEntriesFromClient));
 
-        add(clientId, Sets.difference(productEntriesFromClient, productEntriesFromSettings));
+        productEntryService.add( Sets.difference(productEntriesFromClient, productEntriesFromSettings), clientId);
 
-        return Ebean.find(ProductEntry.class).where().eq("client_settings_id", clientId).eq("category_id",categoryId).findList();
-    }
-
-    private static void add(String clientsId, Collection<ProductEntry> productsToAdd) {
-        ClientSettings clientSettings = ClientSettings.findById( clientsId);
-        clientSettings.productEntries.addAll(productsToAdd);
-        Ebean.save(clientSettings);
-    }
-
-    public static void delete(Collection<ProductEntry> productsToDelete){
-        for (ProductEntry productEntry: productsToDelete){
-            Ebean.delete(ProductEntry.class, productEntry);
-        }
+        return productEntryService.get(clientId, categoryId);
     }
 }
