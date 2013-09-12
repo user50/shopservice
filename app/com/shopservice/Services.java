@@ -1,5 +1,7 @@
 package com.shopservice;
 
+import com.shopservice.clientsinform.ClientsInformationProvider;
+import com.shopservice.clientsinform.NativeClientInformationProvider;
 import com.shopservice.domain.ClientSettings;
 
 import java.sql.SQLException;
@@ -16,6 +18,9 @@ public class Services {
 
     private static HashMap<String, DatabaseManager> databaseManagers = new HashMap<String, DatabaseManager>();
 
+    private static HashMap<String, ClientsInformationProvider> clientsInformationProviders
+                                                                    = new HashMap<String, ClientsInformationProvider>();
+
     public static final PriceListService priceListService = new PriceListService();
 
     public static final Queries queries = new Queries();
@@ -25,5 +30,13 @@ public class Services {
             databaseManagers.put(clientId, new DatabaseManager(new StupidConnectionPool(ClientSettings.findById(clientId).databaseUrl)));
 
         return databaseManagers.get(clientId);
+    }
+
+    public static ClientsInformationProvider getClientsInformationProvider(String clientId)
+    {
+        if (!clientsInformationProviders.containsKey(clientId))
+            clientsInformationProviders.put(clientId, new NativeClientInformationProvider(clientId));
+
+        return clientsInformationProviders.get(clientId);
     }
 }
