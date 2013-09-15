@@ -10,7 +10,6 @@ import com.shopservice.pricelist.models.price.Catalog;
 import com.shopservice.pricelist.models.price.Category;
 import com.shopservice.pricelist.models.price.Item;
 import com.shopservice.pricelist.models.price.Price;
-import com.shopservice.queries.ProductQueryById;
 
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;

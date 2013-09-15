@@ -6,7 +6,6 @@ import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
 import com.shopservice.queries.CategoryQuery;
 import com.shopservice.queries.ProductQueryByCategory;
-import com.shopservice.queries.ProductQueryById;
 import com.shopservice.queries.ProductQueryByListOfIds;
 
 import java.sql.SQLException;

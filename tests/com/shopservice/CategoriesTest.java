@@ -5,6 +5,7 @@ import com.shopservice.queries.CategoryQuery;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class CategoriesTest {
@@ -14,5 +15,13 @@ public class CategoriesTest {
         List<Category> categories = manager.executeQueryForList(new CategoryQuery("client1"));
         for (Category category: categories)
         System.out.println(category.toString());
+    }
+
+    @Test
+    public void testName() throws Exception {
+        String[] abc = new String[10];
+        Arrays.fill(abc, "?");
+
+
     }
 }

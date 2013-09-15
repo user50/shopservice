@@ -37,17 +37,6 @@ public class Queries {
         xPath =  XPathFactory.newInstance().newXPath();
     }
 
-    public String getProductQueriesById(String clientId) {
-        String expression = "/root/client[@id='"+clientId+"']/product/byId";
-        try {
-            return ((String) xPath.compile(expression).evaluate(document, XPathConstants.STRING)).trim();
-        } catch (XPathExpressionException e) {
-            e.printStackTrace();
-        }
-
-        return EMPTY;
-    }
-
     public String getCategoriesQuery(String clientId) {
         return getValue("/root/client[@id='"+clientId+"']/categories");
     }
