@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class CategoryController extends Controller {
 
     public static Result getCategories(String clientId) throws SQLException {
-        Object response = Services.getDataBaseManager(clientId).executeQueryForList(new CategoryQuery(clientId));
+        Object response = Services.getClientsInformationProvider(clientId).getCategories();
 
         return ok(Json.toJson(response));
     }

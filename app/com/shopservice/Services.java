@@ -1,5 +1,6 @@
 package com.shopservice;
 
+import com.shopservice.clientsinform.CachedInformationProvider;
 import com.shopservice.clientsinform.ClientsInformationProvider;
 import com.shopservice.clientsinform.NativeClientInformationProvider;
 import com.shopservice.domain.ClientSettings;
@@ -35,7 +36,7 @@ public class Services {
     public static ClientsInformationProvider getClientsInformationProvider(String clientId)
     {
         if (!clientsInformationProviders.containsKey(clientId))
-            clientsInformationProviders.put(clientId, new NativeClientInformationProvider(clientId));
+            clientsInformationProviders.put(clientId, new CachedInformationProvider( new NativeClientInformationProvider(clientId)) );
 
         return clientsInformationProviders.get(clientId);
     }

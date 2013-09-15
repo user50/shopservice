@@ -65,8 +65,7 @@ public class ProductEntry {
     }
 
     public static List<ProductEntry> find(String clientId, String categoryId) throws SQLException {
-        List<Product> products = Services.getDataBaseManager(clientId)
-                        .executeQueryForList(new ProductQueryByCategory(clientId, categoryId));
+        List<Product> products = Services.getClientsInformationProvider(clientId).getProducts(categoryId);
 
         Set<ProductEntry> productEntriesFromClient = new HashSet<ProductEntry>();
         for (Product product : products)

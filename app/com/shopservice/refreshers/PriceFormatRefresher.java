@@ -41,8 +41,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
         Set<Category> categories = new HashSet<Category>();
 
         for (String productId : getProductIds(clientId)) {
-            Product product = Services.getDataBaseManager(clientId).
-                    executeQueryForOne(new ProductQueryById(clientId, productId));
+            Product product = Services.getClientsInformationProvider(clientId).getProduct(productId);
             price.addItem( createItem(clientId, product) );
 
             categories.add( new Category( product.categoryId, product.categoryName) );
