@@ -56,6 +56,10 @@ public class Queries {
         return getValue("/root/client[@id='"+clientId+"']/product/byCategoryId");
     }
 
+    public String getProductQueryByListOfIds(String clientId) {
+        return getValue("/root/client[@id='"+clientId+"']/product/listOfId");
+    }
+
     private String getValue(String XPathQuery)
     {
         try {

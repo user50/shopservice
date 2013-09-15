@@ -1,9 +1,11 @@
 package com.shopservice.refreshers;
 
+import com.shopservice.domain.Product;
 import com.shopservice.domain.ProductEntry;
 
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public abstract class AbstractPriceListRefresher implements PriceListRefresher {

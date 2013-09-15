@@ -7,8 +7,11 @@ import com.shopservice.domain.Product;
 import com.shopservice.queries.CategoryQuery;
 import com.shopservice.queries.ProductQueryByCategory;
 import com.shopservice.queries.ProductQueryById;
+import com.shopservice.queries.ProductQueryByListOfIds;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class NativeClientInformationProvider implements ClientsInformationProvider {
@@ -38,9 +41,9 @@ public class NativeClientInformationProvider implements ClientsInformationProvid
     }
 
     @Override
-    public Product getProduct(String productId) {
+    public List<Product> getProducts(Collection<String> productId) {
         try {
-            return databaseManager.executeQueryForOne(new ProductQueryById(clientId, productId));
+            return databaseManager.executeQueryForList(new ProductQueryByListOfIds(clientId, new ArrayList<String>( productId )));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

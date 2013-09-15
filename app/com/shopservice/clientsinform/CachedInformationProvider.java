@@ -3,6 +3,7 @@ package com.shopservice.clientsinform;
 import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,11 +30,9 @@ public class CachedInformationProvider implements ClientsInformationProvider {
     }
 
     @Override
-    public Product getProduct(String productId) {
-        if (!products.containsKey(productId))
-            products.put(productId, wrappedProvider.getProduct(productId));
-
-        return products.get(productId);
+    public List<Product> getProducts(Collection<String> productIds) {
+        //no cached
+        return wrappedProvider.getProducts(productIds);
     }
 
     @Override
