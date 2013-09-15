@@ -29,10 +29,7 @@ public class ProductQueryByListOfIds extends ProductQuery {
 
     @Override
     public void prepare(PreparedStatement statement) throws SQLException {
-        long start = System.currentTimeMillis();
         for (int i=0; i<productIds.size(); i++)
             statement.setObject( i+1, productIds.get(i) );
-
-        System.out.println("prepare has been took "+(System.currentTimeMillis() - start));
     }
 }
