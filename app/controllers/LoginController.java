@@ -23,7 +23,7 @@ public class LoginController extends Controller {
 
         ClientSettings clientSettings = ClientSettings.getBySiteName(username);
 
-        if (!clientSettings.password.equals(password))
+        if (clientSettings == null || !clientSettings.password.equals(password))
             return redirect("assets/error.html");
 
         String key = UUID.create();
