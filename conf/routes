@@ -30,3 +30,5 @@ GET    /client/:id/formats/:format/pricelist                            controll
 POST   /client/:id/formats/:format/pricelist                            controllers.PriceListController.refreshPriceList( id, format )
 GET    /client/:id/formats                                              controllers.PriceListController.getPriceListFormats( id )
 
+
+POST /authentication                                                    controllers.LoginController.authentication()

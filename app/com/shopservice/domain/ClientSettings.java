@@ -17,6 +17,7 @@ public class ClientSettings {
     public String databaseUrl;
     public String pathToProductPage;
     public String pathToProductImage;
+    public String password;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
@@ -45,5 +46,9 @@ public class ClientSettings {
     public void update()
     {
         Ebean.update(this);
+    }
+
+    public static ClientSettings getBySiteName(String siteName) {
+        return Ebean.find(ClientSettings.class).where().eq("siteName", siteName).findUnique();
     }
 }
