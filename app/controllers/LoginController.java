@@ -24,13 +24,12 @@ public class LoginController extends Controller {
         ClientSettings clientSettings = ClientSettings.getBySiteName(username);
 
         if (clientSettings == null || !clientSettings.password.equals(password))
-            return redirect("assets/error.html");
+            return status(401);
 
         String key = UUID.create();
         Cache.set(key, clientSettings.id);
 
         response().setCookie("key", key);
-
         return redirect("assets/page.html?clientId="+clientSettings.id);
     }
 }

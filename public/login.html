@@ -1,28 +1,80 @@
-<html>
+<!doctype html>
+
 <head>
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-<title>Login</title>
+
+    <!-- Basics -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Login</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="stylesheets/reset.css">
+    <link rel="stylesheet" href="stylesheets/animate.css">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+
 </head>
+
+<!-- Main HTML -->
+
 <body>
-<div id="box">
-<form method="POST" action="/authentication">
-<table>
-    <tr>
-      <td align="right"><p id="text">Username:</p></td>
-      <td align="left">
-		<input type="text" name="j_username">
-	</td>
-    </tr>
-    <tr>
-      <td align="right"><p id="text">Password:</p></td>
-      <td align="left"><input type="password" name="j_password"></td>
-    </tr>
-    <tr>
-      <td align="right"><input type="submit" value="Log In"></td>
-      <td align="left"><input type="reset" value="Reset"></></td>
-    </tr>
-</table>
-</form>
-</div> 
+
+<!-- Begin Page Content -->
+
+<div id="container" >
+
+    <form id="loginform">
+
+        <label for="name">Username:</label>
+
+        <input type="username" name="j_username">
+
+        <label for="username">Password:</label>
+
+        <!--<p><a href="#">Forgot your password?</a>-->
+        <p>
+            <input type="password" name="j_password">
+
+        <div id="errorMessage" class="error">Invalid username and/or password, please try again.</div>
+
+        <div id="lower">
+            <!--<input type="checkbox">-->
+            <!--<label class="check" for="checkbox">Keep me logged in</label>-->
+            <input type="submit" value="Login">
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- End Page Content -->
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#loginform').submit(function(e) {
+            $('#container').css('height', '280px');
+            $('#errorMessage').css('display', 'none');
+            $.ajax({url: '/authentication',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    statusCode: {
+                            401: function() {
+                                $('#errorMessage').css('display', 'inline');
+                                $('#container').css('height', '297px');
+                            }
+                        }
+                    });
+            e.preventDefault();
+        });
+    });
+
+</script>
 </body>
+
 </html>
+
