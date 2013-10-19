@@ -1,0 +1,61 @@
+@()
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Configure and manage price lists for sites aggregators</title>
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/price.css"/>
+    <META content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/price.js"></script>
+</head>
+
+
+<body>
+
+<div id="container">
+    <div id="header"> <a href="#">Tools for servicing the online store</a> </div>
+    <div id="menu"> <a  href="#">HOME</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="#">SERVICES</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="#">PRICE</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#">CONTACTS</a>  </div>
+    <div id="cont">
+        <div id="sidebar">
+            <form id = "targetsite" >
+                For what site you want to generate the price list?<p>
+                <input type="radio" name="site" value="id1">HotPrice<Br>
+                <input type="radio" name="site" value="id2">Hotline<Br>
+                <input type="radio" name="site" value="id3">Price.UA<Br>
+                <input type="radio" name="site" value="id4">Prom.UA<Br>
+            </form>
+        </div>
+
+        <div id="wrapp">
+
+            <!--<div id="button" class="downloadButton" onClick="message(this.id)"><a href="#">Download</a></div>-->
+            <!--<div id="updating">-->
+            <!--<div id="update">-->
+            <!--<div id="button" class="updateButton" onClick="showCategories()"><a href="#">Change Settings</a>  </div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <div id="main">
+                <p>
+                    You can download last version Your priceList. <a id="downloadHref" href="#" onClick="downloadPrice()">Download</a>
+                <p>
+                    You can generate new version Your priceList. <a href="#" onClick="generatePrice()">Generate</a>
+                <p>
+                    <a href="#" onClick="showCategories()">Show Categories</a>
+                <div id="categories"> </div>
+                <br>
+                <form id="selectButtons">
+                    <input type="button" id = "selectAllProducts" value = "Select All Products" onclick="selectAllProductsForCategory()">
+                    <!--<input type="button" id = "cancelAllProducts" value="Cancel All" onclick="cancelAllProductsForCategory()">-->
+                </form>
+                <form id = "updateForm"></form>
+
+            </div>
+        </div>
+    </div>
+    <div id="footer"> Download  <a align="left" href="/flashshop/log" > log file </a>  </div>
+</div>
+
+</body>
+</html>
