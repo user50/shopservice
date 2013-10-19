@@ -32,7 +32,8 @@ public class LoginController extends Controller {
         Cache.set(key, clientSettings.id);
 
         response().setCookie("key", key, EXPIRATION);
+        response().setCookie("clientId", clientSettings.id, EXPIRATION);
 
-        return redirect("price?clientId="+clientSettings.id);
+        return ok();
     }
 }

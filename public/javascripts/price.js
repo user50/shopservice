@@ -3,20 +3,20 @@ function getURLParameter(name) {
 }
 
 function downloadPrice(){
-    clientId = getURLParameter('clientId');
+    clientId = $.cookie("clientId");
     var url = "/client/"+clientId+"/formats/price/pricelist";
     var href = document.getElementById("downloadHref").setAttribute("href",url);
     href.click();
 }
 
 function generatePrice(){
-    clientId = getURLParameter('clientId');
+    clientId = $.cookie("clientId");
     var url = "/client/"+clientId+"/formats/price/pricelist";
     jQuery.post(url);
 }
 
 function showCategories(){
-    clientId = getURLParameter('clientId');
+    clientId = $.cookie("clientId");
     var url = "/clients/"+clientId+"/categories";
     jQuery.get(url, {}, displayCategories, "json");
 }
