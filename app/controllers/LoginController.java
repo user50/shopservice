@@ -16,6 +16,8 @@ import tyrex.services.UUID;
 public class LoginController extends Controller {
 
 
+    private static final Integer EXPIRATION = 60 * 60 * 24;
+
     public static Result authentication()
     {
         String password = request().body().asFormUrlEncoded().get("j_password")[0];
@@ -29,7 +31,8 @@ public class LoginController extends Controller {
         String key = UUID.create();
         Cache.set(key, clientSettings.id);
 
-        response().setCookie("key", key);
-        return redirect("assets/page.html?clientId="+clientSettings.id);
+        response().setCookie("key", key, EXPIRATION);
+
+        return redirect("price?clientId="+clientSettings.id);
     }
 }
