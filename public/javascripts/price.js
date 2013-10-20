@@ -38,24 +38,45 @@ function displayCategories(categories){
         form.appendChild(span);
         form.appendChild(document.createElement("br"));
     }
-
-    var buttons = document.getElementById("selectButtons");
-    buttons.style.display = 'none';
 }
 
 function showProducts(categoryId){
+    var form = document.getElementById("categories");
+    form.innerHTML = "";
     var productsUrl = "/clients/"+clientId+"/categories/"+categoryId+"/products";
     jQuery.get(productsUrl, {}, displayProducts, "json");
 }
 
 function displayProducts(products){
-    var form = document.getElementById("categories");
-    form.innerHTML = "";
-    form = document.getElementById("updateForm");
-    form.innerHTML = "";
+
+    var table = $('<table></table>').addClass('simple-little-table').attr('cellspacing','0');
+    table.append($('<col width="20px">'));
+    table.append($('<col>'));
+    table.append($('<col width="10px">'));
+    table.append($('<col width="20px">'));
+    tr = $('<tr/>');
+
+    var checkAll = $('<input>');
+    checkAll.attr('onChange','selectAllProductsForCategory()');
+    checkAll.attr('type', 'checkbox');
+    var th = $('<th></th>');
+    th.append(checkAll);
+    tr.append(th);
+    tr.append("<th>Product Name</th>");
+    tr.append("<th>Price, UAH</th>");
+    tr.append("<th>Published</th>");
+    table.append(tr);
+
     for (i=0; i<products.length; i++) {
         var product = products[i];
         categoryId = product.categoryId;
+
+        var productRow = $('<tr/>');
+        if (i%2 == 0)
+            productRow.addClass('even');
+
+        // checkbox for product
+        var checkBoxCell = $('<td/>');
         var input = document.createElement("input");
         input.setAttribute("id", product.id);
         input.setAttribute("categoryId", product.categoryId);
@@ -64,17 +85,38 @@ function displayProducts(products){
             input.setAttribute("checked","checked");
         }
         input.setAttribute("onChange", "updateChecked(this.id,"+categoryId+")");
-        form.appendChild(input);
+        checkBoxCell.append(input);
 
-        var span = document.createElement("span");
-        span.setAttribute("class", "product");
-        span.innerHTML = product.productName;
+//        product Name
+        var productNameCell = $('<td/>').addClass('product');
+          productNameCell.text(product.productName);
 
-        form.appendChild(span);
-        form.appendChild(document.createElement("br"));
+//        product price
+        var productPriceCell = $('<td/>');
+        productPriceCell.text('0.00');
+
+//      published flag
+        var publishFlag = $('<td/>');
+        var imageUrl;
+        if (i%3 == 0){
+           imageUrl = "assets/images/cross.png";
+        } else {
+            imageUrl = "assets/images/check.png";
+        }
+        var imageFlag = $('<img>').attr('alt', 'check').attr('src', imageUrl);
+        imageFlag.width = 16;
+        imageFlag.height = 16;
+        publishFlag.append(imageFlag);
+
+        productRow.append(checkBoxCell);
+        productRow.append(productNameCell);
+        productRow.append(productPriceCell);
+        productRow.append(publishFlag);
+
+        table.append(productRow);
     }
-    var selectButtons = document.getElementById("selectButtons");
-    selectButtons.style.display = 'block';
+    var form = $("#updateForm");
+    form.append(table);
 
     var updateButton = document.getElementsByClassName("updateButton");
 }

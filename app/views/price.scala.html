@@ -9,6 +9,13 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
     <script type="text/javascript" src="/assets/javascripts/jquery.cookie.js"></script>
     <script type="text/javascript" src="/assets/javascripts/price.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            showCategories();
+        });
+    </script>
 </head>
 
 
@@ -18,7 +25,7 @@
     <div id="header"> <a href="#">Tools for servicing the online store</a> </div>
     <div id="menu"> <a  href="#">HOME</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="#">SERVICES</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="#">PRICE</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#">CONTACTS</a>  </div>
     <div id="cont">
-        <div id="sidebar">
+   <!--     <div id="sidebar">
             <form id = "targetsite" >
                 For what site you want to generate the price list?<p>
                 <input type="radio" name="site" value="id1">HotPrice<Br>
@@ -26,7 +33,7 @@
                 <input type="radio" name="site" value="id3">Price.UA<Br>
                 <input type="radio" name="site" value="id4">Prom.UA<Br>
             </form>
-        </div>
+        </div> -->
 
         <div id="wrapp">
 
@@ -43,17 +50,20 @@
                 <p>
                     You can generate new version Your priceList. <a href="#" onClick="generatePrice()">Generate</a>
                 <p>
-                    <a href="#" onClick="showCategories()">Show Categories</a>
+                 <!--   <a href="#" onClick="showCategories()">Show Categories</a>  -->
                 <div id="categories"> </div>
                 <br>
-                <form id="selectButtons">
+                <!--<form id="selectButtons">
                     <input type="button" id = "selectAllProducts" value = "Select All Products" onclick="selectAllProductsForCategory()">
-                    <!--<input type="button" id = "cancelAllProducts" value="Cancel All" onclick="cancelAllProductsForCategory()">-->
+                    <!--<input type="button" id = "cancelAllProducts" value="Cancel All" onclick="cancelAllProductsForCategory()">
+                </form>   -->
+                <form id = "updateForm">
                 </form>
-                <form id = "updateForm"></form>
 
             </div>
+
         </div>
+
     </div>
     <div id="footer"> Download  <a align="left" href="/flashshop/log" > log file </a>  </div>
 </div>
