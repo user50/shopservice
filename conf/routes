@@ -18,9 +18,9 @@ PUT     /clients/:id                                    controllers.ClientSettin
 DELETE  /clients/:id                                    controllers.ClientSettingsController.deleteClientSettings(id)
 
 # ProductEntry operations
-GET     /clients/:id/categories/:categoryId/products                controllers.ProductController.getProducts(id, categoryId)
-PUT     /clients/:id/categories/:categoryId/products/:productId     controllers.ProductController.updateProduct(id, categoryId, productId, checked: java.lang.Boolean )
-PUT     /clients/:id/categories/:categoryId/products                controllers.ProductController.updateProducts(id, categoryId, checked: java.lang.Boolean)
+GET     /clients/:id/sites/:siteId/categories/:categoryId/products                controllers.ProductController.getProducts(id, siteId: Long,  categoryId)
+PUT     /clients/:id/sites/:siteId/categories/:categoryId/products/:productId     controllers.ProductController.updateProduct(id, siteId: Long, categoryId, productId, checked: java.lang.Boolean )
+PUT     /clients/:id/sites/:siteId/categories/:categoryId/products                controllers.ProductController.updateProducts(id, siteId: Long, categoryId, checked: java.lang.Boolean)
 
 # Category operations
 GET     /clients/:id/categories                          controllers.CategoryController.getCategories(id)
@@ -30,5 +30,8 @@ GET    /client/:id/formats/:format/pricelist                            controll
 POST   /client/:id/formats/:format/pricelist                            controllers.PriceListController.refreshPriceList( id, format )
 GET    /client/:id/formats                                              controllers.PriceListController.getPriceListFormats( id )
 
+# Site operations
+GET    /clients/:id/sites                                               controllers.SiteController.getSites( id )
+POST   /clients/:id/sites                                               controllers.SiteController.addSite( id )
 
 POST /authentication                                                    controllers.LoginController.authentication()
