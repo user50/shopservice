@@ -1,315 +1,33 @@
-2013-09-07 19:43:25,407 - [INFO] - from play in main 
-Listening for HTTP on /0.0.0.0:9000
+2013-10-21 11:58:51,572 - [INFO] - from play in main 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2013-09-07 19:43:27,989 - [INFO] - from play in New I/O  worker #1 
-database [default] connected at jdbc:mysql://127.0.0.1:3306/shopservice
+2013-10-21 12:02:13,676 - [INFO] - from play in New I/O  worker #2 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
 
-2013-09-07 19:43:28,897 - [INFO] - from play in New I/O  worker #1 
+2013-10-21 12:02:14,817 - [INFO] - from play in New I/O  worker #2 
 Application started (Dev)
 
-2013-09-07 19:44:10,408 - [ERROR] - from application in play-internal-execution-context-2 
+2013-10-21 12:11:14,029 - [INFO] - from play in New I/O  worker #8 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
 
-
-! @6fgfpncik - Internal server error, for (GET) [/clients/1/categories/1/products] ->
-
-play.api.Application$$anon$1: Execution exception[[PersistenceException: ERROR executing DML bindLog[] error[Incorrect string value: '\xD0\x93\xD0\xBE\xD1\x81...' for column 'product_name' at row 1]]]
-	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
-	at play.api.DefaultApplication.handleError(Application.scala:383) [play_2.10.jar:2.1.0]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) [play_2.10.jar:2.1.0]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) [play_2.10.jar:2.1.0]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library.jar:na]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source) [na:1.6.0_26]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [na:1.6.0_26]
-	at java.lang.Thread.run(Unknown Source) [na:1.6.0_26]
-javax.persistence.PersistenceException: ERROR executing DML bindLog[] error[Incorrect string value: '\xD0\x93\xD0\xBE\xD1\x81...' for column 'product_name' at row 1]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:97) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.insert(DmlBeanPersister.java:57) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersistExecute.executeInsertBean(DefaultPersistExecute.java:72) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeNow(PersistRequestBean.java:481) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeOrQueue(PersistRequestBean.java:511) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.insert(DefaultPersister.java:387) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveEnhanced(DefaultPersister.java:326) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveRecurse(DefaultPersister.java:296) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveAssocManyDetails(DefaultPersister.java:903) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveMany(DefaultPersister.java:786) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveAssocMany(DefaultPersister.java:683) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.update(DefaultPersister.java:428) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveEnhanced(DefaultPersister.java:324) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveRecurse(DefaultPersister.java:296) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.save(DefaultPersister.java:263) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1610) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1600) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebean.Ebean.save(Ebean.java:505) ~[avaje-ebeanorm-api.jar:na]
-	at com.shopservice.domain.ProductEntry.add(ProductEntry.java:81) ~[na:na]
-	at com.shopservice.domain.ProductEntry.find(ProductEntry.java:73) ~[na:na]
-	at controllers.ProductController.getProducts(ProductController.java:14) ~[na:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$8$$anonfun$apply$8.apply(routes_routing.scala:141) ~[na:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$8$$anonfun$apply$8.apply(routes_routing.scala:141) ~[na:na]
-	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
-	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
-	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
-	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
-	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
-	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
-Caused by: java.sql.SQLException: Incorrect string value: '\xD0\x93\xD0\xBE\xD1\x81...' for column 'product_name' at row 1
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1075) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3566) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3498) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1959) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2113) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2568) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2113) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2409) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2327) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2312) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.jolbox.bonecp.PreparedStatementHandle.executeUpdate(PreparedStatementHandle.java:203) ~[bonecp.jar:0.7.1.RELEASE]
-	at com.avaje.ebeaninternal.server.type.DataBind.executeUpdate(DataBind.java:55) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.InsertHandler.execute(InsertHandler.java:139) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:86) ~[avaje-ebeanorm-server.jar:na]
-	... 38 common frames omitted
-
-2013-09-07 20:00:30,363 - [INFO] - from play in play-internal-execution-context-4 
-database [default] connected at jdbc:mysql://127.0.0.1:3306/shopservice
-
-2013-09-07 20:00:30,535 - [INFO] - from play in play-internal-execution-context-4 
+2013-10-21 12:11:14,098 - [INFO] - from play in New I/O  worker #8 
 Application started (Dev)
 
-2013-09-07 20:00:30,548 - [ERROR] - from application in play-internal-execution-context-4 
+2013-10-21 12:33:49,412 - [INFO] - from play in New I/O  worker #5 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
 
+2013-10-21 12:33:49,476 - [INFO] - from play in New I/O  worker #5 
+Application started (Dev)
 
-! @6fgg216gh - Internal server error, for (GET) [/clients/1/categories/1/products] ->
+2013-10-21 12:42:02,138 - [INFO] - from play in New I/O  worker #7 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
 
-play.api.Application$$anon$1: Execution exception[[PersistenceException: ERROR executing DML bindLog[] error[Incorrect string value: '\xD0\x93\xD0\xBE\xD1\x81...' for column 'product_name' at row 1]]]
-	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
-	at play.api.DefaultApplication.handleError(Application.scala:383) [play_2.10.jar:2.1.0]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) [play_2.10.jar:2.1.0]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) [play_2.10.jar:2.1.0]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library.jar:na]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source) [na:1.6.0_26]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [na:1.6.0_26]
-	at java.lang.Thread.run(Unknown Source) [na:1.6.0_26]
-javax.persistence.PersistenceException: ERROR executing DML bindLog[] error[Incorrect string value: '\xD0\x93\xD0\xBE\xD1\x81...' for column 'product_name' at row 1]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:97) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.insert(DmlBeanPersister.java:57) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersistExecute.executeInsertBean(DefaultPersistExecute.java:72) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeNow(PersistRequestBean.java:481) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeOrQueue(PersistRequestBean.java:511) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.insert(DefaultPersister.java:387) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveEnhanced(DefaultPersister.java:326) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveRecurse(DefaultPersister.java:296) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveAssocManyDetails(DefaultPersister.java:903) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveMany(DefaultPersister.java:786) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveAssocMany(DefaultPersister.java:683) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.update(DefaultPersister.java:428) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveEnhanced(DefaultPersister.java:324) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveRecurse(DefaultPersister.java:296) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.save(DefaultPersister.java:263) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1610) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1600) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebean.Ebean.save(Ebean.java:505) ~[avaje-ebeanorm-api.jar:na]
-	at com.shopservice.domain.ProductEntry.add(ProductEntry.java:81) ~[na:na]
-	at com.shopservice.domain.ProductEntry.find(ProductEntry.java:73) ~[na:na]
-	at controllers.ProductController.getProducts(ProductController.java:14) ~[na:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$8$$anonfun$apply$8.apply(routes_routing.scala:141) ~[na:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$8$$anonfun$apply$8.apply(routes_routing.scala:141) ~[na:na]
-	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
-	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
-	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
-	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
-	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
-	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
-Caused by: java.sql.SQLException: Incorrect string value: '\xD0\x93\xD0\xBE\xD1\x81...' for column 'product_name' at row 1
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1075) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3566) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3498) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1959) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2113) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2568) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2113) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2409) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2327) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2312) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.jolbox.bonecp.PreparedStatementHandle.executeUpdate(PreparedStatementHandle.java:203) ~[bonecp.jar:0.7.1.RELEASE]
-	at com.avaje.ebeaninternal.server.type.DataBind.executeUpdate(DataBind.java:55) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.InsertHandler.execute(InsertHandler.java:139) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:86) ~[avaje-ebeanorm-server.jar:na]
-	... 38 common frames omitted
+2013-10-21 12:42:02,292 - [INFO] - from play in New I/O  worker #7 
+Application started (Dev)
 
-2013-09-07 20:00:36,314 - [ERROR] - from application in play-internal-execution-context-4 
+2013-10-21 12:43:16,405 - [INFO] - from play in New I/O  worker #5 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
 
-
-! @6fgg21f4d - Internal server error, for (GET) [/clients/1/categories/1/products] ->
-
-play.api.Application$$anon$1: Execution exception[[PersistenceException: ERROR executing DML bindLog[] error[Incorrect string value: '\xD0\xA0\xE2\x80\x9C\xD0...' for column 'product_name' at row 1]]]
-	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
-	at play.api.DefaultApplication.handleError(Application.scala:383) [play_2.10.jar:2.1.0]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) [play_2.10.jar:2.1.0]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) [play_2.10.jar:2.1.0]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library.jar:na]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source) [na:1.6.0_26]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [na:1.6.0_26]
-	at java.lang.Thread.run(Unknown Source) [na:1.6.0_26]
-javax.persistence.PersistenceException: ERROR executing DML bindLog[] error[Incorrect string value: '\xD0\xA0\xE2\x80\x9C\xD0...' for column 'product_name' at row 1]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:97) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.insert(DmlBeanPersister.java:57) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersistExecute.executeInsertBean(DefaultPersistExecute.java:72) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeNow(PersistRequestBean.java:481) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeOrQueue(PersistRequestBean.java:511) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.insert(DefaultPersister.java:387) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveEnhanced(DefaultPersister.java:326) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveRecurse(DefaultPersister.java:296) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveAssocManyDetails(DefaultPersister.java:903) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveMany(DefaultPersister.java:786) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveAssocMany(DefaultPersister.java:683) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.update(DefaultPersister.java:428) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveEnhanced(DefaultPersister.java:324) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveRecurse(DefaultPersister.java:296) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.save(DefaultPersister.java:263) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1610) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1600) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebean.Ebean.save(Ebean.java:505) ~[avaje-ebeanorm-api.jar:na]
-	at com.shopservice.domain.ProductEntry.add(ProductEntry.java:81) ~[na:na]
-	at com.shopservice.domain.ProductEntry.find(ProductEntry.java:73) ~[na:na]
-	at controllers.ProductController.getProducts(ProductController.java:14) ~[na:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$8$$anonfun$apply$8.apply(routes_routing.scala:141) ~[na:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$8$$anonfun$apply$8.apply(routes_routing.scala:141) ~[na:na]
-	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
-	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
-	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
-	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
-	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
-	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
-Caused by: java.sql.SQLException: Incorrect string value: '\xD0\xA0\xE2\x80\x9C\xD0...' for column 'product_name' at row 1
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1075) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3566) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3498) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1959) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2113) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2568) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2113) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2409) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2327) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2312) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.jolbox.bonecp.PreparedStatementHandle.executeUpdate(PreparedStatementHandle.java:203) ~[bonecp.jar:0.7.1.RELEASE]
-	at com.avaje.ebeaninternal.server.type.DataBind.executeUpdate(DataBind.java:55) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.InsertHandler.execute(InsertHandler.java:139) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:86) ~[avaje-ebeanorm-server.jar:na]
-	... 38 common frames omitted
-
-2013-09-07 20:00:37,455 - [ERROR] - from application in play-internal-execution-context-4 
-
-
-! @6fgg21gma - Internal server error, for (GET) [/clients/1/categories/1/products] ->
-
-play.api.Application$$anon$1: Execution exception[[PersistenceException: ERROR executing DML bindLog[] error[Incorrect string value: '\xD0\xA0\xE2\x80\x9C\xD0...' for column 'product_name' at row 1]]]
-	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
-	at play.api.DefaultApplication.handleError(Application.scala:383) [play_2.10.jar:2.1.0]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) [play_2.10.jar:2.1.0]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) [play_2.10.jar:2.1.0]
-	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) [play_2.10.jar:2.1.0]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library.jar:na]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source) [na:1.6.0_26]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [na:1.6.0_26]
-	at java.lang.Thread.run(Unknown Source) [na:1.6.0_26]
-javax.persistence.PersistenceException: ERROR executing DML bindLog[] error[Incorrect string value: '\xD0\xA0\xE2\x80\x9C\xD0...' for column 'product_name' at row 1]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:97) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.insert(DmlBeanPersister.java:57) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersistExecute.executeInsertBean(DefaultPersistExecute.java:72) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeNow(PersistRequestBean.java:481) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.PersistRequestBean.executeOrQueue(PersistRequestBean.java:511) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.insert(DefaultPersister.java:387) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveEnhanced(DefaultPersister.java:326) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveRecurse(DefaultPersister.java:296) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveAssocManyDetails(DefaultPersister.java:903) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveMany(DefaultPersister.java:786) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveAssocMany(DefaultPersister.java:683) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.update(DefaultPersister.java:428) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveEnhanced(DefaultPersister.java:324) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.saveRecurse(DefaultPersister.java:296) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.DefaultPersister.save(DefaultPersister.java:263) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1610) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.core.DefaultServer.save(DefaultServer.java:1600) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebean.Ebean.save(Ebean.java:505) ~[avaje-ebeanorm-api.jar:na]
-	at com.shopservice.domain.ProductEntry.add(ProductEntry.java:81) ~[na:na]
-	at com.shopservice.domain.ProductEntry.find(ProductEntry.java:73) ~[na:na]
-	at controllers.ProductController.getProducts(ProductController.java:14) ~[na:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$8$$anonfun$apply$8.apply(routes_routing.scala:141) ~[na:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$8$$anonfun$apply$8.apply(routes_routing.scala:141) ~[na:na]
-	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
-	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
-	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
-	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
-	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
-	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
-	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
-Caused by: java.sql.SQLException: Incorrect string value: '\xD0\xA0\xE2\x80\x9C\xD0...' for column 'product_name' at row 1
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1075) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3566) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3498) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1959) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2113) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2568) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2113) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2409) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2327) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2312) ~[mysql-connector-java-5.1.13-bin.jar:na]
-	at com.jolbox.bonecp.PreparedStatementHandle.executeUpdate(PreparedStatementHandle.java:203) ~[bonecp.jar:0.7.1.RELEASE]
-	at com.avaje.ebeaninternal.server.type.DataBind.executeUpdate(DataBind.java:55) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.InsertHandler.execute(InsertHandler.java:139) ~[avaje-ebeanorm-server.jar:na]
-	at com.avaje.ebeaninternal.server.persist.dml.DmlBeanPersister.execute(DmlBeanPersister.java:86) ~[avaje-ebeanorm-server.jar:na]
-	... 38 common frames omitted
+2013-10-21 12:43:16,470 - [INFO] - from play in New I/O  worker #5 
+Application started (Dev)
 
