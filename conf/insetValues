@@ -1,4 +1,3 @@
 INSERT INTO `shopservice`.`client_settings` (`id`, `site_name`, `site_url`, `database_url`, `path_to_product_page`, `path_to_product_image`, `password`)
 VALUES ('client1', 'domosed', 'http://domosed.com', 'jdbc:mysql://91.200.40.60/newdomosed1?user=newdomosed1&password=kissme22', 'http://domosed.ua/', 'http://domosed.ua/images/product_images/popup_images/', 'neuser50');
 
-INSERT INTO `shopservice`.`site` (`id`, `name`) VALUES ('1', 'hotline');
