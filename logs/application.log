@@ -1,33 +1,835 @@
-2013-10-21 11:58:51,572 - [INFO] - from play in main 
+2013-10-22 13:06:31,543 - [INFO] - from play in main 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2013-10-21 12:02:13,676 - [INFO] - from play in New I/O  worker #2 
+2013-10-22 13:06:55,360 - [INFO] - from play in New I/O  worker #1 
 database [default] connected at jdbc:mysql://localhost:3306/shopservice
 
-2013-10-21 12:02:14,817 - [INFO] - from play in New I/O  worker #2 
+2013-10-22 13:06:56,567 - [INFO] - from play in New I/O  worker #1 
 Application started (Dev)
 
-2013-10-21 12:11:14,029 - [INFO] - from play in New I/O  worker #8 
+2013-10-22 13:13:23,871 - [INFO] - from play in New I/O  worker #7 
 database [default] connected at jdbc:mysql://localhost:3306/shopservice
 
-2013-10-21 12:11:14,098 - [INFO] - from play in New I/O  worker #8 
+2013-10-22 13:13:23,957 - [INFO] - from play in New I/O  worker #7 
 Application started (Dev)
 
-2013-10-21 12:33:49,412 - [INFO] - from play in New I/O  worker #5 
+2013-10-22 13:15:43,543 - [INFO] - from play in New I/O  worker #7 
 database [default] connected at jdbc:mysql://localhost:3306/shopservice
 
-2013-10-21 12:33:49,476 - [INFO] - from play in New I/O  worker #5 
+2013-10-22 13:15:43,623 - [INFO] - from play in New I/O  worker #7 
 Application started (Dev)
 
-2013-10-21 12:42:02,138 - [INFO] - from play in New I/O  worker #7 
+2013-10-22 13:18:54,237 - [INFO] - from play in New I/O  worker #1 
 database [default] connected at jdbc:mysql://localhost:3306/shopservice
 
-2013-10-21 12:42:02,292 - [INFO] - from play in New I/O  worker #7 
+2013-10-22 13:18:54,334 - [INFO] - from play in New I/O  worker #1 
 Application started (Dev)
 
-2013-10-21 12:43:16,405 - [INFO] - from play in New I/O  worker #5 
+2013-10-22 13:20:05,696 - [INFO] - from play in New I/O  worker #8 
 database [default] connected at jdbc:mysql://localhost:3306/shopservice
 
-2013-10-21 12:43:16,470 - [INFO] - from play in New I/O  worker #5 
+2013-10-22 13:20:05,770 - [INFO] - from play in New I/O  worker #8 
 Application started (Dev)
+
+2013-10-22 13:24:10,644 - [INFO] - from play in New I/O  worker #1 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 13:24:10,721 - [INFO] - from play in New I/O  worker #1 
+Application started (Dev)
+
+2013-10-22 13:30:57,641 - [INFO] - from play in New I/O  worker #6 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 13:30:57,720 - [INFO] - from play in New I/O  worker #6 
+Application started (Dev)
+
+2013-10-22 13:33:40,380 - [INFO] - from play in New I/O  worker #5 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 13:33:40,474 - [INFO] - from play in New I/O  worker #5 
+Application started (Dev)
+
+2013-10-22 13:34:34,309 - [INFO] - from play in New I/O  worker #6 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 13:34:34,390 - [INFO] - from play in New I/O  worker #6 
+Application started (Dev)
+
+2013-10-22 13:34:51,167 - [INFO] - from play in New I/O  worker #6 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 13:34:51,237 - [INFO] - from play in New I/O  worker #6 
+Application started (Dev)
+
+2013-10-22 13:37:55,172 - [INFO] - from play in New I/O  worker #5 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 13:37:55,238 - [INFO] - from play in New I/O  worker #5 
+Application started (Dev)
+
+2013-10-22 14:18:07,851 - [INFO] - from play in New I/O  worker #5 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 14:18:07,928 - [INFO] - from play in New I/O  worker #5 
+Application started (Dev)
+
+2013-10-22 14:20:06,658 - [ERROR] - from application in play-internal-execution-context-1 
+
+
+! @6g33fbp1b - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:21:03,226 - [ERROR] - from application in play-internal-execution-context-1 
+
+
+! @6g33ff4jj - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:22:06,801 - [ERROR] - from application in play-internal-execution-context-2 
+
+
+! @6g33fikkl - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:24:30,012 - [ERROR] - from application in play-internal-execution-context-2 
+
+
+! @6g33g0oh1 - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:27:53,816 - [ERROR] - from application in play-internal-execution-context-2 
+
+
+! @6g33gce3g - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:30:46,874 - [ERROR] - from application in play-internal-execution-context-4 
+
+
+! @6g33gma3i - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:34:02,665 - [ERROR] - from application in play-internal-execution-context-1 
+
+
+! @6g33h7dk1 - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:40:38,986 - [ERROR] - from application in play-internal-execution-context-4 
+
+
+! @6g33i4214 - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:43:06,774 - [ERROR] - from application in play-internal-execution-context-2 
+
+
+! @6g33icchb - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:44:21,826 - [ERROR] - from application in play-internal-execution-context-1 
+
+
+! @6g33igji2 - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:46:22,997 - [ERROR] - from application in play-internal-execution-context-3 
+
+
+! @6g33ingoc - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:48:10,800 - [ERROR] - from application in play-internal-execution-context-4 
+
+
+! @6g33j3kak - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 14:55:32,317 - [ERROR] - from application in play-internal-execution-context-4 
+
+
+! @6g33k2ne4 - Internal server error, for (POST) [/clients/client1/sites] ->
+
+play.api.Application$$anon$1: Execution exception[[RuntimeException: java.lang.NullPointerException]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.RuntimeException: java.lang.NullPointerException
+	at play.libs.Json.fromJson(Json.java:35) ~[play_2.10.jar:2.1.0]
+	at controllers.SiteController.addSite(SiteController.java:22) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$16$$anonfun$apply$16.apply(routes_routing.scala:229) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: java.lang.NullPointerException: null
+	at org.codehaus.jackson.node.TreeTraversingParser.<init>(TreeTraversingParser.java:72) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeAsTokens(ObjectMapper.java:1717) ~[jackson-mapper-asl.jar:1.9.10]
+	at org.codehaus.jackson.map.ObjectMapper.treeToValue(ObjectMapper.java:1733) ~[jackson-mapper-asl.jar:1.9.10]
+	at play.libs.Json.fromJson(Json.java:33) ~[play_2.10.jar:2.1.0]
+	... 19 common frames omitted
+
+2013-10-22 15:26:04,067 - [INFO] - from play in New I/O  worker #5 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 15:26:04,169 - [INFO] - from play in New I/O  worker #5 
+Application started (Dev)
+
+2013-10-22 15:27:47,834 - [INFO] - from play in New I/O  worker #6 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 15:27:47,898 - [INFO] - from play in New I/O  worker #6 
+Application started (Dev)
+
+2013-10-22 15:30:04,009 - [INFO] - from play in New I/O  worker #7 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 15:30:04,077 - [INFO] - from play in New I/O  worker #7 
+Application started (Dev)
+
+2013-10-22 15:32:57,864 - [INFO] - from play in New I/O  worker #8 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 15:32:57,933 - [INFO] - from play in New I/O  worker #8 
+Application started (Dev)
+
+2013-10-22 15:33:56,921 - [INFO] - from play in New I/O  worker #6 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 15:33:56,986 - [INFO] - from play in New I/O  worker #6 
+Application started (Dev)
+
+2013-10-22 15:55:58,655 - [INFO] - from play in New I/O  worker #4 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 15:55:58,723 - [INFO] - from play in New I/O  worker #4 
+Application started (Dev)
+
+2013-10-22 15:58:41,224 - [INFO] - from play in New I/O  worker #4 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 15:58:41,288 - [INFO] - from play in New I/O  worker #4 
+Application started (Dev)
+
+2013-10-22 16:15:28,614 - [INFO] - from play in New I/O  worker #2 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 16:15:28,677 - [INFO] - from play in New I/O  worker #2 
+Application started (Dev)
+
+2013-10-22 16:21:21,072 - [INFO] - from play in New I/O  worker #6 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 16:21:21,138 - [INFO] - from play in New I/O  worker #6 
+Application started (Dev)
+
+2013-10-22 17:07:15,423 - [INFO] - from play in New I/O  worker #6 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 17:07:15,487 - [INFO] - from play in New I/O  worker #6 
+Application started (Dev)
+
+2013-10-22 17:10:34,637 - [INFO] - from play in New I/O  worker #6 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 17:10:34,776 - [INFO] - from play in New I/O  worker #6 
+Application started (Dev)
+
+2013-10-22 17:14:22,189 - [INFO] - from play in New I/O  worker #7 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 17:14:22,290 - [INFO] - from play in New I/O  worker #7 
+Application started (Dev)
+
+2013-10-22 17:14:45,074 - [INFO] - from play in New I/O  worker #6 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 17:14:45,140 - [INFO] - from play in New I/O  worker #6 
+Application started (Dev)
+
+2013-10-22 17:15:08,406 - [ERROR] - from application in play-internal-execution-context-2 
+
+
+! @6g34cbc58 - Internal server error, for (POST) [/client/client1/formats/price/pricelist] ->
+
+play.api.Application$$anon$1: Execution exception[[PersistenceException: Query threw SQLException:Unknown column 't0.checked' in 'where clause' 
+Bind values:[client1, true] 
+Query was:
+select t0.id c0, t0.product_id c1, t0.product_name c2, t0.category_id c3 
+from product_entry t0 
+where client_settings_id = ?  and t0.checked = ?  
+
+]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+javax.persistence.PersistenceException: Query threw SQLException:Unknown column 't0.checked' in 'where clause' 
+Bind values:[client1, true] 
+Query was:
+select t0.id c0, t0.product_id c1, t0.product_name c2, t0.category_id c3 
+from product_entry t0 
+where client_settings_id = ?  and t0.checked = ?  
+
+
+	at com.avaje.ebeaninternal.server.query.CQuery.createPersistenceException(CQuery.java:815) ~[avaje-ebeanorm-server.jar:na]
+	at com.avaje.ebeaninternal.server.query.CQuery.createPersistenceException(CQuery.java:795) ~[avaje-ebeanorm-server.jar:na]
+	at com.avaje.ebeaninternal.server.query.CQueryEngine.findMany(CQueryEngine.java:210) ~[avaje-ebeanorm-server.jar:na]
+	at com.avaje.ebeaninternal.server.query.DefaultOrmQueryEngine.findMany(DefaultOrmQueryEngine.java:77) ~[avaje-ebeanorm-server.jar:na]
+	at com.avaje.ebeaninternal.server.core.OrmQueryRequest.findList(OrmQueryRequest.java:272) ~[avaje-ebeanorm-server.jar:na]
+	at com.avaje.ebeaninternal.server.core.DefaultServer.findList(DefaultServer.java:1502) ~[avaje-ebeanorm-server.jar:na]
+	at com.avaje.ebeaninternal.server.querydefn.DefaultOrmQuery.findList(DefaultOrmQuery.java:904) ~[avaje-ebeanorm-server.jar:na]
+	at com.avaje.ebeaninternal.util.DefaultExpressionList.findList(DefaultExpressionList.java:177) ~[avaje-ebeanorm-server.jar:na]
+	at com.shopservice.domain.ProductEntry.findSelected(ProductEntry.java:79) ~[na:na]
+	at com.shopservice.refreshers.AbstractPriceListRefresher.getProductIds(AbstractPriceListRefresher.java:16) ~[na:na]
+	at com.shopservice.refreshers.PriceFormatRefresher.refresh(PriceFormatRefresher.java:42) ~[na:na]
+	at com.shopservice.PriceListService.refreshPriceList(PriceListService.java:24) ~[na:na]
+	at controllers.PriceListController.refreshPriceList(PriceListController.java:30) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$13$$anonfun$apply$13.apply(routes_routing.scala:205) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$13$$anonfun$apply$13.apply(routes_routing.scala:205) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 't0.checked' in 'where clause'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.7.0_25]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) ~[na:1.7.0_25]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) ~[na:1.7.0_25]
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:409) ~[mysql-connector-java-5.1.13-bin.jar:na]
+	at com.mysql.jdbc.Util.getInstance(Util.java:384) ~[mysql-connector-java-5.1.13-bin.jar:na]
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1054) ~[mysql-connector-java-5.1.13-bin.jar:na]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3566) ~[mysql-connector-java-5.1.13-bin.jar:na]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3498) ~[mysql-connector-java-5.1.13-bin.jar:na]
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:1959) ~[mysql-connector-java-5.1.13-bin.jar:na]
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2113) ~[mysql-connector-java-5.1.13-bin.jar:na]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2568) ~[mysql-connector-java-5.1.13-bin.jar:na]
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2113) ~[mysql-connector-java-5.1.13-bin.jar:na]
+	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:2275) ~[mysql-connector-java-5.1.13-bin.jar:na]
+	at com.jolbox.bonecp.PreparedStatementHandle.executeQuery(PreparedStatementHandle.java:172) ~[bonecp.jar:0.7.1.RELEASE]
+	at com.avaje.ebeaninternal.server.query.CQuery.prepareBindExecuteQuery(CQuery.java:382) ~[avaje-ebeanorm-server.jar:na]
+	at com.avaje.ebeaninternal.server.query.CQueryEngine.findMany(CQueryEngine.java:174) ~[avaje-ebeanorm-server.jar:na]
+	... 28 common frames omitted
 

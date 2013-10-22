@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/price.css"/>
     <META content="text/html; charset=utf-8" http-equiv="Content-Type">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script type="text/javascript" src="/assets/javascripts/jquery.cookie.js"></script>
     <script type="text/javascript" src="/assets/javascripts/price.js"></script>
     <script type="text/javascript" src="/assets/javascripts/tablePaging.js"></script>
@@ -14,7 +15,10 @@
     <script type="text/javascript">
         $(document).ready(function()
         {
+            showSites();
             showCategories();
+            $(".blue-btn").click(function(){
+            });
         });
     </script>
 </head>
@@ -37,7 +41,22 @@
         </div> -->
 
         <div id="wrapp">
+            <div id="clientSites">
+                <div id="sites">
 
+                </div>
+                <div id="addSiteImage"><img src="assets/images/addSiteButton.png" onclick="$('#addNewSite').show('slide', 300)"></div>
+                <div id="addNewSite">
+                    <form id="addNewSiteForm">
+                            <table>
+                                <tr>
+                                    <td><input type="text" name="name"></td>
+                                    <td><input type="submit" value="OK" onclick="addNewSite()"></td>
+                                </tr>
+                            </table>
+                    </form>
+                </div>
+            </div>
             <!--<div id="button" class="downloadButton" onClick="message(this.id)"><a href="#">Download</a></div>-->
             <!--<div id="updating">-->
             <!--<div id="update">-->
@@ -47,9 +66,8 @@
 
             <div id="main">
                 <p>
-                    You can download last version Your priceList. <a id="downloadHref" href="#" onClick="downloadPrice()">Download</a>
-                <p>
-                    You can generate new version Your priceList. <a href="#" onClick="generatePrice()">Generate</a>
+                <button class="unibutton orange" onClick="downloadPrice()">Download</button>
+                <button href="#" class="unibutton orange" onClick="generatePrice()">Generate</button>
                 <p>
                  <!--   <a href="#" onClick="showCategories()">Show Categories</a>  -->
                 <div id="categories"> </div>
