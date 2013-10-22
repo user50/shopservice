@@ -49,7 +49,7 @@ function showProducts(categoryId){
 
 function displayProducts(products){
 
-    var table = $('<table></table>').addClass('simple-little-table').attr('cellspacing','0');
+    var table = $('<table></table>').attr('id', 'productsTable').addClass('simple-little-table').attr('cellspacing','0');
     table.append($('<col width="20px">'));
     table.append($('<col>'));
     table.append($('<col width="10px">'));
@@ -115,9 +115,11 @@ function displayProducts(products){
 
         table.append(productRow);
     }
+
     var form = $("#updateForm");
     form.append(table);
 
+    $('#productsTable').oneSimpleTablePagination({rowsPerPage: 10});
     var updateButton = document.getElementsByClassName("updateButton");
 }
 
