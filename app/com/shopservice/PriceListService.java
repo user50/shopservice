@@ -14,13 +14,13 @@ import java.sql.SQLException;
  */
 public class PriceListService {
 
-    public File getPriceList(String clientId, PriceListType type){
-        File file = new File(type.getFileName(clientId));
+    public File getPriceList(String clientId, int siteId, PriceListType type){
+        File file = new File(type.getFileName(clientId, siteId));
 
         return file.exists() ? file:null;
     }
 
-    public void refreshPriceList(String clientId, PriceListType type) throws SQLException, JAXBException, FileNotFoundException {
-        type.getHandler().refresh(clientId);
+    public void refreshPriceList(String clientId, int siteId , PriceListType type) throws SQLException, JAXBException, FileNotFoundException {
+        type.getHandler().refresh(clientId, siteId);
     }
 }

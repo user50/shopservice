@@ -34,6 +34,7 @@ public class ProductEntry {
         id = row.getString("id");
         productName = row.getString("product_name");
         categoryId = row.getString("category_id");
+        productId = row.getString("product_id");
         checked = row.getBoolean("checked") == null ? false:row.getBoolean("checked") ;
     }
 
@@ -74,9 +75,21 @@ public class ProductEntry {
         return Ebean.find(ProductEntry.class).where().eq("client_settings_id", clientSettingsId).findList();
     }
 
-    public static List<ProductEntry> findSelected(String clientSettingsId)
+    public static List<ProductEntry> findSelected(String clientSettingsId, int siteId)
     {
-        return Ebean.find(ProductEntry.class).where().eq("client_settings_id", clientSettingsId).eq("checked",true).findList();
+        List<SqlRow> rows = Ebean.createSqlQuery("SELECT * FROM product_entry " +
+                "JOIN site2product ON product_entry.id = site2product.product_entry_id " +
+                "WHERE client_settings_id = ? AND site_id = ? AND checked = ?")
+                .setParameter(1, clientSettingsId)
+                .setParameter(2, siteId)
+                .setParameter(3, true)
+                .findList();
+
+        List<ProductEntry> entries = new ArrayList<ProductEntry>();
+        for (SqlRow row : rows)
+            entries.add( new ProductEntry(row) );
+
+        return entries;
     }
 
     public static List<ProductEntry> findAndRefresh(String clientId, String categoryId, int settingsId) throws SQLException {

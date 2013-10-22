@@ -16,9 +16,11 @@ import static com.shopservice.Services.priceListService;
 
 public class PriceListController extends Controller {
 
-    public static Result getPriceList(String clientId, String format)
+
+
+    public static Result getPriceList(String clientId, Long siteId, String format)
     {
-        File file = priceListService.getPriceList( clientId, PriceListType.valueOf(format) );
+        File file = priceListService.getPriceList( clientId, siteId.intValue(), PriceListType.valueOf(format) );
 
         ClientSettings clientSettings = ClientSettings.findById(clientId);
 
@@ -26,8 +28,8 @@ public class PriceListController extends Controller {
         return ok(file).as("application/force-download");
     }
 
-    public static Result refreshPriceList(String clientId, String format) throws JAXBException, SQLException, FileNotFoundException {
-        priceListService.refreshPriceList( clientId, PriceListType.valueOf(format) );
+    public static Result refreshPriceList(String clientId, Long siteId,  String format) throws JAXBException, SQLException, FileNotFoundException {
+        priceListService.refreshPriceList( clientId, siteId.intValue(), PriceListType.valueOf(format) );
 
         return ok();
     }

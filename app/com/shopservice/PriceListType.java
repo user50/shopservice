@@ -26,9 +26,9 @@ public enum PriceListType {
         this.fileName = fileName;
     }
 
-    public String getFileName(String clientId) {
+    public String getFileName(String clientId, int siteId) {
         return  System.getProperty("user.dir") + File.separator + PRICE_LIST_DIR +
-                File.separator + clientId + File.separator+fileName;
+                File.separator + clientId +File.separator + siteId + File.separator+fileName;
     }
 
     public PriceListRefresher getHandler()

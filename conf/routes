@@ -26,8 +26,8 @@ PUT     /clients/:id/sites/:siteId/categories/:categoryId/products              
 GET     /clients/:id/categories                          controllers.CategoryController.getCategories(id)
 
 # PriceList operations
-GET    /client/:id/formats/:format/pricelist                            controllers.PriceListController.getPriceList( id, format )
-POST   /client/:id/formats/:format/pricelist                            controllers.PriceListController.refreshPriceList( id, format )
+GET    /client/:id/sites/:siteId/formats/:format/pricelist              controllers.PriceListController.getPriceList( id, siteId:Long, format )
+POST   /client/:id/sites/:siteId/formats/:format/pricelist              controllers.PriceListController.refreshPriceList( id, siteId:Long, format )
 GET    /client/:id/formats                                              controllers.PriceListController.getPriceListFormats( id )
 
 # Site operations

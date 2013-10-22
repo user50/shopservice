@@ -30,7 +30,7 @@ import static com.shopservice.Util.save;
  */
 public class PriceFormatRefresher extends AbstractPriceListRefresher {
     @Override
-    public void refresh(String clientId) throws SQLException, JAXBException, FileNotFoundException {
+    public void refresh(String clientId, int siteId) throws SQLException, JAXBException, FileNotFoundException {
         ClientSettings clientSettings = ClientSettings.findById(clientId);
 
         Price price = new Price();
@@ -39,14 +39,14 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
         Set<Category> categories = new HashSet<Category>();
 
-        for (Product product : Services.getClientsInformationProvider(clientId).getProducts( getProductIds(clientId))) {
+        for (Product product : Services.getClientsInformationProvider(clientId).getProducts( getProductIds(clientId, siteId))) {
             price.addItem( createItem(clientId, product) );
             categories.add( new Category( product.categoryId, product.categoryName) );
         }
 
         price.setCatalog( new ArrayList<Category>(categories) );
 
-        save(price, PriceListType.price.getFileName(clientId));
+        save(price, PriceListType.price.getFileName(clientId, siteId));
     }
 
     private Item createItem(String clientId, Product product) throws SQLException {

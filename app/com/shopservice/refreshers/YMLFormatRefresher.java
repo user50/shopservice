@@ -9,7 +9,7 @@ package com.shopservice.refreshers;
  */
 public class YMLFormatRefresher implements PriceListRefresher {
     @Override
-    public void refresh(String clientId) {
+    public void refresh(String clientId, int siteId) {
 
     }
 }

@@ -6,6 +6,7 @@ import com.shopservice.domain.Product;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
@@ -13,6 +14,8 @@ import java.sql.SQLException;
 public class Util {
 
     public static  <T> void save (T t, String filePath) throws JAXBException, FileNotFoundException {
+        new File(filePath).getParentFile().mkdirs();
+
         JAXBContext context = JAXBContext.newInstance( t.getClass() );
 
         Marshaller marshaller = context.createMarshaller();
