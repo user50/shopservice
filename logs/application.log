@@ -833,3 +833,57 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown co
 	at com.avaje.ebeaninternal.server.query.CQueryEngine.findMany(CQueryEngine.java:174) ~[avaje-ebeanorm-server.jar:na]
 	... 28 common frames omitted
 
+2013-10-22 17:20:22,659 - [INFO] - from play in New I/O  worker #7 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 17:20:22,723 - [INFO] - from play in New I/O  worker #7 
+Application started (Dev)
+
+2013-10-22 17:23:16,344 - [ERROR] - from application in play-internal-execution-context-2 
+
+
+! @6g34dd608 - Internal server error, for (GET) [/client/client1/sites/5/formats/price/pricelist] ->
+
+play.api.Application$$anon$1: Execution exception[[NullPointerException: null content]]
+	at play.api.Application$class.handleError(Application.scala:289) ~[play_2.10.jar:2.1.0]
+	at play.api.DefaultApplication.handleError(Application.scala:383) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:132) ~[play_2.10.jar:2.1.0]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anon$2$$anonfun$handle$1.apply(PlayDefaultUpstreamHandler.scala:128) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend1$1.apply(Promise.scala:113) ~[play_2.10.jar:2.1.0]
+	at play.api.libs.concurrent.PlayPromise$$anonfun$extend$1$$anonfun$apply$1.apply(Promise.scala:104) ~[play_2.10.jar:2.1.0]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library.jar:na]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) ~[na:1.7.0_25]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) ~[na:1.7.0_25]
+	at java.lang.Thread.run(Unknown Source) ~[na:1.7.0_25]
+java.lang.NullPointerException: null content
+	at play.mvc.Results$Status.<init>(Results.java:1118) ~[play_2.10.jar:2.1.0]
+	at play.mvc.Results.ok(Results.java:211) ~[play_2.10.jar:2.1.0]
+	at play.mvc.Results.ok(Results.java:204) ~[play_2.10.jar:2.1.0]
+	at controllers.PriceListController.getPriceList(PriceListController.java:28) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$12$$anonfun$apply$12.apply(routes_routing.scala:197) ~[na:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$12$$anonfun$apply$12.apply(routes_routing.scala:197) ~[na:na]
+	at play.core.Router$HandlerInvoker$$anon$6$$anon$2.invocation(Router.scala:141) ~[play_2.10.jar:2.1.0]
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:322) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:31) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:74) ~[play_2.10.jar:2.1.0]
+	at play.core.j.JavaAction$$anon$2.apply(JavaAction.scala:73) ~[play_2.10.jar:2.1.0]
+	at play.libs.F$Promise$PromiseActor.onReceive(F.java:420) ~[play_2.10.jar:2.1.0]
+	at akka.actor.UntypedActor$$anonfun$receive$1.applyOrElse(UntypedActor.scala:159) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:425) ~[akka-actor_2.10.jar:na]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:386) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:230) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:212) ~[akka-actor_2.10.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:502) ~[akka-actor_2.10.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:262) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1478) ~[scala-library.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[scala-library.jar:na]
+
+2013-10-22 17:31:09,252 - [INFO] - from play in New I/O  worker #7 
+database [default] connected at jdbc:mysql://localhost:3306/shopservice
+
+2013-10-22 17:31:09,315 - [INFO] - from play in New I/O  worker #7 
+Application started (Dev)
+
