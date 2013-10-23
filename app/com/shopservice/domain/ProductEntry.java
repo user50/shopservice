@@ -103,7 +103,7 @@ public class ProductEntry {
         }
 
         Set<ProductEntry> productEntriesFromSettings = Ebean.find(ProductEntry.class)
-                                .where().eq("client_settings_id", clientId).eq("category_id",categoryId).findSet();
+                .where().eq("client_settings_id", clientId).eq("category_id",categoryId).findSet();
 
         delete(Sets.difference(productEntriesFromSettings,productEntriesFromClient));
 
