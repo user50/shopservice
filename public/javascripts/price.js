@@ -4,14 +4,17 @@ function getURLParameter(name) {
 
 function downloadPrice(){
     clientId = $.cookie("clientId");
-    var url = "/client/"+clientId+"/formats/price/pricelist";
+    var siteId = $.cookie("siteId");
+    var url = "/client/"+clientId + "/sites/" + siteId + "/formats/price/pricelist";
+//    $.get(url);
     var href = document.getElementById("downloadHref").setAttribute("href",url);
     href.click();
 }
 
 function generatePrice(){
     clientId = $.cookie("clientId");
-    var url = "/client/"+clientId+"/formats/price/pricelist";
+    var siteId = $.cookie("siteId");
+    var url = "/client/"+clientId+ "/sites/" + siteId + "/formats/price/pricelist";
     jQuery.post(url);
 }
 
@@ -43,7 +46,8 @@ function displayCategories(categories){
 function showProducts(categoryId){
     var form = document.getElementById("categories");
     form.innerHTML = "";
-    var productsUrl = "/clients/"+clientId+"/categories/"+categoryId+"/products";
+    var siteId = $.cookie("siteId");
+    var productsUrl = "/clients/"+clientId+ "/sites/" + siteId + "/categories/"+categoryId+"/products";
     jQuery.get(productsUrl, {}, displayProducts, "json");
 }
 
@@ -119,7 +123,7 @@ function displayProducts(products){
     var form = $("#updateForm");
     form.append(table);
 
-    $('#productsTable').oneSimpleTablePagination({rowsPerPage: 10});
+    $('#productsTable').oneSimpleTablePagination({rowsPerPage: 15});
     var updateButton = document.getElementsByClassName("updateButton");
 }
 
@@ -135,7 +139,8 @@ function updateChecked(productId){
 }
 
 function addProduct(productId){
-    var url = "/clients/"+clientId+"/categories/"+categoryId+"/products/"+productId+"?checked=true";
+    var siteId = $.cookie("siteId");
+    var url = "/clients/"+clientId + "/sites/" + siteId + "/categories/"+categoryId+"/products/"+productId+"?checked=true";
     jQuery.ajax({
         url: url,
         type:"put"
@@ -143,7 +148,8 @@ function addProduct(productId){
 }
 
 function deleteProduct(productId){
-    var url = "/clients/"+clientId+"/categories/"+categoryId+"/products/"+productId+"?checked=false";
+    var siteId = $.cookie("siteId");
+    var url = "/clients/"+clientId + "/sites/" + siteId + "/categories/"+categoryId+"/products/"+productId+"?checked=false";
     jQuery.ajax({
         url:url,
         type:"put"
@@ -165,6 +171,36 @@ function selectAllProductsForCategory(){
     }
 }
 
+function showSites(){
+    clientId = $.cookie("clientId");
+    var url = "/clients/" + clientId + "/sites";
+    $.get(url, function(sites){
+        var sitesDiv = $('#sites');
+        for (i = 0; i < sites.length; i++){
+            var button = $('<button/>').addClass('blue-btn').text(sites[i].name);
+            button.attr('siteId', sites[i].id);
+            button.attr('onClick', 'setSite(this)');
+            sitesDiv.append(button);
+        }
+    })
+}
+
+function addNewSite() {
+    clientId = $.cookie("clientId");
+    var url = "/clients/" + clientId + "/sites";
+    jQuery.ajax({
+        url:url,
+        type:"post",
+        contentType: "application/json",
+        data: JSON.stringify($('#addNewSiteForm').serializeObject())
+    });
+}
+
+function setSite (siteId) {
+    $.cookie("siteId", siteId.attributes.getNamedItem('siteId').value);
+    var categoryId = $.cookie("categoryId");
+    showCategories();
+}
 //function cancelAllProductsForCategory(){
 //    var url = "/clients/"+clientId+"/categories/"+categoryId+"/products?checked=false";
 //    jQuery.ajax({
@@ -177,3 +213,20 @@ function selectAllProductsForCategory(){
 //        input.removeAttribute("checked");
 //    }
 //}
+
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
