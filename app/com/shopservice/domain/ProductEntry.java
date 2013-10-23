@@ -22,6 +22,9 @@ public class ProductEntry {
     public String productId;
     public String productName;
     public String categoryId;
+    public double price;
+    public String url;
+    public Boolean published = false;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
@@ -35,6 +38,11 @@ public class ProductEntry {
         productName = row.getString("product_name");
         categoryId = row.getString("category_id");
         productId = row.getString("product_id");
+        price = row.getDouble("price");
+        url = row.getString("url");
+
+        if (row.getString("published") != null)
+            published = row.getString("published").equals("1");
 
         if (row.getString("checked") != null)
             checked = row.getString("checked").equals("1") ;
@@ -68,6 +76,9 @@ public class ProductEntry {
         productId = product.id;
         productName = product.name;
         categoryId = product.categoryId;
+        price = product.price;
+        url = product.url;
+        published = product.published;
     }
 
 

@@ -15,6 +15,7 @@ public class Product {
     public String url;
     public String imageUrl;
     public String categoryId;
+    public Boolean published;
 
     public void setUrl(String url) {
         this.url = url;
