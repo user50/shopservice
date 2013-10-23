@@ -4,14 +4,17 @@ function getURLParameter(name) {
 
 function downloadPrice(){
     clientId = $.cookie("clientId");
-    var url = "/client/"+clientId+"/formats/price/pricelist";
+    var siteId = $.cookie("siteId");
+    var url = "/client/"+clientId + "/sites/" + siteId + "/formats/price/pricelist";
+//    $.get(url);
     var href = document.getElementById("downloadHref").setAttribute("href",url);
     href.click();
 }
 
 function generatePrice(){
     clientId = $.cookie("clientId");
-    var url = "/client/"+clientId+"/formats/price/pricelist";
+    var siteId = $.cookie("siteId");
+    var url = "/client/"+clientId+ "/sites/" + siteId + "/formats/price/pricelist";
     jQuery.post(url);
 }
 
@@ -46,8 +49,6 @@ function showProducts(categoryId){
     var siteId = $.cookie("siteId");
     var productsUrl = "/clients/"+clientId+ "/sites/" + siteId + "/categories/"+categoryId+"/products";
     jQuery.get(productsUrl, {}, displayProducts, "json");
-    $.cookie('categoryId', null);
-    $.cookie('categoryId', categoryId);
 }
 
 function displayProducts(products){
@@ -122,7 +123,7 @@ function displayProducts(products){
     var form = $("#updateForm");
     form.append(table);
 
-    $('#productsTable').oneSimpleTablePagination({rowsPerPage: 10});
+    $('#productsTable').oneSimpleTablePagination({rowsPerPage: 15});
     var updateButton = document.getElementsByClassName("updateButton");
 }
 
@@ -196,7 +197,6 @@ function addNewSite() {
 }
 
 function setSite (siteId) {
-    $.cookie("siteId", null);
     $.cookie("siteId", siteId.attributes.getNamedItem('siteId').value);
     var categoryId = $.cookie("categoryId");
     showCategories();
