@@ -35,7 +35,9 @@ public class ProductEntry {
         productName = row.getString("product_name");
         categoryId = row.getString("category_id");
         productId = row.getString("product_id");
-        checked = row.getBoolean("checked") == null ? false:row.getBoolean("checked") ;
+
+        if (row.getString("checked") != null)
+            checked = row.getString("checked").equals("1") ;
     }
 
     @Override
@@ -77,12 +79,11 @@ public class ProductEntry {
 
     public static List<ProductEntry> findSelected(String clientSettingsId, int siteId)
     {
-        List<SqlRow> rows = Ebean.createSqlQuery("SELECT * FROM product_entry " +
-                "JOIN site2product ON product_entry.id = site2product.product_entry_id " +
-                "WHERE client_settings_id = ? AND site_id = ? AND checked = ?")
-                .setParameter(1, clientSettingsId)
-                .setParameter(2, siteId)
-                .setParameter(3, true)
+        List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.* FROM product_entry " +
+                "JOIN site2product ON site2product.product_entry_id = product_entry.id AND site2product.site_id = ? " +
+                "WHERE client_settings_id = ?")
+                .setParameter(1, siteId)
+                .setParameter(2, clientSettingsId)
                 .findList();
 
         List<ProductEntry> entries = new ArrayList<ProductEntry>();
@@ -102,7 +103,7 @@ public class ProductEntry {
         }
 
         Set<ProductEntry> productEntriesFromSettings = Ebean.find(ProductEntry.class)
-                                .where().eq("client_settings_id", clientId).eq("category_id",categoryId).findSet();
+                .where().eq("client_settings_id", clientId).eq("category_id",categoryId).findSet();
 
         delete(Sets.difference(productEntriesFromSettings,productEntriesFromClient));
 
@@ -125,12 +126,13 @@ public class ProductEntry {
 
     private static List<ProductEntry> getWithChecked(String clientId, String categoryId, int settingsId)
     {
-        List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.*, site2product.checked FROM site2product " +
-                "RIGHT JOIN product_entry ON product_entry.id = site2product.product_entry_id " +
-                "WHERE client_settings_id = ? AND category_id = ? AND (site_id = ? OR site_id IS NULL)")
-                .setParameter(1, clientId)
-                .setParameter(2, categoryId)
-                .setParameter(3, settingsId).findList();
+        List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.*, site2product.id IS NOT NULL as checked FROM product_entry " +
+                "LEFT JOIN site2product ON site2product.product_entry_id = product_entry.id AND site2product.site_id = ? " +
+                "WHERE client_settings_id = ? AND category_id = ? ")
+                .setParameter(1, settingsId)
+                .setParameter(2, clientId)
+                .setParameter(3, categoryId)
+                .findList();
 
         List<ProductEntry> entries = new ArrayList<ProductEntry>();
         for (SqlRow row : rows)
