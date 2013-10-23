@@ -289,7 +289,6 @@ body
 }
 
 #addNewSite {
-    display: none;
     float: left;
     margin: 5px;
 }
@@ -299,7 +298,7 @@ body
     height: 25px;
     width: 28px;
     cursor: pointer;
-    margin: 3px;
+    margin: 6px;
 }
 
 #clientSites {
@@ -309,13 +308,13 @@ body
 }
 
 button.blue-btn{
-    background: #2e8ce3;
+    background: #3399B3;
     padding: 7px 30px;
     font-size:13px;
     font-weight: bold;
     color:#fff;
     text-align: center;
-    border:solid 1px #73c8f0;
+    border:solid 2px #FFFFFF;
 }
 
 .unibutton {
@@ -362,4 +361,40 @@ button.blue-btn{
     background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
     background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
+}
+
+/*==================================================
+ * Effect 7
+ * ===============================================*/
+.effect7
+{
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.effect7:before, .effect7:after
+{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:0;
+    bottom:0;
+    left:10px;
+    right:10px;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+}
+.effect7:after
+{
+    right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+    -moz-transform:skew(8deg) rotate(3deg);
+    -ms-transform:skew(8deg) rotate(3deg);
+    -o-transform:skew(8deg) rotate(3deg);
+    transform:skew(8deg) rotate(3deg);
 }

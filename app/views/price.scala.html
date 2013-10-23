@@ -41,11 +41,11 @@
         </div> -->
 
         <div id="wrapp">
-            <div id="clientSites">
+            <div id="clientSites" class="effect7">
                 <div id="sites">
 
                 </div>
-                <div id="addSiteImage"><img src="assets/images/addSiteButton.png" onclick="$('#addNewSite').show('slide', 300)"></div>
+                <div id="addSiteImage"><img src="assets/images/addSiteButton.png" title="Add site for publishing your price list"></div>
                 <div id="addNewSite">
                     <form id="addNewSiteForm">
                             <table>
@@ -69,9 +69,9 @@
                 <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a>
                 <a href="#" class="unibutton orange" onClick="generatePrice()">Generate</a>
                 <p>
-                 <!--   <a href="#" onClick="showCategories()">Show Categories</a>  -->
                 <div id="categories"> </div>
                 <br>
+                <a id="toCategoriesLink" href="#" onClick="showCategories()" style="display: none;">To Categories</a>
                 <!--<form id="selectButtons">
                     <input type="button" id = "selectAllProducts" value = "Select All Products" onclick="selectAllProductsForCategory()">
                     <!--<input type="button" id = "cancelAllProducts" value="Cancel All" onclick="cancelAllProductsForCategory()">
