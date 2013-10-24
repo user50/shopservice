@@ -21,6 +21,7 @@ function generatePrice(){
 function showCategories(){
     clientId = $.cookie("clientId");
     var url = "/clients/"+clientId+"/categories";
+    $('#toCategoriesLink').css('display', 'none');
     jQuery.get(url, {}, displayCategories, "json");
 }
 
@@ -46,6 +47,7 @@ function displayCategories(categories){
 function showProducts(categoryId){
     var form = document.getElementById("categories");
     form.innerHTML = "";
+    $('#toCategoriesLink').css('display', 'inline');
     var siteId = $.cookie("siteId");
     var productsUrl = "/clients/"+clientId+ "/sites/" + siteId + "/categories/"+categoryId+"/products";
     jQuery.get(productsUrl, {}, displayProducts, "json");
@@ -93,16 +95,17 @@ function displayProducts(products){
 
 //        product Name
         var productNameCell = $('<td/>').addClass('product');
-          productNameCell.text(product.productName);
+        var productNameLink = $('<a></a>').attr('href', product.url).text(product.productName);
+        productNameCell.append(productNameLink);
 
 //        product price
         var productPriceCell = $('<td/>');
-        productPriceCell.text('0.00');
+        productPriceCell.text(product.price);
 
 //      published flag
         var publishFlag = $('<td/>');
         var imageUrl;
-        if (i%3 == 0){
+        if (product.published == false){
            imageUrl = "assets/images/cross.png";
         } else {
             imageUrl = "assets/images/check.png";
