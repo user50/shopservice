@@ -54,6 +54,9 @@ function showProducts(categoryId){
 }
 
 function displayProducts(products){
+    var form = document.getElementById("productsTable");
+    if (form != null)
+     form.innerHTML = "";
 
     var table = $('<table></table>').attr('id', 'productsTable').addClass('simple-little-table').attr('cellspacing','0');
     table.append($('<col width="20px">'));
@@ -179,6 +182,8 @@ function showSites(){
     var url = "/clients/" + clientId + "/sites";
     $.get(url, function(sites){
         var sitesDiv = $('#sites');
+        sitesDiv.innerHTML = '';
+
         for (i = 0; i < sites.length; i++){
             var input = $('<input/>');
             input.attr('siteId', sites[i].id);
@@ -205,19 +210,11 @@ function addNewSite() {
         contentType: "application/json",
         data: JSON.stringify($('#addNewSiteForm').serializeObject())
     });
+    showSites();
+
 }
 
 function setSite (siteId) {
-    var oldSiteId = $.cookie("siteId");
-    var allButtons = document.getElementsByTagName('button');
-    for (var i = 0; i < allButtons.length; i++)
-    {
-        if (allButtons[i].getAttribute('siteId') == oldSiteId);
-        {
-            allButtons[i].attributes.getNamedItem('class').value = 'blue-btn';
-        }
-    }
-    siteId.attributes.getNamedItem('class').value = 'blue-btn-select';
     $.cookie("siteId", siteId.attributes.getNamedItem('siteId').value);
     var categoryId = $.cookie("categoryId");
     showCategories();
