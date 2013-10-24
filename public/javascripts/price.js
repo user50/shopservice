@@ -180,10 +180,18 @@ function showSites(){
     $.get(url, function(sites){
         var sitesDiv = $('#sites');
         for (i = 0; i < sites.length; i++){
-            var button = $('<button/>').addClass('blue-btn').text(sites[i].name);
-            button.attr('siteId', sites[i].id);
-            button.attr('onClick', 'setSite(this)');
-            sitesDiv.append(button);
+            var input = $('<input/>');
+            input.attr('siteId', sites[i].id);
+            input.attr('type', 'radio');
+            input.attr('name', 'site');
+            input.attr('id', sites[i].name);
+            input.attr('onChange', 'setSite(this)');
+            sitesDiv.append(input);
+
+            var label = $('<label/>');
+            label.attr('for', sites[i].name);
+            label.text(sites[i].name);
+            sitesDiv.append(label);
         }
     })
 }
@@ -200,6 +208,16 @@ function addNewSite() {
 }
 
 function setSite (siteId) {
+    var oldSiteId = $.cookie("siteId");
+    var allButtons = document.getElementsByTagName('button');
+    for (var i = 0; i < allButtons.length; i++)
+    {
+        if (allButtons[i].getAttribute('siteId') == oldSiteId);
+        {
+            allButtons[i].attributes.getNamedItem('class').value = 'blue-btn';
+        }
+    }
+    siteId.attributes.getNamedItem('class').value = 'blue-btn-select';
     $.cookie("siteId", siteId.attributes.getNamedItem('siteId').value);
     var categoryId = $.cookie("categoryId");
     showCategories();
@@ -233,3 +251,16 @@ $.fn.serializeObject = function()
     });
     return o;
 };
+
+function getElementByAttributeValue(attribute, value)
+{
+    var allElements = document.getElementsByTagName('*');
+    for (var i = 0; i < allElements.length; i++)
+    {
+        if (allElements[i].getAttribute(attribute) == value)
+        {
+            return allElements[i];
+        }
+    }
+}
+
