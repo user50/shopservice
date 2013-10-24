@@ -39,6 +39,7 @@ public abstract class ProductQuery implements Query<Product> {
         product.categoryId = resultSet.getString("categoryId");
 
         Util.modifyUrl(clientId, product);
+        Util.modifyImageUrl(clientId, product);
 
         return product;
     }
