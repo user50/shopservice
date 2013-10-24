@@ -50,9 +50,6 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
     }
 
     private Item createItem(String clientId, Product product) throws SQLException {
-        Util.modifyUrl(clientId, product);
-        Util.modifyImageUrl(clientId, product);
-
         return new Item(product.id, product.name, product.url, product.price,
                 product.categoryId, product.manufacturer, product.imageUrl, product.description );
     }
