@@ -1,5 +1,6 @@
 package com.shopservice.queries;
 
+import com.shopservice.Util;
 import com.shopservice.domain.Product;
 
 import java.io.UnsupportedEncodingException;
@@ -36,6 +37,8 @@ public abstract class ProductQuery implements Query<Product> {
         product.url = resultSet.getString("url");
         product.imageUrl = resultSet.getString("imageUrl");
         product.categoryId = resultSet.getString("categoryId");
+
+        Util.modifyUrl(clientId, product);
 
         return product;
     }
