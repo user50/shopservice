@@ -20,6 +20,11 @@ public class ProductQueryByListOfIds extends ProductQuery {
 
     @Override
     public String getRawSql() {
+
+        if (productIds.isEmpty())
+            return Services.queries.getProductQueryByListOfIds(clientId)
+                    .replace("?", "null");
+
         String[] abc = new String[productIds.size()];
         Arrays.fill(abc, "?");
 
