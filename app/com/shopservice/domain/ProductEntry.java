@@ -40,9 +40,7 @@ public class ProductEntry {
         productId = row.getString("product_id");
         price = row.getDouble("price");
         url = row.getString("url");
-
-        if (row.getString("published") != null)
-            published = row.getString("published").equals("1");
+        published = row.getBoolean("published");
 
         if (row.getString("checked") != null)
             checked = row.getString("checked").equals("1") ;
