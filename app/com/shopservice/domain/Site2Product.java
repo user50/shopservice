@@ -25,11 +25,6 @@ public class Site2Product {
         this.site = site;
     }
 
-    public static Site2Product get(String productId, int siteId)
-    {
-        return Ebean.find(Site2Product.class).where().eq("product_entry_id", productId ).eq("site_id", siteId).findUnique();
-    }
-
     public static void set(String productId, int siteId, Boolean checked) {
 
         if (checked)

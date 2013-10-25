@@ -1,6 +1,8 @@
 package com.shopservice.domain;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.RawSql;
+import com.avaje.ebean.RawSqlBuilder;
 import com.avaje.ebean.SqlRow;
 import com.google.common.collect.Sets;
 import com.shopservice.Services;
@@ -148,10 +150,6 @@ public class ProductEntry {
             entries.add(new ProductEntry(row));
 
         return entries;
-    }
-
-    public static List<ProductEntry> get(String clientId, String categoryId) {
-        return Ebean.find(ProductEntry.class).where().eq("client_settings_id", clientId).eq("category_id",categoryId).findList();
     }
 }
 
