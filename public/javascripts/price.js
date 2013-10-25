@@ -19,10 +19,12 @@ function generatePrice(){
 }
 
 function showCategories(){
-    clientId = $.cookie("clientId");
-    var url = "/clients/"+clientId+"/categories";
-    $('#toCategoriesLink').css('display', 'none');
-    jQuery.get(url, {}, displayCategories, "json");
+    if ($('input[name=site]:checked', '#sites').attr('siteId') != undefined){
+        clientId = $.cookie("clientId");
+        var url = "/clients/"+clientId+"/categories";
+        $('#toCategoriesLink').css('display', 'none');
+        jQuery.get(url, {}, displayCategories, "json");
+    }
 }
 
 function displayCategories(categories){
@@ -98,7 +100,7 @@ function displayProducts(products){
 
 //        product Name
         var productNameCell = $('<td/>').addClass('product');
-        var productNameLink = $('<a></a>').attr('href', product.url).text(product.productName);
+        var productNameLink = $('<a></a>').attr('href', product.url).attr('target', '_blank').text(product.productName);
         productNameCell.append(productNameLink);
 
 //        product price

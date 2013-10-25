@@ -63,15 +63,14 @@
             <!--<div id="button" class="updateButton" onClick="showCategories()"><a href="#">Change Settings</a>  </div>-->
             <!--</div>-->
             <!--</div>-->
-
+            <div class="buttons">
+                    <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a></br>
+                    <a href="#" class="unibutton orange" onClick="generatePrice()">Generate</a>
+            </div>
             <div id="main">
                 <p>
-                <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a>
-                <a href="#" class="unibutton orange" onClick="generatePrice()">Generate</a>
-                <p>
-                <div id="categories"> </div>
-                <br>
                 <a id="toCategoriesLink" href="#" onClick="showCategories()" style="display: none;">To Categories</a>
+                <div id="categories"> </div>
                 <!--<form id="selectButtons">
                     <input type="button" id = "selectAllProducts" value = "Select All Products" onclick="selectAllProductsForCategory()">
                     <!--<input type="button" id = "cancelAllProducts" value="Cancel All" onclick="cancelAllProductsForCategory()">
