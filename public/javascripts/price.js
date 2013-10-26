@@ -68,6 +68,7 @@ function displayProducts(products){
     tr = $('<tr/>');
 
     var checkAll = $('<input>');
+    checkAll.attr('id', 'check_all');
     checkAll.attr('onChange','selectAllProductsForCategory()');
     checkAll.attr('type', 'checkbox');
     var th = $('<th></th>');
@@ -88,14 +89,15 @@ function displayProducts(products){
 
         // checkbox for product
         var checkBoxCell = $('<td/>');
-        var input = document.createElement("input");
-        input.setAttribute("id", product.id);
-        input.setAttribute("categoryId", product.categoryId);
-        input.setAttribute("type", "checkbox");
+        var input = $('<input>');
+        input.attr("id", product.id);
+        input.attr("categoryId", product.categoryId);
+        input.attr("type", "checkbox");
+        input.attr("class", "productCheck");
         if(product.checked == true){
-            input.setAttribute("checked","checked");
+            input.prop("checked","checked");
         }
-        input.setAttribute("onChange", "updateChecked(this.id,"+categoryId+")");
+        input.attr("onChange", "updateChecked(this.id,"+categoryId+")");
         checkBoxCell.append(input);
 
 //        product Name
@@ -136,13 +138,11 @@ function displayProducts(products){
 }
 
 function updateChecked(productId){
-    input = document.getElementById(productId);
-    if (input.getAttribute("checked") == null){
+    var input = $('#'+productId);
+    if (input.prop("checked") == true){
         addProduct(productId);
-        input.setAttribute("checked","checked");
     } else  {
         deleteProduct(productId);
-        input.removeAttribute("checked");
     }
 }
 
@@ -156,6 +156,8 @@ function addProduct(productId){
 }
 
 function deleteProduct(productId){
+    if ($('#check_all').prop('checked') == true)
+        $('#check_all').prop('checked', false);
     var siteId = $.cookie("siteId");
     var url = "/clients/"+clientId + "/sites/" + siteId + "/categories/"+categoryId+"/products/"+productId+"?checked=false";
     jQuery.ajax({
@@ -165,18 +167,27 @@ function deleteProduct(productId){
 }
 
 function selectAllProductsForCategory(){
-    var url = "/clients/"+clientId+"/categories/"+categoryId+"/products?checked=true";
+    var checkedFlag = $('#check_all').prop('checked');
+    var siteId = $.cookie("siteId");
+    var url = "/clients/"+clientId + "/sites/" + siteId + "/categories/"+categoryId+"/products?checked=" + checkedFlag;
     jQuery.ajax({
         url:url,
         type:"put"
     });
-    var inputs = document.getElementById('updateForm').getElementsByTagName('input');
-    for (i=0; i<inputs.length;i++){
-        var input = inputs[i];
-        var checked = input.getAttribute("checked");
-        if (checked==null)
-            input.setAttribute("checked", "true");
-    }
+
+    $(document).on(' change','input[id="check_all"]',function() {
+        $('.productCheck').prop("checked" , this.checked);
+    });
+
+//    var c = $('#check_all').checked;
+//    $('*[class=productCheck]').each(function(){this.setAttribute('checked',c)})
+//    var inputs = document.getElementById('updateForm').getElementsByTagName('input');
+//    for (i=0; i<inputs.length;i++){
+//        var input = inputs[i];
+//        var checked = input.getAttribute("checked");
+//        if (checked==null)
+//            input.setAttribute("checked", "true");
+//    }
 }
 
 function showSites(){
