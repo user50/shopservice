@@ -25,4 +25,9 @@ public class Site {
     public void save() {
         Ebean.save(this);
     }
+
+    public static String getName(int siteId)
+    {
+        return Ebean.find(Site.class, siteId).name;
+    }
 }
