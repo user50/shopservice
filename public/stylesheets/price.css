@@ -90,8 +90,8 @@ body
 
 
 #categories{
-    margin-left: 15px;
-    padding: 0 0 0 10px;
+    margin-top: 40px;
+    padding: 0 0 0 1px;
 }
 #main {
     min-height:40%;
@@ -104,12 +104,6 @@ body
     text-align: justify;
     clear: left;
 }
-
-#main a {
-    color: #3b7687;
-    text-decoration: underline;
-}
-
 
 #footer {
 
@@ -312,6 +306,7 @@ body
 .buttons {
     width: 25%;
     float: right;
+    text-align: center;
 }
 
 button.blue-btn{
@@ -489,4 +484,123 @@ input[type=radio]:checked + label {
     -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);
     background-color:#e0e0e0;
+}
+
+#loader {
+    position:fixed; display:none;
+    top:0; left:0;
+    height:100%; width:100%;
+    background: #efefef; opacity: .5;
+}
+#loader .anim {
+    display:block; position:absolute;
+    color:#fff; background: rgba(255, 255, 255, 0);
+    margin-left: -100px;
+    margin-top: -100px;
+    top: 50%;
+    left: 50%;
+    padding:5px 10px;
+    -webkit-border-radius: 5px; -moz-border-radius: 5px;
+    border-radius: 5px; cursor:default;
+}
+
+#categories ol{
+    counter-reset: li; /* Инициируем счетчик */
+    list-style: none; /* Удаляем нумерацию по умолчанию */
+    *list-style: decimal; /* Оставляем нумерацию по умолчанию для IE6/7 */
+    font-size: 15px;
+    padding: 0;
+    margin-bottom: 4em;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+#categories ol ol{
+    margin: 0 0 0 2em; /* Добавляем левый отступ для вложенных списков */
+}
+
+.rounded-list a{
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em 2em;
+    *padding: .4em;
+    margin: .5em 0;
+    background: #ddd;
+    color: #444;
+    text-decoration: none;
+    border-radius: .3em;
+    transition: all .3s ease-out;
+    cursor: pointer;
+}
+
+.rounded-list a:hover{
+    background: #eee;
+}
+
+.rounded-list a:hover:before{
+    transform: rotate(360deg);
+}
+
+.rounded-list a:before{
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    left: -1.3em;
+    top: 50%;
+    margin-top: -1.3em;
+    background: #87ceeb;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border: .3em solid #fff;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2em;
+    transition: all .3s ease-out;
+}
+
+.rectangle-list a{
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em .8em;
+    *padding: .4em;
+    margin: .5em 0 .5em 2.5em;
+    background: #F5F5F5;
+    color: #1F6175;
+    text-decoration: none;
+    transition: all .3s ease-out;
+    cursor: pointer;
+}
+
+.rectangle-list a:hover{
+    background: #eee;
+}
+
+.rectangle-list a:before{
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    left: -2.5em;
+    top: 50%;
+    margin-top: -1em;
+    background: #CBE2E9;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    text-align: center;
+    font-weight: bold;
+}
+
+.rectangle-list a:after{
+    position: absolute;
+    content: '';
+    border: .5em solid transparent;
+    left: -1em;
+    top: 50%;
+    margin-top: -.5em;
+    transition: all .3s ease-out;
+}
+
+.rectangle-list a:hover:after{
+    left: -.5em;
+    border-left-color: #CBE2E9;
 }

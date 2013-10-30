@@ -15,11 +15,18 @@ function generatePrice(){
     clientId = $.cookie("clientId");
     var siteId = $.cookie("siteId");
     var url = "/client/"+clientId+ "/sites/" + siteId + "/formats/price/pricelist";
-    jQuery.post(url);
+    $.ajax({url: url,
+            type: 'post',
+            beforeSend: function(){
+                $('#loader').css('display', 'block');
+            }}).done(function(){
+                 $('#loader').css('display', 'none');
+        });
 }
 
 function showCategories(){
-    if ($('input[name=site]:checked', '#sites').attr('siteId') != undefined){
+//    if ($('input[name=site]:checked', '#sites').attr('siteId') != undefined){
+    if ($.cookie("siteId") != undefined){
         clientId = $.cookie("clientId");
         var url = "/clients/"+clientId+"/categories";
         $('#toCategoriesLink').css('display', 'none');
@@ -29,33 +36,50 @@ function showCategories(){
 
 function displayCategories(categories){
     var categoriesUrl = "/clients/"+clientId+"/categories/";
-    var form = document.getElementById("updateForm");
-    form.innerHTML = "";
-    form = document.getElementById("categories");
-    form.innerHTML = "";
+//    var form = document.getElementById("updateForm");
+//    form.innerHTML = "";
+    $('#updateForm').empty();
+
+    var categoriesDiv = $('#categories').empty().css('display', 'block');
+
+    var ol = $('<ol/>');
+    ol.attr('class', 'rectangle-list');
 
     for (i=0; i<categories.length; i++) {
         var category = categories[i];
-        var span = document.createElement("span");
-        span.setAttribute("id", category.id);
-        span.setAttribute("class", "category");
-        span.setAttribute("onClick", "showProducts(this.id)");
-        span.innerHTML = category.name;
-        form.appendChild(span);
-        form.appendChild(document.createElement("br"));
+        var li = $('<li/>');
+        var a = $('<a/>');
+        a.attr('id', category.id);
+        a.attr("onClick", "showProducts(this.id)");
+        a.text(category.name);
+        li.append(a);
+        ol.append(li);
+//        form.appendChild(span);
+//        form.appendChild(document.createElement("br"));
     }
+    categoriesDiv.append(ol);
 }
 
 function showProducts(categoryId){
-    var form = document.getElementById("categories");
-    form.innerHTML = "";
+    var categoriesDiv = $('#categories').empty();
+    categoriesDiv.css('display', 'none');
     $('#toCategoriesLink').css('display', 'inline');
     var siteId = $.cookie("siteId");
     var productsUrl = "/clients/"+clientId+ "/sites/" + siteId + "/categories/"+categoryId+"/products";
-    jQuery.get(productsUrl, {}, displayProducts, "json");
+    $.ajax({
+        url: productsUrl,
+        type: 'get',
+        success: displayProducts,
+        dataType: 'json',
+        beforeSend: function(){
+            $('#loader').css('display', 'block');
+        }}).done(function(){
+            $('#loader').css('display', 'none');
+        });
 }
 
 function displayProducts(products){
+
     var form = document.getElementById("productsTable");
     if (form != null)
      form.innerHTML = "";
@@ -79,6 +103,16 @@ function displayProducts(products){
     tr.append("<th>Published</th>");
     table.append(tr);
 
+    if (products.length == 0){
+        var emptyRow = $('<tr/>');
+        emptyRow.append($('<td/>'));
+        emptyRow.append($('<td/>').text('Products not found.'));
+        emptyRow.append($('<td/>'));
+        emptyRow.append($('<td/>'));
+        table.append(emptyRow);
+        $("#updateForm").append(table);
+        return;
+    }
     for (i=0; i<products.length; i++) {
         var product = products[i];
         categoryId = product.categoryId;
@@ -192,6 +226,7 @@ function selectAllProductsForCategory(){
 
 function showSites(){
     clientId = $.cookie("clientId");
+    siteId = $.cookie("siteId");
     var url = "/clients/" + clientId + "/sites";
     $.get(url, function(sites){
         var sitesDiv = $('#sites');
@@ -204,6 +239,10 @@ function showSites(){
             input.attr('name', 'site');
             input.attr('id', sites[i].name);
             input.attr('onChange', 'setSite(this)');
+
+            if (siteId == sites[i].id)
+                input.prop('checked', 'true');
+
             sitesDiv.append(input);
 
             var label = $('<label/>');
@@ -272,5 +311,20 @@ function getElementByAttributeValue(attribute, value)
             return allElements[i];
         }
     }
+}
+
+
+function startLoadingAnimation() // - функция запуска анимации
+{
+    // найдем элемент с изображением загрузки и уберем невидимость:
+    var loader = $("#loader");
+    loader.show();
+
+
+}
+
+function stopLoadingAnimation() // - функция останавливающая анимацию
+{
+    $("#loader").hide();
 }
 

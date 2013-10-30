@@ -17,6 +17,9 @@
         {
             showSites();
             showCategories();
+            // вешаем колбэки для всех jQuery.ajax-запросов
+        $('#loader').ajaxSend(function(){$(this).show()})
+                .ajaxStop(function(){$(this).hide()});
         });
     </script>
 </head>
@@ -69,7 +72,7 @@
             </div>
             <div id="main">
                 <p>
-                <a id="toCategoriesLink" href="#" onClick="showCategories()" style="display: none;">To Categories</a>
+                <a id="toCategoriesLink" href="#" onClick="showCategories()" style="display: none;"><img src="assets/images/Back_Button.gif"></a>
                 <div id="categories"> </div>
                 <!--<form id="selectButtons">
                     <input type="button" id = "selectAllProducts" value = "Select All Products" onclick="selectAllProductsForCategory()">
@@ -80,10 +83,12 @@
 
             </div>
 
+
         </div>
 
     </div>
-    <div id="footer"> Download  <a align="left" href="/flashshop/log" > log file </a>  </div>
+    <div id="footer"></div>
+    <div id="loader"><div class="anim"><img src="assets/images/download.gif"></div></div>
 </div>
 
 </body>
