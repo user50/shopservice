@@ -30,4 +30,8 @@ public class Site {
     {
         return Ebean.find(Site.class, siteId).name;
     }
+
+    public static boolean exist(String clientId, String name) {
+        return Ebean.find(Site.class).where().eq("client_settings_id", clientId).eq("name", name).findUnique() != null;
+    }
 }

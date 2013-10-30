@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Access(AccessType.FIELD)
 public class ClientSettings {
 
     @Id
@@ -55,4 +56,5 @@ public class ClientSettings {
     public static ClientSettings getBySiteName(String siteName) {
         return Ebean.find(ClientSettings.class).where().eq("siteName", siteName).findUnique();
     }
+
 }

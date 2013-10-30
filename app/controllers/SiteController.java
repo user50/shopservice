@@ -20,6 +20,13 @@ public class SiteController extends Controller {
             return badRequest("Client with id "+clientId+" doesn't exist ");
 
         Site site = Json.fromJson( request().body().asJson(), Site.class );
+
+        if (site.name.isEmpty() )
+            return badRequest("Name cannot be empty");
+
+        if (Site.exist(clientId, site.name))
+            return badRequest("Category with specified name already exists");
+
         settings.sites.add(site);
 
         settings.save();
