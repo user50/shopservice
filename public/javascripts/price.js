@@ -250,23 +250,35 @@ function showSites(){
             label.text(sites[i].name);
             sitesDiv.append(label);
         }
+        var inputAdd = $('<input/>');
+        inputAdd.attr('id', 'inputAdd');
+        inputAdd.attr('type', 'radio');
+        inputAdd.attr('name', 'site');
+        sitesDiv.append(inputAdd);
+        var labelAdd = $('<label/>').attr('onClick', 'showFieldForNewSite()').attr('for', 'inputAdd').text('+');
+        sitesDiv.append(labelAdd);
     })
+}
+
+function showFieldForNewSite() {
+    $('#addNewSite').animate({'left': '+=200px', 'opacity': 'show'}, 'slow');
 }
 
 function addNewSite() {
     clientId = $.cookie("clientId");
     var url = "/clients/" + clientId + "/sites";
-    jQuery.ajax({
+    $.ajax({
         url:url,
         type:"post",
         contentType: "application/json",
-        data: JSON.stringify($('#addNewSiteForm').serializeObject())
+        data: JSON.stringify($('#addNewSiteForm').serializeObject()),
     });
     showSites();
 
 }
 
 function setSite (siteId) {
+    $('#addNewSite').animate({'left': '+=200px', 'opacity': 'hide'}, 'slow');
     $.cookie("siteId", siteId.attributes.getNamedItem('siteId').value);
     var categoryId = $.cookie("categoryId");
     showCategories();
@@ -311,20 +323,5 @@ function getElementByAttributeValue(attribute, value)
             return allElements[i];
         }
     }
-}
-
-
-function startLoadingAnimation() // - функция запуска анимации
-{
-    // найдем элемент с изображением загрузки и уберем невидимость:
-    var loader = $("#loader");
-    loader.show();
-
-
-}
-
-function stopLoadingAnimation() // - функция останавливающая анимацию
-{
-    $("#loader").hide();
 }
 
