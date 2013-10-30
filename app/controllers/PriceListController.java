@@ -24,7 +24,7 @@ public class PriceListController extends Controller {
         File file = priceListService.getPriceList( clientId, siteId.intValue(), PriceListType.valueOf(format) );
 
         if (file == null)
-            return badRequest("The file does not yet exist");
+            return badRequest("The file does not exist yet. You need to generate it at least once");
 
         ClientSettings clientSettings = ClientSettings.findById(clientId);
 

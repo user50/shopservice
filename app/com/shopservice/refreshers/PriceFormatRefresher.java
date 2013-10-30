@@ -39,7 +39,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
         Set<Category> categories = new HashSet<Category>();
 
-        for (Product product : Services.getClientsInformationProvider(clientId).getProducts( getProductIds(clientId, siteId))) {
+        for (Product product : Services.getProductDAO(clientId).getProducts( getProductIds(clientId, siteId))) {
             price.addItem( createItem(clientId, product) );
             categories.add( new Category( product.categoryId, product.categoryName) );
         }
