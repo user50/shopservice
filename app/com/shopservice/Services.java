@@ -1,12 +1,11 @@
 package com.shopservice;
 
-import com.shopservice.clientsinform.CachedInformationProvider;
-import com.shopservice.clientsinform.ClientsInformationProvider;
-import com.shopservice.clientsinform.NativeClientInformationProvider;
+import com.shopservice.dao.*;
 import com.shopservice.domain.ClientSettings;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,8 +18,8 @@ public class Services {
 
     private static HashMap<String, DatabaseManager> databaseManagers = new HashMap<String, DatabaseManager>();
 
-    private static HashMap<String, ClientsInformationProvider> clientsInformationProviders
-                                                                    = new HashMap<String, ClientsInformationProvider>();
+    private static ConcurrentHashMap<String, CategoryDAO> categoryDAOs = new ConcurrentHashMap<String, CategoryDAO>();
+    private static ConcurrentHashMap<String, ProductDAO> productDAOs = new ConcurrentHashMap<String, ProductDAO>();
 
     public static final PriceListService priceListService = new PriceListService();
 
@@ -33,11 +32,19 @@ public class Services {
         return databaseManagers.get(clientId);
     }
 
-    public static ClientsInformationProvider getClientsInformationProvider(String clientId)
+    public static CategoryDAO getCategoryDAO(String clientId)
     {
-        if (!clientsInformationProviders.containsKey(clientId))
-            clientsInformationProviders.put(clientId, new CachedInformationProvider( new NativeClientInformationProvider(clientId)) );
+        if (!categoryDAOs.contains(clientId))
+            categoryDAOs.put( clientId, new CachedCategoryDAO(new JdbcCategoryDAO(clientId)));
 
-        return clientsInformationProviders.get(clientId);
+        return categoryDAOs.get(clientId);
+    }
+
+    public static ProductDAO getProductDAO(String clientId)
+    {
+        if (!productDAOs.contains(clientId))
+            productDAOs.put( clientId, new CachedProductDAO(new JdbcProductDAO(clientId)));
+
+        return productDAOs.get(clientId);
     }
 }

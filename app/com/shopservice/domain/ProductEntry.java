@@ -81,13 +81,6 @@ public class ProductEntry {
         published = product.published;
     }
 
-
-
-    public static List<ProductEntry> find(String clientSettingsId)
-    {
-        return Ebean.find(ProductEntry.class).where().eq("client_settings_id", clientSettingsId).findList();
-    }
-
     public static List<ProductEntry> findSelected(String clientSettingsId, int siteId)
     {
         List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.* FROM product_entry " +
@@ -105,7 +98,7 @@ public class ProductEntry {
     }
 
     public static List<ProductEntry> findAndRefresh(String clientId, String categoryId, int settingsId) throws SQLException {
-        List<Product> products = Services.getClientsInformationProvider(clientId).getProducts(categoryId);
+        List<Product> products = Services.getProductDAO(clientId).getProducts(categoryId);
 
         Set<ProductEntry> productEntriesFromClient = new HashSet<ProductEntry>();
         for (Product product : products){

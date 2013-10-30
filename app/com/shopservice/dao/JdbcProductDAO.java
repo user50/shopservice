@@ -1,10 +1,8 @@
-package com.shopservice.clientsinform;
+package com.shopservice.dao;
 
 import com.shopservice.DatabaseManager;
 import com.shopservice.Services;
-import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
-import com.shopservice.queries.CategoryQuery;
 import com.shopservice.queries.ProductQueryByCategory;
 import com.shopservice.queries.ProductQueryByListOfIds;
 
@@ -13,12 +11,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class NativeClientInformationProvider implements ClientsInformationProvider {
+public class JdbcProductDAO implements ProductDAO{
 
     private DatabaseManager databaseManager;
     private String clientId;
 
-    public NativeClientInformationProvider(String clientId) {
+    public JdbcProductDAO(String clientId) {
         this.clientId = clientId;
         try {
             databaseManager = Services.getDataBaseManager(clientId);
@@ -26,7 +24,6 @@ public class NativeClientInformationProvider implements ClientsInformationProvid
             //todo log
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -45,15 +42,6 @@ public class NativeClientInformationProvider implements ClientsInformationProvid
             return databaseManager.executeQueryForList(new ProductQueryByListOfIds(clientId, new ArrayList<String>( productId )));
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public List<Category> getCategories() {
-        try {
-            return databaseManager.executeQueryForList(new CategoryQuery(clientId));
-        } catch (SQLException e) {
-            throw new RuntimeException( e );
         }
     }
 }
