@@ -25,20 +25,26 @@ function generatePrice(){
 }
 
 function showCategories(){
-//    if ($('input[name=site]:checked', '#sites').attr('siteId') != undefined){
+    $('#updateForm').empty();
+
     if ($.cookie("siteId") != undefined){
         clientId = $.cookie("clientId");
         var url = "/clients/"+clientId+"/categories";
         $('#toCategoriesLink').css('display', 'none');
-        jQuery.get(url, {}, displayCategories, "json");
+        $.ajax({url: url,
+                type: 'get',
+                success: displayCategories,
+                dataType: "json",
+                beforeSend: function(){
+                    $('#loader').css('display', 'block');
+                }}).done(function(){
+                $('#loader').css('display', 'none');
+            });
     }
 }
 
 function displayCategories(categories){
     var categoriesUrl = "/clients/"+clientId+"/categories/";
-//    var form = document.getElementById("updateForm");
-//    form.innerHTML = "";
-    $('#updateForm').empty();
 
     var categoriesDiv = $('#categories').empty().css('display', 'block');
 
