@@ -5,6 +5,8 @@ import com.shopservice.domain.ClientSettings;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -18,8 +20,8 @@ public class Services {
 
     private static HashMap<String, DatabaseManager> databaseManagers = new HashMap<String, DatabaseManager>();
 
-    private static ConcurrentHashMap<String, CategoryDAO> categoryDAOs = new ConcurrentHashMap<String, CategoryDAO>();
-    private static ConcurrentHashMap<String, ProductDAO> productDAOs = new ConcurrentHashMap<String, ProductDAO>();
+    private static Map<String, CategoryDAO> categoryDAOs = new Hashtable<String, CategoryDAO>();
+    private static Map<String, ProductDAO> productDAOs = new Hashtable<String, ProductDAO>();
 
     public static final PriceListService priceListService = new PriceListService();
 
@@ -34,7 +36,7 @@ public class Services {
 
     public static CategoryDAO getCategoryDAO(String clientId)
     {
-        if (!categoryDAOs.contains(clientId))
+        if (!categoryDAOs.containsKey(clientId))
             categoryDAOs.put( clientId, new CachedCategoryDAO(new JdbcCategoryDAO(clientId)));
 
         return categoryDAOs.get(clientId);
@@ -42,7 +44,7 @@ public class Services {
 
     public static ProductDAO getProductDAO(String clientId)
     {
-        if (!productDAOs.contains(clientId))
+        if (!productDAOs.containsKey(clientId))
             productDAOs.put( clientId, new CachedProductDAO(new JdbcProductDAO(clientId)));
 
         return productDAOs.get(clientId);

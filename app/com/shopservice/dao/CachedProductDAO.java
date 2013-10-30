@@ -3,6 +3,7 @@ package com.shopservice.dao;
 import com.shopservice.domain.Product;
 
 import java.util.Collection;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,7 +12,7 @@ public class CachedProductDAO implements ProductDAO {
 
     private ProductDAO productDAO;
 
-    private Map<String, List<Product>> categoryToProducts = new ConcurrentHashMap<String, List<Product>>();
+    private Map<String, List<Product>> categoryToProducts = new Hashtable<String, List<Product>>();
 
     public CachedProductDAO(ProductDAO productDAO) {
         this.productDAO = productDAO;
