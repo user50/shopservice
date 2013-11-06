@@ -233,10 +233,10 @@ function selectAllProductsForCategory(){
 function showSites(){
     clientId = $.cookie("clientId");
     siteId = $.cookie("siteId");
-    var url = "/clients/" + clientId + "/sites";
+    var url = "/sites";
     $.get(url, function(sites){
         var sitesDiv = $('#sites');
-        sitesDiv.innerHTML = '';
+        sitesDiv.empty();
 
         for (i = 0; i < sites.length; i++){
             var input = $('<input/>');
@@ -256,13 +256,13 @@ function showSites(){
             label.text(sites[i].name);
             sitesDiv.append(label);
         }
-        var inputAdd = $('<input/>');
-        inputAdd.attr('id', 'inputAdd');
-        inputAdd.attr('type', 'radio');
-        inputAdd.attr('name', 'site');
-        sitesDiv.append(inputAdd);
-        var labelAdd = $('<label/>').attr('onClick', 'showFieldForNewSite()').attr('for', 'inputAdd').text('+');
-        sitesDiv.append(labelAdd);
+//        var inputAdd = $('<input/>');
+//        inputAdd.attr('id', 'inputAdd');
+//        inputAdd.attr('type', 'radio');
+//        inputAdd.attr('name', 'site');
+//        sitesDiv.append(inputAdd);
+//        var labelAdd = $('<label/>').attr('onClick', 'showFieldForNewSite()').attr('for', 'inputAdd').text('+');
+//        sitesDiv.append(labelAdd);
     })
 }
 
@@ -277,7 +277,7 @@ function addNewSite() {
         url:url,
         type:"post",
         contentType: "application/json",
-        data: JSON.stringify($('#addNewSiteForm').serializeObject()),
+        data: JSON.stringify($('#addNewSiteForm').serializeObject())
     });
     showSites();
 
