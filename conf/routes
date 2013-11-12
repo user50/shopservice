@@ -31,6 +31,7 @@ POST   /client/:id/sites/:siteId/formats/:format/pricelist              controll
 GET    /client/:id/formats                                              controllers.PriceListController.getPriceListFormats( id )
 
 # Site operations
-GET    /sites                                                           controllers.SiteController.getSites()
+GET    /clients/:id/sites                                               controllers.SiteController.getSites( id )
+POST   /clients/:id/sites                                               controllers.SiteController.addSite( id )
 
 POST /authentication                                                    controllers.LoginController.authentication()

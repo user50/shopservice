@@ -18,8 +18,8 @@ public class Site {
     @OneToMany(cascade = CascadeType.ALL)
     public List<Site2Product> checks;
 
-    public static List<Site> get() {
-        return Ebean.find(Site.class).findList();
+    public static List<Site> get(String clientId) {
+        return Ebean.find(Site.class).where().eq("client_settings_id", clientId).findList();
     }
 
     public void save() {
