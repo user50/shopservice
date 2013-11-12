@@ -233,7 +233,7 @@ function selectAllProductsForCategory(){
 function showSites(){
     clientId = $.cookie("clientId");
     siteId = $.cookie("siteId");
-    var url = "/sites";
+    var url = "/clients/"+ clientId +"/sites";
     $.get(url, function(sites){
         var sitesDiv = $('#sites');
         sitesDiv.empty();
@@ -256,13 +256,13 @@ function showSites(){
             label.text(sites[i].name);
             sitesDiv.append(label);
         }
-//        var inputAdd = $('<input/>');
-//        inputAdd.attr('id', 'inputAdd');
-//        inputAdd.attr('type', 'radio');
-//        inputAdd.attr('name', 'site');
-//        sitesDiv.append(inputAdd);
-//        var labelAdd = $('<label/>').attr('onClick', 'showFieldForNewSite()').attr('for', 'inputAdd').text('+');
-//        sitesDiv.append(labelAdd);
+        var inputAdd = $('<input/>');
+        inputAdd.attr('id', 'inputAdd');
+        inputAdd.attr('type', 'radio');
+        inputAdd.attr('name', 'site');
+        sitesDiv.append(inputAdd);
+        var labelAdd = $('<label/>').attr('onClick', 'showFieldForNewSite()').attr('for', 'inputAdd').text('+');
+        sitesDiv.append(labelAdd);
     })
 }
 
