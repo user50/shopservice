@@ -24,6 +24,10 @@ public class ClientSettings {
     @OneToMany(cascade = CascadeType.ALL)
     public List<ProductEntry> productEntries = new ArrayList<ProductEntry>();
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<Site> sites = new ArrayList<Site>();
+
     public static ClientSettings findById(String id)
     {
         return Ebean.find(ClientSettings.class, id);
