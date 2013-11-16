@@ -1,4 +1,4 @@
-package com.shopservice.pricelist.models.price.pricelist.models.yml;
+package com.shopservice.pricelist.models.yml;
 
 /**
  * Created with IntelliJ IDEA.
