@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Site {
+public class ProductGroup {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -16,10 +16,10 @@ public class Site {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    public List<Site2Product> checks;
+    public List<Group2Product> checks;
 
-    public static List<Site> get(String clientId) {
-        return Ebean.find(Site.class).where().eq("client_settings_id", clientId).findList();
+    public static List<ProductGroup> get(String clientId) {
+        return Ebean.find(ProductGroup.class).where().eq("client_settings_id", clientId).findList();
     }
 
     public void save() {
@@ -28,10 +28,10 @@ public class Site {
 
     public static String getName(int siteId)
     {
-        return Ebean.find(Site.class, siteId).name;
+        return Ebean.find(ProductGroup.class, siteId).name;
     }
 
     public static boolean exist(String clientId, String name) {
-        return Ebean.find(Site.class).where().eq("client_settings_id", clientId).eq("name", name).findUnique() != null;
+        return Ebean.find(ProductGroup.class).where().eq("client_settings_id", clientId).eq("name", name).findUnique() != null;
     }
 }

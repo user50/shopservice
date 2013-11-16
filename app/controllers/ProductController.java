@@ -1,8 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Ebean;
+import com.shopservice.domain.Group2Product;
 import com.shopservice.domain.ProductEntry;
-import com.shopservice.domain.Site2Product;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -19,14 +18,14 @@ public class ProductController extends Controller {
 
     public static Result updateProduct(String clientId, Long siteId, String categoryId, String productId, Boolean checked)
     {
-        Site2Product.set(productId, siteId.intValue(), checked);
+        Group2Product.set(productId, siteId.intValue(), checked);
 
         return ok();
     }
 
     public static Result updateProducts(String clientId, Long siteId, String categoryId, Boolean checked)
     {
-        Site2Product.set(clientId, categoryId, siteId.intValue(), checked);
+        Group2Product.set(clientId, categoryId, siteId.intValue(), checked);
 
         return ok();
     }

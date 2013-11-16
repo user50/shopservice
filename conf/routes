@@ -18,20 +18,20 @@ PUT     /clients/:id                                    controllers.ClientSettin
 DELETE  /clients/:id                                    controllers.ClientSettingsController.deleteClientSettings(id)
 
 # ProductEntry operations
-GET     /clients/:id/sites/:siteId/categories/:categoryId/products                controllers.ProductController.getProducts(id, siteId: Long,  categoryId)
-PUT     /clients/:id/sites/:siteId/categories/:categoryId/products/:productId     controllers.ProductController.updateProduct(id, siteId: Long, categoryId, productId, checked: java.lang.Boolean )
-PUT     /clients/:id/sites/:siteId/categories/:categoryId/products                controllers.ProductController.updateProducts(id, siteId: Long, categoryId, checked: java.lang.Boolean)
+GET     /clients/:id/groups/:groupId/categories/:categoryId/products                controllers.ProductController.getProducts(id, groupId: Long,  categoryId)
+PUT     /clients/:id/groups/:groupId/categories/:categoryId/products/:productId     controllers.ProductController.updateProduct(id, groupId: Long, categoryId, productId, checked: java.lang.Boolean )
+PUT     /clients/:id/groups/:groupId/categories/:categoryId/products                controllers.ProductController.updateProducts(id, groupId: Long, categoryId, checked: java.lang.Boolean)
 
 # Category operations
 GET     /clients/:id/categories                          controllers.CategoryController.getCategories(id)
 
 # PriceList operations
-GET    /client/:id/sites/:siteId/formats/:format/pricelist              controllers.PriceListController.getPriceList( id, siteId:Long, format )
-POST   /client/:id/sites/:siteId/formats/:format/pricelist              controllers.PriceListController.refreshPriceList( id, siteId:Long, format )
+GET    /client/:id/groups/:groupId/formats/:format/pricelist              controllers.PriceListController.getPriceList( id, groupId:Long, format )
+POST   /client/:id/groups/:groupId/formats/:format/pricelist              controllers.PriceListController.refreshPriceList( id, groupId:Long, format )
 GET    /client/:id/formats                                              controllers.PriceListController.getPriceListFormats( id )
 
-# Site operations
-GET    /clients/:id/sites                                               controllers.SiteController.getSites( id )
-POST   /clients/:id/sites                                               controllers.SiteController.addSite( id )
+# group operations
+GET    /clients/:id/groups                                               controllers.GroupController.getGroups( id )
+POST   /clients/:id/groups                                               controllers.GroupController.addGroup( id )
 
 POST /authentication                                                    controllers.LoginController.authentication()

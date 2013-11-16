@@ -1,9 +1,8 @@
 package controllers;
 
 import com.shopservice.PriceListType;
-import com.shopservice.Services;
 import com.shopservice.domain.ClientSettings;
-import com.shopservice.domain.Site;
+import com.shopservice.domain.ProductGroup;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -28,7 +27,7 @@ public class PriceListController extends Controller {
 
         ClientSettings clientSettings = ClientSettings.findById(clientId);
 
-        response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ Site.getName(siteId.intValue())+".xml\"" );
+        response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ ProductGroup.getName(siteId.intValue())+".xml\"" );
         return ok(file).as("application/force-download");
     }
 

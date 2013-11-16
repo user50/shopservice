@@ -26,7 +26,7 @@ public class ClientSettings {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    public List<Site> sites = new ArrayList<Site>();
+    public List<ProductGroup> productGroups = new ArrayList<ProductGroup>();
 
     public static ClientSettings findById(String id)
     {

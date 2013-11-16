@@ -1,12 +1,9 @@
 package com.shopservice.domain;
 
 import com.avaje.ebean.Ebean;
-import com.avaje.ebean.RawSql;
-import com.avaje.ebean.RawSqlBuilder;
 import com.avaje.ebean.SqlRow;
 import com.google.common.collect.Sets;
 import com.shopservice.Services;
-import com.shopservice.queries.ProductQueryByCategory;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import tyrex.services.UUID;
 
@@ -30,7 +27,7 @@ public class ProductEntry {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    public List<Site2Product> checks;
+    public List<Group2Product> checks;
 
     @Transient
     public boolean checked;
@@ -81,12 +78,12 @@ public class ProductEntry {
         published = product.published;
     }
 
-    public static List<ProductEntry> findSelected(String clientSettingsId, int siteId)
+    public static List<ProductEntry> findSelected(String clientSettingsId, int groupId)
     {
         List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.* FROM product_entry " +
-                "JOIN site2product ON site2product.product_entry_id = product_entry.id AND site2product.site_id = ? " +
+                "JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.group_id = ? " +
                 "WHERE client_settings_id = ?")
-                .setParameter(1, siteId)
+                .setParameter(1, groupId)
                 .setParameter(2, clientSettingsId)
                 .findList();
 
@@ -130,8 +127,8 @@ public class ProductEntry {
 
     private static List<ProductEntry> getWithChecked(String clientId, String categoryId, int settingsId)
     {
-        List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.*, site2product.id IS NOT NULL as checked FROM product_entry " +
-                "LEFT JOIN site2product ON site2product.product_entry_id = product_entry.id AND site2product.site_id = ? " +
+        List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.*, group2product.id IS NOT NULL as checked FROM product_entry " +
+                "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.group_id = ? " +
                 "WHERE client_settings_id = ? AND category_id = ? ")
                 .setParameter(1, settingsId)
                 .setParameter(2, clientId)
