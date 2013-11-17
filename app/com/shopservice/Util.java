@@ -20,7 +20,7 @@ public class Util {
 
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, true );
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, "utf-8");
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, "cp1251");
 
         FileOutputStream outputStream = new FileOutputStream(filePath);
 
@@ -42,4 +42,5 @@ public class Util {
             product.setImageUrl(ClientSettings.findById(clientId).pathToProductImage + product.imageUrl);
         }
     }
+
 }

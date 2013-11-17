@@ -75,7 +75,7 @@ public class ProductEntry {
         id = UUID.create();
         productId = product.id;
         productName = product.name;
-        categoryId = product.categoryId;
+        categoryId = product.category.id;
         price = product.price;
         url = product.url;
         published = product.published;

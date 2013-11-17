@@ -41,7 +41,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
         for (Product product : Services.getProductDAO(clientId).getProducts( getProductIds(clientId, siteId))) {
             price.addItem( createItem(clientId, product) );
-            categories.add( new Category( product.categoryId, product.categoryName) );
+            categories.add( new Category( product.category.id, product.category.name) );
         }
 
         price.setCatalog( new ArrayList<Category>(categories) );
@@ -51,6 +51,6 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
     private Item createItem(String clientId, Product product) throws SQLException {
         return new Item(product.id, product.name, product.url, product.price,
-                product.categoryId, product.manufacturer, product.imageUrl, product.description );
+                product.category.id, product.manufacturer, product.imageUrl, product.description );
     }
 }

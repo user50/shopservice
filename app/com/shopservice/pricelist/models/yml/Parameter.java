@@ -7,16 +7,24 @@ import javax.xml.bind.annotation.XmlAttribute;
 /**
  * Created with IntelliJ IDEA.
  * User: user50
- * Date: 10.11.13
- * Time: 11:06
+ * Date: 16.11.13
+ * Time: 15:30
  * To change this template use File | Settings | File Templates.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 
-public class Currency {
+public class Parameter {
     @XmlAttribute
-    public String id;
+    public String name;
 
     @XmlAttribute
-    public String rate;
+    public String value;
+
+    public Parameter(String value, String name) {
+        this.value = value;
+        this.name = name;
+    }
+
+    public Parameter() {
+    }
 }

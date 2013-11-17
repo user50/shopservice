@@ -21,6 +21,8 @@ public class CategoryQuery implements Query<Category> {
         Category category = new Category();
         category.id = resultSet.getString("categoryId");
         category.name = resultSet.getString("categoryName");
+        String parentId = resultSet.getString("parentId");
+        category.parentId = parentId.equals("0") ? null : parentId;
 
         return category;
     }

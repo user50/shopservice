@@ -1,5 +1,8 @@
 package com.shopservice.refreshers;
 
+import com.google.common.collect.Sets;
+import com.shopservice.Services;
+import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
 import com.shopservice.domain.ProductEntry;
 
@@ -17,5 +20,21 @@ public abstract class AbstractPriceListRefresher implements PriceListRefresher {
             setOfProductIds.add(productEntry.productId);
 
         return setOfProductIds;
+    }
+
+    private Set<Category> getRelatedCategories(Set<Category> categories, String clientId)
+    {
+        Set<Category> parents = Services.getCategoryDAO(clientId).getParents(categories);
+
+        if (parents.isEmpty())
+            return parents;
+        else
+            return Sets.union(parents, getRelatedCategories(parents, clientId));
+    }
+
+    protected Set<Category> getCategories(Set<Category> categories, String clientId)
+    {
+        return Sets.union(categories, getRelatedCategories(categories, clientId));
+
     }
 }

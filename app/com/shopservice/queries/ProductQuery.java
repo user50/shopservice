@@ -1,6 +1,7 @@
 package com.shopservice.queries;
 
 import com.shopservice.Util;
+import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
 
 import java.io.UnsupportedEncodingException;
@@ -26,7 +27,6 @@ public abstract class ProductQuery implements Query<Product> {
         Product product = new Product();
 
         product.id = resultSet.getString("id");
-        product.categoryName = resultSet.getString("categoryName");
         product.manufacturer = resultSet.getString("manufacturer");
         product.name = resultSet.getString("name");
         product.price = resultSet.getDouble("price");
@@ -36,8 +36,14 @@ public abstract class ProductQuery implements Query<Product> {
         //product.warranty = resultSet.getString("warranty");
         product.url = resultSet.getString("url");
         product.imageUrl = resultSet.getString("imageUrl");
-        product.categoryId = resultSet.getString("categoryId");
         product.published = resultSet.getBoolean("published");
+
+        Category category = new Category();
+        category.id = resultSet.getString("categoryId");
+        category.name = resultSet.getString("categoryName");
+        category.parentId = resultSet.getString("categoryParentId");
+
+        product.category = category;
 
         Util.modifyUrl(clientId, product);
         Util.modifyImageUrl(clientId, product);
