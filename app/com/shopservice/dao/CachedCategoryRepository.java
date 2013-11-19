@@ -6,25 +6,25 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-public class CachedCategoryDAO implements CategoryDAO {
+public class CachedCategoryRepository implements CategoryRepository {
 
-    private CategoryDAO categoryDAO;
+    private CategoryRepository categoryRepository;
     private List<Category> categories;
 
-    public CachedCategoryDAO(CategoryDAO categoryDAO) {
-        this.categoryDAO = categoryDAO;
+    public CachedCategoryRepository(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
     public List<Category> getCategories() throws Exception {
         if (categories == null)
-            categories = categoryDAO.getCategories();
+            categories = categoryRepository.getCategories();
 
         return categories;
     }
 
     @Override
     public Set<Category> getParents(Collection<String> categoryIds) throws Exception {
-        return categoryDAO.getParents(categoryIds);
+        return categoryRepository.getParents(categoryIds);
     }
 }

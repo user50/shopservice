@@ -4,7 +4,7 @@ import com.shopservice.domain.ClientSettings;
 
 import java.util.List;
 
-public interface ClientSettingsDAO {
+public interface ClientSettingsRepository {
 
     ClientSettings findById(String id);
 

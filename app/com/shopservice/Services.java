@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,8 +19,8 @@ public class Services {
 
     private static HashMap<String, DatabaseManager> databaseManagers = new HashMap<String, DatabaseManager>();
 
-    private static Map<String, CategoryDAO> categoryDAOs = new Hashtable<String, CategoryDAO>();
-    private static Map<String, ProductDAO> productDAOs = new Hashtable<String, ProductDAO>();
+    private static Map<String, CategoryRepository> categoryDAOs = new Hashtable<String, CategoryRepository>();
+    private static Map<String, ProductRepository> productDAOs = new Hashtable<String, ProductRepository>();
 
     public static final PriceListService priceListService = new PriceListService();
 
@@ -34,18 +33,18 @@ public class Services {
         return databaseManagers.get(clientId);
     }
 
-    public static CategoryDAO getCategoryDAO(String clientId)
+    public static CategoryRepository getCategoryDAO(String clientId)
     {
         if (!categoryDAOs.containsKey(clientId))
-            categoryDAOs.put( clientId, new CachedCategoryDAO(new JdbcCategoryDAO(clientId)));
+            categoryDAOs.put( clientId, new CachedCategoryRepository(new JdbcCategoryRepository(clientId)));
 
         return categoryDAOs.get(clientId);
     }
 
-    public static ProductDAO getProductDAO(String clientId)
+    public static ProductRepository getProductDAO(String clientId)
     {
         if (!productDAOs.containsKey(clientId))
-            productDAOs.put( clientId, new CachedProductDAO(new JdbcProductDAO(clientId)));
+            productDAOs.put( clientId, new CachedProductRepository(new JdbcProductRepository(clientId)));
 
         return productDAOs.get(clientId);
     }

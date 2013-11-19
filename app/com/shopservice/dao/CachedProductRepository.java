@@ -6,28 +6,27 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
-public class CachedProductDAO implements ProductDAO {
+public class CachedProductRepository implements ProductRepository {
 
-    private ProductDAO productDAO;
+    private ProductRepository productRepository;
 
     private Map<String, List<Product>> categoryToProducts = new Hashtable<String, List<Product>>();
 
-    public CachedProductDAO(ProductDAO productDAO) {
-        this.productDAO = productDAO;
+    public CachedProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     @Override
     public List<Product> getProducts(String categoryId) {
         if (!categoryToProducts.containsKey(categoryId))
-            categoryToProducts.put(categoryId, productDAO.getProducts(categoryId));
+            categoryToProducts.put(categoryId, productRepository.getProducts(categoryId));
 
         return categoryToProducts.get(categoryId);    }
 
     @Override
     public List<Product> getProducts(Collection<String> productIds) {
         //no cached
-        return productDAO.getProducts(productIds);
+        return productRepository.getProducts(productIds);
     }
 }

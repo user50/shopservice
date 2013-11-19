@@ -17,8 +17,6 @@ import static com.shopservice.Services.priceListService;
 
 public class PriceListController extends Controller {
 
-
-
     public static Result getPriceList(String clientId, Long siteId, String format)
     {
         File file = priceListService.getPriceList( clientId, siteId.intValue(), PriceListType.valueOf(format) );

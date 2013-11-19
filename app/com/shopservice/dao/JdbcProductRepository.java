@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class JdbcProductDAO implements ProductDAO{
+public class JdbcProductRepository implements ProductRepository {
 
     private DatabaseManager databaseManager;
     private String clientId;
 
-    public JdbcProductDAO(String clientId) {
+    public JdbcProductRepository(String clientId) {
         this.clientId = clientId;
         try {
             databaseManager = Services.getDataBaseManager(clientId);
