@@ -38,7 +38,7 @@ public class Queries {
     }
 
     public String getCategoriesQuery(String clientId) {
-        return getValue("/root/client[@id='"+clientId+"']/categories");
+        return getValue("/root/client[@id='"+clientId+"']/categories/getCategories");
     }
 
     public String getProductQueryByCategory(String clientId) {
@@ -51,7 +51,7 @@ public class Queries {
 
     public String getQuery4GetParentCategories(String clientId)
     {
-        return getValue("/root/client[@id='"+clientId+"']/product/listOfId");
+        return getValue("/root/client[@id='"+clientId+"']/categories/getParentCategories");
     }
 
     private String getValue(String XPathQuery)
