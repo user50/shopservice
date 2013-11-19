@@ -9,11 +9,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class ProductQueryByListOfIds extends ProductQuery {
+public class GetProductsByIds extends ProductQuery {
 
     private List<String> productIds;
 
-    public ProductQueryByListOfIds(String clientId, List<String> productIds) {
+    public GetProductsByIds(String clientId, List<String> productIds) {
         super(clientId);
         this.productIds = productIds;
     }

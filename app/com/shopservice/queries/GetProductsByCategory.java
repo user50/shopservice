@@ -7,15 +7,15 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 //TODO this query allow to get clients's products by a category
-public class ProductQueryByCategory extends ProductQuery {
+public class GetProductsByCategory extends ProductQuery {
 
     private String categoryId;
 
-    protected ProductQueryByCategory(String clientId) {
+    protected GetProductsByCategory(String clientId) {
         super(clientId);
     }
 
-    public ProductQueryByCategory(String clientId, String categoryId) {
+    public GetProductsByCategory(String clientId, String categoryId) {
         super(clientId);
         this.categoryId = categoryId;
     }

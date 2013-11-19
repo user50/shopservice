@@ -3,8 +3,8 @@ package com.shopservice.dao;
 import com.shopservice.DatabaseManager;
 import com.shopservice.Services;
 import com.shopservice.domain.Product;
-import com.shopservice.queries.ProductQueryByCategory;
-import com.shopservice.queries.ProductQueryByListOfIds;
+import com.shopservice.queries.GetProductsByCategory;
+import com.shopservice.queries.GetProductsByIds;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class JdbcProductDAO implements ProductDAO{
     @Override
     public List<Product> getProducts(String categoryId) {
         try {
-            return  databaseManager.executeQueryForList(new ProductQueryByCategory(clientId, categoryId));
+            return  databaseManager.executeQueryForList(new GetProductsByCategory(clientId, categoryId));
         } catch (SQLException e) {
             //todo log
             throw new RuntimeException(e);
@@ -39,7 +39,7 @@ public class JdbcProductDAO implements ProductDAO{
     @Override
     public List<Product> getProducts(Collection<String> productId) {
         try {
-            return databaseManager.executeQueryForList(new ProductQueryByListOfIds(clientId, new ArrayList<String>( productId )));
+            return databaseManager.executeQueryForList(new GetProductsByIds(clientId, new ArrayList<String>( productId )));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

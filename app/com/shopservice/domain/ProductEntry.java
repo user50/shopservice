@@ -1,12 +1,9 @@
 package com.shopservice.domain;
 
 import com.avaje.ebean.Ebean;
-import com.avaje.ebean.RawSql;
-import com.avaje.ebean.RawSqlBuilder;
 import com.avaje.ebean.SqlRow;
 import com.google.common.collect.Sets;
 import com.shopservice.Services;
-import com.shopservice.queries.ProductQueryByCategory;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import tyrex.services.UUID;
 
