@@ -1,18 +1,15 @@
 package com.shopservice.queries;
 
-import com.shopservice.Services;
 import com.shopservice.domain.Category;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-//TODO This query allow to get all client's categories
-public class CategoryQuery implements Query<Category> {
+public abstract class CategoryQuery implements Query<Category> {
 
-    private String clientId;
+    protected String clientId;
 
-    public CategoryQuery(String clientId) {
+    protected CategoryQuery(String clientId) {
         this.clientId = clientId;
     }
 
@@ -25,15 +22,5 @@ public class CategoryQuery implements Query<Category> {
         category.parentId = parentId.equals("0") ? null : parentId;
 
         return category;
-    }
-
-    @Override
-    public String getRawSql() {
-        return Services.queries.getCategoriesQuery(clientId);
-    }
-
-    @Override
-    public void prepare(PreparedStatement statement) throws SQLException {
-
     }
 }

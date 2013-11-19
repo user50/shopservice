@@ -7,9 +7,7 @@ import com.shopservice.domain.Product;
 import com.shopservice.domain.ProductEntry;
 
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public abstract class AbstractPriceListRefresher implements PriceListRefresher {
 
@@ -22,9 +20,8 @@ public abstract class AbstractPriceListRefresher implements PriceListRefresher {
         return setOfProductIds;
     }
 
-    private Set<Category> getRelatedCategories(Set<Category> categories, String clientId)
-    {
-        Set<Category> parents = Services.getCategoryDAO(clientId).getParents(categories);
+    private Set<Category> getRelatedCategories(Set<Category> categories, String clientId) throws Exception {
+        Set<Category> parents = Services.getCategoryDAO(clientId).getParents(getCategoryIds(categories));
 
         if (parents.isEmpty())
             return parents;
@@ -32,9 +29,17 @@ public abstract class AbstractPriceListRefresher implements PriceListRefresher {
             return Sets.union(parents, getRelatedCategories(parents, clientId));
     }
 
-    protected Set<Category> getCategories(Set<Category> categories, String clientId)
-    {
+    protected Set<Category> getCategories(Set<Category> categories, String clientId) throws Exception {
         return Sets.union(categories, getRelatedCategories(categories, clientId));
 
+    }
+
+    private Collection<String> getCategoryIds(Set<Category> categories)
+    {
+        Collection<String> ids = new ArrayList<String>();
+        for (Category category : categories)
+            ids.add(category.id);
+
+        return ids;
     }
 }

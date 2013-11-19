@@ -32,7 +32,7 @@ public class PriceListController extends Controller {
         return ok(file).as("application/force-download");
     }
 
-    public static Result refreshPriceList(String clientId, Long siteId,  String format) throws JAXBException, SQLException, FileNotFoundException {
+    public static Result refreshPriceList(String clientId, Long siteId,  String format) throws Exception {
         priceListService.refreshPriceList( clientId, siteId.intValue(), PriceListType.valueOf(format) );
 
         return ok();

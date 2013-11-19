@@ -27,7 +27,7 @@ import static com.shopservice.Util.save;
  */
 public class YMLFormatRefresher extends AbstractPriceListRefresher {
     @Override
-    public void refresh(String clientId, int siteId) throws JAXBException, FileNotFoundException, SQLException {
+    public void refresh(String clientId, int siteId) throws Exception {
         ClientSettings clientSettings = ClientSettings.findById(clientId);
 
         YmlCatalog ymlCatalog = new YmlCatalog();
@@ -42,7 +42,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         shop.name = clientSettings.siteName;
         shop.url = clientSettings.siteUrl;
 
-        Set<Category> categories = new HashSet<>();
+        Set<Category> categories = new HashSet<Category>();
 
         for (Product product : Services.getProductDAO(clientId).getProducts( getProductIds(clientId, siteId))) {
             ymlCatalog.shop.offers.add(createOffer(product));
@@ -70,7 +70,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
     }
 
     private List<YmlCategory> convertToYmlCategories(Set<Category> relatedCategories) {
-        List<YmlCategory> result = new ArrayList<>();
+        List<YmlCategory> result = new ArrayList<YmlCategory>();
 
         for (Category relatedCategory : relatedCategories) {
             YmlCategory ymlCategory = new YmlCategory();

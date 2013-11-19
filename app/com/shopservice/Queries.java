@@ -49,6 +49,11 @@ public class Queries {
         return getValue("/root/client[@id='"+clientId+"']/product/listOfId");
     }
 
+    public String getQuery4GetParentCategories(String clientId)
+    {
+        return getValue("/root/client[@id='"+clientId+"']/product/listOfId");
+    }
+
     private String getValue(String XPathQuery)
     {
         try {
@@ -59,6 +64,9 @@ public class Queries {
 
         return EMPTY;
     }
+
+
+
 
 
 }

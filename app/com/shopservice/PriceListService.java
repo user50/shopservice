@@ -20,7 +20,7 @@ public class PriceListService {
         return file.exists() ? file:null;
     }
 
-    public void refreshPriceList(String clientId, int siteId , PriceListType type) throws SQLException, JAXBException, FileNotFoundException {
+    public void refreshPriceList(String clientId, int siteId , PriceListType type) throws Exception {
         type.getHandler().refresh(clientId, siteId);
     }
 }

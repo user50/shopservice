@@ -17,26 +17,6 @@ import java.sql.SQLException;
  */
 public class PriceListServiceTest extends Assert {
 
-    @Test
-    public void testGetExistPriceList() throws Exception {
-        PriceListService priceListService = new PriceListService();
-        File priceList = priceListService.getPriceList("client1", PriceListType.price);
 
-        assertNotNull(priceList);
-    }
-
-    @Test
-    public void testGetNotExistPriceList() throws Exception {
-        PriceListService priceListService = new PriceListService();
-        File priceList = priceListService.getPriceList("client2", PriceListType.price);
-
-        assertNull(priceList);
-    }
-
-    @Test
-    public void testRefresh() throws JAXBException, FileNotFoundException, SQLException {
-        PriceListService priceListService = new PriceListService();
-        priceListService.refreshPriceList("client1",PriceListType.price);
-    }
 
 }

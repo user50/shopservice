@@ -12,5 +12,5 @@ import java.sql.SQLException;
  * To change this template use File | Settings | File Templates.
  */
 public interface PriceListRefresher {
-    public void refresh(String clientId, int siteId) throws SQLException, JAXBException, FileNotFoundException;
+    public void refresh(String clientId, int siteId) throws Exception;
 }

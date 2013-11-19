@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class CategoryController extends Controller {
 
-    public static Result getCategories(String clientId) throws SQLException {
+    public static Result getCategories(String clientId) throws Exception {
         Object response = Services.getCategoryDAO(clientId).getCategories();
 
         return ok(Json.toJson(response));

@@ -2,6 +2,7 @@ package com.shopservice.dao;
 
 import com.shopservice.domain.Category;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ public class CachedCategoryDAO implements CategoryDAO {
     }
 
     @Override
-    public List<Category> getCategories() {
+    public List<Category> getCategories() throws Exception {
         if (categories == null)
             categories = categoryDAO.getCategories();
 
@@ -23,7 +24,7 @@ public class CachedCategoryDAO implements CategoryDAO {
     }
 
     @Override
-    public Set<Category> getParents(Set<Category> categories) {
-        return categoryDAO.getParents(categories);
+    public Set<Category> getParents(Collection<String> categoryIds) throws Exception {
+        return categoryDAO.getParents(categoryIds);
     }
 }

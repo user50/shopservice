@@ -25,15 +25,15 @@ public class Shop {
 
     @XmlElementWrapper(name="currencies")
     @XmlElements({@XmlElement(name="currency") })
-    public List<Currency> currencies = new ArrayList<>();
+    public List<Currency> currencies = new ArrayList<Currency>();
 
     @XmlElementWrapper(name="categories")
     @XmlElements({@XmlElement(name="category") })
-    public List<YmlCategory> categories = new ArrayList<>();
+    public List<YmlCategory> categories = new ArrayList<YmlCategory>();
 
     @XmlElementWrapper(name="offers")
     @XmlElements({@XmlElement(name="offer") })
-    public List<Offer> offers = new ArrayList<>();
+    public List<Offer> offers = new ArrayList<Offer>();
 
 
 }
