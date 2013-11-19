@@ -46,7 +46,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
         price.setCatalog( new ArrayList<Category>(categories) );
 
-        save(price, PriceListType.price.getFileName(clientId, siteId));
+        save(price, PriceListType.price.getFileName(clientId, siteId), clientSettings.encoding);
     }
 
     private Item createItem(String clientId, Product product) throws SQLException {

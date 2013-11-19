@@ -19,6 +19,7 @@ public class ClientSettings {
     public String pathToProductPage;
     public String pathToProductImage;
     public String password;
+    public String encoding;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)

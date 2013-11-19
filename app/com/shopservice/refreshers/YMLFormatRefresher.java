@@ -53,7 +53,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
 
         shop.categories = convertToYmlCategories(relatedCategories);
 
-        save(ymlCatalog, PriceListType.YML.getFileName(clientId, siteId));
+        save(ymlCatalog, PriceListType.YML.getFileName(clientId, siteId), clientSettings.encoding );
 
     }
 
