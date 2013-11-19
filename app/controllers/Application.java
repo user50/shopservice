@@ -11,7 +11,7 @@ public class Application extends Controller {
 
     @With(Authentication.class)
     public static Result index() throws SQLException {
-        return ok(price.render());
+        return redirect("/assets/login.html");
     }
 
 }
