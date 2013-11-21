@@ -60,7 +60,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
     private Offer createOffer(Product product) {
         Offer offer = new Offer();
         offer.price = product.price;
-        offer.id = product.id;
+        offer.id = product.id + ":"+product.category.id;
         offer.categoryId = product.category.id;
         offer.description = product.description;
         offer.vendor = product.manufacturer;

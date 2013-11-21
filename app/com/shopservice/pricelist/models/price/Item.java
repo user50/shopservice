@@ -28,7 +28,7 @@ public class Item {
     }
 
     public Item(String id, String name, String url, Double price, String categoryId, String vendor, String image, String description) {
-        this.id = id;
+        this.id = id+":"+categoryId;
         this.name = name;
         this.url = url;
         this.price = price;
