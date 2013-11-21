@@ -2,6 +2,8 @@ package com.shopservice;
 
 import com.shopservice.dao.*;
 import com.shopservice.domain.ClientSettings;
+import com.shopservice.urlgenerate.UrlGenerator;
+import com.shopservice.urlgenerate.UrlGeneratorStorage;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -26,6 +28,8 @@ public class Services {
 
     public static final Queries queries = new Queries();
 
+    private static final UrlGeneratorStorage URL_GENERATOR_STORAGE = UrlGeneratorStorage.getInstance();
+
     public static DatabaseManager getDataBaseManager(String clientId) throws SQLException {
         if (!databaseManagers.containsKey(clientId))
             databaseManagers.put(clientId, new DatabaseManager(new StupidConnectionPool(ClientSettings.findById(clientId).databaseUrl)));
@@ -47,5 +51,10 @@ public class Services {
             productDAOs.put( clientId, new CachedProductRepository(new JdbcProductRepository(clientId)));
 
         return productDAOs.get(clientId);
+    }
+
+    public static UrlGenerator getUrlGenerator(String clientId)
+    {
+        return URL_GENERATOR_STORAGE.get(clientId);
     }
 }

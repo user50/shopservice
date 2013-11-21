@@ -1,5 +1,6 @@
 package com.shopservice.queries;
 
+import com.shopservice.Services;
 import com.shopservice.Util;
 import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
@@ -45,8 +46,8 @@ public abstract class ProductQuery implements Query<Product> {
 
         product.category = category;
 
-        Util.modifyUrl(clientId, product);
-        Util.modifyImageUrl(clientId, product);
+        product.url = Services.getUrlGenerator(clientId).generateProductUrl(product);
+        product.imageUrl = Services.getUrlGenerator(clientId).generateProductImageUrl(product);
 
         return product;
     }
