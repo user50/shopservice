@@ -3,6 +3,7 @@ package com.shopservice.urlgenerate;
 import com.shopservice.domain.Product;
 
 public class MebelAlliance extends UrlGenerator {
+
     @Override
     public String getClientId() {
         return "client2";
@@ -10,11 +11,13 @@ public class MebelAlliance extends UrlGenerator {
 
     @Override
     public String generateProductUrl(Product product) {
-        return null;
+        return "http://mebel-alliance.kiev.ua/index.php?route=product/product&path="
+                + product.category.parentId + "_" + product.category.id
+                + "&product_id=" + product.id;
     }
 
     @Override
     public String generateProductImageUrl(Product product) {
-        return null;
+        return "http://mebel-alliance.kiev.ua/image/" + product.imageUrl;
     }
 }

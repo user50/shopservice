@@ -31,6 +31,12 @@ public class GetParentCategories extends CategoryQuery {
 
     @Override
     public void prepare(PreparedStatement statement) throws SQLException {
-        //To change body of implemented methods use File | Settings | File Templates.
+        int i = 0;
+
+        for (String categoryId: categoryIds) {
+            i+=1;
+            statement.setObject( i, categoryId );
+        }
+
     }
 }
