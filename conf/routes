@@ -4,7 +4,7 @@
 
 # Home page
 GET     /price                           controllers.Application.index()
-
+GET     /download                           controllers.Application.download()
 
 
 # Map static resources from the /public folder to the /assets URL path

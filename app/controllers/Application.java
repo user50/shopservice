@@ -14,4 +14,9 @@ public class Application extends Controller {
         return ok(price.render());
     }
 
+    @With(Authentication.class)
+    public static Result download() {
+        return ok(download.render());
+    }
+
 }
