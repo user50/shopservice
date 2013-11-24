@@ -37,3 +37,4 @@ DELETE /clients/:id/sites/:siteId                                       controll
 PUT /clients/:id/sites/:siteId                                          controllers.SiteController.updateSite( id, siteId:Long, resourceSiteId: Long, operationName )
 
 POST /authentication                                                    controllers.LoginController.authentication()
+POST /logout                                                            controllers.LoginController.logout()

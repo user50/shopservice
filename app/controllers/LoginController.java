@@ -3,6 +3,7 @@ package controllers;
 import com.shopservice.domain.ClientSettings;
 import play.cache.Cache;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import tyrex.services.UUID;
 
@@ -33,6 +34,18 @@ public class LoginController extends Controller {
 
         response().setCookie("key", key, EXPIRATION);
         response().setCookie("clientId", clientSettings.id, EXPIRATION);
+
+        return ok();
+    }
+
+    public static Result logout()
+    {
+        Http.Cookie cookie = request().cookie("key");
+
+        if (cookie == null)
+            return ok();
+
+        Cache.remove(cookie.value());
 
         return ok();
     }
