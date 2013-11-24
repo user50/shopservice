@@ -33,7 +33,7 @@ GET    /client/:id/formats                                              controll
 # Site operations
 GET    /clients/:id/sites                                               controllers.SiteController.getSites( id )
 POST   /clients/:id/sites                                               controllers.SiteController.addSite( id )
-DELETE /clients/:id/sites/:siteId                                       controllers.SiteController.removeSite( id, siteId )
-PUT /clients/:id/sites/:siteId                                          controllers.SiteController.updateSite( id, siteId, resourceSiteId, operationName )
+DELETE /clients/:id/sites/:siteId                                       controllers.SiteController.removeSite( id, siteId:Long )
+PUT /clients/:id/sites/:siteId                                          controllers.SiteController.updateSite( id, siteId:Long, resourceSiteId: Long, operationName )
 
 POST /authentication                                                    controllers.LoginController.authentication()

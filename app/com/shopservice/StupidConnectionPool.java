@@ -1,6 +1,5 @@
 package com.shopservice;
 
-import play.db.DB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

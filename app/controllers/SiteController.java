@@ -35,9 +35,9 @@ public class SiteController extends Controller {
         return ok( Json.toJson(site) );
     }
 
-    public static Result removeSite(String clientId, String siteId)
+    public static Result removeSite(String clientId, Long siteId)
     {
-        Site.remove(siteId);
+        Site.remove(siteId.intValue());
 
         return ok();
     }

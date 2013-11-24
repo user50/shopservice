@@ -35,7 +35,7 @@ public class Site {
         return Ebean.find(Site.class).where().eq("client_settings_id", clientId).eq("name", name).findUnique() != null;
     }
 
-    public static void remove(String siteId) {
+    public static void remove(int siteId) {
         Ebean.delete(Site.class, siteId);
     }
 
