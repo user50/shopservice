@@ -68,4 +68,27 @@ public class Site2Product {
 
 
     }
+
+    public static void merge(int basic, int source)
+    {
+        Ebean.createSqlUpdate( "INSERT INTO site2product ( `site_id`, `product_entry_id`) " +
+                "SELECT ?, `source`.product_entry_id FROM ( " +
+                " SELECT * FROM site2product " +
+                " WHERE site_id = ? " +
+                ") as `source` " +
+                "LEFT JOIN site2product as basic ON `source`.product_entry_id = basic.product_entry_id " +
+                "AND basic.site_id = ? " +
+                "WHERE basic.id IS NULL" )
+                .setParameter(1, basic).setParameter(2, source).setParameter(1, basic).execute();
+    }
+
+    public static void difference(int basic, int source)
+    {
+        Ebean.createSqlUpdate("DELETE basic.* FROM ( " +
+                " SELECT * FROM site2product " +
+                " WHERE site_id = ? " +
+                ") AS `source` " +
+                "JOIN site2product AS basic ON `source`.product_entry_id = basic.product_entry_id " +
+                "AND basic.site_id = ?").setParameter(1, source).setParameter(2, basic).execute();
+    }
 }
