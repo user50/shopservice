@@ -26,7 +26,8 @@ public enum PriceListType {
         this.fileName = fileName;
     }
 
-    public String getFileName(String clientId, int siteId) {
+    public String
+    getFileName(String clientId, int siteId) {
         return  System.getProperty("user.dir") + File.separator + PRICE_LIST_DIR +
                 File.separator + clientId +File.separator + siteId + File.separator+fileName;
     }

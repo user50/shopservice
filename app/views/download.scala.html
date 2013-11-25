@@ -40,15 +40,19 @@
 
         <div id="wrapp">
             <form id="dataForPrice">
-                <p>Select group: <select id="group">
-                    <option selected disabled>Choose product group</option>
-                </select>
-                <p>Select site: <select id="format">
-                    <option selected disabled>Choose site</option>
-                    <option value="YML">Prom</option>
-                    <option value="price">HotLine</option>
-                    <option value="YML">Zakupka</option>
-                </select></p>
+                <p><label>
+                    <select id="group">
+                        <option selected disabled>Select products group</option>
+                    </select>
+                </label>
+                <p><label>
+                    <select id="format">
+                        <option selected disabled>Select site</option>
+                        <option value="YML">Prom</option>
+                        <option value="price">HotLine</option>
+                        <option value="YML">Zakupka</option>
+                    </select>
+                    </label></p>
             </form>
             <div class="buttons">
                 <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a>
@@ -58,7 +62,7 @@
         </div>
 
     </div>
-    <div id="footer"></div>
+    <div id="footer"><form method="POST" action="/logout"><input type="submit" value="Logout"></div>
     <div id="loader"><div class="anim"><img src="assets/images/download.gif"></div></div>
 </div>
 
