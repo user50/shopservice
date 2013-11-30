@@ -49,9 +49,9 @@ public class SiteController extends Controller {
         switch (operation)
         {
             case merge:
-                Site2Product.merge(basicSiteId.intValue(), resourceSiteId.intValue());
+                Services.getSite2ProductRepository().merge(basicSiteId.intValue(), resourceSiteId.intValue());
             case difference:
-                Site2Product.difference(basicSiteId.intValue(), resourceSiteId.intValue());
+                Services.getSite2ProductRepository().difference(basicSiteId.intValue(), resourceSiteId.intValue());
         }
 
         return ok();

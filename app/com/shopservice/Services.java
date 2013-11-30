@@ -27,6 +27,7 @@ public class Services {
     private static ClientSettingsRepository clientSettingsRepository = new EbeanClientSettingsRepository();
     private static ProductEntryRepository productEntryRepository = new EbeanProductEntryRepository();
     private static SiteRepository siteRepository = new EbeanSiteRepository();
+    private static Site2ProductRepository site2ProductRepository = new EbeanSite2ProductRepository();
 
     public static final PriceListService priceListService = new PriceListService();
 
@@ -74,5 +75,9 @@ public class Services {
     public static UrlGenerator getUrlGenerator(String clientId)
     {
         return URL_GENERATOR_STORAGE.get(clientId);
+    }
+
+    public static Site2ProductRepository getSite2ProductRepository() {
+        return site2ProductRepository;
     }
 }
