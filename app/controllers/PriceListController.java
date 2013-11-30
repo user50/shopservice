@@ -1,7 +1,9 @@
 package controllers;
 
+import com.shopservice.MServiceInjector;
 import com.shopservice.PriceListType;
 import com.shopservice.Services;
+import com.shopservice.dao.ProductGroupRepository;
 import com.shopservice.domain.ClientSettings;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -13,6 +15,8 @@ import static com.shopservice.Services.priceListService;
 
 public class PriceListController extends Controller {
 
+    private static ProductGroupRepository productGroupRepository = MServiceInjector.injector.getInstance(ProductGroupRepository.class);
+
     public static Result getPriceList(String clientId, Long siteId, String format)
     {
         File file = priceListService.getPriceList( clientId, siteId.intValue(), PriceListType.valueOf(format) );
@@ -22,7 +26,7 @@ public class PriceListController extends Controller {
 
         ClientSettings clientSettings = Services.getClientSettingsDAO().findById(clientId);
 
-        response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ Services.getProductGroupRepository().getName(siteId.intValue())+".xml\"" );
+        response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ productGroupRepository.getName(siteId.intValue())+".xml\"" );
         return ok(file).as("application/force-download");
     }
 
