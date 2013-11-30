@@ -32,10 +32,10 @@ POST   /client/:id/sites/:siteId/formats/:format/pricelist              controll
 GET    /client/:id/formats                                              controllers.PriceListController.getPriceListFormats( id )
 
 # Site operations
-GET    /clients/:id/sites                                               controllers.SiteController.getSites( id )
-POST   /clients/:id/sites                                               controllers.SiteController.addSite( id )
-DELETE /clients/:id/sites/:siteId                                       controllers.SiteController.removeSite( id, siteId:Long )
-PUT /clients/:id/sites/:siteId                                          controllers.SiteController.updateSite( id, siteId:Long, resourceSiteId: Long, operationName )
+GET    /clients/:id/sites                                               controllers.ProductGroupController.getSites( id )
+POST   /clients/:id/sites                                               controllers.ProductGroupController.addSite( id )
+DELETE /clients/:id/sites/:siteId                                       controllers.ProductGroupController.removeSite( id, siteId:Long )
+PUT /clients/:id/sites/:siteId                                          controllers.ProductGroupController.updateSite( id, siteId:Long, resourceSiteId: Long, operationName )
 
 POST /authentication                                                    controllers.LoginController.authentication()
 POST /logout                                                            controllers.LoginController.logout()
