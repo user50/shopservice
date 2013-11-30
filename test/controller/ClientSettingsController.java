@@ -1,5 +1,6 @@
 package controller;
 
+import com.avaje.ebean.Ebean;
 import org.junit.Test;
 import play.mvc.Result;
 
@@ -13,5 +14,6 @@ public class ClientSettingsController {
     public void testGetClientSetting() {
         Result result = routeAndCall(fakeRequest("GET", "/clients/1"));
         assertThat(result).isNotNull();
+
     }
 }

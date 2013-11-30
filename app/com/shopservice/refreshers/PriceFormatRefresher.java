@@ -29,9 +29,11 @@ import static com.shopservice.Util.save;
  * To change this template use File | Settings | File Templates.
  */
 public class PriceFormatRefresher extends AbstractPriceListRefresher {
+
+
     @Override
     public void refresh(String clientId, int siteId) throws SQLException, JAXBException, FileNotFoundException {
-        ClientSettings clientSettings = ClientSettings.findById(clientId);
+        ClientSettings clientSettings = Services.getClientSettingsDAO().findById(clientId);
 
         Price price = new Price();
         price.setName( clientSettings.siteName ) ;

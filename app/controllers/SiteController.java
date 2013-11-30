@@ -1,5 +1,6 @@
 package controllers;
 
+import com.shopservice.Services;
 import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.Site;
 import com.shopservice.domain.Site2Product;
@@ -16,7 +17,7 @@ public class SiteController extends Controller {
 
     public static Result addSite( String clientId )
     {
-        ClientSettings settings = ClientSettings.findById(clientId);
+        ClientSettings settings = Services.getClientSettingsDAO().findById(clientId);
         if (settings == null)
             return badRequest("Client with id "+clientId+" doesn't exist ");
 
@@ -30,7 +31,7 @@ public class SiteController extends Controller {
 
         settings.sites.add(site);
 
-        settings.save();
+        Services.getClientSettingsDAO().save(settings);
 
         return ok( Json.toJson(site) );
     }

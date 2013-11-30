@@ -16,11 +16,11 @@ public class ClientSettingsController extends Controller {
 
     public static Result getClientSettings()
     {
-        return ok(Json.toJson(ClientSettings.getAll()));
+        return ok(Json.toJson(Services.getClientSettingsDAO().getAll()));
     }
 
     public static Result getClientSetting(String id) throws SQLException {
-        Object response = ClientSettings.findById(id);
+        Object response = Services.getClientSettingsDAO().findById(id);
 
         if (response == null)
             return status(404);
@@ -33,7 +33,7 @@ public class ClientSettingsController extends Controller {
 
         if (clientSettings.id == null)
             clientSettings.id = UUID.create();
-        clientSettings.save();
+        Services.getClientSettingsDAO().save(clientSettings);
 
         return ok(Json.toJson(clientSettings));
     }
@@ -41,13 +41,13 @@ public class ClientSettingsController extends Controller {
     public static Result updateClientSettings(String id) throws SQLException {
         ClientSettings clientSettings = Json.fromJson(request().body().asJson(), ClientSettings.class);
         clientSettings.id = id;
-        clientSettings.update();
+        Services.getClientSettingsDAO().update(clientSettings);
 
         return ok();
     }
 
     public static Result deleteClientSettings(String id) throws SQLException {
-        ClientSettings.remove(id);
+        Services.getClientSettingsDAO().remove(id);
 
         return ok();
     }

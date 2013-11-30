@@ -28,7 +28,7 @@ import static com.shopservice.Util.save;
 public class YMLFormatRefresher extends AbstractPriceListRefresher {
     @Override
     public void refresh(String clientId, int siteId) throws Exception {
-        ClientSettings clientSettings = ClientSettings.findById(clientId);
+        ClientSettings clientSettings = Services.getClientSettingsDAO().findById(clientId);
 
         YmlCatalog ymlCatalog = new YmlCatalog();
         Shop shop = new Shop();

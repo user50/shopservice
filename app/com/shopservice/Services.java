@@ -24,6 +24,8 @@ public class Services {
     private static Map<String, CategoryRepository> categoryDAOs = new Hashtable<String, CategoryRepository>();
     private static Map<String, ProductRepository> productDAOs = new Hashtable<String, ProductRepository>();
 
+    private static ClientSettingsRepository clientSettingsRepository = new EbeanClientSettingsRepository();
+
     public static final PriceListService priceListService = new PriceListService();
 
     public static final Queries queries = new Queries();
@@ -32,7 +34,7 @@ public class Services {
 
     public static DatabaseManager getDataBaseManager(String clientId) throws SQLException {
         if (!databaseManagers.containsKey(clientId))
-            databaseManagers.put(clientId, new DatabaseManager(new StupidConnectionPool(ClientSettings.findById(clientId).databaseUrl)));
+            databaseManagers.put(clientId, new DatabaseManager(new StupidConnectionPool(getClientSettingsDAO().findById(clientId).databaseUrl)));
 
         return databaseManagers.get(clientId);
     }
@@ -52,6 +54,12 @@ public class Services {
 
         return productDAOs.get(clientId);
     }
+
+    public static ClientSettingsRepository getClientSettingsDAO()
+    {
+        return clientSettingsRepository;
+    }
+
 
     public static UrlGenerator getUrlGenerator(String clientId)
     {

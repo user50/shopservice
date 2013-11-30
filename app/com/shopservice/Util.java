@@ -31,7 +31,7 @@ public class Util {
         if (product.url == null){
             //todo get url;
         } else {
-            product.setUrl(ClientSettings.findById(clientId).pathToProductPage + product.url);
+            product.setUrl(Services.getClientSettingsDAO().findById(clientId).pathToProductPage + product.url);
         }
     }
 
@@ -39,7 +39,7 @@ public class Util {
         if (product.url == null){
             //todo get url;
         } else {
-            product.setImageUrl(ClientSettings.findById(clientId).pathToProductImage + product.imageUrl);
+            product.setImageUrl(Services.getClientSettingsDAO().findById(clientId).pathToProductImage + product.imageUrl);
         }
     }
 

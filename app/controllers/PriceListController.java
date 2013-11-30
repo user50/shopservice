@@ -24,7 +24,7 @@ public class PriceListController extends Controller {
         if (file == null)
             return badRequest("The file does not exist yet. You need to generate it at least once");
 
-        ClientSettings clientSettings = ClientSettings.findById(clientId);
+        ClientSettings clientSettings = Services.getClientSettingsDAO().findById(clientId);
 
         response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ Site.getName(siteId.intValue())+".xml\"" );
         return ok(file).as("application/force-download");

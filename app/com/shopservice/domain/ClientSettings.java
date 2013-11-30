@@ -28,34 +28,4 @@ public class ClientSettings {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     public List<Site> sites = new ArrayList<Site>();
-
-    public static ClientSettings findById(String id)
-    {
-        return Ebean.find(ClientSettings.class, id);
-    }
-
-    public static List<ClientSettings> getAll()
-    {
-        return Ebean.find(ClientSettings.class).findList();
-    }
-
-    public static void remove(String id)
-    {
-        Ebean.delete(ClientSettings.class, id);
-    }
-
-    public void save()
-    {
-        Ebean.save(this);
-    }
-
-    public void update()
-    {
-        Ebean.update(this);
-    }
-
-    public static ClientSettings getBySiteName(String siteName) {
-        return Ebean.find(ClientSettings.class).where().eq("siteName", siteName).findUnique();
-    }
-
 }

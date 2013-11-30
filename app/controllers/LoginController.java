@@ -1,5 +1,6 @@
 package controllers;
 
+import com.shopservice.Services;
 import com.shopservice.domain.ClientSettings;
 import play.cache.Cache;
 import play.mvc.Controller;
@@ -24,7 +25,7 @@ public class LoginController extends Controller {
         String password = request().body().asFormUrlEncoded().get("j_password")[0];
         String username = request().body().asFormUrlEncoded().get("j_username")[0];
 
-        ClientSettings clientSettings = ClientSettings.getBySiteName(username);
+        ClientSettings clientSettings = Services.getClientSettingsDAO().getBySiteName(username);
 
         if (clientSettings == null || !clientSettings.password.equals(password))
             return status(401);

@@ -114,7 +114,7 @@ public class ProductEntry {
     }
 
     private static void add(String clientsId, Collection<ProductEntry> productsToAdd) {
-        ClientSettings clientSettings = ClientSettings.findById( clientsId);
+        ClientSettings clientSettings = Services.getClientSettingsDAO().findById( clientsId);
         clientSettings.productEntries.addAll(productsToAdd);
         Ebean.save(clientSettings);
     }
