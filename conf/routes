@@ -3,7 +3,8 @@
 # ~~~~
 
 # Home page
-GET     /price                           controllers.Application.index()
+GET     /                                   controllers.Application.index()
+GET     /price                              controllers.Application.price()
 GET     /download                           controllers.Application.download()
 
 
