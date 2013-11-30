@@ -26,7 +26,7 @@ public class PriceListController extends Controller {
 
         ClientSettings clientSettings = Services.getClientSettingsDAO().findById(clientId);
 
-        response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ Site.getName(siteId.intValue())+".xml\"" );
+        response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ Services.getSiteRepository().getName(siteId.intValue())+".xml\"" );
         return ok(file).as("application/force-download");
     }
 

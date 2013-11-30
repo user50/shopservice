@@ -18,25 +18,4 @@ public class Site {
     @OneToMany(cascade = CascadeType.ALL)
     public List<Site2Product> checks;
 
-    public static List<Site> get(String clientId) {
-        return Ebean.find(Site.class).where().eq("client_settings_id", clientId).findList();
-    }
-
-    public void save() {
-        Ebean.save(this);
-    }
-
-    public static String getName(int siteId)
-    {
-        return Ebean.find(Site.class, siteId).name;
-    }
-
-    public static boolean exist(String clientId, String name) {
-        return Ebean.find(Site.class).where().eq("client_settings_id", clientId).eq("name", name).findUnique() != null;
-    }
-
-    public static void remove(int siteId) {
-        Ebean.delete(Site.class, siteId);
-    }
-
 }

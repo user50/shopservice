@@ -12,7 +12,7 @@ public class SiteController extends Controller {
 
     public static Result getSites(String clientId)
     {
-        return ok( Json.toJson( Site.get(clientId) ) );
+        return ok( Json.toJson( Services.getSiteRepository().get(clientId) ) );
     }
 
     public static Result addSite( String clientId )
@@ -26,7 +26,7 @@ public class SiteController extends Controller {
         if (site.name.isEmpty() )
             return badRequest("Name cannot be empty");
 
-        if (Site.exist(clientId, site.name))
+        if (Services.getSiteRepository().exist(clientId, site.name))
             return badRequest("Category with specified name already exists");
 
         settings.sites.add(site);
@@ -38,7 +38,7 @@ public class SiteController extends Controller {
 
     public static Result removeSite(String clientId, Long siteId)
     {
-        Site.remove(siteId.intValue());
+        Services.getSiteRepository().remove(siteId.intValue());
 
         return ok();
     }
