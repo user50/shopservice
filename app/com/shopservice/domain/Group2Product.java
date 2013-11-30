@@ -1,11 +1,9 @@
 package com.shopservice.domain;
 
-import com.avaje.ebean.Ebean;
-
 import javax.persistence.*;
 
 @Entity
-public class Site2Product {
+public class Group2Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,15 +11,15 @@ public class Site2Product {
     public boolean checked;
 
     @ManyToOne
-    public Site site;
+    public ProductGroup productGroup;
 
     @ManyToOne
     public ProductEntry productEntry;
 
-    public Site2Product() {
+    public Group2Product() {
     }
 
-    public Site2Product(Site site) {
-        this.site = site;
+    public Group2Product(ProductGroup productGroup) {
+        this.productGroup = productGroup;
     }
 }

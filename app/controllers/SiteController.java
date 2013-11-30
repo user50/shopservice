@@ -2,8 +2,7 @@ package controllers;
 
 import com.shopservice.Services;
 import com.shopservice.domain.ClientSettings;
-import com.shopservice.domain.Site;
-import com.shopservice.domain.Site2Product;
+import com.shopservice.domain.ProductGroup;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -12,7 +11,7 @@ public class SiteController extends Controller {
 
     public static Result getSites(String clientId)
     {
-        return ok( Json.toJson( Services.getSiteRepository().get(clientId) ) );
+        return ok( Json.toJson( Services.getProductGroupRepository().get(clientId) ) );
     }
 
     public static Result addSite( String clientId )
@@ -21,24 +20,24 @@ public class SiteController extends Controller {
         if (settings == null)
             return badRequest("Client with id "+clientId+" doesn't exist ");
 
-        Site site = Json.fromJson( request().body().asJson(), Site.class );
+        ProductGroup productGroup = Json.fromJson( request().body().asJson(), ProductGroup.class );
 
-        if (site.name.isEmpty() )
+        if (productGroup.name.isEmpty() )
             return badRequest("Name cannot be empty");
 
-        if (Services.getSiteRepository().exist(clientId, site.name))
+        if (Services.getProductGroupRepository().exist(clientId, productGroup.name))
             return badRequest("Category with specified name already exists");
 
-        settings.sites.add(site);
+        settings.productGroups.add(productGroup);
 
         Services.getClientSettingsDAO().save(settings);
 
-        return ok( Json.toJson(site) );
+        return ok( Json.toJson(productGroup) );
     }
 
     public static Result removeSite(String clientId, Long siteId)
     {
-        Services.getSiteRepository().remove(siteId.intValue());
+        Services.getProductGroupRepository().remove(siteId.intValue());
 
         return ok();
     }
@@ -49,9 +48,9 @@ public class SiteController extends Controller {
         switch (operation)
         {
             case merge:
-                Services.getSite2ProductRepository().merge(basicSiteId.intValue(), resourceSiteId.intValue());
+                Services.getGroup2ProductRepository().merge(basicSiteId.intValue(), resourceSiteId.intValue());
             case difference:
-                Services.getSite2ProductRepository().difference(basicSiteId.intValue(), resourceSiteId.intValue());
+                Services.getGroup2ProductRepository().difference(basicSiteId.intValue(), resourceSiteId.intValue());
         }
 
         return ok();

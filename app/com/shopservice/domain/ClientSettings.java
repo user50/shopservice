@@ -1,6 +1,5 @@
 package com.shopservice.domain;
 
-import com.avaje.ebean.Ebean;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -27,5 +26,5 @@ public class ClientSettings {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    public List<Site> sites = new ArrayList<Site>();
+    public List<ProductGroup> productGroups = new ArrayList<ProductGroup>();
 }

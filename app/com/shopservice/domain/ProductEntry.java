@@ -1,14 +1,10 @@
 package com.shopservice.domain;
 
-import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlRow;
-import com.google.common.collect.Sets;
-import com.shopservice.Services;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import tyrex.services.UUID;
 
 import javax.persistence.*;
-import java.sql.SQLException;
 import java.util.*;
 
 @Entity
@@ -27,7 +23,7 @@ public class ProductEntry {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
-    public List<Site2Product> checks;
+    public List<Group2Product> checks;
 
     @Transient
     public boolean checked;

@@ -1,6 +1,6 @@
 package com.shopservice.dao;
 
-public interface Site2ProductRepository {
+public interface Group2ProductRepository {
     void set(String productId, int siteId, Boolean checked);
 
     void set(String clientId, String categoryId, int siteId, Boolean checked);

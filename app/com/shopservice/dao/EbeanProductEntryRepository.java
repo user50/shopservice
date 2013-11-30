@@ -14,7 +14,7 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
     @Override
     public List<ProductEntry> findSelected(String clientSettingsId, int siteId) throws Exception {
         List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.* FROM product_entry " +
-                "JOIN site2product ON site2product.product_entry_id = product_entry.id AND site2product.site_id = ? " +
+                "JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
                 "WHERE client_settings_id = ?")
                 .setParameter(1, siteId)
                 .setParameter(2, clientSettingsId)
@@ -61,8 +61,8 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
 
     @Override
     public List<ProductEntry> getWithChecked(String clientId, String categoryId, int settingsId) throws Exception {
-        List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.*, site2product.id IS NOT NULL as checked FROM product_entry " +
-                "LEFT JOIN site2product ON site2product.product_entry_id = product_entry.id AND site2product.site_id = ? " +
+        List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.*, group2product.id IS NOT NULL as checked FROM product_entry " +
+                "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
                 "WHERE client_settings_id = ? AND category_id = ? ")
                 .setParameter(1, settingsId)
                 .setParameter(2, clientId)

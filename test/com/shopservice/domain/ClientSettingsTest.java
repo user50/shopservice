@@ -5,7 +5,6 @@ import com.avaje.ebean.EbeanServerFactory;
 import com.avaje.ebean.config.DataSourceConfig;
 import com.avaje.ebean.config.ServerConfig;
 import org.junit.Before;
-import org.junit.Test;
 
 public class ClientSettingsTest {
 
@@ -35,8 +34,8 @@ public class ClientSettingsTest {
 
         config.addClass(ClientSettings.class);
         config.addClass(ProductEntry.class);
-        config.addClass(Site.class);
-        config.addClass(Site2Product.class);
+        config.addClass(ProductGroup.class);
+        config.addClass(Group2Product.class);
 
         server = EbeanServerFactory.create(config);
     }

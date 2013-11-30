@@ -3,15 +3,11 @@ package controllers;
 import com.shopservice.PriceListType;
 import com.shopservice.Services;
 import com.shopservice.domain.ClientSettings;
-import com.shopservice.domain.Site;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import javax.xml.bind.JAXBException;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
 
 import static com.shopservice.Services.priceListService;
 
@@ -26,7 +22,7 @@ public class PriceListController extends Controller {
 
         ClientSettings clientSettings = Services.getClientSettingsDAO().findById(clientId);
 
-        response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ Services.getSiteRepository().getName(siteId.intValue())+".xml\"" );
+        response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ Services.getProductGroupRepository().getName(siteId.intValue())+".xml\"" );
         return ok(file).as("application/force-download");
     }
 

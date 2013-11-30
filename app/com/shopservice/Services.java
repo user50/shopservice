@@ -1,7 +1,6 @@
 package com.shopservice;
 
 import com.shopservice.dao.*;
-import com.shopservice.domain.ClientSettings;
 import com.shopservice.urlgenerate.UrlGenerator;
 import com.shopservice.urlgenerate.UrlGeneratorStorage;
 
@@ -26,8 +25,8 @@ public class Services {
 
     private static ClientSettingsRepository clientSettingsRepository = new EbeanClientSettingsRepository();
     private static ProductEntryRepository productEntryRepository = new EbeanProductEntryRepository();
-    private static SiteRepository siteRepository = new EbeanSiteRepository();
-    private static Site2ProductRepository site2ProductRepository = new EbeanSite2ProductRepository();
+    private static ProductGroupRepository productGroupRepository = new EbeanProductGroupRepository();
+    private static Group2ProductRepository group2ProductRepository = new EbeanGroup2ProductRepository();
 
     public static final PriceListService priceListService = new PriceListService();
 
@@ -68,8 +67,8 @@ public class Services {
         return productEntryRepository;
     }
 
-    public static SiteRepository getSiteRepository() {
-        return siteRepository;
+    public static ProductGroupRepository getProductGroupRepository() {
+        return productGroupRepository;
     }
 
     public static UrlGenerator getUrlGenerator(String clientId)
@@ -77,7 +76,7 @@ public class Services {
         return URL_GENERATOR_STORAGE.get(clientId);
     }
 
-    public static Site2ProductRepository getSite2ProductRepository() {
-        return site2ProductRepository;
+    public static Group2ProductRepository getGroup2ProductRepository() {
+        return group2ProductRepository;
     }
 }
