@@ -1,6 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import com.shopservice.Services;
 import com.shopservice.domain.ProductEntry;
 import com.shopservice.domain.Site2Product;
 import play.libs.Json;
@@ -13,8 +14,8 @@ public class ProductController extends Controller {
 
     private static int siteId = 1;
 
-    public static Result getProducts(String clientId,Long siteId, String categoryId) throws SQLException {
-        return ok(Json.toJson( ProductEntry.findAndRefresh(clientId, categoryId, siteId.intValue()) ));
+    public static Result getProducts(String clientId,Long siteId, String categoryId) throws Exception {
+        return ok(Json.toJson(Services.getProductEntryRepository().findAndRefresh(clientId, categoryId, siteId.intValue()) ));
     }
 
     public static Result updateProduct(String clientId, Long siteId, String categoryId, String productId, Boolean checked)

@@ -25,6 +25,7 @@ public class Services {
     private static Map<String, ProductRepository> productDAOs = new Hashtable<String, ProductRepository>();
 
     private static ClientSettingsRepository clientSettingsRepository = new EbeanClientSettingsRepository();
+    private static ProductEntryRepository productEntryRepository = new EbeanProductEntryRepository();
 
     public static final PriceListService priceListService = new PriceListService();
 
@@ -60,6 +61,10 @@ public class Services {
         return clientSettingsRepository;
     }
 
+    public static ProductEntryRepository getProductEntryRepository()
+    {
+        return productEntryRepository;
+    }
 
     public static UrlGenerator getUrlGenerator(String clientId)
     {

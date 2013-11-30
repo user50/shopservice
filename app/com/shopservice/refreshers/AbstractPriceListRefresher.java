@@ -11,10 +11,10 @@ import java.util.*;
 
 public abstract class AbstractPriceListRefresher implements PriceListRefresher {
 
-    protected Set<String> getProductIds(String clientId, int siteId) throws SQLException {
+    protected Set<String> getProductIds(String clientId, int siteId) throws Exception {
         Set<String> setOfProductIds = new HashSet<String>();
 
-        for (ProductEntry productEntry : ProductEntry.findSelected(clientId, siteId))
+        for (ProductEntry productEntry : Services.getProductEntryRepository().findSelected(clientId, siteId))
             setOfProductIds.add(productEntry.productId);
 
         return setOfProductIds;

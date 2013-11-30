@@ -32,7 +32,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
 
     @Override
-    public void refresh(String clientId, int siteId) throws SQLException, JAXBException, FileNotFoundException {
+    public void refresh(String clientId, int siteId) throws Exception {
         ClientSettings clientSettings = Services.getClientSettingsDAO().findById(clientId);
 
         Price price = new Price();
