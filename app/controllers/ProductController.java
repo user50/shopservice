@@ -7,6 +7,8 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.util.Map;
+
 import static com.shopservice.MServiceInjector.injector;
 
 public class ProductController extends Controller {
@@ -17,16 +19,18 @@ public class ProductController extends Controller {
         return ok(Json.toJson(Services.getProductEntryRepository().findAndRefresh(clientId, categoryId, siteId.intValue()) ));
     }
 
-    public static Result updateProduct(String clientId, Long siteId, String categoryId, String productId, Boolean checked)
+    public static Result updateProduct(String clientId, Long siteId, String productId)
     {
-        group2ProductRepository.set(productId, siteId.intValue(), checked);
+        Map<String,Boolean> body = Json.fromJson(request().body().asJson(), Map.class);
+        group2ProductRepository.set(productId, siteId.intValue(), body.get("checked"));
 
         return ok();
     }
 
-    public static Result updateProducts(String clientId, Long siteId, String categoryId, Boolean checked)
+    public static Result updateProducts(String clientId, Long siteId, String categoryId)
     {
-        group2ProductRepository.set(clientId, categoryId, siteId.intValue(), checked);
+        Map<String,Boolean> body = Json.fromJson(request().body().asJson(), Map.class);
+        group2ProductRepository.set(clientId, categoryId, siteId.intValue(), body.get("checked"));
 
         return ok();
     }

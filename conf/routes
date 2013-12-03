@@ -13,30 +13,31 @@ GET     /groupmanager                           controllers.Application.groupman
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # ClientSettings operations
-GET     /clients                                        controllers.ClientSettingsController.getClientSettings()
-GET     /clients/:id                                    controllers.ClientSettingsController.getClientSetting(id)
-POST    /clients                                        controllers.ClientSettingsController.createClientSettings()
-PUT     /clients/:id                                    controllers.ClientSettingsController.updateClientSettings(id)
-DELETE  /clients/:id                                    controllers.ClientSettingsController.deleteClientSettings(id)
+GET     /clients                                                        controllers.ClientSettingsController.getClientSettings()
+GET     /clients/:id                                                    controllers.ClientSettingsController.getClientSetting(id)
+POST    /clients                                                        controllers.ClientSettingsController.createClientSettings()
+PUT     /clients/:id                                                    controllers.ClientSettingsController.updateClientSettings(id)
+DELETE  /clients/:id                                                    controllers.ClientSettingsController.deleteClientSettings(id)
 
 # ProductEntry operations
-GET     /clients/:id/sites/:siteId/categories/:categoryId/products                controllers.ProductController.getProducts(id, siteId: Long,  categoryId)
-PUT     /clients/:id/sites/:siteId/categories/:categoryId/products/:productId     controllers.ProductController.updateProduct(id, siteId: Long, categoryId, productId, checked: java.lang.Boolean )
-PUT     /clients/:id/sites/:siteId/categories/:categoryId/products                controllers.ProductController.updateProducts(id, siteId: Long, categoryId, checked: java.lang.Boolean)
+GET     /clients/:id/groups/:groupId/products                             controllers.ProductController.getProducts(id, groupId: Long,  categoryId)
+PUT     /clients/:id/groups/:groupId/products/:productId                  controllers.ProductController.updateProduct(id, groupId: Long, productId )
+PUT     /clients/:id/groups/:groupId/products                             controllers.ProductController.updateProducts(id, groupId: Long, categoryId )
 
 # Category operations
-GET     /clients/:id/categories                          controllers.CategoryController.getCategories(id)
+GET     /clients/:id/categories                                          controllers.CategoryController.getCategories(id)
 
 # PriceList operations
-GET    /client/:id/sites/:siteId/formats/:format/pricelist              controllers.PriceListController.getPriceList( id, siteId:Long, format )
-POST   /client/:id/sites/:siteId/formats/:format/pricelist              controllers.PriceListController.refreshPriceList( id, siteId:Long, format )
-GET    /client/:id/formats                                              controllers.PriceListController.getPriceListFormats( id )
+GET    /client/:id/groups/:groupId/pricelist                              controllers.PriceListController.getPriceList( id, groupId:Long, format )
+POST   /client/:id/groups/:groupId/pricelist                              controllers.PriceListController.refreshPriceList( id, groupId:Long, format )
+GET    /client/:id/formats                                                controllers.PriceListController.getPriceListFormats( id )
 
 # Site operations
-GET    /clients/:id/sites                                               controllers.ProductGroupController.getSites( id )
-POST   /clients/:id/sites                                               controllers.ProductGroupController.addSite( id )
-DELETE /clients/:id/sites/:siteId                                       controllers.ProductGroupController.removeSite( id, siteId:Long )
-PUT /clients/:id/sites/:siteId                                          controllers.ProductGroupController.updateSite( id, siteId:Long, resourceSiteId: Long, operationName )
+GET    /clients/:id/groups                                                controllers.ProductGroupController.get( id )
+POST   /clients/:id/groups                                                controllers.ProductGroupController.add( id )
+DELETE /clients/:id/groups/:groupId                                       controllers.ProductGroupController.removeSite( id, groupId:Long )
+PUT /clients/:id/groups/:groupId/merge                                    controllers.ProductGroupController.merge( id, groupId:Long )
+PUT /clients/:id/groups/:groupId/diff                                     controllers.ProductGroupController.diff( id, groupId:Long )
 
 POST /authentication                                                    controllers.LoginController.authentication()
 POST /logout                                                            controllers.LoginController.logout()

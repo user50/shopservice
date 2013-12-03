@@ -10,6 +10,8 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.util.Map;
+
 import static com.shopservice.MServiceInjector.injector;
 
 public class ProductGroupController extends Controller {
@@ -18,12 +20,12 @@ public class ProductGroupController extends Controller {
     private static Group2ProductRepository group2ProductRepository = injector.getInstance(Group2ProductRepository.class);
 
 
-    public static Result getSites(String clientId)
+    public static Result get(String clientId)
     {
         return ok( Json.toJson( productGroupRepository.get(clientId) ) );
     }
 
-    public static Result addSite( String clientId )
+    public static Result add( String clientId )
     {
         ClientSettings settings = Services.getClientSettingsDAO().findById(clientId);
         if (settings == null)
@@ -51,22 +53,19 @@ public class ProductGroupController extends Controller {
         return ok();
     }
 
-    public static Result updateSite(String clientId, Long basicSiteId, Long resourceSiteId, String operationName )
+    public static Result merge(String clientId, Long groupId)
     {
-        Operation operation = Operation.valueOf(operationName);
-        switch (operation)
-        {
-            case merge:
-                group2ProductRepository.merge(basicSiteId.intValue(), resourceSiteId.intValue());
-            case difference:
-                group2ProductRepository.difference(basicSiteId.intValue(), resourceSiteId.intValue());
-        }
+        Map<String,Integer> body = Json.fromJson(request().body().asJson(), Map.class);
+        group2ProductRepository.merge(groupId.intValue(), body.get("resourceGroupId"));
 
         return ok();
     }
 
-    private static enum Operation
+    public static Result diff(String clientId, Long groupId)
     {
-        merge, difference
+        Map<String,Integer> body = Json.fromJson(request().body().asJson(), Map.class);
+        group2ProductRepository.difference(groupId.intValue(), body.get("resourceGroupId"));
+
+        return ok();
     }
 }
