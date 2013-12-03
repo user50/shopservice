@@ -4,18 +4,18 @@
 <html>
 <head>
     <title>Configure and manage price lists for sites aggregators</title>
-    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/download.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/groupmanager.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/price.css"/>
     <META content="text/html; charset=utf-8" http-equiv="Content-Type">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
     <script type="text/javascript" src="/assets/javascripts/jquery.cookie.js"></script>
-    <script type="text/javascript" src="/assets/javascripts/download.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/groupmanager.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function()
         {
-            fillGroupSelect();
+            showGroups();
         });
     </script>
 
@@ -28,37 +28,25 @@
     <div id="header"> <a href="#">Tools for servicing the online store</a> </div>
     <div id="menu"> <a  href="#">HOME</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="#">SERVICES</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="#">PRICE</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#">CONTACTS</a>  </div>
     <div id="cont">
-        <!--     <div id="sidebar">
-           <form id = "targetsite" >
-               For what site you want to generate the price list?<p>
-               <input type="radio" name="site" value="id1">HotPrice<Br>
-               <input type="radio" name="site" value="id2">Hotline<Br>
-               <input type="radio" name="site" value="id3">Price.UA<Br>
-               <input type="radio" name="site" value="id4">Prom.UA<Br>
-           </form>
-       </div> -->
-
         <div id="wrapp">
-            <form id="dataForPrice">
-                <p><label>
-                    <select id="group">
-                        <option selected disabled>Select products group</option>
+            <div id="firstGroupDiv">
+                <label>
+                    <select id="firstGroup">
+                        <option selected disabled>Select first group</option>
                     </select>
                 </label>
-                <p><label>
-                    <select id="format">
-                        <option selected disabled>Select site</option>
-                        <option value="YML">Prom</option>
-                        <option value="price">HotLine</option>
-                        <option value="YML">Zakupka</option>
-                    </select>
-                    </label></p>
-            </form>
-            <div class="buttons">
-                <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a>
-                <a href="#" class="unibutton orange" onClick="generatePrice()">Generate</a>
             </div>
-
+            <div id="operator">
+              <button value="plus" onclick="mergeGroups()">+</button>
+              <button value="minus" onclick="differenceGroups()">-</button>
+            </div>
+            <div id="secondGroupDiv">
+                <label>
+                    <select id="secondGroup">
+                        <option selected disabled>Select second group</option>
+                    </select>
+                </label>
+            </div>
         </div>
 
     </div>

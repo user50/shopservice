@@ -24,4 +24,9 @@ public class Application extends Controller {
         return ok(download.render());
     }
 
+    @With(Authentication.class)
+    public static Result groupmanager() {
+        return ok(groupmanager.render());
+    }
+
 }
