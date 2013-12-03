@@ -25,12 +25,12 @@ PUT     /clients/:id/groups/:groupId/products/:productId                  contro
 PUT     /clients/:id/groups/:groupId/products                             controllers.ProductController.updateProducts(id, groupId: Long, categoryId )
 
 # Category operations
-GET     /clients/:id/categories                                          controllers.CategoryController.getCategories(id)
+GET     /clients/:id/categories                                           controllers.CategoryController.getCategories(id)
 
 # PriceList operations
-GET    /client/:id/groups/:groupId/pricelist                              controllers.PriceListController.getPriceList( id, groupId:Long, format )
-POST   /client/:id/groups/:groupId/pricelist                              controllers.PriceListController.refreshPriceList( id, groupId:Long, format )
-GET    /client/:id/formats                                                controllers.PriceListController.getPriceListFormats( id )
+GET    /client/:id/groups/:groupId/pricelists/:format                     controllers.PriceListController.getPriceList( id, groupId:Long, format )
+POST   /client/:id/groups/:groupId/pricelists/:format                     controllers.PriceListController.refreshPriceList( id, groupId:Long, format )
+GET    /formats                                                           controllers.PriceListController.getPriceListFormats()
 
 # Site operations
 GET    /clients/:id/groups                                                controllers.ProductGroupController.get( id )
@@ -39,5 +39,5 @@ DELETE /clients/:id/groups/:groupId                                       contro
 PUT /clients/:id/groups/:groupId/merge                                    controllers.ProductGroupController.merge( id, groupId:Long )
 PUT /clients/:id/groups/:groupId/diff                                     controllers.ProductGroupController.diff( id, groupId:Long )
 
-POST /authentication                                                    controllers.LoginController.authentication()
-POST /logout                                                            controllers.LoginController.logout()
+POST /authentication                                                      controllers.LoginController.authentication()
+POST /logout                                                              controllers.LoginController.logout()

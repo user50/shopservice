@@ -36,7 +36,7 @@ public class PriceListController extends Controller {
         return ok();
     }
 
-    public static Result getPriceListFormats(String clientId)
+    public static Result getPriceListFormats()
     {
         return ok(Json.toJson(PriceListType.values()));
     }
