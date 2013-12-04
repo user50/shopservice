@@ -1,12 +1,14 @@
 package controllers;
 
-import com.shopservice.Services;
+import com.shopservice.dao.ClientSettingsRepository;
 import com.shopservice.domain.ClientSettings;
 import play.cache.Cache;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import tyrex.services.UUID;
+
+import static com.shopservice.MServiceInjector.injector;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,15 +19,16 @@ import tyrex.services.UUID;
  */
 public class LoginController extends Controller {
 
-
     private static final Integer EXPIRATION = 60 * 60 * 24;
+
+    private static ClientSettingsRepository clientSettingsRepository = injector.getInstance(ClientSettingsRepository.class);
 
     public static Result authentication()
     {
         String password = request().body().asFormUrlEncoded().get("j_password")[0];
         String username = request().body().asFormUrlEncoded().get("j_username")[0];
 
-        ClientSettings clientSettings = Services.getClientSettingsDAO().getBySiteName(username);
+        ClientSettings clientSettings = clientSettingsRepository.getBySiteName(username);
 
         if (clientSettings == null || !clientSettings.password.equals(password))
             return status(401);

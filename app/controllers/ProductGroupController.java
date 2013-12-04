@@ -1,7 +1,6 @@
 package controllers;
 
-import com.shopservice.MServiceInjector;
-import com.shopservice.Services;
+import com.shopservice.dao.ClientSettingsRepository;
 import com.shopservice.dao.Group2ProductRepository;
 import com.shopservice.dao.ProductGroupRepository;
 import com.shopservice.domain.ClientSettings;
@@ -18,7 +17,7 @@ public class ProductGroupController extends Controller {
 
     private static ProductGroupRepository productGroupRepository = injector.getInstance(ProductGroupRepository.class);
     private static Group2ProductRepository group2ProductRepository = injector.getInstance(Group2ProductRepository.class);
-
+    private static ClientSettingsRepository clientSettingsRepository = injector.getInstance(ClientSettingsRepository.class);
 
     public static Result get(String clientId)
     {
@@ -27,7 +26,7 @@ public class ProductGroupController extends Controller {
 
     public static Result add( String clientId )
     {
-        ClientSettings settings = Services.getClientSettingsDAO().findById(clientId);
+        ClientSettings settings = clientSettingsRepository.findById(clientId);
         if (settings == null)
             return badRequest("Client with id "+clientId+" doesn't exist ");
 
@@ -41,7 +40,7 @@ public class ProductGroupController extends Controller {
 
         settings.productGroups.add(productGroup);
 
-        Services.getClientSettingsDAO().save(settings);
+        clientSettingsRepository.save(settings);
 
         return ok( Json.toJson(productGroup) );
     }

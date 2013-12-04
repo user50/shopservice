@@ -1,10 +1,7 @@
 package com.shopservice.modules;
 
 import com.google.inject.AbstractModule;
-import com.shopservice.dao.EbeanGroup2ProductRepository;
-import com.shopservice.dao.EbeanProductGroupRepository;
-import com.shopservice.dao.Group2ProductRepository;
-import com.shopservice.dao.ProductGroupRepository;
+import com.shopservice.dao.*;
 
 import javax.inject.Singleton;
 
@@ -13,5 +10,7 @@ public class MServiceModule extends AbstractModule {
     protected void configure() {
         bind(ProductGroupRepository.class).to(EbeanProductGroupRepository.class).in(Singleton.class);
         bind(Group2ProductRepository.class).to(EbeanGroup2ProductRepository.class).in(Singleton.class);
+        bind(ProductEntryRepository.class).to(EbeanProductEntryRepository.class).in(Singleton.class);
+        bind(ClientSettingsRepository.class).to(EbeanClientSettingsRepository.class).in(Singleton.class);
     }
 }

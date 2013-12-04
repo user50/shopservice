@@ -10,7 +10,12 @@ import com.shopservice.domain.ProductEntry;
 
 import java.util.*;
 
+import static com.shopservice.MServiceInjector.injector;
+
 public class EbeanProductEntryRepository implements ProductEntryRepository {
+
+    private ClientSettingsRepository clientSettingsRepository = injector.getInstance(ClientSettingsRepository.class);
+
     @Override
     public List<ProductEntry> findSelected(String clientSettingsId, int siteId) throws Exception {
         List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.* FROM product_entry " +
@@ -48,7 +53,7 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
 
     @Override
     public void add(String clientsId, Collection<ProductEntry> productsToAdd) throws Exception {
-        ClientSettings clientSettings = Services.getClientSettingsDAO().findById( clientsId);
+        ClientSettings clientSettings = clientSettingsRepository.findById(clientsId);
         clientSettings.productEntries.addAll(productsToAdd);
         Ebean.save(clientSettings);    }
 

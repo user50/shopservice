@@ -1,7 +1,6 @@
 package controllers;
 
-import com.avaje.ebean.Ebean;
-import com.shopservice.Services;
+import com.shopservice.dao.ClientSettingsRepository;
 import com.shopservice.domain.ClientSettings;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -9,18 +8,20 @@ import play.mvc.Result;
 import tyrex.services.UUID;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
+import static com.shopservice.MServiceInjector.injector;
 
 public class ClientSettingsController extends Controller {
 
+    private static ClientSettingsRepository clientSettingsRepository = injector.getInstance(ClientSettingsRepository.class);
+
     public static Result getClientSettings()
     {
-        return ok(Json.toJson(Services.getClientSettingsDAO().getAll()));
+        return ok(Json.toJson(clientSettingsRepository.getAll()));
     }
 
     public static Result getClientSetting(String id) throws SQLException {
-        Object response = Services.getClientSettingsDAO().findById(id);
+        Object response = clientSettingsRepository.findById(id);
 
         if (response == null)
             return status(404);
@@ -33,7 +34,7 @@ public class ClientSettingsController extends Controller {
 
         if (clientSettings.id == null)
             clientSettings.id = UUID.create();
-        Services.getClientSettingsDAO().save(clientSettings);
+        clientSettingsRepository.save(clientSettings);
 
         return ok(Json.toJson(clientSettings));
     }
@@ -41,13 +42,13 @@ public class ClientSettingsController extends Controller {
     public static Result updateClientSettings(String id) throws SQLException {
         ClientSettings clientSettings = Json.fromJson(request().body().asJson(), ClientSettings.class);
         clientSettings.id = id;
-        Services.getClientSettingsDAO().update(clientSettings);
+        clientSettingsRepository.update(clientSettings);
 
         return ok();
     }
 
     public static Result deleteClientSettings(String id) throws SQLException {
-        Services.getClientSettingsDAO().remove(id);
+        clientSettingsRepository.remove(id);
 
         return ok();
     }

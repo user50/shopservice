@@ -2,19 +2,27 @@ package com.shopservice.refreshers;
 
 import com.google.common.collect.Sets;
 import com.shopservice.Services;
+import com.shopservice.dao.ClientSettingsRepository;
+import com.shopservice.dao.ProductEntryRepository;
 import com.shopservice.domain.Category;
-import com.shopservice.domain.Product;
 import com.shopservice.domain.ProductEntry;
 
-import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import static com.shopservice.MServiceInjector.injector;
 
 public abstract class AbstractPriceListRefresher implements PriceListRefresher {
+
+    protected ProductEntryRepository productEntryRepository = injector.getInstance(ProductEntryRepository.class);
+    protected ClientSettingsRepository clientSettingsRepository = injector.getInstance(ClientSettingsRepository.class);
 
     protected Set<String> getProductIds(String clientId, int siteId) throws Exception {
         Set<String> setOfProductIds = new HashSet<String>();
 
-        for (ProductEntry productEntry : Services.getProductEntryRepository().findSelected(clientId, siteId))
+        for (ProductEntry productEntry : productEntryRepository.findSelected(clientId, siteId))
             setOfProductIds.add(productEntry.productId);
 
         return setOfProductIds;

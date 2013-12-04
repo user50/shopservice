@@ -1,6 +1,5 @@
 package com.shopservice.refreshers;
 
-import com.google.common.collect.Sets;
 import com.shopservice.PriceListType;
 import com.shopservice.Services;
 import com.shopservice.domain.Category;
@@ -8,9 +7,6 @@ import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.Product;
 import com.shopservice.pricelist.models.yml.*;
 
-import javax.xml.bind.JAXBException;
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +24,7 @@ import static com.shopservice.Util.save;
 public class YMLFormatRefresher extends AbstractPriceListRefresher {
     @Override
     public void refresh(String clientId, int siteId) throws Exception {
-        ClientSettings clientSettings = Services.getClientSettingsDAO().findById(clientId);
+        ClientSettings clientSettings = clientSettingsRepository.findById(clientId);
 
         YmlCatalog ymlCatalog = new YmlCatalog();
         Shop shop = new Shop();
