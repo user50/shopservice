@@ -23,6 +23,9 @@ public class ProductController extends Controller {
     public static Result updateProduct(String clientId, Long siteId, String productId)
     {
         Map<String,Boolean> body = Json.fromJson(request().body().asJson(), Map.class);
+        if (!body.containsKey("checked"))
+            return badRequest("Missing field checked");
+
         group2ProductRepository.set(productId, siteId.intValue(), body.get("checked"));
 
         return ok();
@@ -31,6 +34,9 @@ public class ProductController extends Controller {
     public static Result updateProducts(String clientId, Long siteId, String categoryId)
     {
         Map<String,Boolean> body = Json.fromJson(request().body().asJson(), Map.class);
+        if (!body.containsKey("checked"))
+            return badRequest("Missing field checked");
+
         group2ProductRepository.set(clientId, categoryId, siteId.intValue(), body.get("checked"));
 
         return ok();
