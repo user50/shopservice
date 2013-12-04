@@ -1,7 +1,7 @@
 function showGroups(){
     clientId = $.cookie("clientId");
     siteId = $.cookie("siteId");
-    var url = "/clients/"+ clientId +"/sites";
+    var url = "/clients/"+ clientId +"/groups";
     $.get(url, function(groups){
         var selectForFirstGroup = $('#firstGroup');
         var selectForSecondGroup = $('#secondGroup');
@@ -29,11 +29,11 @@ function mergeGroups(){
 
     var firstGroupId = $("#firstGroup option:selected").val();
     var secondGroupId = $("#secondGroup option:selected").val();
-    var dataObject = {"resourceSiteId": secondGroupId, "operationName" : "merge"};
-    var url = "/clients/" + clientId + "/sites/" + firstGroupId;
+    var body = {resourceGroupId: secondGroupId};
+    var url = "/clients/" + clientId + "/groups/" + firstGroupId + "/merge";
     $.ajax({url: url,
         type: 'put',
-        data: dataObject,
+        data: JSON.stringify(body),
         contentType: "application/json",
         beforeSend: function(){
             $('#loader').css('display', 'block');
@@ -43,5 +43,20 @@ function mergeGroups(){
 }
 
 function differenceGroups(){
+    clientId = $.cookie("clientId");
+
+    var firstGroupId = $("#firstGroup option:selected").val();
+    var secondGroupId = $("#secondGroup option:selected").val();
+    var body = {resourceGroupId: secondGroupId};
+    var url = "/clients/" + clientId + "/groups/" + firstGroupId + "/diff";
+    $.ajax({url: url,
+        type: 'put',
+        data: JSON.stringify(body),
+        contentType: "application/json",
+        beforeSend: function(){
+            $('#loader').css('display', 'block');
+        }}).done(function(){
+            $('#loader').css('display', 'none');
+        });
 
 }

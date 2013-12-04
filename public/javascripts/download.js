@@ -1,7 +1,7 @@
 
 function fillGroupSelect() {
     var clientId = $.cookie("clientId");
-    var url = "/clients/"+ clientId +"/sites";
+    var url = "/clients/"+ clientId +"/groups";
     $.get(url, function(groups){
         var selectForGroups = $('#group');
 
@@ -20,7 +20,7 @@ function downloadPrice(){
     var groupId = $("#group option:selected").val();
     var format = $("#format option:selected").val();
 
-    var url = "/client/"+clientId + "/sites/" + groupId + "/formats/" + format + "/pricelist";
+    var url = "/client/"+clientId + "/groups/" + groupId + "/pricelists/" + format;
     var href = document.getElementById("downloadHref").setAttribute("href",url);
     href.click();
 }
@@ -31,7 +31,7 @@ function generatePrice(){
     var groupId = $("#group option:selected").val();
     var format = $("#format option:selected").val();
 
-    var url = "/client/"+clientId+ "/sites/" + groupId + "/formats/" + format + "/pricelist";
+    var url = "/client/"+clientId + "/groups/" + groupId + "/pricelists/" + format;
     $.ajax({url: url,
         type: 'post',
         beforeSend: function(){

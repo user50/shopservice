@@ -44,8 +44,6 @@ function showCategories(){
 }
 
 function displayCategories(categories){
-    var categoriesUrl = "/clients/"+clientId+"/categories/";
-
     var categoriesDiv = $('#categories').empty().css('display', 'block');
 
     var ol = $('<ol/>');
@@ -71,10 +69,11 @@ function showProducts(categoryId){
     categoriesDiv.css('display', 'none');
     $('#toCategoriesLink').css('display', 'inline');
     var siteId = $.cookie("siteId");
-    var productsUrl = "/clients/"+clientId+ "/sites/" + siteId + "/categories/"+categoryId+"/products";
+    var productsUrl = "/clients/"+clientId+ "/groups/" + siteId + "/products";
     $.ajax({
         url: productsUrl,
         type: 'get',
+        data: {categoryId: categoryId},
         success: displayProducts,
         dataType: 'json',
         beforeSend: function(){
@@ -188,10 +187,13 @@ function updateChecked(productId){
 
 function addProduct(productId){
     var siteId = $.cookie("siteId");
-    var url = "/clients/"+clientId + "/sites/" + siteId + "/categories/"+categoryId+"/products/"+productId+"?checked=true";
+    var url = "/clients/"+clientId + "/groups/" + siteId + "/products/"+productId+"?categoryId=" + categoryId;
+    var body = {checked: true};
     jQuery.ajax({
         url: url,
-        type:"put"
+        type:"put",
+        data: JSON.stringify(body),
+        contentType: 'application/json'
     })
 }
 
@@ -199,20 +201,26 @@ function deleteProduct(productId){
     if ($('#check_all').prop('checked') == true)
         $('#check_all').prop('checked', false);
     var siteId = $.cookie("siteId");
-    var url = "/clients/"+clientId + "/sites/" + siteId + "/categories/"+categoryId+"/products/"+productId+"?checked=false";
+    var url = "/clients/"+clientId + "/groups/" + siteId + "/products/"+productId+"?categoryId=" + categoryId;
+    var body = {checked: false};
     jQuery.ajax({
         url:url,
-        type:"put"
+        type:"put",
+        data: JSON.stringify(body),
+        contentType: 'application/json'
     })
 }
 
 function selectAllProductsForCategory(){
     var checkedFlag = $('#check_all').prop('checked');
     var siteId = $.cookie("siteId");
-    var url = "/clients/"+clientId + "/sites/" + siteId + "/categories/"+categoryId+"/products?checked=" + checkedFlag;
+    var url = "/clients/"+clientId + "/groups/" + siteId + "/products?categoryId=" + categoryId;
+    var body = {checked: checkedFlag};
     jQuery.ajax({
         url:url,
-        type:"put"
+        type:"put",
+        data: JSON.stringify(body),
+        contentType: 'application/json'
     });
 
     $(document).on(' change','input[id="check_all"]',function() {
@@ -233,7 +241,7 @@ function selectAllProductsForCategory(){
 function showSites(){
     clientId = $.cookie("clientId");
     siteId = $.cookie("siteId");
-    var url = "/clients/"+ clientId +"/sites";
+    var url = "/clients/"+ clientId +"/groups";
     $.get(url, function(sites){
         var sitesDiv = $('#sites');
         sitesDiv.empty();
@@ -272,7 +280,7 @@ function showFieldForNewSite() {
 
 function addNewSite() {
     clientId = $.cookie("clientId");
-    var url = "/clients/" + clientId + "/sites";
+    var url = "/clients/" + clientId + "/groups";
     $.ajax({
         url:url,
         type:"post",
