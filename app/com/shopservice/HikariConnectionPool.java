@@ -26,7 +26,7 @@ public class HikariConnectionPool implements ConnectionPool {
         config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
         config.addDataSourceProperty("url", url);
 
-        DataSource ds = new HikariDataSource(config);
+        this.dataSource = new HikariDataSource(config);
     }
 
     @Override
