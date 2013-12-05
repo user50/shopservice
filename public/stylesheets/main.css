@@ -1,0 +1,118 @@
+
+html, body{
+    height: 100%;
+    margin:0;
+}
+
+body
+{
+    background: #F4F4F4;
+    margin: 0;
+}
+
+#container {
+    width: 900px;
+    margin: 0 auto;
+    background: #FFFFFF;
+
+}
+
+#header {
+    padding: 45px 0 20px 40px;
+}
+
+#header a {
+    color: #121212;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: "Myriad Pro", "Arial Narrow";
+}
+
+#menu {
+    background: #3b7687;
+    padding: 6px 0 6px 40px;
+
+    background: -moz-linear-gradient(top,  #4D8BA4 0%, #3b7687 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4D8BA4 ), color-stop(100%, #3b7687));
+    background: -webkit-linear-gradient(top,  #4D8BA4 0%, #3b7687 100%);
+    background: -o-linear-gradient(top,  #4D8BA4 0%, #3b7687 100%);
+    background: -ms-linear-gradient(top,  #4D8BA4 0%, #3b7687 100%);
+    background: linear-gradient(top,  #4D8BA4 0%, #3b7687 100%);
+
+}
+
+#menu a {
+    color: #c5d6db;
+    text-decoration: none;
+    font: bold 12px/32px Arial, sans-serif;
+}
+
+#menu a:hover {
+    color: #ecf2f3;
+}
+
+#sidebar {
+    float: left;
+    width: 190px;
+    padding: 0px 10px 0 0px;
+    margin-left: 20px;
+    margin-top: 25px}
+
+
+#wrapp{
+    padding: 15px 0px 30px 0;
+    margin: 35px 40px 30px 20px;
+}
+
+#main {
+    min-height:40%;
+    margin: 35px 0px 30px 0px;
+    padding: 10px 0px 0px 10px;
+    color: #444444;
+    font-family: "Arial";
+    font-size: 15px;
+    line-height: 18px;
+    text-align: justify;
+    clear: left;
+}
+
+#footer {
+
+    padding: 6px 40px 6px 40px;
+    background: #d6d6d6;
+    font-family: "Lucida Sans Unicode";
+    color: #444444;
+    font-size: 11px;
+    text-align: left;
+}
+
+#footer a {
+    text-decoration: none;
+}
+
+#footer a:hover {
+    color: #666666;
+}
+
+.separator {
+    font-size:11px;
+    color:#FFFFFF;
+}
+
+#loader {
+    position:fixed; display:none;
+    top:0; left:0;
+    height:100%; width:100%;
+    background: #efefef; opacity: .5;
+}
+#loader .anim {
+    display:block; position:absolute;
+    color:#fff; background: rgba(255, 255, 255, 0);
+    margin-left: -100px;
+    margin-top: -100px;
+    top: 50%;
+    left: 50%;
+    padding:5px 10px;
+    -webkit-border-radius: 5px; -moz-border-radius: 5px;
+    border-radius: 5px; cursor:default;
+}

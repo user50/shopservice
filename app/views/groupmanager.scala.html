@@ -5,7 +5,7 @@
 <head>
     <title>Configure and manage price lists for sites aggregators</title>
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/groupmanager.css"/>
-    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/price.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/main.css"/>
     <META content="text/html; charset=utf-8" http-equiv="Content-Type">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
@@ -29,26 +29,67 @@
     <div id="menu"> <a  href="/price">GROUP SETTING</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="/groupmanager">GROUPS MANAGER</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="/download">DOWNLOAD PRICE</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#">CONTACTS</a>  </div>
     <div id="cont">
         <div id="wrapp">
-            <div id="firstGroupDiv">
-                <label>
-                    <select id="firstGroup">
-                        <option selected disabled>Select first group</option>
-                    </select>
-                </label>
-            </div>
-            <div id="operator">
-              <button value="plus" onclick="mergeGroups()">+</button>
-              <button value="minus" onclick="differenceGroups()">-</button>
-            </div>
-            <div id="secondGroupDiv">
-                <label>
-                    <select id="secondGroup">
-                        <option selected disabled>Select second group</option>
-                    </select>
-                </label>
-            </div>
-        </div>
+            <div class="tabs">
 
+                <div class="tab">
+                    <input type="radio" id="tab-1" name="tab-group-1" checked>
+                    <label for="tab-1">Add group</label>
+                    <div class="content">
+                        <div id="add">
+                            <div id="addNewSite">
+                                <form id="addNewSiteForm">
+                                    <table>
+                                        <tr>
+                                            <td><input type="text" name="name"></td>
+                                            <td><input type="submit" value="OK" onclick="addNewSite()"></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab">
+                    <input type="radio" id="tab-2" name="tab-group-1">
+                    <label for="tab-2">Merge or diff group</label>
+                        <div class="content">
+                            <div id="mergeDiff">
+                                <div id="firstGroupDiv">
+                                    <select id="firstGroup">
+                                        <option selected disabled>Select first group</option>
+                                    </select>
+                                </div>
+                                <div id="operator">
+                                    <button value="plus" onclick="mergeGroups()">+</button>
+                                    <button value="minus" onclick="differenceGroups()">-</button>
+                                </div>
+                                <div id="secondGroupDiv">
+                                    <select id="secondGroup">
+                                        <option selected disabled>Select second group</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="tab">
+                    <input type="radio" id="tab-3" name="tab-group-1">
+                    <label for="tab-3">Delete group</label>
+                    <div class="content">
+                        <div id="delete">
+                            <div class="selectDelete">
+                                <select id="deleteGroupId">
+                                    <option selected disabled>Select group to delete</option>
+                                </select>
+                            </div>
+                            <div class="buttonDelete">
+                                <button onclick="deleteGroup()" value="delete">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
     <div id="footer"><form method="POST" action="/logout"><input type="submit" value="Logout"></form></div>
     <div id="loader"><div class="anim"><img src="assets/images/download.gif"></div></div>

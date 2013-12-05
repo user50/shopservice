@@ -25,6 +25,7 @@ function generatePrice(){
 }
 
 function showCategories(){
+
     $('#updateForm').empty();
 
     if ($.cookie("siteId") != undefined){
@@ -243,6 +244,11 @@ function showSites(){
     siteId = $.cookie("siteId");
     var url = "/clients/"+ clientId +"/groups";
     $.get(url, function(sites){
+        if (sites.length == 0){
+            alert("You must add at least one group!")  ;
+            return;
+        }
+
         var sitesDiv = $('#sites');
         sitesDiv.empty();
 
@@ -264,13 +270,15 @@ function showSites(){
             label.text(sites[i].name);
             sitesDiv.append(label);
         }
-        var inputAdd = $('<input/>');
-        inputAdd.attr('id', 'inputAdd');
-        inputAdd.attr('type', 'radio');
-        inputAdd.attr('name', 'site');
-        sitesDiv.append(inputAdd);
-        var labelAdd = $('<label/>').attr('onClick', 'showFieldForNewSite()').attr('for', 'inputAdd').text('+');
-        sitesDiv.append(labelAdd);
+        showCategories();
+
+//        var inputAdd = $('<input/>');
+//        inputAdd.attr('id', 'inputAdd');
+//        inputAdd.attr('type', 'radio');
+//        inputAdd.attr('name', 'site');
+//        sitesDiv.append(inputAdd);
+//        var labelAdd = $('<label/>').attr('onClick', 'showFieldForNewSite()').attr('for', 'inputAdd').text('+');
+//        sitesDiv.append(labelAdd);
     })
 }
 
@@ -278,18 +286,6 @@ function showFieldForNewSite() {
     $('#addNewSite').animate({'left': '+=200px', 'opacity': 'show'}, 'slow');
 }
 
-function addNewSite() {
-    clientId = $.cookie("clientId");
-    var url = "/clients/" + clientId + "/groups";
-    $.ajax({
-        url:url,
-        type:"post",
-        contentType: "application/json",
-        data: JSON.stringify($('#addNewSiteForm').serializeObject())
-    });
-    showSites();
-
-}
 
 function setSite (siteId) {
     $('#addNewSite').animate({'left': '+=200px', 'opacity': 'hide'}, 'slow');
