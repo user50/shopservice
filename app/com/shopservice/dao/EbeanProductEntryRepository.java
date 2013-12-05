@@ -66,7 +66,7 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
 
     @Override
     public List<ProductEntry> getWithChecked(String clientId, String categoryId, int groupId) throws Exception {
-        List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.*, group2product.id IS NOT NULL as checked FROM product_entry " +
+        List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.*, group2product.id IS NOT NULL AS checked FROM product_entry " +
                 "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
                 "WHERE client_settings_id = ? AND category_id = ? ")
                 .setParameter(1, groupId)
@@ -79,5 +79,23 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
             entries.add(new ProductEntry(row));
 
         return entries;
+    }
+
+    @Override
+    public Map<String, Integer> getCountPerCategory(String clientId, String groupId) {
+        List<SqlRow> rows = Ebean.createSqlQuery("SELECT category_id, count(product_entry.id) AS total FROM product_entry " +
+                "JOIN group2product ON group2product.product_entry_id = product_entry.id " +
+                "WHERE client_settings_id = ? AND product_group_id = ? " +
+                "GROUP BY category_id")
+                .setParameter(1, clientId)
+                .setParameter(2, groupId)
+                .findList();
+
+        Map<String, Integer> result = new HashMap<String, Integer>();
+
+        for (SqlRow row : rows)
+            result.put(row.getString("category_id"), row.getInteger("total") );
+
+        return result;
     }
 }
