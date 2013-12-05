@@ -55,7 +55,7 @@ public class EbeanGroup2ProductRepository implements Group2ProductRepository {
                 "LEFT JOIN group2product as basic ON `source`.product_entry_id = basic.product_entry_id " +
                 "AND basic.product_group_id = ? " +
                 "WHERE basic.id IS NULL" )
-                .setParameter(1, basic).setParameter(2, source).setParameter(1, basic).execute();
+                .setParameter(1, basic).setParameter(2, source).setParameter(3, basic).execute();
     }
 
     @Override
