@@ -26,7 +26,7 @@
 
 <div id="container">
     <div id="header"> <a href="#">Tools for servicing the online store</a> </div>
-    <div id="menu"> <a  href="#">HOME</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="#">SERVICES</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="#">PRICE</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#">CONTACTS</a>  </div>
+    <div id="menu"> <a  href="/price">GROUP SETTING</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="/groupmanager">GROUPS MANAGER</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="/download">DOWNLOAD PRICE</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#">CONTACTS</a>  </div>
     <div id="cont">
         <!--     <div id="sidebar">
            <form id = "targetsite" >
@@ -39,24 +39,24 @@
        </div> -->
 
         <div id="wrapp">
-            <form id="dataForPrice">
-                <p><label>
+            <div id="dataForPrice">
+                <div class="groups"><label>
                     <select id="group">
                         <option selected disabled>Select products group</option>
                     </select>
-                </label>
-                <p><label>
+                </label></div>
+                <div class="sites"><label>
                     <select id="format">
                         <option selected disabled>Select site</option>
                         <option value="YML">Prom</option>
                         <option value="price">HotLine</option>
                         <option value="YML">Zakupka</option>
                     </select>
-                    </label></p>
-            </form>
-            <div class="buttons">
-                <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a>
-                <a href="#" class="unibutton orange" onClick="generatePrice()">Generate</a>
+                    </label></div>
+                <div class="buttons">
+                    <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a>
+                    <a href="#" class="unibutton orange" onClick="generatePrice()">Generate</a>
+                </div>
             </div>
 
         </div>
