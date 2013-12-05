@@ -54,22 +54,22 @@ public class ProductGroupController extends Controller {
 
     public static Result merge(String clientId, Long groupId)
     {
-        Map<String,Integer> body = Json.fromJson(request().body().asJson(), Map.class);
+        Map<String,String> body = Json.fromJson(request().body().asJson(), Map.class);
         if (!body.containsKey("resourceGroupId"))
             return badRequest("Missing field resourceGroupId");
 
-        group2ProductRepository.merge(groupId.intValue(), body.get("resourceGroupId"));
+        group2ProductRepository.merge(groupId.intValue(), Integer.parseInt(body.get("resourceGroupId")));
 
         return ok();
     }
 
     public static Result diff(String clientId, Long groupId)
     {
-        Map<String,Integer> body = Json.fromJson(request().body().asJson(), Map.class);
+        Map<String,String> body = Json.fromJson(request().body().asJson(), Map.class);
         if (!body.containsKey("resourceGroupId"))
             return badRequest("Missing field resourceGroupId");
 
-        group2ProductRepository.difference(groupId.intValue(), body.get("resourceGroupId"));
+        group2ProductRepository.difference(groupId.intValue(), Integer.parseInt(body.get("resourceGroupId")));
 
         return ok();
     }
