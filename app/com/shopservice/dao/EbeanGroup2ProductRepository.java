@@ -4,34 +4,34 @@ import com.avaje.ebean.Ebean;
 
 public class EbeanGroup2ProductRepository implements Group2ProductRepository {
     @Override
-    public void set(String productId, int siteId, Boolean checked) {
+    public void set(String productId, int groupId, Boolean checked) {
         if (checked)
             Ebean.createSqlUpdate("INSERT INTO group2product (`product_group_id`, `product_entry_id`) " +
                     "SELECT ?, product_entry.id FROM product_entry " +
                     "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
                     "WHERE product_entry.id = ? AND group2product.id IS NULL")
-                    .setParameter(1, siteId)
-                    .setParameter(2, siteId)
+                    .setParameter(1, groupId)
+                    .setParameter(2, groupId)
                     .setParameter(3, productId)
                     .execute();
         else
             Ebean.createSqlUpdate("DELETE group2product.* FROM product_entry " +
                     "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
                     "WHERE product_entry.id = ? AND group2product.id IS NOT NULL")
-                    .setParameter(1, siteId)
+                    .setParameter(1, groupId)
                     .setParameter(2, productId)
                     .execute();
     }
 
     @Override
-    public void set(String clientId, String categoryId, int siteId, Boolean checked) {
+    public void set(String clientId, String categoryId, int groupId, Boolean checked) {
         if (checked)
             Ebean.createSqlUpdate("INSERT INTO group2product (`product_group_id`, `product_entry_id`) " +
                     "SELECT ?, product_entry.id FROM product_entry " +
                     "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
                     "WHERE client_settings_id = ? AND category_id = ? AND group2product.id IS NULL")
-                    .setParameter(1, siteId)
-                    .setParameter(2, siteId)
+                    .setParameter(1, groupId)
+                    .setParameter(2, groupId)
                     .setParameter(3, clientId)
                     .setParameter(4, categoryId)
                     .execute();
@@ -39,7 +39,7 @@ public class EbeanGroup2ProductRepository implements Group2ProductRepository {
             Ebean.createSqlUpdate("DELETE group2product.* FROM product_entry " +
                     "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
                     "WHERE client_settings_id = ? AND category_id = ? AND group2product.id IS NOT NULL")
-                    .setParameter(1, siteId)
+                    .setParameter(1, groupId)
                     .setParameter(2, clientId)
                     .setParameter(3, categoryId)
                     .execute();
