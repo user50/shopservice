@@ -35,7 +35,7 @@ public class Services {
 
     public static DatabaseManager getDataBaseManager(String clientId) throws SQLException {
         if (!databaseManagers.containsKey(clientId))
-            databaseManagers.put(clientId, new DatabaseManager(new StupidConnectionPool(clientSettingsRepository.findById(clientId).databaseUrl)));
+            databaseManagers.put(clientId, new DatabaseManager(new HikariConnectionPool(clientSettingsRepository.findById(clientId).databaseUrl)));
 
         return databaseManagers.get(clientId);
     }
