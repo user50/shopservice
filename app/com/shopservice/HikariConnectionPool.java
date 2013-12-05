@@ -16,11 +16,13 @@ import java.sql.SQLException;
  */
 public class HikariConnectionPool implements ConnectionPool {
 
+    private static final int CONNECTION_POOL_SIZE = 4;
+
     DataSource dataSource;
 
     public HikariConnectionPool(String url) {
         HikariConfig config = new HikariConfig();
-        config.setMaximumPoolSize(100);
+        config.setMaximumPoolSize(CONNECTION_POOL_SIZE);
         config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
         config.addDataSourceProperty("url", url);
 
