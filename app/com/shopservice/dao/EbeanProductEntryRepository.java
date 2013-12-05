@@ -17,11 +17,11 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
     private ClientSettingsRepository clientSettingsRepository = injector.getInstance(ClientSettingsRepository.class);
 
     @Override
-    public List<ProductEntry> findSelected(String clientSettingsId, int siteId) throws Exception {
+    public List<ProductEntry> findSelected(String clientSettingsId, int groupId) throws Exception {
         List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.* FROM product_entry " +
                 "JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
                 "WHERE client_settings_id = ?")
-                .setParameter(1, siteId)
+                .setParameter(1, groupId)
                 .setParameter(2, clientSettingsId)
                 .findList();
 
@@ -33,7 +33,7 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
     }
 
     @Override
-    public List<ProductEntry> findAndRefresh(String clientId, String categoryId, int settingsId) throws Exception {
+    public List<ProductEntry> findAndRefresh(String clientId, String categoryId, int groupId) throws Exception {
         List<Product> products = Services.getProductDAO(clientId).getProducts(categoryId);
 
         Set<ProductEntry> productEntriesFromClient = new HashSet<ProductEntry>();
@@ -49,7 +49,7 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
 
         add(clientId, Sets.difference(productEntriesFromClient, productEntriesFromSettings));
 
-        return getWithChecked(clientId, categoryId, settingsId);    }
+        return getWithChecked(clientId, categoryId, groupId);    }
 
     @Override
     public void add(String clientsId, Collection<ProductEntry> productsToAdd) throws Exception {
@@ -65,11 +65,11 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
     }
 
     @Override
-    public List<ProductEntry> getWithChecked(String clientId, String categoryId, int settingsId) throws Exception {
+    public List<ProductEntry> getWithChecked(String clientId, String categoryId, int groupId) throws Exception {
         List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.*, group2product.id IS NOT NULL as checked FROM product_entry " +
                 "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
                 "WHERE client_settings_id = ? AND category_id = ? ")
-                .setParameter(1, settingsId)
+                .setParameter(1, groupId)
                 .setParameter(2, clientId)
                 .setParameter(3, categoryId)
                 .findList();
