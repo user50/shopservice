@@ -16,7 +16,8 @@ object ApplicationBuild extends Build {
     "postgresql" % "postgresql" % "8.4-702.jdbc4",
     "com.google.inject" % "guice" % "3.0",
     "com.google.inject.extensions" % "guice-assistedinject" % "3.0",
-    "com.zaxxer" % "HikariCP" % "1.1.8"
+    "com.zaxxer" % "HikariCP" % "1.1.8",
+    "org.mockito" % "mockito-all" % "1.8.4"
 
   )
 

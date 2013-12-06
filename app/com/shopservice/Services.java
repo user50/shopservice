@@ -1,5 +1,6 @@
 package com.shopservice;
 
+import com.shopservice.assemblers.CategoryAssembler;
 import com.shopservice.dao.*;
 import com.shopservice.urlgenerate.UrlGenerator;
 import com.shopservice.urlgenerate.UrlGeneratorStorage;
@@ -54,6 +55,11 @@ public class Services {
             productDAOs.put( clientId, new CachedProductRepository(new JdbcProductRepository(clientId)));
 
         return productDAOs.get(clientId);
+    }
+
+    public static CategoryAssembler getCategoryAssembler(String clientId)
+    {
+        return new CategoryAssembler( injector.getInstance(ProductEntryRepository.class), getCategoryDAO(clientId) );
     }
 
     public static UrlGenerator getUrlGenerator(String clientId)

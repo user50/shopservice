@@ -5,6 +5,15 @@ public class Category {
     public String name;
     public String parentId;
 
+    public int count;
+
+    public Category(String id) {
+        this.id = id;
+    }
+
+    public Category() {
+    }
+
     @Override
     public String toString() {
         return "Category Id: "+id+", Category Name: "+name;
