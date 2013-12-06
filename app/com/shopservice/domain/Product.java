@@ -16,11 +16,5 @@ public class Product {
     public Boolean published;
     public Category category;
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+    public boolean checked;
 }
