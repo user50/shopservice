@@ -15,7 +15,6 @@ public class CategoryAssembler {
     ProductEntryRepository productEntryRepository;
     CategoryRepository categoryRepository;
 
-    @Inject
     public CategoryAssembler(ProductEntryRepository productEntryRepository, CategoryRepository categoryRepository) {
         this.productEntryRepository = productEntryRepository;
         this.categoryRepository = categoryRepository;
