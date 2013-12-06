@@ -30,7 +30,7 @@ function showCategories(){
 
     if ($.cookie("siteId") != undefined){
         clientId = $.cookie("clientId");
-        var url = "/clients/"+clientId+"/categories";
+        var url = "/clients/"+clientId+"/categories?groupId=" + siteId;
         $('#toCategoriesLink').css('display', 'none');
         $.ajax({url: url,
                 type: 'get',
@@ -45,13 +45,14 @@ function showCategories(){
 }
 
 function displayCategories(categories){
+    var categoriesList = categories.categories;
     var categoriesDiv = $('#categories').empty().css('display', 'block');
 
     var ol = $('<ol/>');
     ol.attr('class', 'rectangle-list');
 
-    for (i=0; i<categories.length; i++) {
-        var category = categories[i];
+    for (var i=0; i<categoriesList.length; i++) {
+        var category = categoriesList[i];
         var li = $('<li/>');
         var a = $('<a/>');
         a.attr('id', category.id);
@@ -281,11 +282,6 @@ function showSites(){
 //        sitesDiv.append(labelAdd);
     })
 }
-
-function showFieldForNewSite() {
-    $('#addNewSite').animate({'left': '+=200px', 'opacity': 'show'}, 'slow');
-}
-
 
 function setSite (siteId) {
     $('#addNewSite').animate({'left': '+=200px', 'opacity': 'hide'}, 'slow');
