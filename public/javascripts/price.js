@@ -25,9 +25,8 @@ function generatePrice(){
 }
 
 function showCategories(){
-
     $('#updateForm').empty();
-
+    var siteId = $.cookie("siteId");
     if ($.cookie("siteId") != undefined){
         clientId = $.cookie("clientId");
         var url = "/clients/"+clientId+"/categories?groupId=" + siteId;
@@ -46,6 +45,8 @@ function showCategories(){
 
 function displayCategories(categories){
     var categoriesList = categories.categories;
+    $(".countProducts").empty();
+    $(".countProducts").text(categories.totalCount);
     var categoriesDiv = $('#categories').empty().css('display', 'block');
 
     var ol = $('<ol/>');
@@ -57,7 +58,7 @@ function displayCategories(categories){
         var a = $('<a/>');
         a.attr('id', category.id);
         a.attr("onClick", "showProducts(this.id)");
-        a.text(category.name);
+        a.text(category.name + " ( " + categoriesList[i].count + " )");
         li.append(a);
         ol.append(li);
 //        form.appendChild(span);

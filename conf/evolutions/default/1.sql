@@ -11,7 +11,16 @@ create table client_settings (
   path_to_product_page      varchar(255),
   path_to_product_image     varchar(255),
   password                  varchar(255),
+  encoding                  varchar(255),
   constraint pk_client_settings primary key (id))
+;
+
+create table group2product (
+  id                        integer auto_increment not null,
+  checked                   tinyint(1) default 0,
+  product_group_id          integer,
+  product_entry_id          varchar(255),
+  constraint pk_group2product primary key (id))
 ;
 
 create table product_entry (
@@ -20,32 +29,27 @@ create table product_entry (
   product_id                varchar(255),
   product_name              varchar(255),
   category_id               varchar(255),
+  price                     double,
+  url                       varchar(255),
+  published                 tinyint(1) default 0,
   constraint pk_product_entry primary key (id))
 ;
 
-create table site (
+create table product_group (
   id                        integer auto_increment not null,
   client_settings_id        varchar(255) not null,
   name                      varchar(255),
-  constraint pk_site primary key (id))
+  constraint pk_product_group primary key (id))
 ;
 
-create table site2product (
-  id                        integer auto_increment not null,
-  checked                   tinyint(1) default 0,
-  site_id                   integer,
-  product_entry_id          varchar(255),
-  constraint pk_site2product primary key (id))
-;
-
-alter table product_entry add constraint fk_product_entry_client_settings_1 foreign key (client_settings_id) references client_settings (id) on delete restrict on update restrict;
-create index ix_product_entry_client_settings_1 on product_entry (client_settings_id);
-alter table site add constraint fk_site_client_settings_2 foreign key (client_settings_id) references client_settings (id) on delete restrict on update restrict;
-create index ix_site_client_settings_2 on site (client_settings_id);
-alter table site2product add constraint fk_site2product_site_3 foreign key (site_id) references site (id) on delete restrict on update restrict;
-create index ix_site2product_site_3 on site2product (site_id);
-alter table site2product add constraint fk_site2product_productEntry_4 foreign key (product_entry_id) references product_entry (id) on delete restrict on update restrict;
-create index ix_site2product_productEntry_4 on site2product (product_entry_id);
+alter table group2product add constraint fk_group2product_productGroup_1 foreign key (product_group_id) references product_group (id) on delete restrict on update restrict;
+create index ix_group2product_productGroup_1 on group2product (product_group_id);
+alter table group2product add constraint fk_group2product_productEntry_2 foreign key (product_entry_id) references product_entry (id) on delete restrict on update restrict;
+create index ix_group2product_productEntry_2 on group2product (product_entry_id);
+alter table product_entry add constraint fk_product_entry_client_settings_3 foreign key (client_settings_id) references client_settings (id) on delete restrict on update restrict;
+create index ix_product_entry_client_settings_3 on product_entry (client_settings_id);
+alter table product_group add constraint fk_product_group_client_settings_4 foreign key (client_settings_id) references client_settings (id) on delete restrict on update restrict;
+create index ix_product_group_client_settings_4 on product_group (client_settings_id);
 
 
 
@@ -55,11 +59,11 @@ SET FOREIGN_KEY_CHECKS=0;
 
 drop table client_settings;
 
+drop table group2product;
+
 drop table product_entry;
 
-drop table site;
-
-drop table site2product;
+drop table product_group;
 
 SET FOREIGN_KEY_CHECKS=1;
 
