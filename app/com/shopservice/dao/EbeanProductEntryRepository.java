@@ -2,10 +2,7 @@ package com.shopservice.dao;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlRow;
-import com.google.common.collect.Sets;
-import com.shopservice.Services;
 import com.shopservice.domain.ClientSettings;
-import com.shopservice.domain.Product;
 import com.shopservice.domain.ProductEntry;
 
 import java.util.*;
@@ -31,25 +28,6 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
 
         return entries;
     }
-
-    @Override
-    public List<ProductEntry> findAndRefresh(String clientId, String categoryId, int groupId) throws Exception {
-        List<Product> products = Services.getProductDAO(clientId).getProducts(categoryId);
-
-        Set<ProductEntry> productEntriesFromClient = new HashSet<ProductEntry>();
-        for (Product product : products){
-
-            productEntriesFromClient.add(new ProductEntry(product));
-        }
-
-        Set<ProductEntry> productEntriesFromSettings = Ebean.find(ProductEntry.class)
-                .where().eq("client_settings_id", clientId).eq("category_id",categoryId).findSet();
-
-        delete(Sets.difference(productEntriesFromSettings, productEntriesFromClient));
-
-        add(clientId, Sets.difference(productEntriesFromClient, productEntriesFromSettings));
-
-        return getWithChecked(clientId, categoryId, groupId);    }
 
     @Override
     public void add(String clientsId, Collection<ProductEntry> productsToAdd) throws Exception {

@@ -1,36 +1,52 @@
 package com.shopservice.assemblers;
 
+import com.avaje.ebean.Ebean;
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import com.shopservice.Services;
 import com.shopservice.dao.ProductEntryRepository;
-import com.shopservice.dao.ProductRepository;
 import com.shopservice.domain.Product;
 import com.shopservice.domain.ProductEntry;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ProductAssembler {
 
     ProductEntryRepository productEntryRepository;
-    ProductRepository productRepository;
 
-    public ProductAssembler(ProductEntryRepository productEntryRepository, ProductRepository productRepository) {
+    @Inject
+    public ProductAssembler(ProductEntryRepository productEntryRepository) {
         this.productEntryRepository = productEntryRepository;
-        this.productRepository = productRepository;
     }
 
-    public Collection<Product> getProducts(String clientId, String categoryId, int groupId) throws Exception {
-        Map<String,Product> products = new HashMap<String, Product>();
-        for (Product product : productRepository.getProducts(categoryId))
-            products.put(product.id, product);
+    public Collection<ProductEntry> getProducts(String clientId, String categoryId, int groupId) throws Exception {
+        List<Product> products = Services.getProductDAO(clientId).getProducts(categoryId);
 
-        for (ProductEntry o : productEntryRepository.getWithChecked(clientId, categoryId, groupId) ){
+        Set<ProductEntry> productEntriesFromClient = new HashSet<ProductEntry>();
+        for (Product product : products)
+            productEntriesFromClient.add(new ProductEntry(product));
 
-        }
+        Set<ProductEntry> productEntriesFromSettings = Ebean.find(ProductEntry.class)
+                .where().eq("client_settings_id", clientId).eq("category_id",categoryId).findSet();
 
+        productEntryRepository.delete(Sets.difference(productEntriesFromSettings, productEntriesFromClient));
 
-       return null;
+        productEntryRepository.add(clientId, Sets.difference(productEntriesFromClient, productEntriesFromSettings));
+
+        Map<String,ProductEntry> productEntries = new HashMap<String, ProductEntry>();
+        for (ProductEntry entry : productEntryRepository.getWithChecked(clientId, categoryId, groupId) )
+            productEntries.put(entry.productId, entry );
+
+        for (Product product : Services.getProductDAO(clientId).getProducts(categoryId))
+            fill(productEntries.get(product.id), product);
+
+       return productEntries.values();
+    }
+
+    private void fill(ProductEntry productEntry, Product product) {
+        productEntry.url = product.url;
+        productEntry.price = product.price;
+        productEntry.productName = product.name;
+        productEntry.published = product.published;
     }
 }

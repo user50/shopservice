@@ -15,27 +15,33 @@ public class ProductEntry {
 
     @JsonIgnore
     public String productId;
-    public String productName;
     public String categoryId;
+
+    @Transient
+    public String productName;
+
+    @Transient
     public double price;
+
+    @Transient
     public String url;
+
+    @Transient
     public Boolean published = false;
+
+    @Transient
+    public boolean checked;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     public List<Group2Product> checks;
 
-    @Transient
-    public boolean checked;
+
 
     public ProductEntry(SqlRow row) {
         id = row.getString("id");
-        productName = row.getString("product_name");
         categoryId = row.getString("category_id");
         productId = row.getString("product_id");
-        price = row.getDouble("price");
-        url = row.getString("url");
-        published = row.getBoolean("published");
 
         if (row.getString("checked") != null)
             checked = row.getString("checked").equals("1") ;

@@ -1,5 +1,6 @@
 package controllers;
 
+import com.shopservice.assemblers.ProductAssembler;
 import com.shopservice.dao.Group2ProductRepository;
 import com.shopservice.dao.ProductEntryRepository;
 import play.libs.Json;
@@ -13,11 +14,10 @@ import static com.shopservice.MServiceInjector.injector;
 public class ProductController extends Controller {
 
     private static Group2ProductRepository group2ProductRepository = injector.getInstance(Group2ProductRepository.class);
-    private static ProductEntryRepository productEntryRepository = injector.getInstance(ProductEntryRepository.class);
-
+    private static ProductAssembler productAssembler = injector.getInstance(ProductAssembler.class);
 
     public static Result getProducts(String clientId,Long siteId, String categoryId) throws Exception {
-        return ok(Json.toJson(productEntryRepository.findAndRefresh(clientId, categoryId, siteId.intValue()) ));
+        return ok(Json.toJson(productAssembler.getProducts(clientId, categoryId, siteId.intValue()) ));
     }
 
     public static Result updateProduct(String clientId, Long siteId, String productId)
