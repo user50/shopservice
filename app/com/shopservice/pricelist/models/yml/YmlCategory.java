@@ -2,6 +2,7 @@ package com.shopservice.pricelist.models.yml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +14,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class YmlCategory {
+    @XmlAttribute
     public String id;
+    @XmlAttribute
     public String parentId;
     public String name;
 }
