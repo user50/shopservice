@@ -76,4 +76,13 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
 
         return result;
     }
+
+    @Override
+    public Set<ProductEntry> get(String clientId, String categoryId) {
+        return Ebean.find(ProductEntry.class)
+                .where()
+                .eq("client_settings_id", clientId)
+                .eq("category_id",categoryId)
+                .findSet();
+    }
 }

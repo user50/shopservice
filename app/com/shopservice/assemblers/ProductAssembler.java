@@ -26,8 +26,7 @@ public class ProductAssembler {
         for (Product product : products)
             productEntriesFromClient.add(new ProductEntry(product));
 
-        Set<ProductEntry> productEntriesFromSettings = Ebean.find(ProductEntry.class)
-                .where().eq("client_settings_id", clientId).eq("category_id",categoryId).findSet();
+        Set<ProductEntry> productEntriesFromSettings = productEntryRepository.get(clientId, categoryId);
 
         productEntryRepository.delete(Sets.difference(productEntriesFromSettings, productEntriesFromClient));
 
