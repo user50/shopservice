@@ -46,7 +46,7 @@ public class JdbcCategoryRepositoryTest {
     public static List<Object[]> data() {
         List<Object[]> cases = new ArrayList<Object[]>();
         cases.add( new Object[]{"client1", "jdbc:mysql://91.200.40.60/newdomosed1?user=newdomosed1&password=kissme22"} );
-//        cases.add( new Object[]{"client2", "jdbc:mysql://91.200.40.60/newdomosed1?user=newdomosed1&password=kissme22"} );
+        cases.add( new Object[]{"client2", "jdbc:mysql://91.240.20.7:3306/gneus153_mebel?user=gneus153_eugene&password=23111989kjpjd"} );
 
         return cases;
     }
