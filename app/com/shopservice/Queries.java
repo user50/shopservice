@@ -18,7 +18,7 @@ public class Queries {
     private Document document;
     private XPath xPath;
 
-    private static final String CONFIGURATION_FILE = "conf" + File.separator + "queries.conf";
+    public static final String CONFIGURATION_FILE = "conf" + File.separator + "queries.conf";
     private static final String EMPTY = "";
 
     public Queries(){

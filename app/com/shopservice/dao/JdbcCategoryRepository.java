@@ -28,6 +28,11 @@ public class JdbcCategoryRepository implements CategoryRepository {
         }
     }
 
+    JdbcCategoryRepository(DatabaseManager databaseManager, String clientId) {
+        this.databaseManager = databaseManager;
+        this.clientId = clientId;
+    }
+
     @Override
     public List<Category> getCategories() throws SQLException {
         return databaseManager.executeQueryForList(new GetCategories(clientId));
