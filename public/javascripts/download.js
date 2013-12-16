@@ -20,6 +20,16 @@ function downloadPrice(){
     var groupId = $("#group option:selected").val();
     var format = $("#format option:selected").val();
 
+    if (groupId == "Select products group"){
+        alert("You should select products group");
+        return;
+    }
+
+    if (format == "Select site"){
+        alert("You should select site");
+        return;
+    }
+
     var url = "/client/"+clientId + "/groups/" + groupId + "/pricelists/" + format;
     var href = document.getElementById("downloadHref").setAttribute("href",url);
     href.click();
@@ -31,6 +41,16 @@ function generatePrice(){
     var groupId = $("#group option:selected").val();
     var format = $("#format option:selected").val();
 
+    if (groupId == "Select products group"){
+        alert("You should select products group");
+        return;
+    }
+
+    if (format == "Select site"){
+        alert("You should select site");
+        return;
+    }
+
     var url = "/client/"+clientId + "/groups/" + groupId + "/pricelists/" + format;
     $.ajax({url: url,
         type: 'post',
@@ -38,6 +58,7 @@ function generatePrice(){
             $('#loader').css('display', 'block');
         }}).done(function(){
             $('#loader').css('display', 'none');
+            alert("Price list generation is complete")
         });
 }
 
