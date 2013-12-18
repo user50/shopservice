@@ -41,7 +41,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         Set<Category> categories = new HashSet<Category>();
 
         for (Product product : Services.getProductDAO(clientId).getProducts( getProductIds(clientId, siteId))) {
-            ymlCatalog.shop.offers.add(createOffer(product));
+            ymlCatalog.shop.offers.add(createOffer(product, clientSettings.currency.name()));
             categories.add( product.category );
         }
 
@@ -53,10 +53,10 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
 
     }
 
-    private Offer createOffer(Product product) {
+    private Offer createOffer(Product product, String currency) {
         Offer offer = new Offer();
         offer.price = product.price;
-        offer.currencyId = "UAH";
+        offer.currencyId = currency;
         offer.id = product.id + product.category.id;
         offer.categoryId = product.category.id;
         offer.description = product.description;
