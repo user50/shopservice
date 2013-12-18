@@ -39,4 +39,6 @@ public class ClientSettingsTest {
 
         server = EbeanServerFactory.create(config);
     }
+
+
 }

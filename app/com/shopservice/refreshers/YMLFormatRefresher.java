@@ -31,7 +31,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         ymlCatalog.shop = shop;
 
         Currency currency = new Currency();
-        currency.id = "UAH";
+        currency.id = clientSettings.currency.name();
         currency.rate = "1";
         shop.currencies.add(currency);
 
