@@ -32,7 +32,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
 
         Currency currency = new Currency();
         currency.id = clientSettings.currency.name();
-        currency.rate = "1";
+        currency.rate = clientSettings.currency.getRate();
         shop.currencies.add(currency);
 
         shop.name = clientSettings.siteName;
