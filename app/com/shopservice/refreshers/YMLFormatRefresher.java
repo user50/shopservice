@@ -64,6 +64,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         offer.name = product.name;
         offer.picture = product.imageUrl;
         offer.url = product.url;
+        offer.available = product.available;
 
         return  offer;
     }

@@ -13,7 +13,6 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-
 public class Offer {
     @XmlAttribute
     public String id;
