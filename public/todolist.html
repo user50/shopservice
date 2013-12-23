@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title></title>
+</head>
+<script type="text/javascript" src="javascripts/backbonejs/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/underscore.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/backbone.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/main13.js"></script>
+<body>
+<h3>Tasks list:</h3>
+<form id="addTask">
+    <input type="text" placeholder="Name of a new task..">
+    <input type="submit" value="Add Task">
+</form>
+
+<div class="tasks">
+    <script type="text/template" id="taskTemplate">
+        <span><%= title %></span>
+        <button class="edit">Edit</button>
+        <button class="delete">Delete</button>
+    </script>
+</div>
+</body>
+</html>
