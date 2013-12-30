@@ -12,9 +12,13 @@ $(function(){
 
     App.Models.Group = Backbone.Model.extend({});
 
+    clientId = 'client2';
+
     App.Collections.Groups = Backbone.Collection.extend({
         model: App.Models.Group,
-        url: '/clients/client2/groups'
+        url: function(){
+            return '/clients/'+clientId+'/groups';
+        }
     });
 
     App.Views.Groups = Backbone.View.extend({
@@ -23,7 +27,6 @@ $(function(){
         initialize: function(){
             this.collection.on('add', this.addOne, this);
         },
-
         render: function(){
             this.$el.empty();
             this.collection.each(this.addOne, this);
@@ -32,10 +35,6 @@ $(function(){
         addOne: function(group){
             var groupView = new App.Views.Group({model: group});
             this.$el.append(groupView.render().el);
-//            var label = $('<label/>');
-//            label.attr('for', group.get('name'));
-//            label.text(group.get('name'));
-//            this.$el.append(label);
         }
     });
 
@@ -51,7 +50,22 @@ $(function(){
         }
     });
 
-    window.groups = new App.Collections.Groups();
-    groups.fetch();
-    var groupsView = new App.Views.Groups({collection: groups});
+    App.Views.AddGroup = Backbone.View.extend({
+        el: '#addGroup',
+
+        events: {
+            'submit': 'submit'
+        },
+
+        initialize: function(){
+        },
+
+        submit: function(e){
+            e.preventDefault();
+
+            var newGroupName = $(e.currentTarget).find('input[type=text]').val();
+            var newGroup = new App.Models.Group({name: newGroupName});
+            this.collection.create(newGroup, {wait: true});
+        }
+    });
 });
