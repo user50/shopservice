@@ -25,6 +25,7 @@ public class HikariConnectionPool implements ConnectionPool {
         config.setMaximumPoolSize(CONNECTION_POOL_SIZE);
         config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
         config.addDataSourceProperty("url", url);
+        config.setAcquireRetries(0);
 
         this.dataSource = new HikariDataSource(config);
     }
