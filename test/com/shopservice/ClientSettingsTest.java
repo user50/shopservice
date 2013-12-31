@@ -1,6 +1,5 @@
 package com.shopservice;
 
-import com.avaje.ebean.Ebean;
 import com.avaje.ebean.EbeanServer;
 import com.avaje.ebean.EbeanServerFactory;
 import com.avaje.ebean.config.DataSourceConfig;
@@ -8,12 +7,6 @@ import com.avaje.ebean.config.ServerConfig;
 import com.shopservice.domain.*;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.xml.bind.JAXBException;
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
-
-import static org.fest.assertions.Assertions.assertThat;
 
 public class ClientSettingsTest {
 

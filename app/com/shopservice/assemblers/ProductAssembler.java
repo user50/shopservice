@@ -1,6 +1,5 @@
 package com.shopservice.assemblers;
 
-import com.avaje.ebean.Ebean;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.shopservice.Services;
