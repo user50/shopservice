@@ -1,11 +1,11 @@
 package com.shopservice.domain;
 
 import com.avaje.ebean.SqlRow;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import tyrex.services.UUID;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.List;
 
 @Entity
 public class ProductEntry {

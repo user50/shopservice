@@ -1,8 +1,6 @@
 package com.shopservice.refreshers;
 
-import com.shopservice.PriceListType;
 import com.shopservice.Services;
-import com.shopservice.dao.ClientSettingsRepository;
 import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.Product;
 import com.shopservice.pricelist.models.price.Category;
@@ -14,8 +12,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.shopservice.MServiceInjector.injector;
-import static com.shopservice.Util.save;
+import static com.shopservice.Util.marshal;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,7 +25,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
 
     @Override
-    public void refresh(String clientId, int siteId) throws Exception {
+    public byte[] generate(String clientId, int siteId) throws Exception {
         ClientSettings clientSettings = clientSettingsRepository.findById(clientId);
 
         Price price = new Price();
@@ -44,7 +41,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
         price.setCatalog( new ArrayList<Category>(categories) );
 
-        save(price, PriceListType.price.getFileName(clientId, siteId), clientSettings.encoding);
+        return marshal(price, clientSettings.encoding);
     }
 
     private Item createItem(String clientId, Product product) throws SQLException {

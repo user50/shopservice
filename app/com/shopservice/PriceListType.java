@@ -4,8 +4,6 @@ import com.shopservice.refreshers.PriceFormatRefresher;
 import com.shopservice.refreshers.PriceListRefresher;
 import com.shopservice.refreshers.YMLFormatRefresher;
 
-import java.io.File;
-
 /**
  * Created with IntelliJ IDEA.
  * User: neuser50
@@ -14,22 +12,12 @@ import java.io.File;
  * To change this template use File | Settings | File Templates.
  */
 public enum PriceListType {
-    price("price.xml", new PriceFormatRefresher()), YML("yml.xml", new YMLFormatRefresher() );
+    price(new PriceFormatRefresher()), YML(new YMLFormatRefresher() );
 
-    private static final String PRICE_LIST_DIR = "pricelists";
-
-    private String fileName;
     private PriceListRefresher refresher;
 
-    private PriceListType(String fileName, PriceListRefresher refresher) {
+    private PriceListType(PriceListRefresher refresher) {
         this.refresher = refresher;
-        this.fileName = fileName;
-    }
-
-    public String
-    getFileName(String clientId, int siteId) {
-        return  System.getProperty("user.dir") + File.separator + PRICE_LIST_DIR +
-                File.separator + clientId +File.separator + siteId + File.separator+fileName;
     }
 
     public PriceListRefresher getHandler()

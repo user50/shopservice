@@ -28,8 +28,7 @@ PUT     /clients/:id/groups/:groupId/products                             contro
 GET     /clients/:id/categories                                           controllers.CategoryController.getCategories(id, groupId)
 
 # PriceList operations
-GET    /client/:id/groups/:groupId/pricelists/:format                     controllers.PriceListController.getPriceList( id, groupId:Long, format )
-POST   /client/:id/groups/:groupId/pricelists/:format                     controllers.PriceListController.refreshPriceList( id, groupId:Long, format )
+GET    /client/:id/groups/:groupId/pricelists/:format                     controllers.PriceListController.generatePriceList( id, groupId:Long, format )
 GET    /formats                                                           controllers.PriceListController.getPriceListFormats()
 
 # Site operations

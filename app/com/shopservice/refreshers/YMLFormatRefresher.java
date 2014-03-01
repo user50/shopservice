@@ -1,6 +1,5 @@
 package com.shopservice.refreshers;
 
-import com.shopservice.PriceListType;
 import com.shopservice.Services;
 import com.shopservice.domain.Category;
 import com.shopservice.domain.ClientSettings;
@@ -12,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.shopservice.Util.save;
+import static com.shopservice.Util.marshal;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,7 +22,7 @@ import static com.shopservice.Util.save;
  */
 public class YMLFormatRefresher extends AbstractPriceListRefresher {
     @Override
-    public void refresh(String clientId, int siteId) throws Exception {
+    public byte[] generate(String clientId, int siteId) throws Exception {
         ClientSettings clientSettings = clientSettingsRepository.findById(clientId);
 
         YmlCatalog ymlCatalog = new YmlCatalog();
@@ -49,7 +48,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
 
         shop.categories = convertToYmlCategories(relatedCategories);
 
-        save(ymlCatalog, PriceListType.YML.getFileName(clientId, siteId), clientSettings.encoding );
+        return marshal(ymlCatalog, clientSettings.encoding);
 
     }
 

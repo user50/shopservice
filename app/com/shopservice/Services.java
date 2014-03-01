@@ -28,8 +28,6 @@ public class Services {
     private static Map<String, CategoryRepository> categoryDAOs = new Hashtable<String, CategoryRepository>();
     private static Map<String, ProductRepository> productDAOs = new Hashtable<String, ProductRepository>();
 
-    public static final PriceListService priceListService = new PriceListService();
-
     public static final Queries queries = new Queries();
 
     private static final UrlGeneratorStorage URL_GENERATOR_STORAGE = UrlGeneratorStorage.getInstance();

@@ -1,11 +1,11 @@
 package com.shopservice;
 
 import com.shopservice.dao.ClientSettingsRepository;
+import play.api.mvc.SimpleResult;
 import play.cache.Cache;
 import play.libs.F;
 import play.mvc.Action;
 import play.mvc.Http;
-import play.mvc.SimpleResult;
 
 import static com.shopservice.MServiceInjector.injector;
 import static play.libs.F.Promise;
@@ -24,7 +24,7 @@ public class Authentication extends Action.Simple {
         if (Cache.get(cookie.value()) == null)
             return Promise.pure(redirect("/assets/login.html"));
 
-        if (repository.findById( (String) Cache.get(cookie.value()) ) == null)
+        if (repository.findById((String) Cache.get(cookie.value())) == null)
             return Promise.pure(redirect("/assets/login.html"));
 
         return delegate.call(context);

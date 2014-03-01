@@ -1,9 +1,5 @@
 package com.shopservice.refreshers;
 
-import javax.xml.bind.JAXBException;
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
-
 /**
  * Created with IntelliJ IDEA.
  * User: neuser50
@@ -12,5 +8,5 @@ import java.sql.SQLException;
  * To change this template use File | Settings | File Templates.
  */
 public interface PriceListRefresher {
-    public void refresh(String clientId, int siteId) throws Exception;
+    public byte[] generate(String clientId, int siteId) throws Exception;
 }
