@@ -6,17 +6,20 @@
     <title>Configure and manage price lists for sites aggregators</title>
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/main.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/price.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/download.css"/>
     <META content="text/html; charset=utf-8" http-equiv="Content-Type">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
     <script type="text/javascript" src="/assets/javascripts/jquery.cookie.js"></script>
     <script type="text/javascript" src="/assets/javascripts/price.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/download.js"></script>
     <script type="text/javascript" src="/assets/javascripts/tablePaging.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function()
         {
             showSites();
+            fillGroupSelect();
             // вешаем колбэки для всех jQuery.ajax-запросов
         $('#loader').ajaxSend(function(){$(this).show()})
                 .ajaxStop(function(){$(this).hide()});
@@ -27,7 +30,7 @@
 
 <div id="container">
     <div id="header"> <a href="#">Tools for servicing the online store</a> </div>
-    <div id="menu"> <a  href="/price">GROUP SETTING</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="/groupmanager">GROUPS MANAGER</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="/download">DOWNLOAD PRICE</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#">CONTACTS</a>  </div>
+    <div id="menu"> <a  href="/price">GROUP SETTING</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="/groupmanager">GROUPS MANAGER</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#">CONTACTS</a>  </div>
     <div id="cont">
         <div id="wrapp">
             <div class="sitesDiv">
@@ -35,6 +38,18 @@
                     <div id="sites"></div>
                 </div>
             </div>
+            <div class="buttons">
+                <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a>
+            </div>
+            <div class="sites"><label>
+                <select id="format">
+                    <option selected disabled>Select site</option>
+                    <option value="YML">Prom</option>
+                    <option value="YML">UkrMebli</option>
+                    <option value="price">HotLine</option>
+                    <option value="YML">Zakupka</option>
+                </select>
+            </label></div>
             <div id="main">
                 <p>
                 <a id="toCategoriesLink" href="#" onClick="showCategories()" style="display: none;"><img src="assets/images/Back_Button.gif"></a>

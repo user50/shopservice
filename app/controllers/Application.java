@@ -20,11 +20,6 @@ public class Application extends Controller {
     }
 
     @With(Authentication.class)
-    public static Result download() {
-        return ok(download.render());
-    }
-
-    @With(Authentication.class)
     public static Result groupmanager() {
         return ok(groupmanager.render());
     }

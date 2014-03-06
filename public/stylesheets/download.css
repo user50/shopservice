@@ -7,11 +7,13 @@
 
 .sites {
     float: left;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-right: 10px;
 }
 
 .buttons {
+    float: left;
+    margin-top: 5px;
 }
 
 button.blue-btn{
@@ -136,8 +138,8 @@ select {
     select {padding-right: 28px}
 }
 
-label {position:relative}
-label:after {
+.groups label {position:relative}
+.groups label:after {
     content:'<>';
     font:13px "Consolas", monospace;
     color:#B1A4A4;
@@ -151,7 +153,7 @@ label:after {
     position:absolute;
     pointer-events:none;
 }
-label:before {
+.groups label:before {
     content:'';
     right:6px; top:0px;
     width:20px; height:20px;

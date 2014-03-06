@@ -1,27 +1,25 @@
 function getURLParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
 }
-
 function downloadPrice(){
     clientId = $.cookie("clientId");
-    var siteId = $.cookie("siteId");
-    var url = "/client/"+clientId + "/sites/" + siteId + "/formats/price/pricelist";
-//    $.get(url);
+
+    var groupId = $.cookie("siteId");
+    var format = $("#format option:selected").val();
+
+    if (groupId == "Select products group"){
+        alert("You should select products group");
+        return;
+    }
+
+    if (format == "Select site"){
+        alert("You should select site");
+        return;
+    }
+
+    var url = "/client/"+clientId + "/groups/" + groupId + "/pricelists/" + format;
     var href = document.getElementById("downloadHref").setAttribute("href",url);
     href.click();
-}
-
-function generatePrice(){
-    clientId = $.cookie("clientId");
-    var siteId = $.cookie("siteId");
-    var url = "/client/"+clientId+ "/sites/" + siteId + "/formats/price/pricelist";
-    $.ajax({url: url,
-            type: 'post',
-            beforeSend: function(){
-                $('#loader').css('display', 'block');
-            }}).done(function(){
-                 $('#loader').css('display', 'none');
-        });
 }
 
 function showCategories(){

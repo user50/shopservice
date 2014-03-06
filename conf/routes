@@ -5,7 +5,6 @@
 # Home page
 GET     /                                   controllers.Application.index()
 GET     /price                              controllers.Application.price()
-GET     /download                           controllers.Application.download()
 GET     /groupmanager                           controllers.Application.groupmanager()
 
 
