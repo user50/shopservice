@@ -12,15 +12,15 @@
     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
     <script type="text/javascript" src="/assets/javascripts/jquery.cookie.js"></script>
     <script type="text/javascript" src="/assets/javascripts/price.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/groupmanager.js"></script>
     <script type="text/javascript" src="/assets/javascripts/download.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/motionpack.js"></script>
     <script type="text/javascript" src="/assets/javascripts/tablePaging.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function()
         {
             showSites();
-            fillGroupSelect();
-            // вешаем колбэки для всех jQuery.ajax-запросов
         $('#loader').ajaxSend(function(){$(this).show()})
                 .ajaxStop(function(){$(this).hide()});
         });
@@ -38,18 +38,38 @@
                     <div id="sites"></div>
                 </div>
             </div>
-            <div class="buttons">
-                <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a>
+            <div class="downloadDiv">
+                <div class="buttons">
+                    <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a>
+                </div>
+                <div class="sites">
+                    <label>
+                        <select id="format">
+                            <option selected disabled>Select site</option>
+                            <option value="YML">Prom</option>
+                            <option value="YML">UkrMebli</option>
+                            <option value="price">HotLine</option>
+                            <option value="YML">Zakupka</option>
+                        </select>
+                    </label>
+                </div>
             </div>
-            <div class="sites"><label>
-                <select id="format">
-                    <option selected disabled>Select site</option>
-                    <option value="YML">Prom</option>
-                    <option value="YML">UkrMebli</option>
-                    <option value="price">HotLine</option>
-                    <option value="YML">Zakupka</option>
-                </select>
-            </label></div>
+            <div class="groupsManager">
+                <a title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
+                    <img src="/assets/images/addSiteImg.png">
+                </a>
+                <img src="/assets/images/delete.png" onclick="deleteGroup()">
+                <div id="addNewSite" style="display:none; overflow:hidden; height:50px;">
+                        <form id="addNewSiteForm">
+                            <table>
+                                <tr>
+                                    <td><input type="text" name="name"></td>
+                                    <td><input type="submit" value="OK" onclick="addNewSite()"></td>
+                                </tr>
+                            </table>
+                        </form>
+                </div>
+            </div>
             <div id="main">
                 <p>
                 <a id="toCategoriesLink" href="#" onClick="showCategories()" style="display: none;"><img src="assets/images/Back_Button.gif"></a>

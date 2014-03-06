@@ -301,6 +301,17 @@ function setSite (siteId) {
 //    }
 //}
 
+
+function deleteGroup() {
+    clientId = $.cookie("clientId");
+    var deleteId = $.cookie("siteId");
+
+    var url = "/clients/" + clientId + "/groups/" + deleteId;
+    $.ajax({ url: url,
+        type: 'delete'});
+    showSites();
+}
+
 $.fn.serializeObject = function()
 {
     var o = {};

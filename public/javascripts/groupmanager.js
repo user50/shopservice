@@ -87,16 +87,6 @@ function differenceGroups(){
 
 }
 
-function deleteGroup() {
-    clientId = $.cookie("clientId");
-
-    var deleteId = $("#deleteGroupId option:selected").val();
-    var url = "/clients/" + clientId + "/groups/" + deleteId;
-    $.ajax({ url: url,
-            type: 'delete'});
-    showGroups();
-}
-
 $.fn.serializeObject = function()
 {
     var o = {};
