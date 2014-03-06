@@ -1,7 +1,7 @@
 package com.shopservice.domain;
 
 import com.avaje.ebean.SqlRow;
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import tyrex.services.UUID;
 
 import javax.persistence.*;

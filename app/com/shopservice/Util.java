@@ -1,10 +1,10 @@
 package com.shopservice;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
@@ -17,11 +17,11 @@ public class Util {
         marshaller.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, true );
         marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding);
 
-        ByteOutputStream outputStream = new ByteOutputStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
         marshaller.marshal( t, outputStream );
 
-        return outputStream.getBytes();
+        return outputStream.toByteArray();
     }
 
     public static int sum(Collection<Integer> values) {
