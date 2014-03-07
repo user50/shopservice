@@ -340,3 +340,21 @@ input[type=radio]:checked + label {
     clear: both;
     margin-left: 10px;
 }
+
+#addNewGroupDiv{
+    margin: 5px;
+    float: left;
+}
+
+#mergeDiv{
+    float: left;
+}
+
+#excludeDiv{
+}
+
+#deleteGroupId{
+    margin-right: 5px;
+    margin-left: 5px;
+    float: left;
+}

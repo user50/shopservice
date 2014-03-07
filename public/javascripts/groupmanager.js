@@ -1,3 +1,25 @@
+
+function fillGroupSelect() {
+    var clientId = $.cookie("clientId");
+    var url = "/clients/"+ clientId +"/groups";
+    $.get(url, function(groups){
+        var selectForGroups = $('#mergeGroups');
+            for (i = 0; i < groups.length; i++){
+                var option = $('<option/>');
+                option.attr('value', groups[i].id);
+                option.text(groups[i].name);
+                selectForGroups.append(option);
+            }
+            var selectForGroups = $('#excludeGroups');
+            for (i = 0; i < groups.length; i++){
+                var option = $('<option/>');
+                option.attr('value', groups[i].id);
+                option.text(groups[i].name);
+                selectForGroups.append(option);
+            };
+    });
+}
+
 function showGroups(){
     $('#firstGroup').find('option:not(:first)').remove();
     $('#secondGroup').find('option:not(:first)').remove();
@@ -50,13 +72,12 @@ function addNewSite() {
 
 }
 
-function mergeGroups(){
+function mergeGroups(groupId){
     clientId = $.cookie("clientId");
+    var siteId = $.cookie("siteId");
 
-    var firstGroupId = $("#firstGroup option:selected").val();
-    var secondGroupId = $("#secondGroup option:selected").val();
-    var body = {resourceGroupId: secondGroupId};
-    var url = "/clients/" + clientId + "/groups/" + firstGroupId + "/merge";
+    var body = {resourceGroupId: groupId};
+    var url = "/clients/" + clientId + "/groups/" + siteId + "/merge";
     $.ajax({url: url,
         type: 'put',
         data: JSON.stringify(body),
@@ -68,13 +89,12 @@ function mergeGroups(){
         });
 }
 
-function differenceGroups(){
+function differenceGroups(groupId){
     clientId = $.cookie("clientId");
+    var siteId = $.cookie("siteId");
 
-    var firstGroupId = $("#firstGroup option:selected").val();
-    var secondGroupId = $("#secondGroup option:selected").val();
-    var body = {resourceGroupId: secondGroupId};
-    var url = "/clients/" + clientId + "/groups/" + firstGroupId + "/diff";
+    var body = {resourceGroupId: groupId};
+    var url = "/clients/" + clientId + "/groups/" + siteId + "/diff";
     $.ajax({url: url,
         type: 'put',
         data: JSON.stringify(body),
@@ -84,7 +104,6 @@ function differenceGroups(){
         }}).done(function(){
             $('#loader').css('display', 'none');
         });
-
 }
 
 $.fn.serializeObject = function()

@@ -13,7 +13,6 @@
     <script type="text/javascript" src="/assets/javascripts/jquery.cookie.js"></script>
     <script type="text/javascript" src="/assets/javascripts/price.js"></script>
     <script type="text/javascript" src="/assets/javascripts/groupmanager.js"></script>
-    <script type="text/javascript" src="/assets/javascripts/download.js"></script>
     <script type="text/javascript" src="/assets/javascripts/motionpack.js"></script>
     <script type="text/javascript" src="/assets/javascripts/tablePaging.js"></script>
 
@@ -21,9 +20,17 @@
         $(document).ready(function()
         {
             showSites();
+            fillGroupSelect();
         $('#loader').ajaxSend(function(){$(this).show()})
                 .ajaxStop(function(){$(this).hide()});
+        $('#mergeGroups').on('change', function() {
+            mergeGroups(this.value); // or $(this).val()
         });
+        $('#excludeGroups').on('change', function() {
+            differenceGroups(this.value); // or $(this).val()
+        });
+        });
+
     </script>
 </head>
 <body>
@@ -55,20 +62,36 @@
                 </div>
             </div>
             <div class="groupsManager">
-                <a title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
-                    <img src="/assets/images/addSiteImg.png">
-                </a>
-                <img src="/assets/images/delete.png" onclick="deleteGroup()">
-                <div id="addNewSite" style="display:none; overflow:hidden; height:50px;">
-                        <form id="addNewSiteForm">
-                            <table>
-                                <tr>
-                                    <td><input type="text" name="name"></td>
-                                    <td><input type="submit" value="OK" onclick="addNewSite()"></td>
-                                </tr>
-                            </table>
-                        </form>
+                <div id="addNewGroupDiv" title="Add new group">
+                    <a title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
+                        <img src="/assets/images/addSiteImg.png">
+                    </a>
                 </div>
+                <div id="addNewSite" style="display:none; overflow:hidden; height:50px;">
+                    <form id="addNewSiteForm">
+                        <table>
+                            <tr>
+                                <td><input type="text" name="name"></td>
+                                <td><input type="submit" value="OK" onclick="addNewSite()"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div id="deleteGroupId" title="Delete current group">
+                    <img src="/assets/images/delete.png" onclick="deleteGroup()">
+                </div>
+                <div id="mergeDiv">
+                    <select id="mergeGroups" required>
+                        <option selected disabled>Merge to</option>
+                    </select>
+                </div>
+                <div id="excludeDiv">
+                    <select id="excludeGroups" required>
+                        <option selected disabled>Exclude</option>
+                    </select>
+                </div>
+
+
             </div>
             <div id="main">
                 <p>
