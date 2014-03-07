@@ -339,6 +339,7 @@ input[type=radio]:checked + label {
 .groupsManager{
     clear: both;
     margin-left: 10px;
+
 }
 
 #addNewGroupDiv{

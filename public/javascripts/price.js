@@ -310,6 +310,7 @@ function deleteGroup() {
     $.ajax({ url: url,
         type: 'delete'});
     showSites();
+    fillGroupSelect();
 }
 
 $.fn.serializeObject = function()

@@ -2,6 +2,12 @@
 function fillGroupSelect() {
     var clientId = $.cookie("clientId");
     var url = "/clients/"+ clientId +"/groups";
+
+    $('#mergeGroups').find('option').remove()
+        .end().append('<option selected disabled>Merge to</option>');
+    $('#excludeGroups').find('option').remove()
+        .end().append('<option selected disabled>Exclude</option>');
+
     $.get(url, function(groups){
         var selectForGroups = $('#mergeGroups');
             for (i = 0; i < groups.length; i++){
@@ -87,6 +93,8 @@ function mergeGroups(groupId){
         }}).done(function(){
             $('#loader').css('display', 'none');
         });
+    showSites();
+    fillGroupSelect();
 }
 
 function differenceGroups(groupId){
@@ -104,6 +112,8 @@ function differenceGroups(groupId){
         }}).done(function(){
             $('#loader').css('display', 'none');
         });
+    showSites();
+    fillGroupSelect();
 }
 
 $.fn.serializeObject = function()
