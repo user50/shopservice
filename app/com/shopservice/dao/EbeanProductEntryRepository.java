@@ -38,7 +38,7 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
     @Override
     public void delete(Collection<ProductEntry> productsToDelete) throws Exception {
         for (ProductEntry productEntry: productsToDelete){
-            Ebean.delete(ProductEntry.class, productEntry);
+            Ebean.delete(ProductEntry.class, productEntry.id);
         }
     }
 

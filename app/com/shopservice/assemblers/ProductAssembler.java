@@ -35,7 +35,7 @@ public class ProductAssembler {
         for (ProductEntry entry : productEntryRepository.getWithChecked(clientId, categoryId, groupId) )
             productEntries.put(entry.productId, entry );
 
-        for (Product product : Services.getProductDAO(clientId).getProducts(categoryId))
+        for (Product product : products)
             fill(productEntries.get(product.id), product);
 
        return productEntries.values();
