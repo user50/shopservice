@@ -359,3 +359,7 @@ input[type=radio]:checked + label {
     margin-left: 5px;
     float: left;
 }
+
+.site{
+    float: left;
+}

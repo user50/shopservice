@@ -1,62 +1,49 @@
-$(function(){
-    window.App = {
-        Models: {},
-        Views: {},
-        Collections: {},
-        Router: {}
-    };
+var app = app || {};
 
-    window.template = function (id){
-        return _.template( $('#' + id).html());
-    };
+    app.Category = Backbone.Model.extend({});
 
-    App.Models.Category = Backbone.Model.extend({});
-
-    App.Collections.Category = Backbone.Collection.extend({
-        model: App.Models.Category,
+    app.Categories = Backbone.Collection.extend({
+        model: app.Category,
         url: function(){
-            return "/clients/" + clientId + "/categories";
+            return "/clients/" + clientId + "/categories?groupId=23";
         },
         parse: function(response){
             return response.categories;
         }
     });
 
-    App.Views.Category = Backbone.View.extend({
+    app.CategoryView = Backbone.View.extend({
         tagName: 'li',
-        template: template('categoryTpl'),
+        template: _.template($('#categoryTpl').html()),
         render: function(){
             var template = this.template(this.model.toJSON())
             this.$el.html( template );
             return this;
-        },
-        events: {
-            'click': 'showMessage'
-        },
-
-        showMessage: function(e){
-            alert($(e.currentTarget).text());
         }
     });
 
-    App.Views.Categories = Backbone.View.extend({
+    app.CategoriesView = Backbone.View.extend({
         initialize: function(){
             //this.render();
             this.collection.on('add', this.addOne, this);
         },
-        tagName: 'ol',
-        className: 'rectangle-list',
+        el: '.rectangle-list',
         render: function(){
             this.$el.empty();
             this.collection.each(function(category){
-                var categoryView = new App.Views.Category({model: category});
+                var categoryView = new app.CategoryView({model: category});
                 this.$el.append(categoryView.render().el);
             }, this);
             return this;
         },
         addOne: function(category){
-            var categoryView = new App.Views.Category({model: category});
+            var categoryView = new app.CategoryView({model: category});
             this.$el.append(categoryView.render().el);
+        },
+
+        filterOne: function(){
+            alert("ups");
         }
+
+
     });
-});

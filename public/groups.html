@@ -6,12 +6,6 @@
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/price.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/main.css"/>
 </head>
-<script type="text/javascript" src="javascripts/backbonejs/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="javascripts/backbonejs/underscore.js"></script>
-<script type="text/javascript" src="javascripts/backbonejs/backbone.js"></script>
-<script type="text/javascript" src="javascripts/backbonejs/groups.js"></script>
-<script type="text/javascript" src="javascripts/backbonejs/categories.js"></script>
-<script type="text/javascript" src="javascripts/backbonejs/general.js"></script>
 <script type="text/template" id="groupTemp">
     <input id="<%= name %>" siteId="<%= id %>" type="radio" name="site" >
     <label for="<%= name %>"> <%= name %> </label>
@@ -35,11 +29,19 @@
         </div>
         </div>
         <div id="main">
-            <div id="categories"></div>
+            <div id="categories">
+            <ol class="rectangle-list"></ol>
+            </div>
         </div>
 
     </div>
 </div>
 </div>
+<script type="text/javascript" src="javascripts/backbonejs/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/underscore.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/backbone.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/groups.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/categories.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/general.js"></script>
 </body>
 </html>
