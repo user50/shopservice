@@ -1,0 +1,164 @@
+
+.groups {
+    float: left;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+.sites {
+    float: left;
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.buttons {
+    float: left;
+    margin-top: 5px;
+}
+
+button.blue-btn{
+    background: #3399B3;
+    padding: 7px 30px;
+    font-size:13px;
+    font-weight: bold;
+    color:#fff;
+    text-align: center;
+    border:solid 2px #FFFFFF;
+}
+
+button.blue-btn-select{
+    background: #266680;
+    padding: 7px 30px;
+    font-size:13px;
+    font-weight: bold;
+    color:#fff;
+    text-align: center;
+    border:solid 2px #FFFFFF;
+}
+
+.unibutton {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding: .5em 2em .55em;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    margin-left: 5px;
+    margin-top: 7px;
+}
+.unibutton:hover {
+    text-decoration: none;
+}
+.unibutton:active {
+    position: relative;
+    top: 1px;
+}
+
+.orange {
+    color: #FFF;
+    border: solid 1px #da7c0c;
+    background: #f78d1d;
+    background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+    background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+}
+.orange:hover {
+    background: #f47c20;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+    background: -moz-linear-gradient(top,  #f88e11,  #f06015);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
+}
+.orange:active {
+    color: #fcd3a5;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
+    background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
+}
+
+.bttoolz {
+    border-top: 1px solid #adadad;
+    background: #4dd417;
+    background: -webkit-gradient(linear, left top, left bottom, from(#133466), to(#4dd417));
+    background: -moz-linear-gradient(top, #133466, #4dd417);
+    padding: 7px 14px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    box-shadow: rgba(0,0,0,1) 0 1px 0;
+    text-shadow: rgba(0,0,0,.4) 0 1px 0;
+    color: white;
+    font-size: 20px;
+    font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+    text-decoration: none;
+    vertical-align: middle;
+}
+.bttoolz:hover {
+    border-top-color: #11a800;
+    background: #11a800;
+    color: #ffffff;
+}
+.bttoolz:active {
+    border-top-color: #1b435e;
+    background: #1b435e;
+}
+
+/* The CSS */
+select {
+    padding:3px;
+    margin: 0;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    background: #f8f8f8;
+    color:#888;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+}
+
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select {padding-right: 28px}
+}
+
+.groups label {position:relative}
+.groups label:after {
+    content:'<>';
+    font:13px "Consolas", monospace;
+    color:#B1A4A4;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:8px; top:2px;
+    padding:0 0 2px;
+    border-bottom:1px solid #B1A4A4;
+    position:absolute;
+    pointer-events:none;
+}
+.groups label:before {
+    content:'';
+    right:6px; top:0px;
+    width:20px; height:20px;
+    background:#f8f8f8;
+    position:absolute;
+    pointer-events:none;
+    display:block;
+}

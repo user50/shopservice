@@ -1,14 +1,27 @@
 package controllers;
 
-import play.*;
+import com.shopservice.Authentication;
 import play.mvc.*;
 
 import views.html.*;
 
+import java.sql.SQLException;
+
 public class Application extends Controller {
 
-    public static Result index() {
-        return ok(index.render("Your new application is ready."));
+    @With(Authentication.class)
+    public static Result index() throws SQLException {
+        return redirect("/assets/login.html");
+    }
+
+    @With(Authentication.class)
+    public static Result price() throws SQLException {
+        return ok(price.render());
+    }
+
+    @With(Authentication.class)
+    public static Result groupmanager() {
+        return ok(groupmanager.render());
     }
 
 }

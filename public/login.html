@@ -1,0 +1,81 @@
+<!doctype html>
+
+<head>
+    <title>Login</title>
+    <!-- Basics -->
+
+    <META content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- CSS -->
+
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/reset.css">
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/login.css">
+
+</head>
+
+<!-- Main HTML -->
+
+<body>
+
+<!-- Begin Page Content -->
+
+<div id="container" >
+
+    <form id="loginform">
+
+        <label for="name">Username:</label>
+
+        <input type="username" name="j_username">
+
+        <label for="username">Password:</label>
+
+        <!--<p><a href="#">Forgot your password?</a>-->
+        <p>
+            <input type="password" name="j_password">
+
+        <div id="errorMessage" class="error">Invalid username and/or password, please try again.</div>
+
+        <div id="lower">
+            <!--<input type="checkbox">-->
+            <!--<label class="check" for="checkbox">Keep me logged in</label>-->
+            <input type="submit" value="Login">
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- End Page Content -->
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#loginform').submit(function(e) {
+            $('#container').css('height', '280px');
+            $('#errorMessage').css('display', 'none');
+            $.ajax({url: '/authentication',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    statusCode: {
+                            401: function() {
+                                $('#errorMessage').css('display', 'inline');
+                                $('#container').css('height', '297px');
+                            },
+                            200: function() {
+                                window.location.replace("/price");
+                            }
+                        }
+                    });
+            e.preventDefault();
+        });
+    });
+
+</script>
+</body>
+
+</html>
+

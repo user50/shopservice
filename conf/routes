@@ -3,7 +3,39 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                                   controllers.Application.index()
+GET     /price                              controllers.Application.price()
+GET     /groupmanager                           controllers.Application.groupmanager()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# ClientSettings operations
+GET     /clients                                                        controllers.ClientSettingsController.getClientSettings()
+GET     /clients/:id                                                    controllers.ClientSettingsController.getClientSetting(id)
+POST    /clients                                                        controllers.ClientSettingsController.createClientSettings()
+PUT     /clients/:id                                                    controllers.ClientSettingsController.updateClientSettings(id)
+DELETE  /clients/:id                                                    controllers.ClientSettingsController.deleteClientSettings(id)
+
+# ProductEntry operations
+GET     /clients/:id/groups/:groupId/products                             controllers.ProductController.getProducts(id, groupId: Long,  categoryId)
+PUT     /clients/:id/groups/:groupId/products/:productId                  controllers.ProductController.updateProduct(id, groupId: Long, productId )
+PUT     /clients/:id/groups/:groupId/products                             controllers.ProductController.updateProducts(id, groupId: Long, categoryId )
+
+# Category operations
+GET     /clients/:id/categories                                           controllers.CategoryController.getCategories(id, groupId)
+
+# PriceList operations
+GET    /client/:id/groups/:groupId/pricelists/:format                     controllers.PriceListController.generatePriceList( id, groupId:Long, format )
+GET    /formats                                                           controllers.PriceListController.getPriceListFormats()
+
+# Site operations
+GET    /clients/:id/groups                                                controllers.ProductGroupController.get( id )
+POST   /clients/:id/groups                                                controllers.ProductGroupController.add( id )
+DELETE /clients/:id/groups/:groupId                                       controllers.ProductGroupController.removeSite( id, groupId:Long )
+PUT /clients/:id/groups/:groupId/merge                                    controllers.ProductGroupController.merge( id, groupId:Long )
+PUT /clients/:id/groups/:groupId/diff                                     controllers.ProductGroupController.diff( id, groupId:Long )
+
+POST /authentication                                                      controllers.LoginController.authentication()
+POST /logout                                                              controllers.LoginController.logout()

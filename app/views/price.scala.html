@@ -1,0 +1,113 @@
+@()
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Configure and manage price lists for sites aggregators</title>
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/price.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/download.css"/>
+    <META content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/price.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/groupmanager.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/motionpack.js"></script>
+    <script type="text/javascript" src="/assets/javascripts/tablePaging.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            showSites();
+            fillGroupSelect();
+        $('#loader').ajaxSend(function(){$(this).show()})
+                .ajaxStop(function(){$(this).hide()});
+        $('#mergeGroups').on('change', function() {
+            mergeGroups(this.value); // or $(this).val()
+        });
+        $('#excludeGroups').on('change', function() {
+            differenceGroups(this.value); // or $(this).val()
+        });
+        });
+
+    </script>
+</head>
+<body>
+
+<div id="container">
+    <div id="header"> <a href="#">Tools for servicing the online store</a> </div>
+    <div id="menu"> <a  href="/price">GROUP SETTING</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="/groupmanager">GROUPS MANAGER</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#">CONTACTS</a>  </div>
+    <div id="cont">
+        <div id="wrapp">
+            <div class="sitesDiv">
+                <div id="clientSites">
+                    <div id="sites"></div>
+                </div>
+            </div>
+            <div class="downloadDiv">
+                <div class="buttons">
+                    <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a>
+                    <!--<a id="downloadHref" href="#">-->
+                        <!--<img src="/assets/images/download-button.jpg" onclick="downloadPrice()"> </a>-->
+                </div>
+                <div class="sites">
+                    <label>
+                        <select id="format">
+                            <option selected disabled>Select site</option>
+                            <option value="YML">Prom</option>
+                            <option value="YML">UkrMebli</option>
+                            <option value="price">HotLine</option>
+                            <option value="YML">Zakupka</option>
+                            <option value="YML">Aukro</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="groupsManager">
+                <div id="addNewGroupDiv" title="Add new group">
+                    <a title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
+                        <img src="/assets/images/addSiteImg.png">
+                    </a>
+                </div>
+                <div id="addNewSite" style="display:none; overflow:hidden; height:50px;">
+                    <form id="addNewSiteForm">
+                        <table>
+                            <tr>
+                                <td><input type="text" name="name"></td>
+                                <td><input type="submit" value="OK" onclick="addNewSite()"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div id="deleteGroupId" title="Delete current group">
+                    <img src="/assets/images/delete.png" onclick="deleteGroup()">
+                </div>
+                <div id="mergeDiv">
+                    <select id="mergeGroups" required>
+
+                    </select>
+                </div>
+                <div id="excludeDiv">
+                    <select id="excludeGroups" required>
+                        <option selected disabled>Exclude</option>
+                    </select>
+                </div>
+
+
+            </div>
+            <div id="main">
+                <p>
+                <a id="toCategoriesLink" href="#" onClick="showCategories()" style="display: none;"><img src="assets/images/Back_Button.gif"></a>
+                <div id="counter">Total selected items: <span class="countProducts"></span></div>
+                <div id="categories"> </div>
+                <form id = "updateForm"></form>
+            </div>
+        </div>
+    </div>
+    <div id="footer"><form action="/logout" method="post"><input type="submit" value="Logout"></form> </div>
+    <div id="loader"><div class="anim"><img src="assets/images/download.gif"></div></div>
+</div>
+
+</body>
+</html>

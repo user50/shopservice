@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/myapp -Dhttp.port=${PORT} -DapplyEvolutions.default=true -Ddb.default.url=${DATABASE_URL} -Ddb.default.driver=org.postgresql.Driver
+web: target/universal/stage/bin/testapp -Dhttp.port=${PORT} ${JAVA_OPTS}  -DapplyDownEvolutions.default=false -DapplyEvolutions.default=false -Ddb.default.driver=com.mysql.jdbc.Driver -Ddb.default.url=${CLEARDB_DATABASE_URL}'&useUnicode=true&characterEncoding=UTF-8'
