@@ -1,16 +1,9 @@
 var app = app || {};
-
 $(function() {
-    var groups = new app.Groups();
+    var groups = new Groups();
     groups.fetch();
 
-    var groupsView = new app.GroupsView({collection: groups});
+    var addGroupView = new AddGroup({collection: groups});
 
-    var categories = new app.Categories();
-    categories.fetch();
-
-    var categoriesView = new app.CategoriesView({collection: categories});
-    categoriesView.render();
-
-    var addGroupView = new app.AddGroup({collection: groups});
+//    categories.listenTo(groups, 'change', categories.meta('currentGroupId', groups.find(function(model) { return model.get('checked') == true; })));
 });

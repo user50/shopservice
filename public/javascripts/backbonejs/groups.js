@@ -1,18 +1,19 @@
 var app = app || {};
 
-    app.Group = Backbone.Model.extend({});
+
+    var Group = Backbone.Model.extend();
 
     clientId = 'client1';
 
-    app.Groups = Backbone.Collection.extend({
-        model: app.Group,
+    var Groups = Backbone.Collection.extend({
+        model: Group,
 
         url: function(){
             return '/clients/'+clientId+'/groups';
         }
     });
 
-    app.GroupsView = Backbone.View.extend({
+    var GroupsView = Backbone.View.extend({
         el: '#sites',
 
         initialize: function(){
@@ -20,11 +21,12 @@ var app = app || {};
         },
 
         events: {
-            'click input[name=site]': 'showMessage'
+            'click input[name=site]': 'setSelectedGroup'
         },
 
-        showMessage: function(e){
-            alert(e.currentTarget.attributes.siteid.value);
+        setSelectedGroup: function(e){
+            var selectedGroupId = e.currentTarget.attributes.siteid.value;
+            this.trigger('changeCurrentGroup', selectedGroupId);
         },
 
         render: function(){
@@ -33,12 +35,12 @@ var app = app || {};
             return this;
         },
         addOne: function(group){
-            var groupView = new app.GroupView({model: group});
+            var groupView = new GroupView({model: group});
             this.$el.append(groupView.render().el);
         }
     });
 
-    app.GroupView = Backbone.View.extend({
+    var GroupView = Backbone.View.extend({
         initialize: function(){
             this.model.on('destroy', this.remove, this);
         },
@@ -52,7 +54,7 @@ var app = app || {};
         }
     });
 
-    app.AddGroup = Backbone.View.extend({
+    var AddGroup = Backbone.View.extend({
         el: '#addGroup',
 
         events: {
@@ -64,9 +66,12 @@ var app = app || {};
 
         submit: function(e){
             e.preventDefault();
-
             var newGroupName = $(e.currentTarget).find('input[type=text]').val();
-            var newGroup = new app.Group({name: newGroupName});
+            var newGroup = new Group({name: newGroupName});
             this.collection.create(newGroup, {wait: true});
         }
     });
+
+    app.Groups = new Groups();
+    app.Groups.fetch();
+    app.GroupsView = new GroupsView({collection: app.Groups});
