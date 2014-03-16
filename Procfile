@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/testapp -Dhttp.port=${PORT}  -DapplyDownEvolutions.default=false -DapplyEvolutions.default=false -Ddb.default.driver=com.mysql.jdbc.Driver -Ddb.default.url='jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d&useUnicode=true&characterEncoding=UTF-8&username=b02276676df1a5&password=2c270044'
+web: target/universal/stage/bin/testapp -Dhttp.port=${PORT}  -DapplyDownEvolutions.default=false -DapplyEvolutions.default=false
