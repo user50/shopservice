@@ -17,11 +17,6 @@
 <div id="container">
 <div id="cont">
     <div id="wrapp">
-
-        <form id="addGroup">
-            <input type="text" placeholder="Name of a new group..">
-            <input type="submit" value="Add Group">
-        </form>
         <div id="sitesDiv">
         <div id="clientSites">
             <div id="sites">
@@ -30,6 +25,36 @@
         </div>
         <div id="main">
             <div id="categories">
+                <div class="groupsManager">
+                    <div id="addNewGroupDiv" title="Add new group">
+                        <a title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
+                            <img src="/assets/images/addSiteImg.png">
+                        </a>
+                    </div>
+                    <div id="addNewSite" style="display:none; overflow:hidden; height:50px;">
+                        <form id="addNewSiteForm">
+                            <table>
+                                <tr>
+                                    <td><input type="text" name="name"></td>
+                                    <td><input type="submit" value="OK" onclick="addNewSite()"></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div id="deleteGroupId" title="Delete current group">
+                        <img id="deleteGroupIdImg" src="/assets/images/delete.png">
+                    </div>
+                    <div id="mergeDiv">
+                        <select id="mergeGroups" required>
+                            <option selected disabled>Merge to</option>
+                        </select>
+                    </div>
+                    <div id="excludeDiv">
+                        <select id="excludeGroups" required>
+                            <option selected disabled>Exclude</option>
+                        </select>
+                    </div>
+                </div>
             <ol class="rectangle-list"></ol>
             </div>
         </div>
@@ -40,9 +65,10 @@
 <script type="text/javascript" src="javascripts/backbonejs/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/underscore.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/backbone.js"></script>
+<script type="text/javascript" src="javascripts/motionpack.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/groups.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/categories.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/general.js"></script>
-<script type="text/javascript" src="javascripts/backbonejs/cookie.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/groupsmanager.js"></script>
 </body>
 </html>

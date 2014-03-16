@@ -26,6 +26,7 @@ var app = app || {};
 
         setSelectedGroup: function(e){
             var selectedGroupId = e.currentTarget.attributes.siteid.value;
+            currentGroupId = selectedGroupId;
             this.trigger('changeCurrentGroup', selectedGroupId);
         },
 
@@ -54,24 +55,6 @@ var app = app || {};
         }
     });
 
-    var AddGroup = Backbone.View.extend({
-        el: '#addGroup',
-
-        events: {
-            'submit': 'submit'
-        },
-
-        initialize: function(){
-        },
-
-        submit: function(e){
-            e.preventDefault();
-            var newGroupName = $(e.currentTarget).find('input[type=text]').val();
-            var newGroup = new Group({name: newGroupName});
-            this.collection.create(newGroup, {wait: true});
-        }
-    });
-
-    app.Groups = new Groups();
-    app.Groups.fetch();
-    app.GroupsView = new GroupsView({collection: app.Groups});
+app.Groups = new Groups();
+app.GroupsView = new GroupsView({collection: app.Groups});
+app.Groups.fetch();
