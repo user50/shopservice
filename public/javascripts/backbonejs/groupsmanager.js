@@ -36,11 +36,7 @@ var MargeView = Backbone.View.extend({
 
     initialize: function(){
         this.collection.on('add', this.addOne, this);
-//        this.collection.on('remove', this.removeOne, this);
-    },
-
-    events: {
-        "change": "merge"
+        this.on('change', this.merge);
     },
 
     render: function(){
@@ -50,20 +46,9 @@ var MargeView = Backbone.View.extend({
     },
 
     addOne: function(group){
-//        var option = $('<option/>');
-//        option.attr('value', group.id);
-//        option.text(group.get('name'));
         var newGroup = new GroupViewToSelect({model: group});
         this.$el.append(newGroup.render().el);
-    },
-//    removeOne: function(group){
-//        this.$el.find("option[value='" + group.id + "']").remove();
-//    },
-
-    merge: function(){
-        console.log("Click on");
     }
-
 });
 
 var ExcludeView = Backbone.View.extend({
@@ -71,7 +56,6 @@ var ExcludeView = Backbone.View.extend({
 
     initialize: function(){
         this.collection.on('add', this.addOne, this);
-//        this.collection.on('remove', this.removeOne, this);
     },
 
     render: function(){
@@ -81,17 +65,9 @@ var ExcludeView = Backbone.View.extend({
     },
 
     addOne: function(group){
-//        var option = $('<option/>');
-//        option.attr('value', group.id);
-//        option.text(group.get('name'));
-
         var newGroup = new GroupViewToSelect({model: group});
         this.$el.append(newGroup.render().el);
     }
-//    removeOne: function(group){
-//        this.$el.find("option[value='" + group.id + "']").remove();
-//    }
-
 });
 
 app.AddGroup = new AddGroup({collection: app.Groups});

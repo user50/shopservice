@@ -2,5 +2,19 @@ var app = app || {};
 var currentGroupId = -1;
 
 $(function() {
-//    categories.listenTo(groups, 'change', categories.meta('currentGroupId', groups.find(function(model) { return model.get('checked') == true; })));
+//    $('#mergeGroups').on('change', function() {
+//        console.log(this.value+ "  "+ currentGroupId);
+//        mergeGroups(this.value, currentGroupId);
+//    });
+//
+//    function mergeGroups(groupId, targetGroupId){
+//        var body = {resourceGroupId: groupId};
+//        var url = "/clients/client1/groups/" + targetGroupId + "/merge";
+//        $.ajax({url: url,
+//            type: 'put',
+//            data: JSON.stringify(body),
+//            contentType: "application/json"
+//            });
+//        app.categoriesView.render();
+//    }
 });
