@@ -55,6 +55,19 @@ var app = app || {};
         }
     });
 
+    var GroupViewToSelect = Backbone.View.extend({
+        tagName: 'option',
+        initialize: function(){
+            this.model.on('destroy', this.remove, this);
+        },
+
+        render: function(){
+            this.$el.html(this.$el.attr('value', this.model.id));
+            this.$el.text(this.model.get('name'));
+            return this;
+        }
+    });
+
 app.Groups = new Groups();
 app.GroupsView = new GroupsView({collection: app.Groups});
 app.Groups.fetch();

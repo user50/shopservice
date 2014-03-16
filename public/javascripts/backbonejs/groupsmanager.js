@@ -36,7 +36,11 @@ var MargeView = Backbone.View.extend({
 
     initialize: function(){
         this.collection.on('add', this.addOne, this);
-        this.collection.on('remove', this.removeOne, this);
+//        this.collection.on('remove', this.removeOne, this);
+    },
+
+    events: {
+        "change": "merge"
     },
 
     render: function(){
@@ -46,14 +50,18 @@ var MargeView = Backbone.View.extend({
     },
 
     addOne: function(group){
-        var option = $('<option/>');
-        option.attr('value', group.id);
-        option.text(group.get('name'));
-
-        this.$el.append(option);
+//        var option = $('<option/>');
+//        option.attr('value', group.id);
+//        option.text(group.get('name'));
+        var newGroup = new GroupViewToSelect({model: group});
+        this.$el.append(newGroup.render().el);
     },
-    removeOne: function(group){
-        this.$el.find("option[value='" + group.id + "']").remove();
+//    removeOne: function(group){
+//        this.$el.find("option[value='" + group.id + "']").remove();
+//    },
+
+    merge: function(){
+        console.log("Click on");
     }
 
 });
@@ -63,7 +71,7 @@ var ExcludeView = Backbone.View.extend({
 
     initialize: function(){
         this.collection.on('add', this.addOne, this);
-        this.collection.on('remove', this.removeOne, this);
+//        this.collection.on('remove', this.removeOne, this);
     },
 
     render: function(){
@@ -73,15 +81,16 @@ var ExcludeView = Backbone.View.extend({
     },
 
     addOne: function(group){
-        var option = $('<option/>');
-        option.attr('value', group.id);
-        option.text(group.get('name'));
+//        var option = $('<option/>');
+//        option.attr('value', group.id);
+//        option.text(group.get('name'));
 
-        this.$el.append(option);
-    },
-    removeOne: function(group){
-        this.$el.find("option[value='" + group.id + "']").remove();
+        var newGroup = new GroupViewToSelect({model: group});
+        this.$el.append(newGroup.render().el);
     }
+//    removeOne: function(group){
+//        this.$el.find("option[value='" + group.id + "']").remove();
+//    }
 
 });
 
