@@ -3,18 +3,31 @@ var app = app || {};
 var AddGroup = Backbone.View.extend({
     el: '#addNewSiteForm',
 
+    initialize: function() {
+    },
+
     events: {
-        'submit': 'submit'
+//        'submit': 'submit'
+        'keypress #new-group': 'createOnEnter'
     },
 
     initialize: function(){
     },
 
-    submit: function(e){
-        var newGroupName = $(e.currentTarget).find('input[type=text]').val();
-        var newGroup = new Group({name: newGroupName});
+    createOnEnter: function( event ) {
+        $newGroup = this.$('#new-group');
+        if ( event.which !== ENTER_KEY || !$newGroup.val().trim() ) {
+            return;
+        }
+        var newGroup = new Group({name: $newGroup.val().trim()});
         this.collection.create(newGroup, {wait: true});
+        this.$input.val('');
     }
+//    submit: function(e){
+//        var newGroupName = $(e.currentTarget).find('input[type=text]').val();
+//        var newGroup = new Group({name: newGroupName});
+//        this.collection.create(newGroup, {wait: true});
+//    }
 });
 
 var DeleteGroup = Backbone.View.extend({
@@ -36,7 +49,16 @@ var MargeView = Backbone.View.extend({
 
     initialize: function(){
         this.collection.on('add', this.addOne, this);
-        this.on('change', this.merge);
+//        this.$el.on('change', function() {
+//        var body = {resourceGroupId: this.value};
+//        var url = "/clients/client1/groups/" + currentGroupId+ "/merge";
+//            $.ajax({url: url,
+//                type: 'put',
+//                data: JSON.stringify(body),
+//                contentType: "application/json"
+//                });
+//            app.categoriesView.render();
+//        });
     },
 
     render: function(){

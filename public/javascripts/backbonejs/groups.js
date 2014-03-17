@@ -27,7 +27,7 @@ var app = app || {};
         setSelectedGroup: function(e){
             var selectedGroupId = e.currentTarget.attributes.siteid.value;
             currentGroupId = selectedGroupId;
-            this.trigger('changeCurrentGroup', selectedGroupId);
+            this.trigger('changeCurrentGroup');
         },
 
         render: function(){

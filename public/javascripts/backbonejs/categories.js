@@ -8,6 +8,7 @@ var app = app || {};
         },
 
         parse: function(response){
+            app.Counter.set('count', response.totalCount);
             return response.categories;
         }
     });
@@ -26,13 +27,14 @@ var app = app || {};
         initialize: function(){
             this.collection.on('add', this.addOne, this);
             this.listenTo(app.GroupsView, 'changeCurrentGroup', this.render);
+            this.listenTo(app.GroupsView, 'mergeIsHappened', this.render);
         },
 
         el: '.rectangle-list',
-        render: function(groupId){
+        render: function(){
             this.$el.empty();
 
-            this.collection.updateUrl(groupId);
+            this.collection.updateUrl(currentGroupId);
             this.collection.reset();
             this.collection.fetch();
 
@@ -47,3 +49,7 @@ var app = app || {};
 
     app.categories = new Categories();
     app.categoriesView = new CategoriesView({collection: app.categories});
+
+
+var Vent = Backbone.View.extend({});
+app.Event = new Vent();
