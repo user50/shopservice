@@ -27,7 +27,7 @@ var app = app || {};
         setSelectedGroup: function(e){
             var selectedGroupId = e.currentTarget.attributes.siteid.value;
             currentGroupId = selectedGroupId;
-            app.categories.fetch({ data: $.param({ groupId: selectedGroupId}) });
+            app.categories.trigger('changeCurrentGroup', selectedGroupId);
         },
 
         render: function(){
@@ -38,6 +38,10 @@ var app = app || {};
         addOne: function(group){
             var groupView = new GroupView({model: group});
             this.$el.append(groupView.render().el);
+        },
+
+        getCheckedGroupId: function(){
+            console.log("start getCheckedGroupId...");
         }
     });
 

@@ -3,7 +3,15 @@ var app = app || {};
     var Category = Backbone.Model.extend({});
 
     var Categories = Backbone.Collection.extend({
+        initialize: function(){
+            this.on('changeCurrentGroup', function(selectedGroupId){
+                    this.fetch({
+                        data: $.param({ groupId: selectedGroupId})});
+                    }, this);
+        },
+
         url: "/clients/" + clientId + "/categories",
+
         parse: function(response){
             app.Counter.set('count', response.totalCount);
             return response.categories;
