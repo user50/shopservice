@@ -24,19 +24,26 @@ var app = app || {};
         tagName: 'li',
         template: _.template($('#categoryTpl').html()),
 
+        events: {
+            'click' : 'onClick'
+        },
         initialize: function(){
             this.model.on('change', this.render, this);
         },
 
-    render: function(){
-        console.log("Render CategoryView to a category model with id: " + this.model.id);
-        var template = this.template(this.model.toJSON())
-            this.$el.html( template );
-            return this;
+        render: function(){
+            console.log("Render CategoryView to a category model with id: " + this.model.id);
+            var template = this.template(this.model.toJSON())
+                this.$el.html( template );
+                return this;
+        },
+
+        onClick: function(){
+            app.Products.trigger('selectedCategory', this.model.id);
         }
     });
 
-var CategoriesView = Backbone.View.extend({
+    var CategoriesView = Backbone.View.extend({
         el: '.rectangle-list',
 
         initialize: function(){

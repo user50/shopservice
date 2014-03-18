@@ -16,6 +16,18 @@
 <script type="text/template" id="groupTempToSelect">
     <option value="<%= id %>"> <%= name %> </option>
 </script>
+<script type="text/template" id="productTemplate">
+
+        <td><input id="<%= id %>" type="checkbox" class="productCheck"></td>
+        <td><a href="<%= url %>" target="_blank"><%= productName %></a></td>
+        <td><%= price %></td>
+        <td><% if (published) { %>
+            <img alt="check" src="images/check.png">
+            <% } else { %>
+            <img alt="check" src="images/cross.png"><% } %>
+        </td>
+
+</script>
 <body>
 <div id="container">
 <div id="cont">
@@ -63,6 +75,9 @@
                     <p>Total selected items: <span class="countProducts"></span></div>
             <ol class="rectangle-list"></ol>
             </div>
+            <div id="productsTableDiv">
+                <table id="productsTable" class="simple-little-table" cellspacing="0"> </table>
+            </div>
         </div>
 
     </div>
@@ -78,6 +93,7 @@
 <script type="text/javascript" src="javascripts/backbonejs/general.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/groupsmanager.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/counter.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/products.js"></script>
 <script type="text/javascript">
     $(document).ready(function()
     {
