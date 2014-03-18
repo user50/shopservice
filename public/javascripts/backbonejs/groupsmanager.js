@@ -49,20 +49,12 @@ var MargeView = Backbone.View.extend({
 
     initialize: function(){
         this.collection.on('add', this.addOne, this);
-//        this.$el.on('change', function() {
-//        var body = {resourceGroupId: this.value};
-//        var url = "/clients/client1/groups/" + currentGroupId+ "/merge";
-//            $.ajax({url: url,
-//                type: 'put',
-//                data: JSON.stringify(body),
-//                contentType: "application/json"
-//                });
-//            app.categoriesView.render();
-//        });
+        this.listenTo(app.categories, 'mergeIsHappened', this.render);
     },
 
     render: function(){
-        this.$el.empty();
+        this.$el.find('option').remove()
+            .end().append('<option selected disabled>Merge to</option>');
         this.collection.each(this.addOne, this);
         return this;
     },
@@ -78,10 +70,12 @@ var ExcludeView = Backbone.View.extend({
 
     initialize: function(){
         this.collection.on('add', this.addOne, this);
+        this.listenTo(app.categories, 'excludeIsHappened', this.render);
     },
 
     render: function(){
-        this.$el.empty();
+        this.$el.find('option').remove()
+            .end().append('<option selected disabled>Exclude</option>');
         this.collection.each(this.addOne, this);
         return this;
     },

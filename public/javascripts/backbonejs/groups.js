@@ -38,10 +38,6 @@ var app = app || {};
         addOne: function(group){
             var groupView = new GroupView({model: group});
             this.$el.append(groupView.render().el);
-        },
-
-        getCheckedGroupId: function(){
-            console.log("start getCheckedGroupId...");
         }
     });
 
