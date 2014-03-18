@@ -3,11 +3,13 @@ var app = app || {};
     var Category = Backbone.Model.extend({});
 
     var Categories = Backbone.Collection.extend({
+
         initialize: function(){
-            this.on('changeCurrentGroup', function(selectedGroupId){
+            this.on('changeCurrentGroup mergeIsHappened excludeIsHappened',
+                function(currentGroupId){
                     this.fetch({
-                        data: $.param({ groupId: selectedGroupId})});
-                    }, this);
+                      data: $.param({ groupId: currentGroupId})});
+                }, this);
         },
 
         url: "/clients/" + clientId + "/categories",
@@ -26,8 +28,9 @@ var app = app || {};
             this.model.on('change', this.render, this);
         },
 
-        render: function(){
-            var template = this.template(this.model.toJSON())
+    render: function(){
+        console.log("Render CategoryView to a category model with id: " + this.model.id);
+        var template = this.template(this.model.toJSON())
             this.$el.html( template );
             return this;
         }
@@ -38,7 +41,6 @@ var CategoriesView = Backbone.View.extend({
 
         initialize: function(){
             this.collection.on('add', this.addOne, this);
-            this.listenTo(app.GroupsView, 'mergeIsHappened', this.render);
         },
         render: function(){
             this.$el.empty();
@@ -46,6 +48,7 @@ var CategoriesView = Backbone.View.extend({
             return this;
         },
         addOne: function(category){
+            console.log("Adding the category view (model.id = " + category.id + ")to CategoriesView : start...")
             var categoryView = new CategoryView({model: category});
             this.$el.append(categoryView.render().el);
         }
