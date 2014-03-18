@@ -3,10 +3,7 @@ var app = app || {};
     var Category = Backbone.Model.extend({});
 
     var Categories = Backbone.Collection.extend({
-        updateUrl: function(groupId){
-            this.url = "/clients/" + clientId + "/categories?groupId=" + groupId;
-        },
-
+        url: "/clients/" + clientId + "/categories",
         parse: function(response){
             app.Counter.set('count', response.totalCount);
             return response.categories;
@@ -16,6 +13,11 @@ var app = app || {};
     var CategoryView = Backbone.View.extend({
         tagName: 'li',
         template: _.template($('#categoryTpl').html()),
+
+        initialize: function(){
+            this.model.on('change', this.render, this);
+        },
+
         render: function(){
             var template = this.template(this.model.toJSON())
             this.$el.html( template );
@@ -23,21 +25,15 @@ var app = app || {};
         }
     });
 
-    var CategoriesView = Backbone.View.extend({
+var CategoriesView = Backbone.View.extend({
+        el: '.rectangle-list',
+
         initialize: function(){
             this.collection.on('add', this.addOne, this);
-            this.listenTo(app.GroupsView, 'changeCurrentGroup', this.render);
             this.listenTo(app.GroupsView, 'mergeIsHappened', this.render);
         },
-
-        el: '.rectangle-list',
         render: function(){
             this.$el.empty();
-
-            this.collection.updateUrl(currentGroupId);
-            this.collection.reset();
-            this.collection.fetch();
-
             this.collection.each(this.addOne, this);
             return this;
         },
@@ -49,7 +45,3 @@ var app = app || {};
 
     app.categories = new Categories();
     app.categoriesView = new CategoriesView({collection: app.categories});
-
-
-var Vent = Backbone.View.extend({});
-app.Event = new Vent();
