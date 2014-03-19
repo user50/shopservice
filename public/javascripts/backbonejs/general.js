@@ -1,6 +1,7 @@
 var app = app || {};
 var ENTER_KEY = 13;
 var currentGroupId = -1;
+var currentCategoryId = -1;
 
 $(function() {
     $('#mergeGroups').on('change', function() {

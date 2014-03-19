@@ -18,7 +18,7 @@
 </script>
 <script type="text/template" id="productTemplate">
 
-        <td><input id="<%= id %>" type="checkbox" class="productCheck"></td>
+        <td><input id="<%= id %>" type="checkbox" class="productCheck" <% if (checked) { %> checked <% } %> ></td>
         <td><a href="<%= url %>" target="_blank"><%= productName %></a></td>
         <td><%= price %></td>
         <td><% if (published) { %>
@@ -88,6 +88,7 @@
 <script type="text/javascript" src="javascripts/backbonejs/underscore.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/backbone.js"></script>
 <script type="text/javascript" src="javascripts/motionpack.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/app.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/groups.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/categories.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/general.js"></script>

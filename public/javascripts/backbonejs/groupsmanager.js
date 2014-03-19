@@ -21,7 +21,6 @@ var AddGroup = Backbone.View.extend({
         }
         var newGroup = new Group({name: $newGroup.val().trim()});
         this.collection.create(newGroup, {wait: true});
-        this.$input.val('');
     }
 //    submit: function(e){
 //        var newGroupName = $(e.currentTarget).find('input[type=text]').val();

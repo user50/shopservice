@@ -1,10 +1,24 @@
 var app = app || {};
 
-var Product = Backbone.Model.extend({});
+var Product = Backbone.Model.extend({
+    toggle: function(){
+        this.save({
+            checked: !this.get('checked')
+        }, { groupId: currentGroupId});
+    }
+});
 
 var ProductView = Backbone.View.extend({
     tagName: 'tr',
     template: _.template($('#productTemplate').html()),
+
+    initialize: function(){
+        this.model.on('change', this.render, this);
+    },
+
+    events: {
+        'click .productCheck' : 'productToggle'
+    },
 
     initialize: function(){
         this.model.on('change', this.render, this);
@@ -14,7 +28,12 @@ var ProductView = Backbone.View.extend({
         var template = this.template(this.model.toJSON())
         this.$el.html( template );
         return this;
+    },
+
+    productToggle: function(e){
+        this.model.toggle();
     }
+
 });
 
 var Products = Backbone.Collection.extend({
@@ -28,7 +47,9 @@ var Products = Backbone.Collection.extend({
             }, this);
     },
 
-    url: "/clients/" + clientId + "/groups/" + currentGroupId + "/products"
+    url: function(){
+        return "/clients/" + clientId + "/groups/" + currentGroupId + "/products"
+    }
 });
 
 var ProductsView = Backbone.View.extend({

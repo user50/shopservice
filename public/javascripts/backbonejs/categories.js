@@ -10,6 +10,7 @@ var app = app || {};
                     this.fetch({
                       data: $.param({ groupId: currentGroupId})});
                 }, this);
+            this.listenTo(app.Groups, 'remove', function(){console.log("categories is reseted in Categories"); this.reset()})
         },
 
         url: "/clients/" + clientId + "/categories",
@@ -48,6 +49,7 @@ var app = app || {};
 
         initialize: function(){
             this.collection.on('add', this.addOne, this);
+            this.collection.on('reset', this.render, this);
         },
         render: function(){
             this.$el.empty();
