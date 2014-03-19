@@ -2,6 +2,11 @@ var app = app || {};
 
 var Product = Backbone.Model.extend({
     toggle: function(){
+        if (this.attributes.checked == true){
+            app.Counter.set('count', app.Counter.get('count') - 1)
+        } else {
+            app.Counter.set('count', app.Counter.get('count') + 1)
+        }
         this.save({
             checked: !this.get('checked')
         }, { groupId: currentGroupId});

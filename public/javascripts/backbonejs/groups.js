@@ -42,16 +42,23 @@ var app = app || {};
     });
 
     var GroupView = Backbone.View.extend({
-        initialize: function(){
-            this.model.on('destroy', this.remove, this);
-        },
         className: "site",
         template: _.template($('#groupTemp').html()),
 
+        initialize: function(){
+            this.model.on('destroy', this.remove, this);
+        },
+
+        events: {
+            'click' : 'click'
+        },
         render: function(){
             var template = this.template(this.model.toJSON())
             this.$el.html( template );
             return this;
+        },
+        click: function(){
+            vent.trigger('selectedGroup');
         }
     });
 

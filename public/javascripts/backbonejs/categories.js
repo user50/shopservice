@@ -10,7 +10,6 @@ var app = app || {};
                     this.fetch({
                       data: $.param({ groupId: currentGroupId})});
                 }, this);
-            this.listenTo(app.Groups, 'remove', function(){console.log("categories is reseted in Categories"); this.reset()})
         },
 
         url: "/clients/" + clientId + "/categories",
@@ -41,6 +40,7 @@ var app = app || {};
 
         onClick: function(){
             app.Products.trigger('selectedCategory', this.model.id);
+            vent.trigger('selectedCategory');
         }
     });
 

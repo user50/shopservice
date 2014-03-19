@@ -22,6 +22,8 @@ $(function() {
             async: false
             });
         app.categories.trigger('mergeIsHappened', currentGroupId);
+        vent.trigger('selectedGroup');
+
     };
 
     function excludeGroups(groupId, targetGroupId){
@@ -34,5 +36,6 @@ $(function() {
             async: false
             });
         app.categories.trigger('excludeIsHappened', currentGroupId);
+        vent.trigger('selectedGroup');
     }
 });
