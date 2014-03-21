@@ -42,19 +42,19 @@
             <div id="categories">
                 <div class="groupsManager">
                     <div id="addNewGroupDiv" title="Add new group">
-                        <a title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
+                        <a id="plusImg" title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
                             <img src="/assets/images/addSiteImg.png">
                         </a>
                     </div>
                     <div id="addNewSite" style="display:none; overflow:hidden; height:50px;">
                         <form id="addNewSiteForm">
-                            <input id="new-group" type="text" name="name">
-                            <!--<table>
+                            <!--<input id="new-group" type="text" name="name">-->
+                            <table>
                                 <tr>
                                     <td><input id="new-group" type="text" name="name"></td>
-                                    <td><input type="submit" value="OK" onclick="addNewSite()"></td>
+                                    <td><input type="button" value="OK"></td>
                                 </tr>
-                            </table>  -->
+                            </table>
                         </form>
                     </div>
                     <div id="deleteGroupId" title="Delete current group">

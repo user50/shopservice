@@ -7,7 +7,7 @@ var AddGroup = Backbone.View.extend({
     },
 
     events: {
-//        'submit': 'submit'
+        'click input[type=button]': 'addGroup',
         'keypress #new-group': 'createOnEnter'
     },
 
@@ -19,14 +19,15 @@ var AddGroup = Backbone.View.extend({
         if ( event.which !== ENTER_KEY || !$newGroup.val().trim() ) {
             return;
         }
+        event.preventDefault();
         var newGroup = new Group({name: $newGroup.val().trim()});
         this.collection.create(newGroup, {wait: true});
+    },
+    addGroup: function(e){
+        var newGroupName = this.$el.find('input[type=text]').val();
+        var newGroup = new Group({name: newGroupName});
+        this.collection.create(newGroup, {wait: true});
     }
-//    submit: function(e){
-//        var newGroupName = $(e.currentTarget).find('input[type=text]').val();
-//        var newGroup = new Group({name: newGroupName});
-//        this.collection.create(newGroup, {wait: true});
-//    }
 });
 
 var DeleteGroup = Backbone.View.extend({
