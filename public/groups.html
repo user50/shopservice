@@ -16,6 +16,15 @@
 <script type="text/template" id="groupTempToSelect">
     <option value="<%= id %>"> <%= name %> </option>
 </script>
+<script type="text/template" id="productTableHeader">
+        <tr>
+            <th>
+                <input id="check_all" type="checkbox"></th>
+            <th>Product Name</th>
+            <th>Price, UAH</th>
+            <th>Published</th>
+        </tr>
+</script>
 <script type="text/template" id="productTemplate">
 
         <td><input id="<%= id %>" type="checkbox" class="productCheck" <% if (checked) { %> checked <% } %> ></td>
@@ -77,8 +86,10 @@
                 <ol class="rectangle-list"></ol>
             </div>
             <div id="productsTableDiv">
-                <table id="productsTable" class="simple-little-table" cellspacing="0"> </table>
+                <table id="productsTable" class="simple-little-table" cellspacing="0">
+                </table>
             </div>
+
         </div>
     </div>
     <div id="listener"></div>

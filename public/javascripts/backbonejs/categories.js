@@ -41,6 +41,7 @@ var app = app || {};
         onClick: function(){
             app.Products.trigger('selectedCategory', this.model.id);
             vent.trigger('selectedCategory');
+            currentCategoryId = this.model.id;
         }
     });
 

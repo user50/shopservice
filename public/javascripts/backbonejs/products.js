@@ -10,6 +10,18 @@ var Product = Backbone.Model.extend({
         this.save({
             checked: !this.get('checked')
         }, { groupId: currentGroupId});
+    },
+
+    checked: function(checked){
+        if (checked == true && this.attributes.checked != true) {
+            app.Counter.set('count', app.Counter.get('count') + 1);
+            this.set('checked', true);
+        }
+        if (checked == false && this.attributes.checked != false) {
+            app.Counter.set('count', app.Counter.get('count') - 1);
+            this.set('checked', false);
+        }
+        console.log("Product with id " + this.attributes.id + " checked as " + checked);
     }
 });
 
@@ -61,12 +73,22 @@ var ProductsView = Backbone.View.extend({
     el: '#productsTable',
 
     initialize: function(){
-        this.collection.on('add', this.addOne, this);
+        this.collection.on('add', this.render, this);
         this.collection.on('reset', this.render, this);
+    },
+
+    events: {
+        'change #check_all_products' : 'checkAll'
     },
 
     render: function(){
         this.$el.empty();
+        this.renderHeader();
+        if (this.collection.length == this.collection.where({checked: true}).length){
+            console.log("All products are checked!");
+            this.$el.find('#check_all_products').prop('checked', 'checked');
+        }
+
         this.collection.each(this.addOne, this);
         return this;
     },
@@ -74,6 +96,45 @@ var ProductsView = Backbone.View.extend({
     addOne: function(product){
         var productView = new ProductView({model: product});
         this.$el.append(productView.render().el);
+    },
+
+    checkAll: function(e){
+        console.log("Check all products...");
+
+        var url = "/clients/"+clientId + "/groups/" + currentGroupId + "/products?categoryId=" + currentCategoryId;
+        var body = {checked: e.currentTarget.checked};
+
+        $.ajax({
+            url:url,
+            type:"put",
+            data: JSON.stringify(body),
+            contentType: 'application/json'
+        });
+
+        this.collection.each(function(product){
+            product.checked(e.currentTarget.checked);
+        }, this);
+    },
+
+    renderHeader: function(){
+        this.$el.append($('<col width="20px">'));
+        this.$el.append($('<col>'));
+        this.$el.append($('<col width="10px">'));
+        this.$el.append($('<col width="20px">'));
+
+        var tr = $('<tr/>');
+
+        var checkAll = $('<input>');
+        checkAll.attr('id', 'check_all_products');
+        checkAll.attr('type', 'checkbox');
+        var th = $('<th></th>');
+        th.append(checkAll);
+        tr.append(th);
+        tr.append("<th>Product Name</th>");
+        tr.append("<th>Price, UAH</th>");
+        tr.append("<th>Published</th>");
+        this.$el.append(tr);
+        console.log("Header is rendered...");
     }
 });
 
