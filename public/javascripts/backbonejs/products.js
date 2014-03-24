@@ -60,12 +60,16 @@ var Products = Backbone.Collection.extend({
         this.on('selectedCategory',
             function(currentCategory){
                 this.fetch({
-                    data: $.param({ categoryId: currentCategory}), reset: true});
+                    data: $.param({ categoryId: currentCategory, offset: 0, limit: 10}), reset: true});
             }, this);
     },
 
     url: function(){
         return "/clients/" + clientId + "/groups/" + currentGroupId + "/products"
+    },
+
+    parse: function(response){
+        return response.collectionResult;
     }
 });
 

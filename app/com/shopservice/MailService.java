@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class MailService {
 
-    private static final List<String> OWNERS = Arrays.asList("jmen7070@gmail.com", "oleogin@gmail.com");
+    private static final List<String> OWNERS = Arrays.asList("jmen7070@gmail.com");
 
     private static MailService instance;
 

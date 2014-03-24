@@ -19,7 +19,7 @@ PUT     /clients/:id                                                    controll
 DELETE  /clients/:id                                                    controllers.ClientSettingsController.deleteClientSettings(id)
 
 # ProductEntry operations
-GET     /clients/:id/groups/:groupId/products                             controllers.ProductController.getProducts(id, groupId: Long,  categoryId)
+GET     /clients/:id/groups/:groupId/products                             controllers.ProductController.getProductsPage(id, groupId: Long,  categoryId, offset: Long, limit: Long)
 PUT     /clients/:id/groups/:groupId/products/:productId                  controllers.ProductController.updateProduct(id, groupId: Long, productId )
 PUT     /clients/:id/groups/:groupId/products                             controllers.ProductController.updateProducts(id, groupId: Long, categoryId )
 

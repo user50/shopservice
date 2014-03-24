@@ -60,6 +60,25 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
     }
 
     @Override
+    public List<ProductEntry> getWithCheckedPage(String clientId, String categoryId, int groupId, int offset, int limit) {
+        List<SqlRow> rows = Ebean.createSqlQuery("SELECT product_entry.*, group2product.id IS NOT NULL AS checked FROM product_entry " +
+                "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
+                "WHERE client_settings_id = ? AND category_id = ? LIMIT ? OFFSET ?")
+                .setParameter(1, groupId)
+                .setParameter(2, clientId)
+                .setParameter(3, categoryId)
+                .setParameter(4, limit)
+                .setParameter(5, offset)
+                .findList();
+
+        List<ProductEntry> entries = new ArrayList<ProductEntry>();
+        for (SqlRow row : rows)
+            entries.add(new ProductEntry(row));
+
+        return entries;
+    }
+
+    @Override
     public Map<String, Integer> getCountPerCategory(String clientId, String groupId) {
         List<SqlRow> rows = Ebean.createSqlQuery("SELECT category_id, count(product_entry.id) AS total FROM product_entry " +
                 "JOIN group2product ON group2product.product_entry_id = product_entry.id " +

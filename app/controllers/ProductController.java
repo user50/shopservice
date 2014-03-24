@@ -20,6 +20,10 @@ public class ProductController extends Controller {
         return ok(Json.toJson(productAssembler.getProducts(clientId, categoryId, siteId.intValue()) ));
     }
 
+    public static Result getProductsPage(String clientId, Long groupId,  String categoryId, Long offset, Long limit) throws Exception {
+        return ok(Json.toJson(productAssembler.getProductsPage(clientId, categoryId, groupId.intValue(), offset.intValue(), limit.intValue())));
+    }
+
     public static Result updateProduct(String clientId, Long siteId, String productId)
     {
         Map<String,Boolean> body = Json.fromJson(request().body().asJson(), Map.class);
