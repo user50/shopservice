@@ -11,6 +11,7 @@ var AppView = Backbone.View.extend({
         app.categories.reset();
         app.categoriesView.$el.hide();
         app.BackButton.$el.show();
+        app.pagination.$el.show();
     },
     onSelectedGroup: function(){
         app.categoriesView.$el.show();
@@ -35,6 +36,7 @@ var BackButton = Backbone.View.extend({
         app.categories.trigger('changeCurrentGroup', currentGroupId);
         app.categoriesView.$el.show();
         app.ProductsView.$el.empty();
+        app.pagination.$el.hide();
         this.$el.hide();
     }
 });
