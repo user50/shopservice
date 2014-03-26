@@ -1,6 +1,13 @@
 package com.shopservice.dao;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlUpdate;
+import com.shopservice.domain.Group2Product;
+import com.shopservice.domain.ProductEntry;
+import com.shopservice.domain.ProductGroup;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class EbeanGroup2ProductRepository implements Group2ProductRepository {
     @Override
@@ -66,5 +73,25 @@ public class EbeanGroup2ProductRepository implements Group2ProductRepository {
                 ") AS `source` " +
                 "JOIN group2product AS basic ON `source`.product_entry_id = basic.product_entry_id " +
                 "AND basic.product_group_id = ?").setParameter(1, source).setParameter(2, basic).execute();
+    }
+
+    @Override
+    public void set(String clientId, int groupId, List<ProductEntry> productEntries) {
+        String[] abc = new String[productEntries.size()];
+        Arrays.fill(abc, "?");
+
+        SqlUpdate sqlUpdate = Ebean.createSqlUpdate("INSERT INTO group2product (`product_group_id`, `product_entry_id`) " +
+                "SELECT ?, product_entry.id FROM product_entry " +
+                "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
+                "WHERE client_settings_id = ? AND product_entry.id IN (" + Arrays.asList(abc).toString().replace("[", "").replace("]", "") + ") AND group2product.id IS NULL")
+                .setParameter(1, groupId)
+                .setParameter(2, groupId)
+                .setParameter(3, clientId);
+
+        int i = 4;
+        for (ProductEntry productEntry : productEntries)
+            sqlUpdate.setParameter(i++, productEntry.id);
+
+        sqlUpdate.execute();
     }
 }

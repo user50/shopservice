@@ -41,7 +41,7 @@ public class ProductAssembler {
     public PaginationResult<ProductEntry> getProductsPage(String clientId, String categoryId, int groupId, int offset, int limit) throws Exception {
         List<Product> products = syncProducts(clientId, categoryId);
 
-        Map<String,ProductEntry> productEntriesPage = new LinkedHashMap<>();
+        Map<String,ProductEntry> productEntriesPage = new LinkedHashMap<String,ProductEntry>();
         for (ProductEntry entry : productEntryRepository.getWithCheckedPage(clientId, categoryId, groupId, offset, limit) )
             productEntriesPage.put(entry.productId, entry );
 
