@@ -39,9 +39,9 @@ var app = app || {};
         },
 
         onClick: function(){
+            currentCategoryId = this.model.id;
             app.Products.trigger('selectedCategory', this.model.id);
             vent.trigger('selectedCategory');
-            currentCategoryId = this.model.id;
         }
     });
 

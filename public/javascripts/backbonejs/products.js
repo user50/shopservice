@@ -59,9 +59,12 @@ var Products = Backbone.Collection.extend({
     initialize: function(){
         this.on('selectedCategory',
             function(currentCategory){
-                this.fetch({
-                    data: $.param({ categoryId: currentCategory, offset: 0, limit: 10}), reset: true});
+//                this.fetch({
+//                    data: $.param({ categoryId: currentCategory, offset: 0, limit: 10}), reset: true});
+                this.updatePage(1);
             }, this);
+
+        this.on('updatePage', this.updatePage, this);
     },
 
     url: function(){
@@ -69,7 +72,19 @@ var Products = Backbone.Collection.extend({
     },
 
     parse: function(response){
+        app.PaginationModel.set('page_count', Math.floor(response.totalCount/10)+1);
         return response.collectionResult;
+    },
+
+    updatePage: function(page){
+        app.PaginationModel.set('page_active', page);
+
+        if (page > 1)
+            var offset = page*10 - 10;
+        else var offset = 0;
+
+        this.fetch({
+            data: $.param({ categoryId: currentCategoryId, offset: offset, limit: 10}), reset: true});
     }
 });
 
@@ -142,70 +157,32 @@ var ProductsView = Backbone.View.extend({
     }
 });
 
+var PaginationModel = Backbone.Model.extend({});
+
 var PaginationView = Backbone.View.extend({
     el: '#pagination',
     template: _.template($("#pagination-view").html()), // шаблон
-    link: "", // ссылка
-    page_count: null, // кол-во страниц
-    page_active: null, // активная страница
-    page_show: 5, // кол-во страниц в блоке видимости
-    attributes: { // атрибуты элемента
+
+    attributes: {
         "class": "pagination"
     },
-    initialize: function(params) { // конструктор
-        this.link = params.link;
-        this.page_count = params.page_count;
-        if (this.page_count <= this.page_show) {
-            this.page_show = this.page_count;
-        }
-        this.page_active = params.page_active;
+    initialize: function() {
+        this.model.bind('change', this.render, this);
     },
 
     render: function() {
-        var range = Math.floor(this.page_show / 2);
-        var nav_begin = this.page_active - range;
-        if (this.page_show % 2 == 0) { // Если четное кол-во
-            nav_begin++;
-        }
-        var nav_end = this.page_active + range;
-        var left_dots = true;
-        var right_dots = true;
-        if (nav_begin <= 2) {
-            nav_end = this.page_show;
-            if (nav_begin == 2) {
-                nav_end++;
-            }
-            nav_begin = 1;
-            left_dots = false;
-        }
-
-        if (nav_end >= this.page_count - 1 ) {
-            nav_begin = this.page_count - this.page_show + 1;
-            if (nav_end == this.page_count - 1) {
-                nav_begin--;
-            }
-            nav_end = this.page_count;
-            right_dots = false;
-        }
-
         $(this.el).html( this.template({
-            link: this.link,
-            page_count: this.page_count,
-            page_active: this.page_active,
-            nav_begin: nav_begin,
-            nav_end: nav_end,
-            left_dots: left_dots,
-            right_dots: right_dots
+            link: this.model.attributes.link,
+            page_count: this.model.attributes.page_count,
+            page_active: this.model.attributes.page_active
         }) );
         return this;
     }
 });
 
-app.pagination = new PaginationView({
-    link: "#products/page/",
-    page_count: 10,
-    page_active: 5
+app.PaginationModel = new PaginationModel({
+    link: "#products/page/"
 });
-app.pagination.render();
+app.pagination = new PaginationView({model: app.PaginationModel});
 app.Products = new Products();
 app.ProductsView = new ProductsView({collection: app.Products});

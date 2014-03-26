@@ -40,26 +40,10 @@
 <script type="text/template" id="pagination-view">
 <ul>
 
-    <% if (page_active > 1) { %>
-    <li><a href="<%= link %><%= page_active-1 %>">«</a></li>
-    <% } %>
-    <% if (left_dots) {%>
-    <li><a href="<%= link %>1">1</a></li>
-    <li class="disabled"><a href="#">...</a></li>
-    <% } %>
-
-    <% for (var i = nav_begin; i <= nav_end; i++) { %>
+    <% for (var i = 1; i <= page_count; i++) { %>
     <li <% if (page_active == i) print('class="active"') %> ><a href="<%= link %><%= i %>"><%= i %></a></li>
     <% } %>
 
-    <% if (right_dots) {%>
-    <li class="disabled"><a href="#">...</a></li>
-    <li><a href="<%= link %><%= page_count %>"><%= page_count %></a></li>
-    <% } %>
-
-    <% if (page_active < page_count) { %>
-    <li><a  href="<%= link %><%= page_active+1 %>">»</a></li>
-    <% } %>
 </ul>
     </script>
 <body>
@@ -133,6 +117,7 @@
 <script type="text/javascript" src="javascripts/backbonejs/counter.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/products.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/app.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/routes.js"></script>
 <script type="text/javascript">
     $(document).ready(function()
     {
