@@ -13,5 +13,5 @@ public interface Group2ProductRepository {
 
     void difference(int basic, int source);
 
-    void set(String clientId, int groupId, List<ProductEntry> productEntries);
+    void set(String clientId, int groupId, List<String> productEntriesIds, boolean checked);
 }
