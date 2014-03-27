@@ -1,6 +1,9 @@
 var app = app || {};
 
 var Product = Backbone.Model.extend({
+//    urlRoot: function(){
+//        return "/clients/" + clientId + "/groups/" + currentGroupId + "/products";
+//    },
     toggle: function(){
         if (this.attributes.checked == true){
             app.Counter.set('count', app.Counter.get('count') - 1)
@@ -171,6 +174,7 @@ var PaginationView = Backbone.View.extend({
     },
 
     render: function() {
+
         $(this.el).html( this.template({
             link: this.model.attributes.link,
             page_count: this.model.attributes.page_count,

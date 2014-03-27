@@ -6,16 +6,15 @@ var AppView = Backbone.View.extend({
         this.listenTo(vent, 'selectedCategory', this.onSelectedCategory);
         this.listenTo(vent, 'selectedGroup', this.onSelectedGroup);
         this.listenTo(app.Groups, 'remove', this.groupRemoved);
+
     },
     onSelectedCategory: function(){
         app.categories.reset();
         app.categoriesView.$el.hide();
         app.BackButton.$el.show();
-        app.pagination.$el.show();
     },
     onSelectedGroup: function(){
         app.categoriesView.$el.show();
-        app.ProductsView.$el.empty();
         app.BackButton.$el.hide();
     },
     groupRemoved: function(){
@@ -35,7 +34,7 @@ var BackButton = Backbone.View.extend({
     toCategories: function(){
         app.categories.trigger('changeCurrentGroup', currentGroupId);
         app.categoriesView.$el.show();
-        app.ProductsView.$el.empty();
+        app.ProductsView.$el.hide();
         app.pagination.$el.hide();
         this.$el.hide();
     }

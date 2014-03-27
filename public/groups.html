@@ -37,15 +37,55 @@
         </td>
 
 </script>
-<script type="text/template" id="pagination-view">
-<ul>
+<script type="text/html" id="tmpServerPagination">
+    <div class="breadcrumb">
 
-    <% for (var i = 1; i <= page_count; i++) { %>
-    <li <% if (page_active == i) print('class="active"') %> ><a href="<%= link %><%= i %>"><%= i %></a></li>
-    <% } %>
+          <span class="cell">
+          <% for(p=1;p<=totalPages;p++){
+          %>
+            <% if (currentPage == p) { %>
+              <span class="page selected"><%= p %></span>
+            <% } else { %>
+              <a href="#" class="page"><%= p %></a>
+            <% } %>
+          <%
+          }%>
 
-</ul>
-    </script>
+          <span class="divider">/</span>
+
+          <% if (currentPage > firstPage) { %>
+            <a href="#" class="serverprevious">Previous</a>
+          <% }else{ %>
+            <span>Previous</span>
+          <% }%>
+
+          <% if (currentPage < totalPages) { %>
+            <a href="#" class="servernext">Next</a>
+          <% } %>
+
+          <% if (firstPage != currentPage) { %>
+            <a href="#" class="serverfirst">First</a>
+          <% } %>
+
+          <% if (lastPage != currentPage) { %>
+            <a href="#" class="serverlast">Last</a>
+          <% } %>
+
+          <span class="divider">/</span>
+          <span class="cell first records">
+            Page: <span class="current"><%= currentPage %></span>
+            of
+            <span class="total"><%= totalPages %></span>
+                  shown
+          </span>
+
+      <span class="divider">/</span>
+
+      </span>
+
+
+    </div>
+</script>
 <body>
 <div id="container">
 <div id="cont">
@@ -97,9 +137,9 @@
             <div id="productsTableDiv">
                 <table id="productsTable" class="simple-little-table" cellspacing="0">
                 </table>
+                <div id="pagination">
+                </div>
             </div>
-            <div id="pagination"></div>
-
         </div>
     </div>
     <div id="listener"></div>
@@ -110,13 +150,14 @@
 <script type="text/javascript" src="javascripts/backbonejs/underscore.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/backbone.js"></script>
 <script type="text/javascript" src="javascripts/motionpack.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/backbone.paginator.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/groups.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/categories.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/general.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/groupsmanager.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/counter.js"></script>
-<script type="text/javascript" src="javascripts/backbonejs/products.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/app.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/paginatorTest.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/routes.js"></script>
 <script type="text/javascript">
     $(document).ready(function()

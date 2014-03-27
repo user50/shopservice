@@ -2,13 +2,25 @@ var app = app || {};
 
 var Router = Backbone.Router.extend({
     routes: {
-        "products/page/:page" : "productsPage"
+        'groups/:groupId/categories/:categoryId' : 'showProductsTable',
+        'groups/:groupId' : 'showGroup'
     },
 
-    productsPage: function(page){
-        app.Products.trigger('updatePage', page);
+    showProductsTable: function(groupId, categoryId){
+        console.log("Show products of category: " + categoryId + ", group " + groupId);
+        app.categories.reset();
+        app.categoriesView.$el.hide();
+        vent.trigger('selectedCategory');
+        app.BackButton.$el.show();
+        app.ProductsView.$el.show();
+        app.pagination.$el.show();
+    },
+
+    showGroup: function(groupId){
+        console.log("Show products of group: " + groupId);
+        app.categories.trigger('changeCurrentGroup', groupId)
     }
 });
 
-new Router();
+app.router = new Router();
 Backbone.history.start();

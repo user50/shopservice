@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css"/>
+</head>
+<script type="text/template" id="productTemplate">
+
+    <td><input id="<%= id %>" type="checkbox" class="productCheck" <% if (checked) { %> checked <% } %> ></td>
+    <td><a href="<%= url %>" target="_blank"><%= productName %></a></td>
+    <td><%= price %></td>
+    <td><% if (published) { %>
+        <img alt="check" src="images/check.png">
+        <% } else { %>
+        <img alt="check" src="images/cross.png"><% } %>
+    </td>
+
+</script>
+<script type="text/html" id="tmpServerPagination">
+    <div class="breadcrumb">
+
+          <span class="cell">
+          <% for(p=1;p<=totalPages;p++){
+          %>
+            <% if (currentPage == p) { %>
+              <span class="page selected"><%= p %></span>
+            <% } else { %>
+              <a href="#" class="page"><%= p %></a>
+            <% } %>
+          <%
+          }%>
+
+          <span class="divider">/</span>
+
+          <% if (currentPage > firstPage) { %>
+            <a href="#" class="serverprevious">Previous</a>
+          <% }else{ %>
+            <span>Previous</span>
+          <% }%>
+
+          <% if (currentPage < totalPages) { %>
+            <a href="#" class="servernext">Next</a>
+          <% } %>
+
+          <% if (firstPage != currentPage) { %>
+            <a href="#" class="serverfirst">First</a>
+          <% } %>
+
+          <% if (lastPage != currentPage) { %>
+            <a href="#" class="serverlast">Last</a>
+          <% } %>
+
+
+          <span class="divider">/</span>
+
+          <span class="divider">/</span>
+          <span class="cell first records">
+            Page: <span class="current"><%= currentPage %></span>
+            of
+            <span class="total"><%= totalPages %></span>
+                  shown
+          </span>
+
+      <span class="divider">/</span>
+
+      </span>
+
+
+    </div>
+</script>
+<body>
+<div id="container">
+    <div id="cont">
+        <div id="wrapp">
+            <div id="productsDiv">
+                <table id="productsTable" cellspacing="0">
+                </table>
+                <div id="pagination">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="javascripts/backbonejs/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/underscore.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/backbone.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/backbone.paginator.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/paginatorTest.js"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
