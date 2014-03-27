@@ -52,12 +52,12 @@ public class ProductController extends Controller {
         return ok();
     }
 
-    public static Result updateProducts( String clientId, Long groupId ) throws IOException {
+    public static Result updateProducts( String clientId, Long groupId, boolean checked ) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        List<ProductEntry> productEntries = objectMapper.readValue(request().body().asJson().toString(), new TypeReference<List<ProductEntry>>() { });
+        List<String> productEntries = objectMapper.readValue(request().body().asJson().toString(), new TypeReference<List<String>>() { });
 
-        group2ProductRepository.set(clientId, groupId.intValue(), productEntries);
+        group2ProductRepository.set(clientId, groupId.intValue(), productEntries, checked);
 
         return ok();
     }

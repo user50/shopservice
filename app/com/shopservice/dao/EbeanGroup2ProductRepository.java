@@ -76,22 +76,39 @@ public class EbeanGroup2ProductRepository implements Group2ProductRepository {
     }
 
     @Override
-    public void set(String clientId, int groupId, List<ProductEntry> productEntries) {
-        String[] abc = new String[productEntries.size()];
+    public void set(String clientId, int groupId, List<String> productEntriesIds, boolean checked) {
+        String[] abc = new String[productEntriesIds.size()];
         Arrays.fill(abc, "?");
 
-        SqlUpdate sqlUpdate = Ebean.createSqlUpdate("INSERT INTO group2product (`product_group_id`, `product_entry_id`) " +
-                "SELECT ?, product_entry.id FROM product_entry " +
-                "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
-                "WHERE client_settings_id = ? AND product_entry.id IN (" + Arrays.asList(abc).toString().replace("[", "").replace("]", "") + ") AND group2product.id IS NULL")
-                .setParameter(1, groupId)
-                .setParameter(2, groupId)
-                .setParameter(3, clientId);
+        if (checked)
+        {
+            SqlUpdate sqlUpdate = Ebean.createSqlUpdate("INSERT INTO group2product (`product_group_id`, `product_entry_id`) " +
+                    "SELECT ?, product_entry.id FROM product_entry " +
+                    "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
+                    "WHERE client_settings_id = ? AND product_entry.id IN (" + Arrays.asList(abc).toString().replace("[", "").replace("]", "") + ") AND group2product.id IS NULL")
+                    .setParameter(1, groupId)
+                    .setParameter(2, groupId)
+                    .setParameter(3, clientId);
 
-        int i = 4;
-        for (ProductEntry productEntry : productEntries)
-            sqlUpdate.setParameter(i++, productEntry.id);
+            int i = 4;
+            for (String entryId : productEntriesIds)
+                sqlUpdate.setParameter(i++, entryId);
 
-        sqlUpdate.execute();
+            sqlUpdate.execute();
+        }
+        else
+        {
+            SqlUpdate sqlUpdate = Ebean.createSqlUpdate("DELETE group2product.* FROM product_entry " +
+                    "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
+                    "WHERE client_settings_id = ? AND product_entry.id IN (" + Arrays.asList(abc).toString().replace("[", "").replace("]", "") + ") AND group2product.id IS NOT NULL")
+                    .setParameter(1, groupId)
+                    .setParameter(2, clientId);
+
+            int i = 3;
+            for (String entryId : productEntriesIds)
+                sqlUpdate.setParameter(i++, entryId);
+
+            sqlUpdate.execute();
+        }
     }
 }
