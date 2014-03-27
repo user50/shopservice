@@ -26,55 +26,22 @@ var Product = Backbone.Model.extend({
 });
 
 var Products = Backbone.Paginator.requestPager.extend({
-
-
-    // As usual, let's specify the model to be used
-    // with this collection
     model: Product,
-
-    // We're going to map the parameters supported by
-    // your API or backend data service back to attributes
-    // that are internally used by Backbone.Paginator.
-
-    // e.g the GitHub API refers to it's parameter for
-    // stating how many results to skip ahead by as $skip
-    // and it's number of items to return per page as $top
-
-    // We simply map these to the relevant Paginator equivalents
-
-    // Note that you can define support for new custom attributes
-    // adding them with any name you want
     url: function(){
         return "/clients/" + clientId + "/groups/" + currentGroupId + "/products"
     },
     paginator_core: {
-        // the type of the request (GET by default)
         type: 'GET',
-
-        // the type of reply (jsonp by default)
         dataType: 'json',
-
-        // the URL (or base URL) for the service
         url: function(){
             return this.url();
         }
     },
 
     paginator_ui: {
-        // the lowest page index your API allows to be accessed
         firstPage: 1,
-
-        // which page should the paginator start from
-        // (also, the actual page the paginator is on)
         currentPage: 1,
-
-        // how many items per page should be shown
         perPage: 10,
-
-        // a default number of total pages to query in case the API or
-        // service you are using does not support providing the total
-        // number of pages for us.
-        // 10 as a default in case your service doesn't return the total
         totalPages: 10
     },
 
@@ -85,14 +52,8 @@ var Products = Backbone.Paginator.requestPager.extend({
     },
 
     parse: function (response) {
-        // Normally this would be parsed from the response,
-        // but GitHub doesn't make this readily available
         this.totalPages = Math.floor(response.totalCount/this.perPage) + 1;
-
         this.totalRecords = this.totalPages * this.perPage;
-
-        // Be sure to change this based on how your results
-        // are structured (e.g response.data is GitHub specific)
         return response.collectionResult;
     }
 

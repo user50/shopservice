@@ -32,11 +32,8 @@ var BackButton = Backbone.View.extend({
     },
 
     toCategories: function(){
-        app.categories.trigger('changeCurrentGroup', currentGroupId);
-        app.categoriesView.$el.show();
-        app.ProductsView.$el.hide();
-        app.pagination.$el.hide();
         this.$el.hide();
+        app.router.navigate('groups/' + currentGroupId,{trigger: true});
     }
 });
 
