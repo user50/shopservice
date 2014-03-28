@@ -2,8 +2,13 @@ var app = app || {};
 
 var Router = Backbone.Router.extend({
     routes: {
+        '' : 'start',
         'groups/:groupId/categories/:categoryId' : 'showProductsTable',
         'groups/:groupId' : 'showGroup'
+    },
+    start: function(){
+        app.ProductsView.$el.hide();
+        app.pagination.$el.hide();
     },
 
     showProductsTable: function(groupId, categoryId){
@@ -19,6 +24,7 @@ var Router = Backbone.Router.extend({
     showGroup: function(groupId){
         console.log("Show products of group: " + groupId);
         app.categories.trigger('changeCurrentGroup', groupId);
+        app.BackButton.$el.hide();
         app.ProductsView.$el.hide();
         app.pagination.$el.hide();
         app.categoriesView.$el.show();

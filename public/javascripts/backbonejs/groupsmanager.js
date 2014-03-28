@@ -48,6 +48,7 @@ var MargeView = Backbone.View.extend({
     el: '#mergeGroups',
 
     initialize: function(){
+//        this.listenTo($('#mergeGroups option'), 'click', function(e){console.log('Hello!')});
         this.collection.on('add', this.addOne, this);
         this.listenTo(app.categories, 'mergeIsHappened', this.render);
     },

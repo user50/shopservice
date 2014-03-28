@@ -21,7 +21,7 @@ DELETE  /clients/:id                                                    controll
 # ProductEntry operations
 GET     /clients/:id/groups/:groupId/products                             controllers.ProductController.getProductsPage(id, groupId: Long,  categoryId, offset: Long, limit: Long)
 PUT     /clients/:id/groups/:groupId/products/:productId                  controllers.ProductController.updateProduct(id, groupId: Long, productId )
-PUT     /clients/:id/groups/:groupId/products                             controllers.ProductController.updateProducts(id, groupId: Long, categoryId )
+PUT     /clients/:id/groups/:groupId/products                             controllers.ProductController.updateProducts(id, groupId: Long, checked : Boolean )
 
 # Category operations
 GET     /clients/:id/categories                                           controllers.CategoryController.getCategories(id, groupId)

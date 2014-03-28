@@ -3,7 +3,7 @@ var app = app || {};
 
     var Group = Backbone.Model.extend();
 
-    clientId = 'client1';
+    clientId = Cookie.get('clientId');
 
     var Groups = Backbone.Collection.extend({
         model: Group,
@@ -28,7 +28,6 @@ var app = app || {};
             var selectedGroupId = e.currentTarget.attributes.siteid.value;
             currentGroupId = selectedGroupId;
             app.router.navigate('groups/' + selectedGroupId, {trigger: true});
-//            app.categories.trigger('changeCurrentGroup', selectedGroupId);
         },
 
         render: function(){

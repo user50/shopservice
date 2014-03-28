@@ -1,9 +1,6 @@
 var app = app || {};
 
 var Product = Backbone.Model.extend({
-//    urlRoot: function(){
-//        return "/clients/" + clientId + "/groups/" + currentGroupId + "/products";
-//    },
     toggle: function(){
         if (this.attributes.checked == true){
             app.Counter.set('count', app.Counter.get('count') - 1)
@@ -28,114 +25,126 @@ var Product = Backbone.Model.extend({
     }
 });
 
+var Products = Backbone.Paginator.requestPager.extend({
+    model: Product,
+    url: function(){
+        return "/clients/" + clientId + "/groups/" + currentGroupId + "/products"
+    },
+    paginator_core: {
+        type: 'GET',
+        dataType: 'json',
+        url: function(){
+            return this.url();
+        }
+    },
+
+    paginator_ui: {
+        firstPage: 1,
+        currentPage: 1,
+        perPage: 10,
+        totalPages: 10
+    },
+
+    server_api: {
+        'offset': function() { return this.currentPage * this.perPage - this.perPage},
+        'limit' : function() { return this.perPage},
+        'categoryId' : function(){ return currentCategoryId}
+    },
+
+    parse: function (response) {
+        this.totalPages = Math.floor(response.totalCount/this.perPage) + 1;
+        this.totalRecords = this.totalPages * this.perPage;
+        return response.collectionResult;
+    }
+
+});
+
 var ProductView = Backbone.View.extend({
     tagName: 'tr',
     template: _.template($('#productTemplate').html()),
 
-    initialize: function(){
-        this.model.on('change', this.render, this);
+    initialize: function() {
+        this.model.bind('change', this.render, this);
+        this.model.bind('remove', this.remove, this);
     },
 
     events: {
         'click .productCheck' : 'productToggle'
     },
 
-    initialize: function(){
-        this.model.on('change', this.render, this);
-    },
-    render: function(){
-        console.log("Render ProductView to a product model with id: " + this.model.id);
-        var template = this.template(this.model.toJSON())
-        this.$el.html( template );
+    render : function () {
+        this.$el.html(this.template(this.model.toJSON()));
         return this;
     },
 
-    productToggle: function(e){
+    productToggle: function(){
         this.model.toggle();
-    }
-
-});
-
-var Products = Backbone.Collection.extend({
-    model: Product,
-
-    initialize: function(){
-        this.on('selectedCategory',
-            function(currentCategory){
-//                this.fetch({
-//                    data: $.param({ categoryId: currentCategory, offset: 0, limit: 10}), reset: true});
-                this.updatePage(1);
-            }, this);
-
-        this.on('updatePage', this.updatePage, this);
-    },
-
-    url: function(){
-        return "/clients/" + clientId + "/groups/" + currentGroupId + "/products"
-    },
-
-    parse: function(response){
-        app.PaginationModel.set('page_count', Math.floor(response.totalCount/10)+1);
-        return response.collectionResult;
-    },
-
-    updatePage: function(page){
-        app.PaginationModel.set('page_active', page);
-
-        if (page > 1)
-            var offset = page*10 - 10;
-        else var offset = 0;
-
-        this.fetch({
-            data: $.param({ categoryId: currentCategoryId, offset: offset, limit: 10}), reset: true});
     }
 });
 
 var ProductsView = Backbone.View.extend({
-    el: '#productsTable',
+    el : '#productsTable',
 
-    initialize: function(){
-        this.collection.on('add', this.render, this);
-        this.collection.on('reset', this.render, this);
+    initialize : function () {
+        var tags = this.collection;
+        tags.on('add', this.render, this);
+        tags.on('remove', this.render, this);
+        tags.pager();
     },
 
     events: {
-        'change #check_all_products' : 'checkAll'
+        'change #check_all_products' : 'checkAllOnPage'
     },
 
-    render: function(){
-        this.$el.empty();
-        this.renderHeader();
-        if (this.collection.length == this.collection.where({checked: true}).length){
-            console.log("All products are checked!");
-            this.$el.find('#check_all_products').prop('checked', 'checked');
+    addOne : function ( item ) {
+        var view = new ProductView({model:item});
+        this.$el.append(view.render().el);
+    },
+
+    checkAllOnPage: function(e){
+        console.log("Check all products on the page...");
+
+        var url = "/clients/"+clientId + "/groups/" + currentGroupId + "/products?checked=" + e.currentTarget.checked;
+        var productIdsToUpdate = [];
+
+        for(i = 0; i < this.collection.length; i++){
+            productIdsToUpdate[i] = this.collection.at(i).id;
         }
-
-        this.collection.each(this.addOne, this);
-        return this;
-    },
-
-    addOne: function(product){
-        var productView = new ProductView({model: product});
-        this.$el.append(productView.render().el);
-    },
-
-    checkAll: function(e){
-        console.log("Check all products...");
-
-        var url = "/clients/"+clientId + "/groups/" + currentGroupId + "/products?categoryId=" + currentCategoryId;
-        var body = {checked: e.currentTarget.checked};
 
         $.ajax({
             url:url,
             type:"put",
-            data: JSON.stringify(body),
+            data: JSON.stringify(productIdsToUpdate),
             contentType: 'application/json'
         });
 
         this.collection.each(function(product){
             product.checked(e.currentTarget.checked);
         }, this);
+    },
+
+    render: function(){
+        console.log('Rendering of ProductsView...');
+        this.$el.empty();
+        this.renderHeader();
+//        if (this.collection.length == 0){
+//            var emptyRow = $('<tr/>');
+//            emptyRow.append($('<td/>'));
+//            emptyRow.append($('<td/>').text('Products not found.'));
+//            emptyRow.append($('<td/>'));
+//            emptyRow.append($('<td/>'));
+//            this.$el.append(emptyRow);
+//            return this;
+//        }
+//        if (this.collection.length == this.collection.where({checked: true}).length){
+//            console.log("All products are checked!");
+//            this.$el.find('#check_all_products').prop('checked', 'checked');
+//        } else {
+//            console.log("All products are not checked!");
+//            this.$el.find('#check_all_products').prop('checked', '');
+//        }
+        this.collection.each(this.addOne, this);
+        return this;
     },
 
     renderHeader: function(){
@@ -160,33 +169,66 @@ var ProductsView = Backbone.View.extend({
     }
 });
 
-var PaginationModel = Backbone.Model.extend({});
-
 var PaginationView = Backbone.View.extend({
-    el: '#pagination',
-    template: _.template($("#pagination-view").html()), // шаблон
 
-    attributes: {
-        "class": "pagination"
+    events: {
+        'click a.servernext': 'nextResultPage',
+        'click a.serverprevious': 'previousResultPage',
+        'click a.serverlast': 'gotoLast',
+        'click a.page': 'gotoPage',
+        'click a.serverfirst': 'gotoFirst',
+        'click a.serverpage': 'gotoPage'
     },
-    initialize: function() {
-        this.model.bind('change', this.render, this);
+
+    tagName: 'aside',
+
+    template: _.template($('#tmpServerPagination').html()),
+
+    initialize: function () {
+        this.listenTo(vent, 'selectedCategory',
+            function(){
+                this.gotoFirst();
+            }, this);
+
+        this.collection.on('reset', this.render, this);
+        this.collection.on('sync', this.render, this);
+
+        this.$el.appendTo('#pagination');
+
     },
 
-    render: function() {
+    render: function () {
+        var html = this.template(this.collection.info());
+        this.$el.html(html);
+    },
 
-        $(this.el).html( this.template({
-            link: this.model.attributes.link,
-            page_count: this.model.attributes.page_count,
-            page_active: this.model.attributes.page_active
-        }) );
-        return this;
+    nextResultPage: function (e) {
+        e.preventDefault();
+        this.collection.requestNextPage();
+    },
+
+    previousResultPage: function (e) {
+        e.preventDefault();
+        this.collection.requestPreviousPage();
+    },
+
+    gotoFirst: function () {
+//        e.preventDefault();
+        this.collection.goTo(this.collection.information.firstPage);
+    },
+
+    gotoLast: function (e) {
+        e.preventDefault();
+        this.collection.goTo(this.collection.information.lastPage);
+    },
+
+    gotoPage: function (e) {
+        e.preventDefault();
+        var page = $(e.target).text();
+        this.collection.goTo(page);
     }
 });
 
-app.PaginationModel = new PaginationModel({
-    link: "#products/page/"
-});
-app.pagination = new PaginationView({model: app.PaginationModel});
 app.Products = new Products();
 app.ProductsView = new ProductsView({collection: app.Products});
+app.pagination = new PaginationView({collection:app.Products});

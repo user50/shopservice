@@ -3,8 +3,8 @@ var app = app || {};
 var AppView = Backbone.View.extend({
     el: '#cont',
     initialize: function(){
-        this.listenTo(vent, 'selectedCategory', this.onSelectedCategory);
-        this.listenTo(vent, 'selectedGroup', this.onSelectedGroup);
+//        this.listenTo(vent, 'selectedCategory', this.onSelectedCategory);
+//        this.listenTo(vent, 'selectedGroup', this.onSelectedGroup);
         this.listenTo(app.Groups, 'remove', this.groupRemoved);
 
     },
