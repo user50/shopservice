@@ -14,7 +14,7 @@ public class Global extends GlobalSettings {
     public F.Promise<SimpleResult> onError(Http.RequestHeader requestHeader, Throwable throwable) {
         Throwable exception = throwable.getCause();
 
-        if ( Play.application().configuration().getBoolean("productionMode") )
+        if ( Play.application().configuration().getBoolean("errorReporting") )
             MailService.getInstance().report(exception);
 
         Promise.apply().success(Results.status(500));
