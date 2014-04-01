@@ -38,4 +38,11 @@ $(function() {
         app.categories.trigger('excludeIsHappened', currentGroupId);
         vent.trigger('selectedGroup');
     }
+
+    $( document ).ajaxStart(function() {
+        $( "#loader" ).show();
+    });
+    $( document ).ajaxStop(function() {
+        $( "#loader" ).hide();
+    });
 });
