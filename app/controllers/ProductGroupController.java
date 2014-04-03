@@ -61,6 +61,10 @@ public class ProductGroupController extends Controller {
             return notFound();
 
         group.name = Json.fromJson(request().body().asJson(), ProductGroup.class).name;
+
+        if (productGroupRepository.exist(clientId, group.name))
+            return badRequest("Category with specified name already exists");
+
         productGroupRepository.save(group);
 
         return ok(Json.toJson(group));
