@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import com.shopservice.dao.ClientSettingsRepository;
 import com.shopservice.dao.Group2ProductRepository;
 import com.shopservice.dao.ProductGroupRepository;
@@ -45,11 +46,24 @@ public class ProductGroupController extends Controller {
         return ok( Json.toJson(productGroup) );
     }
 
-    public static Result removeSite(String clientId, Long siteId)
+    public static Result remove(String clientId, Long siteId)
     {
         productGroupRepository.remove(siteId.intValue());
 
         return ok();
+    }
+
+    public static Result update(String clientId, Long groupId)
+    {
+        ProductGroup group = Ebean.find(ProductGroup.class, groupId);
+
+        if (group == null)
+            return notFound();
+
+        group.name = Json.fromJson(request().body().asJson(), ProductGroup.class).name;
+        productGroupRepository.save(group);
+
+        return ok(Json.toJson(group));
     }
 
     public static Result merge(String clientId, Long groupId)

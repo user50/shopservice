@@ -30,12 +30,13 @@ GET     /clients/:id/categories                                           contro
 GET    /client/:id/groups/:groupId/pricelists/:format                     controllers.PriceListController.generatePriceList( id, groupId:Long, format )
 GET    /formats                                                           controllers.PriceListController.getPriceListFormats()
 
-# Site operations
+# Group operations
 GET    /clients/:id/groups                                                controllers.ProductGroupController.get( id )
 POST   /clients/:id/groups                                                controllers.ProductGroupController.add( id )
-DELETE /clients/:id/groups/:groupId                                       controllers.ProductGroupController.removeSite( id, groupId:Long )
-PUT /clients/:id/groups/:groupId/merge                                    controllers.ProductGroupController.merge( id, groupId:Long )
-PUT /clients/:id/groups/:groupId/diff                                     controllers.ProductGroupController.diff( id, groupId:Long )
+DELETE /clients/:id/groups/:groupId                                       controllers.ProductGroupController.remove( id, groupId:Long )
+PUT    /clients/:id/groups/:groupId                                       controllers.ProductGroupController.update( id, groupId:Long )
+PUT    /clients/:id/groups/:groupId/merge                                 controllers.ProductGroupController.merge( id, groupId:Long )
+PUT    /clients/:id/groups/:groupId/diff                                  controllers.ProductGroupController.diff( id, groupId:Long )
 
 POST /authentication                                                      controllers.LoginController.authentication()
 POST /logout                                                              controllers.LoginController.logout()
