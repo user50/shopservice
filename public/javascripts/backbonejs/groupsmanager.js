@@ -30,6 +30,31 @@ var AddGroup = Backbone.View.extend({
     }
 });
 
+var EditGroup = Backbone.View.extend({
+    el: '#editSiteForm',
+
+    events: {
+        'click input[type=button]': 'editGroup',
+        'keypress #edit-group': 'editOnEnter'
+    },
+
+    editOnEnter: function( event ) {
+        $groupToEdit = this.$('#edit-group');
+        if ( event.which !== ENTER_KEY || !$groupToEdit.val().trim() ) {
+            return;
+        }
+        event.preventDefault();
+        var changedGroup = this.collection.get(currentGroupId);
+        changedGroup.save({name: $groupToEdit.val().trim()})
+    },
+    editGroup: function(e){
+        var changedGroupName = this.$el.find('input[type=text]').val();
+        var changedGroup = this.collection.get(currentGroupId);
+        changedGroup.save({name: changedGroupName});
+    }
+
+});
+
 var DeleteGroup = Backbone.View.extend({
     el: '#deleteGroupIdImg',
     events: {
@@ -88,6 +113,7 @@ var ExcludeView = Backbone.View.extend({
 });
 
 app.AddGroup = new AddGroup({collection: app.Groups});
+app.EditGroup = new EditGroup({collection: app.Groups});
 app.DeleteGroup = new DeleteGroup({collection: app.Groups});
 app.MergeView = new MargeView({collection: app.Groups});
 app.ExcludeView = new ExcludeView({collection: app.Groups});
