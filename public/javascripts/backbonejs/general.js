@@ -12,6 +12,10 @@ $(function() {
         excludeGroups(this.value, currentGroupId);
     });
 
+    $('#downloadYMLBtn').on('click', function() {
+        downloadPrice();
+    });
+
     function mergeGroups(groupId, targetGroupId){
         var body = {resourceGroupId: groupId};
         var url = "/clients/" + clientId + "/groups/" + targetGroupId + "/merge";
@@ -24,7 +28,7 @@ $(function() {
         app.categories.trigger('mergeIsHappened', currentGroupId);
         vent.trigger('selectedGroup');
 
-    };
+    }
 
     function excludeGroups(groupId, targetGroupId){
         var body = {resourceGroupId: groupId};
@@ -45,4 +49,10 @@ $(function() {
     $( document ).ajaxStop(function() {
         $( "#loader" ).hide();
     });
+
+    function downloadPrice(){
+        var url = "/client/"+clientId + "/groups/" + currentGroupId + "/pricelists/YML";
+        var href = document.getElementById("downloadYMLBtn").setAttribute("href",url);
+        href.click();
+    }
 });

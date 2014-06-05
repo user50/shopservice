@@ -51,6 +51,13 @@ var Products = Backbone.Paginator.requestPager.extend({
         'categoryId' : function(){ return currentCategoryId}
     },
 
+    // Fetch method when called triggers 'fetch' event. That way we can
+    // set loading state on components.
+    fetch: function(options) {
+        this.trigger('fetch', this, options);
+        return Backbone.Collection.prototype.fetch.call(this, options);
+    },
+
     parse: function (response) {
         this.totalPages = Math.floor(response.totalCount/this.perPage) + 1;
         this.totalRecords = this.totalPages * this.perPage;
@@ -89,11 +96,16 @@ var ProductsView = Backbone.View.extend({
         var tags = this.collection;
         tags.on('add', this.render, this);
         tags.on('remove', this.render, this);
+        tags.on('fetch', this.test, this);
         tags.pager();
     },
 
     events: {
         'change #check_all_products' : 'checkAllOnPage'
+    },
+
+    test: function(){
+        console.log("products are fetched..");
     },
 
     addOne : function ( item ) {
