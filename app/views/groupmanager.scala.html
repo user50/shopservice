@@ -92,45 +92,85 @@
     <div id="menu"> <a  href="/price">GROUP SETTING</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="/groupmanager">GROUPS MANAGER</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#">CONTACTS</a>  </div>
     <div id="cont">
         <div id="wrapp">
+            <div id="top">
+                <div id="sitesAndGroupManager">
             <div id="sitesDiv">
                 <div id="clientSites">
                     <div id="sites">
                     </div>
                 </div>
+
             </div>
+            <div class="groupsManager">
+                <div id="addNewGroupDiv" title="Add new group">
+                    <a id="plusImg" title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
+                        <img src="/assets/images/addSiteImg.png">
+                    </a>
+                </div>
+                <div id="addNewSite" style="display:none; overflow:hidden; height:50px;">
+                    <form id="addNewSiteForm">
+                        <!--<input id="new-group" type="text" name="name">-->
+                        <table>
+                            <tr>
+                                <td><input id="new-group" type="text" name="name"></td>
+                                <td><input type="button" value="OK"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div id="editGroupDiv" title="Add new group">
+                    <a id="editGroupImg" title="" href="javascript:;" onmousedown="slidedown('editSite');slideup('editSite');">
+                        <img src="/assets/images/addSiteImg.png">
+                    </a>
+                </div>
+                <div id="editSite" style="display:none; overflow:hidden; height:50px;">
+                    <form id="editSiteForm">
+                        <table>
+                            <tr>
+                                <td><input id="edit-group" type="text" name="name"></td>
+                                <td><input type="button" value="OK"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div id="deleteGroupId" title="Delete current group">
+                    <img id="deleteGroupIdImg" src="/assets/images/delete.png">
+                </div>
+                <div id="mergeDiv">
+                    <select id="mergeGroups" required>
+                        <option selected disabled>Merge to</option>
+                    </select>
+                </div>
+                <div id="excludeDiv">
+                    <select id="excludeGroups" required>
+                        <option selected disabled>Exclude</option>
+                    </select>
+                </div>
+                </div>
+            </div>
+                <div class="buttons">
+                <div class="downloadBtnDiv">
+                    <a href="#" class="downloadBtn" onClick="downloadPrice()">Download</a>
+                </div>
+                    <div class="sites">
+                    <label>
+                        <select id="format">
+                            <option selected disabled>Select site</option>
+                            <option value="YML">Prom</option>
+                            <option value="YML">UkrMebli</option>
+                            <option value="price">HotLine</option>
+                            <option value="YML">Zakupka</option>
+                            <option value="YML">Aukro</option>
+                        </select>
+                    </label>
+                </div>
+
+            </div>
+
+                </div>
             <div id="main">
                 <div id="categories">
-                    <div class="groupsManager">
-                        <div id="addNewGroupDiv" title="Add new group">
-                            <a id="plusImg" title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
-                                <img src="/assets/images/addSiteImg.png">
-                            </a>
-                        </div>
-                        <div id="addNewSite" style="display:none; overflow:hidden; height:50px;">
-                            <form id="addNewSiteForm">
-                                <!--<input id="new-group" type="text" name="name">-->
-                                <table>
-                                    <tr>
-                                        <td><input id="new-group" type="text" name="name"></td>
-                                        <td><input type="button" value="OK"></td>
-                                    </tr>
-                                </table>
-                            </form>
-                        </div>
-                        <div id="deleteGroupId" title="Delete current group">
-                            <img id="deleteGroupIdImg" src="/assets/images/delete.png">
-                        </div>
-                        <div id="mergeDiv">
-                            <select id="mergeGroups" required>
-                                <option selected disabled>Merge to</option>
-                            </select>
-                        </div>
-                        <div id="excludeDiv">
-                            <select id="excludeGroups" required>
-                                <option selected disabled>Exclude</option>
-                            </select>
-                        </div>
-                    </div>
+
                     <div id="counterDiv">
                         <p>Total selected items: <span class="countProducts"></span></div>
                     <div id="toCategories"><img src="/assets/images/Back_Button.gif"></div>
