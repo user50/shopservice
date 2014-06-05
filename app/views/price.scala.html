@@ -1,91 +1,144 @@
-@()
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>Configure and manage price lists for sites aggregators</title>
-    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/main.css"/>
-    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/price.css"/>
-    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/download.css"/>
-    <META content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="/assets/javascripts/jquery.cookie.js"></script>
-    <script type="text/javascript" src="/assets/javascripts/price.js"></script>
-    <script type="text/javascript" src="/assets/javascripts/groupmanager.js"></script>
-    <script type="text/javascript" src="/assets/javascripts/motionpack.js"></script>
-    <script type="text/javascript" src="/assets/javascripts/tablePaging.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function()
-        {
-            showSites();
-            fillGroupSelect();
-        $('#loader').ajaxSend(function(){$(this).show()})
-                .ajaxStop(function(){$(this).hide()});
-        $('#mergeGroups').on('change', function() {
-            mergeGroups(this.value); // or $(this).val()
-        });
-        $('#excludeGroups').on('change', function() {
-            differenceGroups(this.value); // or $(this).val()
-        });
-        });
-
-    </script>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/price.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/main.css"/>
 </head>
-<body>
+<script type="text/template" id="groupTemp">
+    <input id="<%= name %>" siteId="<%= id %>" type="radio" name="site" >
+    <label for="<%= name %>"> <%= name %> </label>
+</script>
+<script type="text/template" id="categoryTpl">
+    <a id="<%= id %>"> <%= name %> ( <%= count %> ) </a>
+</script>
+<script type="text/template" id="groupTempToSelect">
+    <option value="<%= id %>"> <%= name %> </option>
+</script>
+<script type="text/template" id="productTableHeader">
+    <tr>
+        <th>
+            <input id="check_all" type="checkbox"></th>
+        <th>Product Name</th>
+        <th>Price, UAH</th>
+        <th>Published</th>
+    </tr>
+</script>
+<script type="text/template" id="productTemplate">
 
+    <td><input id="<%= id %>" type="checkbox" class="productCheck" <% if (checked) { %> checked <% } %> ></td>
+    <td><a href="<%= url %>" target="_blank"><%= productName %></a></td>
+    <td><%= price %></td>
+    <td><% if (published) { %>
+        <img alt="check" src="assets/images/check.png">
+        <% } else { %>
+        <img alt="check" src="assets/images/cross.png"><% } %>
+    </td>
+
+</script>
+<script type="text/html" id="tmpServerPagination">
+    <div class="breadcrumb">
+
+          <span class="cell">
+          <% for(p=1;p<=totalPages;p++){
+          %>
+            <% if (currentPage == p) { %>
+              <span class="page selected"><%= p %></span>
+            <% } else { %>
+              <a href="#" class="page"><%= p %></a>
+            <% } %>
+          <%
+          }%>
+
+          <span class="divider">/</span>
+
+          <% if (currentPage > firstPage) { %>
+            <a href="#" class="serverprevious">Previous</a>
+          <% }else{ %>
+            <span>Previous</span>
+          <% }%>
+
+          <% if (currentPage < totalPages) { %>
+            <a href="#" class="servernext">Next</a>
+          <% } %>
+
+          <% if (firstPage != currentPage) { %>
+            <a href="#" class="serverfirst">First</a>
+          <% } %>
+
+          <% if (lastPage != currentPage) { %>
+            <a href="#" class="serverlast">Last</a>
+          <% } %>
+
+          <span class="divider">/</span>
+          <span class="cell first records">
+            Page: <span class="current"><%= currentPage %></span>
+            of
+            <span class="total"><%= totalPages %></span>
+                  shown
+          </span>
+
+      <span class="divider">/</span>
+
+      </span>
+
+
+    </div>
+</script>
+<body>
 <div id="container">
     <div id="header"> <a href="#">Tools for servicing the online store</a> </div>
-    <div id="menu"> <a  href="/price">GROUP SETTING</a> &nbsp; &nbsp; &nbsp; &nbsp; <a  href="/groupmanager">GROUPS MANAGER</a> &nbsp; &nbsp; &nbsp; &nbsp; <a href="#">CONTACTS</a>  </div>
+    <div id="menu"></div>
     <div id="cont">
         <div id="wrapp">
-            <div class="sitesDiv">
+            <div id="top">
+                <div id="sitesAndGroupManager">
+            <div id="sitesDiv">
                 <div id="clientSites">
-                    <div id="sites"></div>
+                    <div id="sites">
+                    </div>
                 </div>
-            </div>
-            <div class="downloadDiv">
-                <div class="buttons">
-                    <a id="downloadHref" href="#" class="unibutton orange" onClick="downloadPrice()">Download</a>
-                    <!--<a id="downloadHref" href="#">-->
-                        <!--<img src="/assets/images/download-button.jpg" onclick="downloadPrice()"> </a>-->
-                </div>
-                <div class="sites">
-                    <label>
-                        <select id="format">
-                            <option selected disabled>Select site</option>
-                            <option value="YML">Prom</option>
-                            <option value="YML">UkrMebli</option>
-                            <option value="price">HotLine</option>
-                            <option value="YML">Zakupka</option>
-                            <option value="YML">Aukro</option>
-                        </select>
-                    </label>
-                </div>
+
             </div>
             <div class="groupsManager">
                 <div id="addNewGroupDiv" title="Add new group">
-                    <a title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
+                    <a id="plusImg" title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
                         <img src="/assets/images/addSiteImg.png">
                     </a>
                 </div>
                 <div id="addNewSite" style="display:none; overflow:hidden; height:50px;">
                     <form id="addNewSiteForm">
+                        <!--<input id="new-group" type="text" name="name">-->
                         <table>
                             <tr>
-                                <td><input type="text" name="name"></td>
-                                <td><input type="submit" value="OK" onclick="addNewSite()"></td>
+                                <td><input id="new-group" type="text" name="name"></td>
+                                <td><input type="button" value="OK"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div id="editGroupDiv" title="Add new group">
+                    <a id="editGroupImg" title="" href="javascript:;" onmousedown="slidedown('editSite');slideup('editSite');">
+                        <img src="/assets/images/edit_group_button.jpg">
+                    </a>
+                </div>
+                <div id="editSite" style="display:none; overflow:hidden; height:50px;">
+                    <form id="editSiteForm">
+                        <table>
+                            <tr>
+                                <td><input id="edit-group" type="text" name="name"></td>
+                                <td><input type="button" value="OK"></td>
                             </tr>
                         </table>
                     </form>
                 </div>
                 <div id="deleteGroupId" title="Delete current group">
-                    <img src="/assets/images/delete.png" onclick="deleteGroup()">
+                    <img id="deleteGroupIdImg" src="/assets/images/delete.png">
                 </div>
                 <div id="mergeDiv">
                     <select id="mergeGroups" required>
-
+                        <option selected disabled>Merge to</option>
                     </select>
                 </div>
                 <div id="excludeDiv">
@@ -93,21 +146,50 @@
                         <option selected disabled>Exclude</option>
                     </select>
                 </div>
-
-
+                </div>
             </div>
+                <div class="buttons">
+                <div class="downloadBtnDiv">
+                    <a id="downloadYMLBtn" href="#" class="downloadBtn">Download YML</a>
+                </div>
+            </div>
+
+                </div>
             <div id="main">
-                <p>
-                <a id="toCategoriesLink" href="#" onClick="showCategories()" style="display: none;"><img src="assets/images/Back_Button.gif"></a>
-                <div id="counter">Total selected items: <span class="countProducts"></span></div>
-                <div id="categories"> </div>
-                <form id = "updateForm"></form>
+                <div id="categories">
+
+                    <div id="counterDiv">
+                        <p>Total selected items: <span class="countProducts"></span></div>
+                    <div id="toCategories"><img src="/assets/images/Back_Button.gif"></div>
+                    <ol class="rectangle-list"></ol>
+                </div>
+                <div id="productsTableDiv">
+                    <table id="productsTable" class="simple-little-table" cellspacing="0">
+                    </table>
+                    <div id="pagination">
+                    </div>
+                </div>
             </div>
         </div>
+        <div id="listener"></div>
+        <div id="loader"><div class="anim"><img src="assets/images/download.gif"></div></div>
     </div>
     <div id="footer"><form action="/logout" method="post"><input type="submit" value="Logout"></form> </div>
-    <div id="loader"><div class="anim"><img src="assets/images/download.gif"></div></div>
 </div>
 
+<script type="text/javascript" src="assets/javascripts/backbonejs/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/underscore.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/backbone.js"></script>
+<script type="text/javascript" src="assets/javascripts/motionpack.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/cookie.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/backbone.paginator.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/groups.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/categories.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/general.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/groupsmanager.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/counter.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/app.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/products.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/routes.js"></script>
 </body>
 </html>

@@ -5,7 +5,6 @@
 # Home page
 GET     /                                   controllers.Application.index()
 GET     /price                              controllers.Application.price()
-GET     /groupmanager                           controllers.Application.groupmanager()
 
 
 # Map static resources from the /public folder to the /assets URL path
