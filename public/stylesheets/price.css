@@ -441,3 +441,7 @@
     margin: 3px;
     float: left;
 }
+
+#counterDiv{
+    display: none;
+}
