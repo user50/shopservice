@@ -3,8 +3,8 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/price.css"/>
-    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/main.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/price.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css"/>
 </head>
 <script type="text/template" id="groupTemp">
     <input id="<%= name %>" siteId="<%= id %>" type="radio" name="site" >
@@ -13,15 +13,83 @@
 <script type="text/template" id="categoryTpl">
     <a id="<%= id %>"> <%= name %> ( <%= count %> ) </a>
 </script>
+<script type="text/template" id="groupTempToSelect">
+    <option value="<%= id %>"> <%= name %> </option>
+</script>
+<script type="text/template" id="productTableHeader">
+        <tr>
+            <th>
+                <input id="check_all" type="checkbox"></th>
+            <th>Product Name</th>
+            <th>Price, UAH</th>
+            <th>Published</th>
+        </tr>
+</script>
+<script type="text/template" id="productTemplate">
+
+        <td><input id="<%= id %>" type="checkbox" class="productCheck" <% if (checked) { %> checked <% } %> ></td>
+        <td><a href="<%= url %>" target="_blank"><%= productName %></a></td>
+        <td><%= price %></td>
+        <td><% if (published) { %>
+            <img alt="check" src="images/check.png">
+            <% } else { %>
+            <img alt="check" src="images/cross.png"><% } %>
+        </td>
+
+</script>
+<script type="text/html" id="tmpServerPagination">
+    <div class="breadcrumb">
+
+          <span class="cell">
+          <% for(p=1;p<=totalPages;p++){
+          %>
+            <% if (currentPage == p) { %>
+              <span class="page selected"><%= p %></span>
+            <% } else { %>
+              <a href="#" class="page"><%= p %></a>
+            <% } %>
+          <%
+          }%>
+
+          <span class="divider">/</span>
+
+          <% if (currentPage > firstPage) { %>
+            <a href="#" class="serverprevious">Previous</a>
+          <% }else{ %>
+            <span>Previous</span>
+          <% }%>
+
+          <% if (currentPage < totalPages) { %>
+            <a href="#" class="servernext">Next</a>
+          <% } %>
+
+          <% if (firstPage != currentPage) { %>
+            <a href="#" class="serverfirst">First</a>
+          <% } %>
+
+          <% if (lastPage != currentPage) { %>
+            <a href="#" class="serverlast">Last</a>
+          <% } %>
+
+          <span class="divider">/</span>
+          <span class="cell first records">
+            Page: <span class="current"><%= currentPage %></span>
+            of
+            <span class="total"><%= totalPages %></span>
+                  shown
+          </span>
+
+      <span class="divider">/</span>
+
+      </span>
+
+
+    </div>
+</script>
 <body>
 <div id="container">
 <div id="cont">
     <div id="wrapp">
-
-        <form id="addGroup">
-            <input type="text" placeholder="Name of a new group..">
-            <input type="submit" value="Add Group">
-        </form>
         <div id="sitesDiv">
         <div id="clientSites">
             <div id="sites">
@@ -30,18 +98,77 @@
         </div>
         <div id="main">
             <div id="categories">
-            <ol class="rectangle-list"></ol>
+                <div class="groupsManager">
+                    <div id="addNewGroupDiv" title="Add new group">
+                        <a id="plusImg" title="" href="javascript:;" onmousedown="slidedown('addNewSite');slideup('addNewSite');">
+                            <img src="/assets/images/addSiteImg.png">
+                        </a>
+                    </div>
+                    <div id="addNewSite" style="display:none; overflow:hidden; height:50px;">
+                        <form id="addNewSiteForm">
+                            <!--<input id="new-group" type="text" name="name">-->
+                            <table>
+                                <tr>
+                                    <td><input id="new-group" type="text" name="name"></td>
+                                    <td><input type="button" value="OK"></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div id="deleteGroupId" title="Delete current group">
+                        <img id="deleteGroupIdImg" src="/assets/images/delete.png">
+                    </div>
+                    <div id="mergeDiv">
+                        <select id="mergeGroups" required>
+                            <option selected disabled>Merge to</option>
+                        </select>
+                    </div>
+                    <div id="excludeDiv">
+                        <select id="excludeGroups" required>
+                            <option selected disabled>Exclude</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="counterDiv">
+                    <p>Total selected items: <span class="countProducts"></span></div>
+                <div id="toCategories"><img src="/assets/images/Back_Button.gif"></div>
+                <ol class="rectangle-list"></ol>
+            </div>
+            <div id="productsTableDiv">
+                <table id="productsTable" class="simple-little-table" cellspacing="0">
+                </table>
+                <div id="pagination">
+                </div>
             </div>
         </div>
-
     </div>
+    <div id="listener"></div>
 </div>
 </div>
+
 <script type="text/javascript" src="javascripts/backbonejs/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/underscore.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/backbone.js"></script>
+<script type="text/javascript" src="javascripts/motionpack.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/cookie.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/backbone.paginator.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/groups.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/categories.js"></script>
 <script type="text/javascript" src="javascripts/backbonejs/general.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/groupsmanager.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/counter.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/app.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/products.js"></script>
+<script type="text/javascript" src="javascripts/backbonejs/routes.js"></script>
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+//        $('#mergeGroups').on('change', function() {
+//            console.log(this.value); // or $(this).val()
+//        });
+
+    });
+
+</script>
 </body>
 </html>

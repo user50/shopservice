@@ -19,6 +19,8 @@ public class Group2Product {
     public Group2Product() {
     }
 
+
+
     public Group2Product(ProductGroup productGroup) {
         this.productGroup = productGroup;
     }

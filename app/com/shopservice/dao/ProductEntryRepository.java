@@ -20,5 +20,5 @@ public interface ProductEntryRepository {
 
     Set<ProductEntry> get(String clientId, String categoryId);
 
-
+    List<ProductEntry> getWithCheckedPage(String clientId, String categoryId, int groupId, int offset, int limit);
 }

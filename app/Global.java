@@ -1,5 +1,6 @@
 import com.shopservice.MailService;
 import play.GlobalSettings;
+import play.Play;
 import play.api.libs.concurrent.Promise;
 import play.libs.F;
 import play.mvc.Http;
@@ -12,7 +13,9 @@ public class Global extends GlobalSettings {
     @Override
     public F.Promise<SimpleResult> onError(Http.RequestHeader requestHeader, Throwable throwable) {
         Throwable exception = throwable.getCause();
-        MailService.getInstance().report(exception);
+
+        if ( Play.application().configuration().getBoolean("errorReporting") )
+            MailService.getInstance().report(exception);
 
         Promise.apply().success(Results.status(500));
 

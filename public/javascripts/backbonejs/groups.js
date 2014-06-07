@@ -1,18 +1,19 @@
 var app = app || {};
 
-    app.Group = Backbone.Model.extend({});
 
-    clientId = 'client1';
+    var Group = Backbone.Model.extend();
 
-    app.Groups = Backbone.Collection.extend({
-        model: app.Group,
+    clientId = Cookie.get('clientId');
+
+    var Groups = Backbone.Collection.extend({
+        model: Group,
 
         url: function(){
             return '/clients/'+clientId+'/groups';
         }
     });
 
-    app.GroupsView = Backbone.View.extend({
+    var GroupsView = Backbone.View.extend({
         el: '#sites',
 
         initialize: function(){
@@ -20,11 +21,13 @@ var app = app || {};
         },
 
         events: {
-            'click input[name=site]': 'showMessage'
+            'click input[name=site]': 'setSelectedGroup'
         },
 
-        showMessage: function(e){
-            alert(e.currentTarget.attributes.siteid.value);
+        setSelectedGroup: function(e){
+            var selectedGroupId = e.currentTarget.attributes.siteid.value;
+            currentGroupId = selectedGroupId;
+            app.router.navigate('groups/' + selectedGroupId, {trigger: true});
         },
 
         render: function(){
@@ -33,40 +36,46 @@ var app = app || {};
             return this;
         },
         addOne: function(group){
-            var groupView = new app.GroupView({model: group});
+            var groupView = new GroupView({model: group});
             this.$el.append(groupView.render().el);
         }
     });
 
-    app.GroupView = Backbone.View.extend({
-        initialize: function(){
-            this.model.on('destroy', this.remove, this);
-        },
+    var GroupView = Backbone.View.extend({
         className: "site",
         template: _.template($('#groupTemp').html()),
 
+        initialize: function(){
+            this.model.on('change', this.render, this);
+            this.model.on('destroy', this.remove, this);
+        },
+
+        events: {
+            'click' : 'click'
+        },
         render: function(){
             var template = this.template(this.model.toJSON())
             this.$el.html( template );
             return this;
+        },
+        click: function(){
+            vent.trigger('selectedGroup');
         }
     });
 
-    app.AddGroup = Backbone.View.extend({
-        el: '#addGroup',
-
-        events: {
-            'submit': 'submit'
-        },
-
+    var GroupViewToSelect = Backbone.View.extend({
+        tagName: 'option',
         initialize: function(){
+            this.model.on('destroy', this.remove, this);
         },
 
-        submit: function(e){
-            e.preventDefault();
-
-            var newGroupName = $(e.currentTarget).find('input[type=text]').val();
-            var newGroup = new app.Group({name: newGroupName});
-            this.collection.create(newGroup, {wait: true});
+        render: function(){
+            this.$el.html(this.$el.attr('value', this.model.id));
+            this.$el.text(this.model.get('name'));
+            return this;
         }
     });
+
+app.Groups = new Groups();
+app.GroupsView = new GroupsView({collection: app.Groups});
+app.Groups.fetch();

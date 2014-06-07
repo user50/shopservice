@@ -61,7 +61,7 @@ body
 
 #wrapp{
     padding: 15px 0px 30px 0;
-    margin: 35px 40px 30px 20px;
+    margin: 5px 40px 30px 20px;
 }
 
 #main {
@@ -115,4 +115,57 @@ body
     padding:5px 10px;
     -webkit-border-radius: 5px; -moz-border-radius: 5px;
     border-radius: 5px; cursor:default;
+}
+
+.hidden{
+    display: none;
+}
+
+.visible{
+    display: block;
+}
+
+#pagination {
+    margin-top: 10px;
+}
+
+#pagination ul li { display: inline; }
+
+#pagination ul
+{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+
+#pagination .active{
+    display: inline;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #B9D5F1;
+}
+
+#pagination ul li a
+{
+    text-decoration: none;
+    color: #465EA8;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#pagination ul li a:hover
+{
+    text-decoration: none;
+    color: #fff;
+    background-color: #369;
+}
+
+.backbone-loading{
+    background-color: #bbbbbb;
+}
+
+.logout-Btn{
+    margin-left: 95%;
 }

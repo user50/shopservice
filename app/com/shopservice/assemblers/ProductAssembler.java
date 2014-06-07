@@ -19,17 +19,7 @@ public class ProductAssembler {
     }
 
     public Collection<ProductEntry> getProducts(String clientId, String categoryId, int groupId) throws Exception {
-        List<Product> products = Services.getProductDAO(clientId).getProducts(categoryId);
-
-        Set<ProductEntry> productEntriesFromClient = new HashSet<ProductEntry>();
-        for (Product product : products)
-            productEntriesFromClient.add(new ProductEntry(product));
-
-        Set<ProductEntry> productEntriesFromSettings = productEntryRepository.get(clientId, categoryId);
-
-        productEntryRepository.delete(Sets.difference(productEntriesFromSettings, productEntriesFromClient));
-
-        productEntryRepository.add(clientId, Sets.difference(productEntriesFromClient, productEntriesFromSettings));
+        List<Product> products = syncProducts(clientId, categoryId);
 
         Map<String,ProductEntry> productEntries = new HashMap<String, ProductEntry>();
         for (ProductEntry entry : productEntryRepository.getWithChecked(clientId, categoryId, groupId) )
@@ -46,5 +36,35 @@ public class ProductAssembler {
         productEntry.price = product.price;
         productEntry.productName = product.name;
         productEntry.published = product.published;
+    }
+
+    public PaginationResult<ProductEntry> getProductsPage(String clientId, String categoryId, int groupId, int offset, int limit) throws Exception {
+        List<Product> products = syncProducts(clientId, categoryId);
+
+        Map<String,ProductEntry> productEntriesPage = new LinkedHashMap<String,ProductEntry>();
+        for (ProductEntry entry : productEntryRepository.getWithCheckedPage(clientId, categoryId, groupId, offset, limit) )
+            productEntriesPage.put(entry.productId, entry );
+
+        for (Product product : products) {
+            if (productEntriesPage.keySet().contains(product.id))
+                fill(productEntriesPage.get(product.id), product);
+        }
+
+        return new PaginationResult<ProductEntry>(products.size(), productEntriesPage.values());
+    }
+
+    private List<Product> syncProducts(String clientId, String categoryId) throws Exception {
+        List<Product> products = Services.getProductDAO(clientId).getProducts(categoryId);
+        Set<ProductEntry> productEntriesFromClient = new HashSet<ProductEntry>();
+        for (Product product : products)
+            productEntriesFromClient.add(new ProductEntry(product));
+
+        Set<ProductEntry> productEntriesFromSettings = productEntryRepository.get(clientId, categoryId);
+
+        productEntryRepository.delete(Sets.difference(productEntriesFromSettings, productEntriesFromClient));
+
+        productEntryRepository.add(clientId, Sets.difference(productEntriesFromClient, productEntriesFromSettings));
+
+        return products;
     }
 }

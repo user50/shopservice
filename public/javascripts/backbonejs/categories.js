@@ -1,49 +1,69 @@
 var app = app || {};
 
-    app.Category = Backbone.Model.extend({});
+    var Category = Backbone.Model.extend({});
 
-    app.Categories = Backbone.Collection.extend({
-        model: app.Category,
-        url: function(){
-            return "/clients/" + clientId + "/categories?groupId=23";
+    var Categories = Backbone.Collection.extend({
+
+        initialize: function(){
+            this.on('changeCurrentGroup mergeIsHappened excludeIsHappened',
+                function(currentGroupId){
+                    this.fetch({
+                      data: $.param({ groupId: currentGroupId})});
+                }, this);
         },
+
+        url: "/clients/" + clientId + "/categories",
+
         parse: function(response){
+            app.Counter.set('count', response.totalCount);
             return response.categories;
         }
     });
 
-    app.CategoryView = Backbone.View.extend({
+    var CategoryView = Backbone.View.extend({
         tagName: 'li',
         template: _.template($('#categoryTpl').html()),
+
+        events: {
+            'click' : 'onClick'
+        },
+        initialize: function(){
+            this.model.on('change', this.render, this);
+        },
+
         render: function(){
+            console.log("Render CategoryView to a category model with id: " + this.model.id);
             var template = this.template(this.model.toJSON())
-            this.$el.html( template );
-            return this;
+                this.$el.html( template );
+                return this;
+        },
+
+        onClick: function(){
+            currentCategoryId = this.model.id;
+            app.router.navigate('groups/' + currentGroupId + '/categories/' + this.model.id, {trigger: true});
+//            app.Products.trigger('selectedCategory');
+//            vent.trigger('selectedCategory');
         }
     });
 
-    app.CategoriesView = Backbone.View.extend({
-        initialize: function(){
-            //this.render();
-            this.collection.on('add', this.addOne, this);
-        },
+    var CategoriesView = Backbone.View.extend({
         el: '.rectangle-list',
+
+        initialize: function(){
+            this.collection.on('add', this.addOne, this);
+            this.collection.on('reset', this.render, this);
+        },
         render: function(){
             this.$el.empty();
-            this.collection.each(function(category){
-                var categoryView = new app.CategoryView({model: category});
-                this.$el.append(categoryView.render().el);
-            }, this);
+            this.collection.each(this.addOne, this);
             return this;
         },
         addOne: function(category){
-            var categoryView = new app.CategoryView({model: category});
+            console.log("Adding the category view (model.id = " + category.id + ")to CategoriesView : start...")
+            var categoryView = new CategoryView({model: category});
             this.$el.append(categoryView.render().el);
-        },
-
-        filterOne: function(){
-            alert("ups");
         }
-
-
     });
+
+    app.categories = new Categories();
+    app.categoriesView = new CategoriesView({collection: app.categories});

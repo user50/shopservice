@@ -1,16 +1,58 @@
 var app = app || {};
+var ENTER_KEY = 13;
+var currentGroupId = -1;
+var currentCategoryId = -1;
 
 $(function() {
-    var groups = new app.Groups();
-    groups.fetch();
+    $('#mergeGroups').on('change', function() {
+        mergeGroups(this.value, currentGroupId);
+    });
 
-    var groupsView = new app.GroupsView({collection: groups});
+    $('#excludeGroups').on('change', function() {
+        excludeGroups(this.value, currentGroupId);
+    });
 
-    var categories = new app.Categories();
-    categories.fetch();
+    $('#downloadYMLBtn').on('click', function() {
+        downloadPrice();
+    });
 
-    var categoriesView = new app.CategoriesView({collection: categories});
-    categoriesView.render();
+    function mergeGroups(groupId, targetGroupId){
+        var body = {resourceGroupId: groupId};
+        var url = "/clients/" + clientId + "/groups/" + targetGroupId + "/merge";
+        $.ajax({url: url,
+            type: 'put',
+            data: JSON.stringify(body),
+            contentType: "application/json",
+            async: false
+            });
+        app.categories.trigger('mergeIsHappened', currentGroupId);
+        vent.trigger('selectedGroup');
 
-    var addGroupView = new app.AddGroup({collection: groups});
+    }
+
+    function excludeGroups(groupId, targetGroupId){
+        var body = {resourceGroupId: groupId};
+        var url = "/clients/" + clientId + "/groups/" + targetGroupId + "/diff";
+        $.ajax({url: url,
+            type: 'put',
+            data: JSON.stringify(body),
+            contentType: "application/json",
+            async: false
+            });
+        app.categories.trigger('excludeIsHappened', currentGroupId);
+        vent.trigger('selectedGroup');
+    }
+
+    $( document ).ajaxStart(function() {
+        $( "#loader" ).show();
+    });
+    $( document ).ajaxStop(function() {
+        $( "#loader" ).hide();
+    });
+
+    function downloadPrice(){
+        var url = "/client/"+clientId + "/groups/" + currentGroupId + "/pricelists/YML";
+        var href = document.getElementById("downloadYMLBtn").setAttribute("href",url);
+        href.click();
+    }
 });

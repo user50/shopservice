@@ -1,11 +1,17 @@
 package com.shopservice.dao;
 
-public interface Group2ProductRepository {
-    void set(String productId, int siteId, Boolean checked);
+import com.shopservice.domain.ProductEntry;
 
-    void set(String clientId, String categoryId, int siteId, Boolean checked);
+import java.util.List;
+
+public interface Group2ProductRepository {
+    void set(String productId, int groupId, Boolean checked);
+
+    void set(String clientId, String categoryId, int groupId, Boolean checked);
 
     void merge(int basic, int source);
 
     void difference(int basic, int source);
+
+    void set(String clientId, int groupId, List<String> productEntriesIds, boolean checked);
 }
