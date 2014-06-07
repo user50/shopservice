@@ -25,8 +25,6 @@ var Router = Backbone.Router.extend({
         app.ProductsView.$el.hide();
         app.pagination.$el.hide();
         app.categoriesView.$el.show();
-        app.ProductsView.$el.empty();
-        app.pagination.$el.empty();
     }
 });
 
