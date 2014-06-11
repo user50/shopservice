@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap 3, from LayoutIt!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+    <!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+    <!--script src="js/less-1.3.3.min.js"></script-->
+    <!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+
+    <!-- Свіжа збірка мінімізованих CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- Додаткові теми -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+
+</head>
+
+<script type="text/template" id="categoryTpl">
+    <a id="<%= id %>" href="<%= href %>" class="list-group-item"> <%= name %> <span class="badge"> <%= count %> </span> </a>
+</script>
+
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">MService</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#">How it works</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Price generator</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Price generator</a> <span class="divider"></span>
+                </li>
+                <li class="active">
+                    Categories
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row clearfix">
+                                <div class="col-md-12 column">
+                                    <div class="btn-group">
+
+                                        <!-- Button trigger create price modal -->
+                                        <button class="btn btn-info btn-md" type="button" data-toggle="modal" data-target="#createPriceModal">
+                                            <span class="glyphicon glyphicon glyphicon-plus"></span>
+                                        </button>
+
+                                        <!-- Create price Modal -->
+                                        <div class="modal fade" id="createPriceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title" id="myModalLabel">Create a new price list</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="input-group">
+                                                            <div class="form-group">
+                                                                <label class="control-label" for="inputDefault">Price name:</label>
+                                                                <input type="text" class="form-control" id="inputDefault">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Button trigger edit price modal -->
+                                        <button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-target="#editPriceModal">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+
+                                        <button class="btn btn-success btn-md" type="button">
+                                            <span class="glyphicon glyphicon-download-alt"></span>
+                                        </button>
+
+                                        <!-- Edit Modal -->
+                                        <div class="modal fade" id="editPriceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title" id="myModalLabel1">Edit the price list</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="input-group">
+                                                            <div class="form-group">
+                                                                <label class="control-label" for="inputDefault">Price list name:</label>
+                                                                <input type="text" class="form-control" id="inputDefault1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button class="btn btn-danger btn-md" type="button">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
+
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-primary btn-md">
+                                            <input type="radio" name="options" id="option1"> <strong>Hotline  </strong>
+                                            <span class="badge">176</span>
+                                        </label>
+                                        <label class="btn btn-primary btn-md">
+                                            <input type="radio" name="options" id="option2"> <strong>Hotprice </strong>
+                                            <span class="badge">0</span>
+                                        </label>
+                                        <label class="btn btn-primary btn-md">
+                                            <input type="radio" name="options" id="option3"> <strong>Price.Ua </strong>
+                                            <span class="badge">0</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+             <div id="categories" class="list-group"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="assets/javascripts/backbonejs/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/underscore.js"></script>
+<script type="text/javascript" src="assets/javascripts/backbonejs/backbone.js"></script>
+<script type="text/javascript" src="assets/javascripts/bootstrapjs/routes.js"></script>
+<script type="text/javascript" src="assets/javascripts/bootstrapjs/globvar.js"></script>
+<script type="text/javascript" src="assets/javascripts/bootstrapjs/categories.js"></script>
+
+<!-- Свіжа збірка мінімізованої JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+</body>
+</html>
