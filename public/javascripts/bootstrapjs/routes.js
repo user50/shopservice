@@ -15,6 +15,8 @@ var Router = Backbone.Router.extend({
     },
 
     showGroup: function(groupId){
+        console.log("Show products of group: " + groupId);
+        app.categories.trigger('changeCurrentGroup', groupId);
     }
 });
 

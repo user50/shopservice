@@ -5,8 +5,11 @@ var app = app || {};
     var Categories = Backbone.Collection.extend({
 
         initialize: function(){
-            this.on('changeCurrentGroup mergeIsHappened excludeIsHappened',
+            this.on('test', function(){console.log("test trigger")});
+
+            this.on('changeCurrentGroup',
                 function(currentGroupId){
+                    console.log("In categories collection model: changeCurrentGroup is triggered");
                     this.fetch({
                       data: $.param({ groupId: currentGroupId})});
                 }, this);
@@ -20,6 +23,13 @@ var app = app || {};
     });
 
     var CategoryView = Backbone.View.extend({
+        tagName: 'a',
+        className: 'list-group-item',
+
+        events: {
+            'click' : 'onClick'
+        },
+
         template: _.template($('#categoryTpl').html()),
 
         initialize: function(){
@@ -28,10 +38,15 @@ var app = app || {};
 
         render: function(){
             console.log("Render CategoryView to a category model with id: " + this.model.id);
-            this.model.set('href', 'groups/' + currentGroupId + '/categories/' + this.model.id);
+            this.$el.attr('id', this.model.id);
             var template = this.template(this.model.toJSON());
-            this.setElement(template);
+            this.$el.html( template );
             return this;
+        },
+
+        onClick: function(){
+            currentCategoryId = this.model.id;
+            app.router.navigate('groups/' + currentGroupId + '/categories/' + this.model.id, {trigger: true});
         }
     });
 
