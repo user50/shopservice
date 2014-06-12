@@ -42,6 +42,59 @@
     <span class="badge">0</span>
 </script>
 
+<script type="text/template" id="productViewTemplate">
+
+    <td>
+        <input id="<%= id %>" type="checkbox" class="productCheck" <% if (checked) { %> checked <% } %> >
+    </td>
+    <td>
+        <a href="<%= url %>" target="_blank"><%= productName %></a>
+    </td>
+    <td>
+        <%= price %>
+    </td>
+    <td>
+        <% if (published) { %>
+        <span class="label label-success">YES</span>
+        <% } else { %>
+        <span class="label label-default">NO</span><% } %>
+    </td>
+
+</script>
+
+<script type="text/template" id="tmpServerPagination">
+          <% if (currentPage > firstPage) { %>
+                  <li>
+                    <a href="#" class="serverprevious">Prev</a>
+                  </li>
+          <% } else { %>
+                  <li>
+                    <a href="#">Prev</a>
+                  </li>
+                  <% } %>
+
+          <% for(p=1;p<=totalPages;p++){
+          %>
+            <% if (currentPage == p) { %>
+                  <li class="active">
+                      <a href="#"><%= p %></a>
+                  </li>
+            <% } else { %>
+                  <li>
+                    <a href="#" class="page"><%= p %></a>
+                  </li>
+            <% } %>
+          <%
+          }%>
+
+          <% if (currentPage < totalPages) { %>
+            <li>
+                <a href="#" class="servernext">Next</a>
+            </li>
+          <% } %>
+
+</script>
+
 <body>
 <div class="container">
     <!-- Top menu -->
@@ -188,15 +241,117 @@
              <div id="categories" class="list-group"></div>
         </div>
     </div>
+
+    <!-- products table -->
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table id="productsTable" class="table table-bordered">
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th>-->
+                        <!--<input type="checkbox" value="">-->
+                    <!--</th>-->
+                    <!--<th>-->
+                        <!--Product name-->
+                    <!--</th>-->
+                    <!--<th>-->
+                        <!--Price-->
+                    <!--</th>-->
+                    <!--<th>-->
+                        <!--Published-->
+                    <!--</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<td>-->
+                        <!--<input type="checkbox" value="">-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<a href="parta-detskaya-sport-edican-pr-01.html" target="_blank">Парта детская Спорт (Эдисан) PR-01</a>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--1231-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span class="label label-success">YES</span>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr class="active">-->
+                    <!--<td>-->
+                        <!--<input type="checkbox" value="">-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<a href="parta-detskaya-politsiya-edican-pr-01.html" target="_blank">Парта детская Полиция (Эдисан) PR-01</a>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--2323-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span class="label label-default">NO</span>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>-->
+                        <!--<input type="checkbox" value="">-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<a href="parta-detskaya-taxi-edican-pr-01.html" target="_blank">Парта детская Такси (Эдисан) PR-01</a>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--563,43-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span class="label label-success">YES</span>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr  class="active">-->
+                    <!--<td>-->
+                        <!--<input type="checkbox" value="">-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<a href="parta-uchenicheskaya-su-04.html" target="_blank">Парта детская СУ-04</a>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--3453-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span class="label label-success">YES</span>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td>-->
+                        <!--<input type="checkbox" value="">-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<a href="parta-detskaya-maks-mini.html" target="_blank">Парта детская Макс-мини</a>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--77-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<span class="label label-default">NO</span>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            </table>
+            <ul class="pagination">
+            </ul>
+        </div>
+    </div>
+
 </div>
 
 <script type="text/javascript" src="assets/javascripts/backbonejs/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="assets/javascripts/backbonejs/underscore.js"></script>
 <script type="text/javascript" src="assets/javascripts/backbonejs/backbone.js"></script>
-<script type="text/javascript" src="assets/javascripts/bootstrapjs/routes.js"></script>
+<script type="text/javascript" src="assets/javascripts/bootstrapjs/backbone.paginator.js"></script>
+<script type="text/javascript" src="assets/javascripts/bootstrapjs/counter.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/globvar.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/categories.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/groups.js"></script>
+<script type="text/javascript" src="assets/javascripts/bootstrapjs/products.js"></script>
+<script type="text/javascript" src="assets/javascripts/bootstrapjs/routes.js"></script>
 
 <!-- Свіжа збірка мінімізованої JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>

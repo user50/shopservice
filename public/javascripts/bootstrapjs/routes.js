@@ -12,11 +12,21 @@ var Router = Backbone.Router.extend({
 
     showProductsTable: function(groupId, categoryId){
         console.log("Show products of category: " + categoryId + ", group " + groupId);
+        app.categories.reset();
+        app.categoriesView.$el.hide();
+        vent.trigger('selectedCategory');
+        app.ProductsView.$el.show();
+        app.pagination.$el.show();
     },
 
     showGroup: function(groupId){
         console.log("Show products of group: " + groupId);
         app.categories.trigger('changeCurrentGroup', groupId);
+        app.ProductsView.$el.hide();
+        app.pagination.$el.hide();
+        app.categoriesView.$el.show();
+        app.ProductsView.$el.empty();
+        app.pagination.$el.empty();
     }
 });
 
