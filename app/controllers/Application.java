@@ -19,6 +19,7 @@ public class Application extends Controller {
         return ok(price.render());
     }
 
+    @With(Authentication.class)
     public static Result priceUpdated() throws SQLException {
         return ok(priceUpdated.render());
     }
