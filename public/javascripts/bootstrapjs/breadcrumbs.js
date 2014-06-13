@@ -28,4 +28,4 @@ var BreadcrumbsView = Backbone.View.extend({
     }
 });
 
-new BreadcrumbsView({categoryName: null});
+new BreadcrumbsView({categoryName: null, groupName: null});

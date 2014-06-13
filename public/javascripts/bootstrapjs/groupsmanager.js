@@ -40,13 +40,16 @@ var AddGroup = Backbone.View.extend({
         var name = this.$el.find('#priceNameInput').val();
         var format = this.$el.find('#priceFormatSelect option:selected').val();
         var newGroup = new Group({name: name, format: format});
-        this.collection.create(newGroup, {wait: true});
+        this.collection.create(newGroup, {wait: true,
+            error: function(){$('#invalidNewPriceName').show()},
+            success: function(){$('#invalidNewPriceName').hide()}});
     },
 
     clear: function(){
         console.log('clear form for creating a price');
+        this.$el.find('#invalidNewPriceName').hide();
         var name = this.$el.find('#priceNameInput').val('');
-        var format = this.$el.find('#priceFormatSelect').val('none');
+        var format = this.$el.find('#priceFormatSelect').val('YML');
     }
 });
 
@@ -62,10 +65,13 @@ var EditGroup = Backbone.View.extend({
         var changedName = this.$el.find('#priceNameInputEdit').val();
         var changedFormat = this.$el.find('#priceFormatSelectEdit option:selected').val();
         var changedGroup = this.collection.get(currentGroupId);
-        changedGroup.save({name: changedName, format: changedFormat});
+        changedGroup.save({name: changedName, format: changedFormat}, {wait: true,
+            error: function(){$('#invalidPriceName').show()},
+            success: function(){$('#invalidPriceName').hide()}});
     },
 
     render: function(){
+        this.$el.find('#invalidPriceName').hide();
         var group = app.Groups.get(currentGroupId);
         var name = this.$el.find('#priceNameInputEdit').val(group.get('name'));
         var format = this.$el.find('#priceFormatSelectEdit').val(group.get('format'));
@@ -75,6 +81,7 @@ var EditGroup = Backbone.View.extend({
 
 var DeleteGroup = Backbone.View.extend({
     el: '#deletePriceButton',
+
     events: {
         'click': 'removeOne'
     },
@@ -96,6 +103,10 @@ var DeleteGroup = Backbone.View.extend({
                     className: "btn-danger",
                     callback: function() {
                         app.Groups.get(currentGroupId).destroy();
+                        app.categories.reset();
+                        new BreadcrumbsView({categoryName: null, groupName: null});
+                        app.ProductsView.$el.hide();
+                        app.pagination.$el.hide();
                     }
                 }
             }

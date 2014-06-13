@@ -102,11 +102,11 @@
     </li>
     <% if (categoryName != null ) { %>
         <li>
-            <a id="goToCategoriesLink" href="#">Categories</a> <span class="divider"></span>
+            <%= groupName%> <span class="divider">/</span> <a id="goToCategoriesLink" href="#">Categories</a> <span class="divider"></span>
         </li>
-    <% } else { %>
-        <li>
-            Categories
+    <% } else { if (groupName != null ) %>
+        <li class="active">
+            <%= groupName %><span class="divider"> / </span> Categories
         </li>
     <% } %>
 
@@ -191,6 +191,7 @@
                                                             <div class="form-group">
                                                                 <label class="control-label" for="priceNameInput">Price name:</label>
                                                                 <input type="text" class="form-control" id="priceNameInput">
+                                                                <span id="invalidNewPriceName" class="error">Group with this name already exists!</span>
                                                             </div>
                                                         </div>
 
@@ -198,7 +199,6 @@
                                                             <div class="col-xs-6">
                                                                 <label for="priceFormatSelect">Price list format:</label>
                                                                 <select id="priceFormatSelect" class="form-control">
-                                                                    <option value="none" disabled>Select price list format</option>
                                                                     <option value="YML">YML</option>
                                                                     <option value="price">XML (for Hotprice)</option>
                                                                 </select>
@@ -208,7 +208,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button id="saveNewPrice" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                                                        <button id="saveNewPrice" type="button" class="btn btn-primary">Save changes</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -236,13 +236,13 @@
                                                             <div class="form-group">
                                                                 <label class="control-label" for="priceNameInputEdit">Price list name:</label>
                                                                 <input type="text" class="form-control" id="priceNameInputEdit">
+                                                                <span id="invalidPriceName" class="error">Group with this name already exists!</span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-xs-6">
                                                                 <label for="priceFormatSelectEdit">Price list format:</label>
                                                                 <select id="priceFormatSelectEdit" class="form-control">
-                                                                    <option value="none" disabled>Select price list format</option>
                                                                     <option value="YML">YML</option>
                                                                     <option value="price">XML (for HotLine)</option>
                                                                 </select>
@@ -251,7 +251,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button id="saveEditedPrice" saveEditedPrice type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                                                        <button id="saveEditedPrice" saveEditedPrice type="button" class="btn btn-primary">Save changes</button>
                                                     </div>
                                                 </div>
                                             </div>
