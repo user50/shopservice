@@ -236,4 +236,5 @@ var PaginationView = Backbone.View.extend({
 
 app.Products = new Products();
 app.ProductsView = new ProductsView({collection: app.Products});
-app.pagination = new PaginationView({collection:app.Products});
+app.pagination = new PaginationView({collection:app.Products});app.pagination.$el.hide();
+

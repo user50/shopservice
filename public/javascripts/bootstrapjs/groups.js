@@ -41,7 +41,7 @@ var app = app || {};
 
     var GroupView = Backbone.View.extend({
         tagName: 'label',
-        className : 'btn btn-primary btn-md',
+        className : 'btn btn-default btn-md',
 
         template: _.template($('#groupViewTemplate').html()),
 

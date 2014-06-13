@@ -41,7 +41,6 @@
 
 <script type="text/template" id="groupViewTemplate">
     <input type="radio" name="site" id="<%= name %>" siteId="<%= id %>"> <strong><%= name %> </strong>
-    <span class="badge">0</span>
 </script>
 
 <script type="text/template" id="productViewTemplate">
@@ -169,13 +168,13 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="row clearfix">
-                                <div class="col-md-12 column">
+                                <div id="priceManagerDiv" class="col-md-12 column">
 
                                     <!-- Buttons for working with prices-->
-                                    <div class="btn-group">
+                                    <!--<div class="btn-group">-->
 
                                         <!-- Button trigger create price modal -->
-                                        <button class="btn btn-info btn-md" type="button" data-toggle="modal" data-target="#createPriceModal">
+                                        <button id="createNewPriceBtn" class="btn btn-info btn-md" type="button" data-toggle="modal" data-target="#createPriceModal">
                                             <span class="glyphicon glyphicon glyphicon-plus"></span>
                                         </button>
 
@@ -194,6 +193,18 @@
                                                                 <input type="text" class="form-control" id="priceNameInput">
                                                             </div>
                                                         </div>
+
+                                                        <div class="row">
+                                                            <div class="col-xs-6">
+                                                                <label for="priceFormatSelect">Price list format:</label>
+                                                                <select id="priceFormatSelect" class="form-control">
+                                                                    <option value="none" disabled>Select price list format</option>
+                                                                    <option value="YML">YML</option>
+                                                                    <option value="price">XML (for Hotprice)</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -204,11 +215,11 @@
                                         </div>
 
                                         <!-- Button trigger edit price modal -->
-                                        <button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-target="#editPriceModal">
+                                        <button id="editPriceBtn" class="btn btn-warning btn-md" type="button" data-toggle="modal" data-target="#editPriceModal">
                                             <span class="glyphicon glyphicon-pencil"></span>
                                         </button>
 
-                                        <button class="btn btn-success btn-md" type="button">
+                                        <button id="downloadPriceBtn" class="btn btn-success btn-md" type="button">
                                             <span class="glyphicon glyphicon-download-alt"></span>
                                         </button>
 
@@ -227,6 +238,16 @@
                                                                 <input type="text" class="form-control" id="priceNameInputEdit">
                                                             </div>
                                                         </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-6">
+                                                                <label for="priceFormatSelectEdit">Price list format:</label>
+                                                                <select id="priceFormatSelectEdit" class="form-control">
+                                                                    <option value="none" disabled>Select price list format</option>
+                                                                    <option value="YML">YML</option>
+                                                                    <option value="price">XML (for HotLine)</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -242,7 +263,8 @@
 
                                     <!-- Prices -->
                                     <div id="prices" class="btn-group" data-toggle="buttons"></div>
-                                </div>
+                                <!--</div>-->
+
                             </div>
                         </div>
                     </div>
@@ -275,6 +297,7 @@
 <script type="text/javascript" src="assets/javascripts/backbonejs/underscore.js"></script>
 <script type="text/javascript" src="assets/javascripts/backbonejs/backbone.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/backbone.paginator.js"></script>
+<script type="text/javascript" src="assets/javascripts/bootstrapjs/bootbox.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/counter.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/globvar.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/breadcrumbs.js"></script>
