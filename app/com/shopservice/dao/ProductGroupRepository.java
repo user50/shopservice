@@ -14,4 +14,6 @@ public interface ProductGroupRepository {
     boolean exist(String clientId, String name);
 
     void remove(int id);
+
+    ProductGroup get(Long groupId);
 }
