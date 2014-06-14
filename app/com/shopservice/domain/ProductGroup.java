@@ -3,6 +3,7 @@ package com.shopservice.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.shopservice.PriceListType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class ProductGroup {
     @Id
     public int id;
     public String name;
+
+    public PriceListType format;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
