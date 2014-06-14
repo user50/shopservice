@@ -30,4 +30,9 @@ public class EbeanProductGroupRepository implements ProductGroupRepository {
     public void remove(int id) {
         Ebean.delete(ProductGroup.class, id);
     }
+
+    @Override
+    public ProductGroup get(Long groupId) {
+        return Ebean.find(ProductGroup.class, groupId);
+    }
 }
