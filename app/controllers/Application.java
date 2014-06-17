@@ -9,9 +9,8 @@ import java.sql.SQLException;
 
 public class Application extends Controller {
 
-    @With(Authentication.class)
     public static Result index() throws SQLException {
-        return redirect("/assets/login.html");
+        return ok(index.render());
     }
 
     @With(Authentication.class)
