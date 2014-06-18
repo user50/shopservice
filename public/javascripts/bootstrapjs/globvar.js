@@ -14,7 +14,7 @@ $(function() {
         $.ajax({url: '/logout',
                 type: 'POST',
             success: function(data, status, xhr) {
-                window.location.href = '/assets/login.html';
+                window.location.href = '/';
             }});
     });
 });

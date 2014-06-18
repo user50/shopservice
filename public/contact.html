@@ -63,13 +63,13 @@
 
         <div class="col-sm-8">
             <h3>Свяжитесь с нами!</h3>
-            <p>Если вам интересно начать пользоваться нашим сервисом, или у вас возникли любые вопросы, обращайтесь по указаных контактах.
+            <p>Если вам интересно начать пользоваться нашими сервисами, или у вас возникли какие-то вопросы, свяжитесь с нами.
               Мы будем рады с вами сотрудничать и готовы ответить на все интересующие вопросы.</p>
-    <form role="form" method="POST" action="contact-form-submission.php">
+    <form role="form" id="contactForm">
         <div class="row">
             <div class="form-group col-lg-4">
                 <label for="input1">Ваше имя</label>
-                <input type="text" name="contact_name" class="form-control" id="input1">
+                <input type="text" name="contact_name" class="form-control" id="input1" required>
             </div>
             <div class="form-group col-lg-4">
                 <label for="input2">Email</label>
@@ -77,7 +77,7 @@
             </div>
             <div class="form-group col-lg-4">
                 <label for="input3">Контактный телефон</label>
-                <input type="phone" name="contact_phone" class="form-control" id="input3">
+                <input type="phone" name="contact_phone" class="form-control" id="input3" required>
             </div>
             <div class="clearfix"></div>
             <div class="form-group col-lg-12">
@@ -85,8 +85,14 @@
                 <textarea name="contact_message" class="form-control" rows="6" id="input4"></textarea>
             </div>
             <div class="form-group col-lg-12">
-                <input type="hidden" name="save" value="contact">
-                <button type="submit" class="btn btn-primary">Отправить</button>
+                <div id="sendMessageSuccess" class="alert alert-success">
+                    Сообщение успешено отправлено! Мы свяжимся с вами в ближайшее время!</div>
+                <div id="sendMessageError" class="alert alert-danger">
+                    Извините, возникла ошибка во время отправки сообщения!
+                    Пожалуйста, попробуйте еще раз или свяжитесь с нами другим доступным способом! </div>
+                <button type="button" id="loading-example-btn" data-loading-text="Отправка сообщения..." class="btn btn-primary">
+                    Отправить
+                </button>
             </div>
         </div>
     </form>
@@ -102,11 +108,11 @@
     <p><i class="fa fa-skype"></i>  o_inskiy</p>
     <!--<p><i class="fa fa-vk"></i> <a href="http://vk.com">http://vk.com/MService</a></p>-->
     <p><i class="fa fa-envelope-o"></i> <a href="mailto:info@mservice.com">info@mservice.com</a></p>
-    <ul class="list-unstyled list-inline list-social-icons">
+    <!-- <ul class="list-unstyled list-inline list-social-icons">
         <li class="tooltip-social facebook-link"><a href="#facebook-page" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook-square fa-2x"></i></a></li>
         <li class="tooltip-social twitter-link"><a href="#twitter-profile" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter-square fa-2x"></i></a></li>
         <li class="tooltip-social google-plus-link"><a href="#google-plus-page" data-toggle="tooltip" data-placement="top" title="Google+"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-    </ul>
+    </ul> -->
 </div>
 
 </div><!-- /.row -->
@@ -138,7 +144,48 @@
         // Activates Tooltips for Social Links
         $('.tooltip-social').tooltip({
             selector: "a[data-toggle=tooltip]"
-        })
+        });
+
+        $.fn.serializeObject = function()
+        {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+
+        $('#loading-example-btn').click(function () {
+            var btn = $(this);
+            btn.button('loading');
+            $.ajax({
+                url: '/assets/contact',
+                type: 'POST',
+                data: $('#contactForm').serializeObject(),
+                dataType: 'json',
+                statusCode: {
+                    200: function() {
+                        $("#sendMessageSuccess").show();
+                        $("#sendMessageError").hide();
+                    },
+                    500: function(){
+                        $("#sendMessageError").show();
+                        $("#sendMessageSuccess").hide();
+                    }
+                }
+            }).always(function () {
+                btn.button('reset')
+            });
+        });
+
     });
 
 </script>

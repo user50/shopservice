@@ -40,3 +40,5 @@ PUT    /clients/:id/groups/:groupId/diff                                  contro
 
 POST /authentication                                                      controllers.LoginController.authentication()
 POST /logout                                                              controllers.LoginController.logout()
+
+POST /assets/contact                                                             controllers.FeedbackController.feedbackNotify()

@@ -23,3 +23,11 @@
 .google-plus-link a:hover {
     color: #d14836;
 }
+
+#sendMessageSuccess{
+    display: none;
+}
+
+#sendMessageError{
+    display: none;
+}
