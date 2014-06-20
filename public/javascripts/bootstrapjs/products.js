@@ -116,7 +116,7 @@ var ProductsView = Backbone.View.extend({
     checkAllOnPage: function(e){
         console.log("Check all products on the page...");
 
-        var url = "/clients/"+clientId + "/groups/" + currentGroupId + "/products?checked=" + e.currentTarget.checked;
+        var url = "/clients/"+clientId + "/groups/" + currentGroupId + "/products?categoryId=&checked=" + e.currentTarget.checked;
         var productIdsToUpdate = [];
 
         for(i = 0; i < this.collection.length; i++){
@@ -169,9 +169,9 @@ var ProductsView = Backbone.View.extend({
         var th = $('<th></th>');
         th.append(checkAll);
         tr.append(th);
-        tr.append("<th>Product Name</th>");
-        tr.append("<th>Price, UAH</th>");
-        tr.append("<th>Published</th>");
+        tr.append("<th>наименование товара</th>");
+        tr.append("<th>Цена</th>");
+        tr.append("<th>Опубликован</th>");
         this.$el.append(tr);
         console.log("Header is rendered...");
     }
@@ -234,7 +234,111 @@ var PaginationView = Backbone.View.extend({
     }
 });
 
+var SearchResults = Backbone.Collection.extend({
+    model: Product,
+
+    url: function(){
+        return "/clients/" + clientId + "/groups/" + currentGroupId + "/products"
+    }
+});
+
+var SearchResultView = Backbone.View.extend({
+    tagName: 'tr',
+    template: _.template($('#searchResultViewTemplate').html()),
+
+    initialize: function() {
+    },
+
+    events: {
+        'click .productCheck' : 'productToggle'
+    },
+
+    render : function () {
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    },
+
+    productToggle: function(){
+        this.model.toggle();
+    }
+});
+
+var SearchResultsView = Backbone.View.extend({
+    el: '#searchResultsTable',
+
+    initialize: function(){
+        this.collection.on('all', this.render, this);
+    },
+
+    render: function(){
+        console.log('Rendering of SearchResultsView...');
+        this.$el.empty();
+        this.renderHeader();
+        this.collection.each(this.addOne, this);
+        return this;
+        },
+
+    renderHeader: function(){
+        var thead = $('<thead/>');
+        var tr = $('<tr/>');
+
+        var checkAll = $('<input>');
+        checkAll.attr('id', 'check_all_searched_products');
+        checkAll.attr('type', 'checkbox');
+        var th = $('<th></th>');
+        th.append(checkAll);
+        tr.append(th);
+        tr.append("<th>Категория</th>");
+        tr.append("<th>наименование товара</th>");
+        tr.append("<th>Цена</th>");
+        tr.append("<th>Опубликован</th>");
+        this.$el.append(tr);
+        console.log("Header is rendered...");
+    },
+
+    addOne : function ( item ) {
+        console.log('add one search result');
+        var view = new SearchResultView({model:item});
+        this.$el.append(view.render().el);
+    }
+});
+
+var SearchView = Backbone.View.extend({
+    el: '#searchDiv',
+
+    events: {
+        'click #sendSearchTextsBtn' : 'sendSearchQuery'
+    },
+
+    initialize: function(){
+        this.searchResults = new SearchResults();
+        this.searchResultsView = new SearchResultsView ({collection: this.searchResults});
+        this.$el.find('#searchForm').hide();
+    },
+
+    sendSearchQuery: function(){
+        var text = this.$el.find('#searchText').val();
+        console.log("Search texts: " + text);
+        this.$el.find('#searchText').val('');
+        this.searchResults.add(searchResultsStub);
+        app.router.navigate('groups/' + currentGroupId + "/search=" + text, {trigger: true});
+        this.searchResultsView.$el.show();
+        app.categoriesView.$el.hide();
+        app.ProductsView.$el.hide();
+        app.pagination.$el.hide();
+
+    },
+
+    hideResults: function(){
+        this.$el.find('#searchForm').show();
+        this.searchResultsView.$el.hide();
+    }
+});
+
 app.Products = new Products();
 app.ProductsView = new ProductsView({collection: app.Products});
 app.pagination = new PaginationView({collection:app.Products});app.pagination.$el.hide();
 
+var searchResultsStub = JSON.parse('[{"id":"0889119c-d6ef-1004-8e43-b7d03cabe5c7","categoryId":"35","productName":"Парта детская Спорт (Эдисан) PR-01","price":1490.0,"url":"parta-detskaya-sport-edican-pr-01.html","published":true,"checked":true},{"id":"0889119d-d6ef-1004-8e43-b7d03cabe5c7","categoryId":"35","productName":"Парта детская Полиция (Эдисан) PR-01","price":1490.0,"url":"parta-detskaya-politsiya-edican-pr-01.html","published":true,"checked":false}]');
+
+app.SearchView = new SearchView();

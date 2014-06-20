@@ -58,9 +58,32 @@
     </td>
     <td>
         <% if (published) { %>
-        <span class="label label-success">YES</span>
+        <span class="label label-success">ДА</span>
         <% } else { %>
-        <span class="label label-default">NO</span><% } %>
+        <span class="label label-default">НЕТ</span><% } %>
+    </td>
+
+</script>
+
+<script type="text/template" id="searchResultViewTemplate">
+
+    <td>
+        <input id="<%= id %>" type="checkbox" class="productCheck" <% if (checked) { %> checked <% } %> >
+    </td>
+    <td>
+        categoryName
+    </td>
+    <td>
+        <a href="<%= url %>" target="_blank"><%= productName %></a>
+    </td>
+    <td>
+        <%= price %>
+    </td>
+    <td>
+        <% if (published) { %>
+        <span class="label label-success">ДА</span>
+        <% } else { %>
+        <span class="label label-default">НЕТ</span><% } %>
     </td>
 
 </script>
@@ -108,7 +131,7 @@
         </li>
     <% } else { if (groupName != null ) %>
         <li class="active">
-            <%= groupName %><span class="divider">/</span> Categories
+            <%= groupName %><span class="divider">/</span> <a id="goToCategoriesLink" href="#">Categories</a>
         </li>
     <% } %>
 
@@ -273,6 +296,20 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="searchDiv" class="row clearfix">
+        <div class="col-md-12 column">
+            <form id="searchForm" class="form-inline" role="form">
+                <div class="form-group">
+                    <label class="sr-only" for="searchText">Поиск товара</label>
+                    <input type="email" class="form-control" id="searchText" placeholder="Поиск товара">
+                </div>
+                <button id="sendSearchTextsBtn" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </form> </br>
+            <table id="searchResultsTable" class="table table-bordered"></table>
+
         </div>
     </div>
 

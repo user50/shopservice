@@ -21,10 +21,6 @@ var BreadcrumbsView = Backbone.View.extend({
 
     render: function(){
         this.$el.html(this.template(this.options));
-    },
-
-    goToCategories: function(){
-        app.router.navigate('groups/' + currentGroupId , {trigger: true});
     }
 });
 

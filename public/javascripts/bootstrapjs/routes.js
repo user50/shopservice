@@ -14,7 +14,7 @@ var Router = Backbone.Router.extend({
         console.log("Show products of category: " + categoryId + ", group " + groupId);
         new BreadcrumbsView({categoryName: app.categories.get(categoryId).get('name'),
                              groupName: app.Groups.get(currentGroupId).get('name')});
-        app.categories.reset();
+        app.SearchView.hideResults();
         app.categoriesView.$el.hide();
         vent.trigger('selectedCategory');
         app.ProductsView.$el.show();
@@ -27,6 +27,7 @@ var Router = Backbone.Router.extend({
         app.categories.trigger('changeCurrentGroup', groupId);
         app.ProductsView.$el.hide();
         app.pagination.$el.hide();
+        app.SearchView.hideResults();
         app.categoriesView.$el.show();
     }
 });
