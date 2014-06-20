@@ -41,23 +41,17 @@ public class ProductController extends Controller {
         return ok();
     }
 
-//    public static Result updateProducts(String clientId, Long groupId, String categoryId)
-//    {
-//        Map<String,Boolean> body = Json.fromJson(request().body().asJson(), Map.class);
-//        if (!body.containsKey("checked"))
-//            return badRequest("Missing field checked");
-//
-//        group2ProductRepository.set(clientId, categoryId, groupId.intValue(), body.get("checked"));
-//
-//        return ok();
-//    }
+    public static Result updateProducts( String clientId, Long groupId, String categoryId, boolean checked ) throws IOException {
+        if (categoryId != null)
+        {
+            group2ProductRepository.set(clientId, categoryId, groupId.intValue(), checked);
+        }
+        else
+        {
+            List<String> productEntries = Json.fromJson(request().body().asJson(), List.class);
 
-    public static Result updateProducts( String clientId, Long groupId, boolean checked ) throws IOException {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        List<String> productEntries = objectMapper.readValue(request().body().asJson().toString(), new TypeReference<List<String>>() { });
-        List<String> productEntries = Json.fromJson(request().body().asJson(), List.class);
-
-        group2ProductRepository.set(clientId, groupId.intValue(), productEntries, checked);
+            group2ProductRepository.set(clientId, groupId.intValue(), productEntries, checked);
+        }
 
         return ok();
     }
