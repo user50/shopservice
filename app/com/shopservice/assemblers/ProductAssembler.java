@@ -36,6 +36,8 @@ public class ProductAssembler {
         productEntry.price = product.price;
         productEntry.productName = product.name;
         productEntry.published = product.published;
+        productEntry.categoryName = product.category.name;
+
     }
 
     public PaginationResult<ProductEntry> getProductsPage(String clientId, String categoryId, int groupId, int offset, int limit) throws Exception {

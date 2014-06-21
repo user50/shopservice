@@ -42,7 +42,7 @@ public class ProductController extends Controller {
     }
 
     public static Result updateProducts( String clientId, Long groupId, String categoryId, boolean checked ) throws IOException {
-        if (!categoryId.equals(""))
+        if (categoryId != null)
         {
             group2ProductRepository.set(clientId, categoryId, groupId.intValue(), checked);
         }

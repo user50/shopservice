@@ -116,7 +116,7 @@ var ProductsView = Backbone.View.extend({
     checkAllOnPage: function(e){
         console.log("Check all products on the page...");
 
-        var url = "/clients/"+clientId + "/groups/" + currentGroupId + "/products?categoryId=&checked=" + e.currentTarget.checked;
+        var url = "/clients/"+clientId + "/groups/" + currentGroupId + "/products?checked=" + e.currentTarget.checked;
         var productIdsToUpdate = [];
 
         for(i = 0; i < this.collection.length; i++){
