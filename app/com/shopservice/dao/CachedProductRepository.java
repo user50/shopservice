@@ -7,14 +7,14 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-public class CachedProductRepository implements ProductRepository {
+public class CachedProductRepository extends ProductRepositoryWrapper {
 
     private ProductRepository productRepository;
 
     private Map<String, List<Product>> categoryToProducts = new Hashtable<String, List<Product>>();
 
     public CachedProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+        super(productRepository);
     }
 
     @Override
@@ -24,12 +24,7 @@ public class CachedProductRepository implements ProductRepository {
         else
             refreshCache(categoryId);
 
-        return categoryToProducts.get(categoryId);    }
-
-    @Override
-    public List<Product> getProducts(Collection<String> productIds) {
-        //no cached
-        return productRepository.getProducts(productIds);
+        return categoryToProducts.get(categoryId);
     }
 
     private void refreshCache(final String categoryId) {

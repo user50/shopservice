@@ -51,6 +51,12 @@ public class Queries {
         return getValue("/root/client[@id='"+clientId+"']/categories/getParentCategories");
     }
 
+
+    public String getProductQueryByWords(String clientId)
+    {
+        return getValue("/root/client[@id='"+clientId+"']/product/byWords");
+    }
+
     private String getValue(String XPathQuery)
     {
         try {
@@ -61,9 +67,6 @@ public class Queries {
 
         return EMPTY;
     }
-
-
-
 
 
 }

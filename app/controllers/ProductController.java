@@ -26,7 +26,12 @@ public class ProductController extends Controller {
         return ok(Json.toJson(productAssembler.getProducts(clientId, categoryId, siteId.intValue()) ));
     }
 
-    public static Result getProductsPage(String clientId, Long groupId,  String categoryId, Long offset, Long limit) throws Exception {
+    public static Result getProductsPage(String clientId, Long groupId,  String categoryId, String words, Long offset, Long limit) throws Exception {
+        if (words != null)
+        {
+            return ok(Json.toJson(productAssembler.getProductsByWords(clientId, groupId.intValue(), words)));
+        }
+
         return ok(Json.toJson(productAssembler.getProductsPage(clientId, categoryId, groupId.intValue(), offset.intValue(), limit.intValue())));
     }
 

@@ -9,4 +9,6 @@ public interface ProductRepository {
     List<Product> getProducts(String categoryId);
 
     List<Product> getProducts(Collection<String> productIds);
+
+    List<Product> findProductsByWords(List<String> words);
 }

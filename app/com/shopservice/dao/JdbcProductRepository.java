@@ -5,6 +5,7 @@ import com.shopservice.Services;
 import com.shopservice.domain.Product;
 import com.shopservice.queries.GetProductsByCategory;
 import com.shopservice.queries.GetProductsByIds;
+import com.shopservice.queries.GetProductsByWords;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -44,4 +45,15 @@ public class JdbcProductRepository implements ProductRepository {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<Product> findProductsByWords(List<String> words) {
+        try {
+            return  databaseManager.executeQueryForList(new GetProductsByWords(clientId, words));
+        } catch (SQLException e) {
+            //todo log
+            throw new RuntimeException(e);
+        }
+    }
+
 }

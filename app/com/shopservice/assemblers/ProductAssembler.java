@@ -69,4 +69,19 @@ public class ProductAssembler {
 
         return products;
     }
+
+    public List<ProductEntry> getProductsByWords(String clientId, int groupId, String words) throws Exception {
+        List<Product> products = Services.getProductDAO(clientId).findProductsByWords(Arrays.asList(words.trim().split(" ")));
+
+        Map<String,ProductEntry> result = new LinkedHashMap<String,ProductEntry>();
+        for (ProductEntry entry : productEntryRepository.findSelected(clientId, groupId) )
+            result.put(entry.productId, entry );
+
+        for (Product product : products) {
+            if (result.keySet().contains(product.id))
+                fill(result.get(product.id), product);
+        }
+
+        return null;
+    }
 }
