@@ -4,7 +4,8 @@ var Router = Backbone.Router.extend({
     routes: {
         '' : 'start',
         'groups/:groupId/categories/:categoryId' : 'showProductsTable',
-        'groups/:groupId' : 'showGroup'
+        'groups/:groupId' : 'showGroup',
+        'groups/:groupId/search=*searchText' : 'searchProduct'
     },
     start: function(){
         console.log('Hello!');
@@ -29,6 +30,12 @@ var Router = Backbone.Router.extend({
         app.pagination.$el.hide();
         app.SearchView.hideResults();
         app.categoriesView.$el.show();
+    },
+
+    searchProduct: function(groupId, searchText){
+        app.categoriesView.$el.hide();
+        app.ProductsView.$el.hide();
+        app.pagination.$el.hide();
     }
 });
 

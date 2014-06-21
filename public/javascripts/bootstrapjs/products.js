@@ -320,13 +320,12 @@ var SearchView = Backbone.View.extend({
         var text = this.$el.find('#searchText').val();
         console.log("Search texts: " + text);
         this.$el.find('#searchText').val('');
-        this.searchResults.add(searchResultsStub);
-        app.router.navigate('groups/' + currentGroupId + "/search=" + text, {trigger: true});
-        this.searchResultsView.$el.show();
-        app.categoriesView.$el.hide();
-        app.ProductsView.$el.hide();
-        app.pagination.$el.hide();
 
+        //TODO  ajax for updating searchResults collection
+        this.searchResults.add(searchResultsStub);
+
+        this.searchResultsView.$el.show();
+        app.router.navigate('groups/' + currentGroupId + "/search=" + text, {trigger: true});
     },
 
     hideResults: function(){
