@@ -1,6 +1,7 @@
 package com.shopservice.queries;
 
 import com.shopservice.ProductConditions;
+import com.shopservice.Queries;
 import com.shopservice.Services;
 import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
@@ -61,7 +62,7 @@ public class JdbcProductQuery implements Query<Product> {
 
     @Override
     public String getRawSql() {
-        String sql = Services.queries.getProductQuery(clientId) ;
+        String sql = Queries.getInstance().getProductQuery(clientId) ;
 
         List<String> conditions = new ArrayList<>();
 

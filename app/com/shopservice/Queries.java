@@ -21,6 +21,15 @@ public class Queries {
     public static final String CONFIGURATION_FILE = "conf" + File.separator + "queries.conf";
     private static final String EMPTY = "";
 
+    private static Queries instance;
+
+    public static Queries getInstance() {
+        if (instance==null)
+            instance = new Queries();
+
+        return instance;
+    }
+
     public Queries(){
         try {
             FileInputStream file = new FileInputStream(new File(CONFIGURATION_FILE));
@@ -38,10 +47,6 @@ public class Queries {
         return getValue("/root/client[@id='"+clientId+"']/categories/getCategories");
     }
 
-    public String getProductQueryByCategory(String clientId) {
-        return getValue("/root/client[@id='"+clientId+"']/product/byCategoryId");
-    }
-
     public String getProductQuery(String clientId) {
         return getValue("/root/client[@id='"+clientId+"']/product");
     }
@@ -49,12 +54,6 @@ public class Queries {
     public String getQuery4GetParentCategories(String clientId)
     {
         return getValue("/root/client[@id='"+clientId+"']/categories/getParentCategories");
-    }
-
-
-    public String getProductQueryByWords(String clientId)
-    {
-        return getValue("/root/client[@id='"+clientId+"']/product/byWords");
     }
 
     private String getValue(String XPathQuery)
