@@ -15,9 +15,9 @@ public class ProductConditions {
 
     public Collection<String> words = new TreeSet<>();
 
-    public int offset;
+    public Integer offset;
 
-    public int limit;
+    public Integer limit;
 
     @Override
     public boolean equals(Object o) {

@@ -86,6 +86,9 @@ public class JdbcProductQuery implements Query<Product> {
         while (iterator.hasNext())
             sql += " "+iterator.next() + (iterator.hasNext() ? " AND": "" );
 
+        if (this.conditions.limit !=null && this.conditions.offset != null)
+            sql += " LIMIT ? OFFSET ?";
+
         return sql;
     }
 
@@ -102,6 +105,10 @@ public class JdbcProductQuery implements Query<Product> {
         for (String word : conditions.words)
             statement.setString(i++, "%"+word+"%");
 
+        if (this.conditions.limit !=null && this.conditions.offset != null) {
+            statement.setInt(i++, this.conditions.limit);
+            statement.setInt(i, this.conditions.offset);
+        }
 
     }
 }
