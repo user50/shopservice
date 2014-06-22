@@ -1,8 +1,8 @@
 package com.shopservice.dao;
 
+import com.shopservice.ProductConditions;
 import com.shopservice.domain.Product;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -10,24 +10,25 @@ import java.util.List;
  */
 public class ProductRepositoryWrapper implements ProductRepository  {
 
-    private ProductRepository productRepository;
+    protected ProductRepository productRepository;
 
     public ProductRepositoryWrapper(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
+
     @Override
-    public List<Product> getProducts(String categoryId) {
-        return productRepository.getProducts(categoryId);
+    public List<Product> find(ProductConditions query) {
+        return productRepository.find(query);
     }
 
     @Override
-    public List<Product> getProducts(Collection<String> productIds) {
-        return productRepository.getProducts(productIds);
+    public List<Product> find() {
+        return productRepository.find();
     }
 
     @Override
-    public List<Product> findProductsByWords(List<String> words) {
-        return productRepository.findProductsByWords(words);
+    public int size(ProductConditions conditions) {
+        return productRepository.size(conditions);
     }
 }

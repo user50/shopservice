@@ -1,5 +1,6 @@
 package com.shopservice.refreshers;
 
+import com.shopservice.ProductConditions;
 import com.shopservice.Services;
 import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.Product;
@@ -34,7 +35,10 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
         Set<Category> categories = new HashSet<Category>();
 
-        for (Product product : Services.getProductDAO(clientId).getProducts( getProductIds(clientId, siteId))) {
+        ProductConditions query = new ProductConditions();
+        query.productIds = getProductIds(clientId, siteId);
+
+        for (Product product : Services.getProductDAO(clientId).find( query)) {
             price.addItem( createItem(clientId, product) );
             categories.add( new Category( product.category.id, product.category.name) );
         }

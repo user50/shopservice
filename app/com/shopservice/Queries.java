@@ -42,8 +42,8 @@ public class Queries {
         return getValue("/root/client[@id='"+clientId+"']/product/byCategoryId");
     }
 
-    public String getProductQueryByListOfIds(String clientId) {
-        return getValue("/root/client[@id='"+clientId+"']/product/listOfId");
+    public String getProductQuery(String clientId) {
+        return getValue("/root/client[@id='"+clientId+"']/product");
     }
 
     public String getQuery4GetParentCategories(String clientId)

@@ -19,7 +19,7 @@ public class GetParentCategories extends CategoryQuery {
     @Override
     public String getRawSql() {
         if (categoryIds.isEmpty())
-            return Services.queries.getProductQueryByListOfIds(clientId)
+            return Services.queries.getProductQuery(clientId)
                     .replace("?", "null");
 
         String[] abc = new String[categoryIds.size()];

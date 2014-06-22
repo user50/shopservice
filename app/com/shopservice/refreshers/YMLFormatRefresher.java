@@ -1,5 +1,6 @@
 package com.shopservice.refreshers;
 
+import com.shopservice.ProductConditions;
 import com.shopservice.Services;
 import com.shopservice.domain.Category;
 import com.shopservice.domain.ClientSettings;
@@ -39,7 +40,10 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
 
         Set<Category> categories = new HashSet<Category>();
 
-        for (Product product : Services.getProductDAO(clientId).getProducts( getProductIds(clientId, siteId))) {
+        ProductConditions query = new ProductConditions();
+        query.productIds = getProductIds(clientId, siteId);
+
+        for (Product product : Services.getProductDAO(clientId).find( query )) {
             ymlCatalog.shop.offers.add(createOffer(product, clientSettings.currency.name()));
             categories.add( product.category );
         }

@@ -7,6 +7,7 @@ import javax.xml.bind.Marshaller;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.util.Collection;
+import java.util.List;
 
 public class Util {
 
@@ -34,4 +35,5 @@ public class Util {
 
         return sum;
     }
+
 }
