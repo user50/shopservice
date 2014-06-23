@@ -503,7 +503,6 @@ var SearchView = Backbone.View.extend({
             return;
 
         console.log("Search texts: " + text);
-        this.$el.find('#searchText').val('');
         this.$el.find('#searchQueryLabel').html('Результаты поиска по запросу: <em><strong>' + text + '</em></strong>');
         this.$el.find('#searchQueryLabel').show();
             //TODO  ajax for updating searchResults collection
@@ -525,6 +524,7 @@ var SearchView = Backbone.View.extend({
 
     hideResults: function(){
         this.$el.find('#searchForm').show();
+        this.$el.find('#searchText').val('');
         this.$el.find('#searchQueryLabel').hide();
         this.searchResultsView.$el.hide();
         this.searchResultsPaginationView.$el.hide();
