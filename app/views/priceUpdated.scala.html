@@ -1,9 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
-    <title>Bootstrap 3, from LayoutIt!</title>
+    <title>Price Generator - MService</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -71,7 +71,7 @@
         <input id="<%= id %>" type="checkbox" class="productCheck" <% if (checked) { %> checked <% } %> >
     </td>
     <td>
-        categoryName
+        <%= categoryName %>
     </td>
     <td>
         <a href="<%= url %>" target="_blank"><%= productName %></a>
@@ -91,11 +91,11 @@
 <script type="text/template" id="tmpServerPagination">
           <% if (currentPage > firstPage) { %>
                   <li>
-                    <a href="#" class="serverprevious">Prev</a>
+                    <a href="#" class="serverprevious">Пред.</a>
                   </li>
           <% } else { %>
                   <li>
-                    <a href="#">Prev</a>
+                    <a href="#">Пред.</a>
                   </li>
                   <% } %>
 
@@ -115,23 +115,55 @@
 
           <% if (currentPage < totalPages) { %>
             <li>
-                <a href="#" class="servernext">Next</a>
+                <a href="#" class="servernext">След.</a>
             </li>
           <% } %>
+</script>
+
+<script type="text/template" id="searchResultsPaginationTmp">
+    <% if (currentPage > firstPage) { %>
+    <li>
+        <a href="#" class="serverprevious">Пред.</a>
+    </li>
+    <% } else { %>
+    <li>
+        <a href="#">Пред.</a>
+    </li>
+    <% } %>
+
+    <% for(p=1;p<=totalPages;p++){
+    %>
+    <% if (currentPage == p) { %>
+    <li class="active">
+        <a href="#"><%= p %></a>
+    </li>
+    <% } else { %>
+    <li>
+        <a href="#" class="page"><%= p %></a>
+    </li>
+    <% } %>
+    <%
+    }%>
+
+    <% if (currentPage < totalPages) { %>
+    <li>
+        <a href="#" class="servernext">След.</a>
+    </li>
+    <% } %>
 
 </script>
 
 <script type="text/template" id="breadcrumbsViewTemplate">
     <li>
-        <a id="goHome" href="#">Price generator</a> <span class="divider"></span>
+        <a id="goHome" href="/priceUpdated">Генератор прайс-листов</a> <span class="divider"></span>
     </li>
     <% if (categoryName != null ) { %>
         <li>
-            <%= groupName%> <span class="divider">/</span> <a id="goToCategoriesLink" href="#">Categories</a> <span class="divider"></span>
+            <%= groupName%> <span class="divider">/</span> <a id="goToCategoriesLink" href="#">Категории</a> <span class="divider"></span>
         </li>
     <% } else { if (groupName != null ) %>
         <li class="active">
-            <%= groupName %><span class="divider">/</span> <a id="goToCategoriesLink" href="#">Categories</a>
+            <%= groupName %> <span class="divider">/</span> <a id="goToCategoriesLink" href="#">Категории</a>
         </li>
     <% } %>
 
@@ -210,20 +242,20 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                        <h4 class="modal-title" id="myModalLabel">Create a new price list</h4>
+                                                        <h4 class="modal-title" id="myModalLabel">Создать новый прайс-лист</h4>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="input-group">
                                                             <div class="form-group">
-                                                                <label class="control-label" for="priceNameInput">Price name:</label>
+                                                                <label class="control-label" for="priceNameInput">Название прайс-листа:</label>
                                                                 <input type="text" class="form-control" id="priceNameInput">
-                                                                <span id="invalidNewPriceName" class="error">Group with this name already exists!</span>
+                                                                <span id="invalidNewPriceName" class="error">Прайс-лист с таким именем уже существует!</span>
                                                             </div>
                                                         </div>
 
                                                         <div class="row">
                                                             <div class="col-xs-6">
-                                                                <label for="priceFormatSelect">Price list format:</label>
+                                                                <label for="priceFormatSelect">Формат прайс-листа:</label>
                                                                 <select id="priceFormatSelect" class="form-control">
                                                                     <option value="YML">YML</option>
                                                                     <option value="price">XML (for Hotprice)</option>
@@ -233,8 +265,8 @@
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button id="saveNewPrice" type="button" class="btn btn-primary">Save changes</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                                        <button id="saveNewPrice" type="button" class="btn btn-primary">Сохранить</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -255,19 +287,19 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                        <h4 class="modal-title" id="myModalLabel1">Edit the price list</h4>
+                                                        <h4 class="modal-title" id="myModalLabel1">Редактировать прайс-лист</h4>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="input-group">
                                                             <div class="form-group">
-                                                                <label class="control-label" for="priceNameInputEdit">Price list name:</label>
+                                                                <label class="control-label" for="priceNameInputEdit">Название прайс-листа:</label>
                                                                 <input type="text" class="form-control" id="priceNameInputEdit">
-                                                                <span id="invalidPriceName" class="error">Group with this name already exists!</span>
+                                                                <span id="invalidPriceName" class="error">Прайс-лист с таким именем уже существует!</span>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-xs-6">
-                                                                <label for="priceFormatSelectEdit">Price list format:</label>
+                                                                <label for="priceFormatSelectEdit">Формат прайс-листа:</label>
                                                                 <select id="priceFormatSelectEdit" class="form-control">
                                                                     <option value="YML">YML</option>
                                                                     <option value="price">XML (for HotLine)</option>
@@ -276,8 +308,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button id="saveEditedPrice" saveEditedPrice type="button" class="btn btn-primary">Save changes</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                                        <button id="saveEditedPrice" saveEditedPrice type="button" class="btn btn-primary">Сохранить</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -297,19 +329,25 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
 
     <div id="searchDiv" class="row clearfix">
         <div class="col-md-12 column">
             <form id="searchForm" class="form-inline" role="form">
+                <button id="sendSearchTextsBtn" type="button" class="btn btn-default"><i class="fa fa-search"></i> Найти </button>
                 <div class="form-group">
-                    <label class="sr-only" for="searchText">Поиск товара</label>
-                    <input type="email" class="form-control" id="searchText" placeholder="Поиск товара">
+                    <label class="sr-only" for="searchText">name</label>
+                    <input type="text" class="form-control" id="searchText" placeholder="">
                 </div>
-                <button id="sendSearchTextsBtn" type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
             </form> </br>
+
+            <div id="searchQueryLabel" class="well well-sm"></div>
+
             <table id="searchResultsTable" class="table table-bordered"></table>
 
+            <!-- searchResultspagination -->
+            <ul id="searchResultsPagination" class="pagination pagination-sm"></ul>
         </div>
     </div>
 
@@ -323,10 +361,10 @@
     <!-- products table -->
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <table id="productsTable" class="table table-bordered"></table>
+            <table id="productsTable" class="table table-responsive"></table>
 
             <!-- pagination -->
-            <ul id="paginationView" class="pagination"></ul>
+            <ul id="paginationView" class="pagination pagination-sm"></ul>
         </div>
     </div>
 

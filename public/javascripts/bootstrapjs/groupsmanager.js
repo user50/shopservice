@@ -90,16 +90,16 @@ var DeleteGroup = Backbone.View.extend({
         var groupName = this.collection.get(currentGroupId).get('name');
 
         bootbox.dialog({
-            message: "Are you sure you want to delete the " + groupName + " price list?",
+            message: "Вы уверены, что хотите удалить прайс-лист  \"" + groupName + "\" ?",
             buttons: {
                 success: {
-                    label: "Close",
+                    label: "Отмена",
                     className: "btn-default",
                     callback: function() {
                     }
                 },
                 danger: {
-                    label: "Delete",
+                    label: "Удалить",
                     className: "btn-danger",
                     callback: function() {
                         app.Groups.get(currentGroupId).destroy();
