@@ -40,6 +40,8 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public int size(ProductConditions conditions) {
+        conditions.limit = null;
+        conditions.offset = null;
         return find(conditions).size();
     }
 }
