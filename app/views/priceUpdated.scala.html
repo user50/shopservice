@@ -263,6 +263,35 @@
                                                             </div>
                                                         </div>
 
+                                                        <div class="row top-buffer">
+                                                            <div class="col-xs-6">
+                                                                <label for="priceCurrencySelect">Основная валюта:</label>
+                                                                <select id="priceCurrencySelect" class="form-control">
+                                                                    <option value="UAH">Гривны</option>
+                                                                    <option value="RUB">Рубли (рус.)</option>
+                                                                    <option value="BYR">Рубли (бел.)</option>
+                                                                    <option value="USD">Доллары</option>
+                                                                    <option value="EUR">Евро</option>
+                                                                    <option value="KZT">Тенге</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row top-buffer">
+                                                            <div class="col-xs-6">
+                                                                <select id="priceCurrencyRateSelect" class="form-control" disabled>
+                                                                    <option value="none" disabled>Курс валюты..</option>
+                                                                    <option value="NBU">НБУ</option>
+                                                                    <option value="CBRF ">ЦБРФ</option>
+                                                                    <option value="BYR">НБК</option>
+                                                                    <option value="custom">Другой курс</option>
+                                                                </select>
+
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                <input class="form-control" id="priceCurrencyRate" type="text" placeholder="Укажите курс .." disabled>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
@@ -297,7 +326,7 @@
                                                                 <span id="invalidPriceName" class="error">Прайс-лист с таким именем уже существует!</span>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="row ">
                                                             <div class="col-xs-6">
                                                                 <label for="priceFormatSelectEdit">Формат прайс-листа:</label>
                                                                 <select id="priceFormatSelectEdit" class="form-control">
@@ -306,6 +335,37 @@
                                                                 </select>
                                                             </div>
                                                         </div>
+
+
+                                                        <div class="row top-buffer">
+                                                            <div class="col-xs-6">
+                                                                <label for="priceCurrencySelectEdit">Основная валюта:</label>
+                                                                <select id="priceCurrencySelectEdit" class="form-control">
+                                                                    <option value="UAH">Гривны</option>
+                                                                    <option value="RUB">Рубли (рус.)</option>
+                                                                    <option value="BYR">Рубли (бел.)</option>
+                                                                    <option value="USD">Доллары</option>
+                                                                    <option value="EUR">Евро</option>
+                                                                    <option value="KZT">Тенге</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row top-buffer">
+                                                            <div class="col-xs-6">
+                                                                <select id="priceCurrencyRateSelectEdit" class="form-control" disabled>
+                                                                    <option value="none" disabled>Курс валюты..</option>
+                                                                    <option value="NBU">НБУ</option>
+                                                                    <option value="CBRF ">ЦБРФ</option>
+                                                                    <option value="BYR">НБК</option>
+                                                                    <option value="custom">Другой курс</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                <input class="form-control" id="priceCurrencyRateEdit" type="text" placeholder="Укажите курс .." disabled>
+                                                            </div>
+                                                        </div>
+
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
@@ -344,7 +404,7 @@
 
             <div id="searchQueryLabel" class="well well-sm"></div>
 
-            <table id="searchResultsTable" class="table table-bordered"></table>
+            <table id="searchResultsTable" class="table table-striped table-hover"></table>
 
             <!-- searchResultspagination -->
             <ul id="searchResultsPagination" class="pagination pagination-sm"></ul>
@@ -361,7 +421,7 @@
     <!-- products table -->
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <table id="productsTable" class="table table-responsive"></table>
+            <table id="productsTable" class="table table-striped table-hover"></table>
 
             <!-- pagination -->
             <ul id="paginationView" class="pagination pagination-sm"></ul>
