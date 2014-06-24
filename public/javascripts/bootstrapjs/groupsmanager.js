@@ -29,7 +29,9 @@ var AddGroup = Backbone.View.extend({
     },
 
     events: {
-        'click #saveNewPrice': 'addGroup'
+        'click #saveNewPrice': 'addGroup',
+        'change #priceCurrencySelect' : 'selectCurrency',
+        'change #priceCurrencyRateSelect' : 'selectRateType'
     },
 
     initialize: function(){
@@ -45,6 +47,28 @@ var AddGroup = Backbone.View.extend({
             success: function(){$('#invalidNewPriceName').hide()}});
     },
 
+    selectCurrency: function(e){
+        console.log('selected currency is ' + e.currentTarget.value);
+        if ((e.currentTarget.value == 'USD') || (e.currentTarget.value == 'EUR')){
+            this.$el.find('#priceCurrencyRateSelect').attr('disabled', false);
+        } else {
+            this.$el.find('#priceCurrencyRateSelect').attr('disabled', true);
+            this.$el.find('#priceCurrencyRateSelect').val('none');
+            this.$el.find('#priceCurrencyRate').attr('disabled', true);
+            this.$el.find('#priceCurrencyRate').val('');
+        }
+    },
+
+    selectRateType: function(e){
+        console.log('selected rate type is ' + e.currentTarget.value);
+        if (e.currentTarget.value == 'custom'){
+            this.$el.find('#priceCurrencyRate').attr('disabled', false);
+        } else {
+            this.$el.find('#priceCurrencyRate').attr('disabled', true);
+            this.$el.find('#priceCurrencyRate').val('');
+        }
+    },
+
     clear: function(){
         console.log('clear form for creating a price');
         this.$el.find('#invalidNewPriceName').hide();
@@ -57,7 +81,9 @@ var EditGroup = Backbone.View.extend({
     el: '#editPriceModal',
 
     events: {
-        'click #saveEditedPrice': 'editGroup'
+        'click #saveEditedPrice': 'editGroup',
+        'change #priceCurrencySelectEdit' : 'selectCurrency',
+        'change #priceCurrencyRateSelectEdit' : 'selectRateType'
     },
 
     editGroup: function(e){
@@ -75,6 +101,28 @@ var EditGroup = Backbone.View.extend({
         var group = app.Groups.get(currentGroupId);
         var name = this.$el.find('#priceNameInputEdit').val(group.get('name'));
         var format = this.$el.find('#priceFormatSelectEdit').val(group.get('format'));
+    },
+
+    selectCurrency: function(e){
+        console.log('selected currency is ' + e.currentTarget.value);
+        if ((e.currentTarget.value == 'USD') || (e.currentTarget.value == 'EUR')){
+            this.$el.find('#priceCurrencyRateSelectEdit').attr('disabled', false);
+        } else {
+            this.$el.find('#priceCurrencyRateSelectEdit').attr('disabled', true);
+            this.$el.find('#priceCurrencyRateSelectEdit').val('none');
+            this.$el.find('#priceCurrencyRateEdit').attr('disabled', true);
+            this.$el.find('#priceCurrencyRateEdit').val('');
+        }
+    },
+
+    selectRateType: function(e){
+        console.log('selected rate type is ' + e.currentTarget.value);
+        if (e.currentTarget.value == 'custom'){
+            this.$el.find('#priceCurrencyRateEdit').attr('disabled', false);
+        } else {
+            this.$el.find('#priceCurrencyRateEdit').attr('disabled', true);
+            this.$el.find('#priceCurrencyRateEdit').val('');
+        }
     }
 
 });
