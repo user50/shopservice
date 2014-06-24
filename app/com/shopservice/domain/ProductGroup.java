@@ -21,7 +21,7 @@ public class ProductGroup {
 
     public Currency currency;
 
-    public double rate;
+    public String rate;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)

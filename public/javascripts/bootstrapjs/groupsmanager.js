@@ -41,7 +41,14 @@ var AddGroup = Backbone.View.extend({
         //TODO validation
         var name = this.$el.find('#priceNameInput').val();
         var format = this.$el.find('#priceFormatSelect option:selected').val();
-        var newGroup = new Group({name: name, format: format});
+        var currency = this.$el.find('#priceCurrencySelect option:selected').val();
+        var rate = 1;
+        if ((currency == 'USD') || (currency == 'EUR')){
+            rate = this.$el.find('#priceCurrencyRateSelect').val();
+            if (rate == 'custom')
+                rate = this.$el.find('#priceCurrencyRate').val();
+        }
+        var newGroup = new Group({name: name, format: format, currency: currency, rate: rate});
         this.collection.create(newGroup, {wait: true,
             error: function(){$('#invalidNewPriceName').show()},
             success: function(){$('#invalidNewPriceName').hide()}});
@@ -90,8 +97,14 @@ var EditGroup = Backbone.View.extend({
         //TODO validation
         var changedName = this.$el.find('#priceNameInputEdit').val();
         var changedFormat = this.$el.find('#priceFormatSelectEdit option:selected').val();
+        var changedCurrency = this.$el.find('#priceCurrencySelectEdit option:selected').val();
+        var changedRate = this.$el.find('#priceCurrencyRateEdit').val();
+        if (changedRate == ''){
+            changedRate = this.$el.find('#priceCurrencyRateSelectEdit option:selected').val();
+        }
         var changedGroup = this.collection.get(currentGroupId);
-        changedGroup.save({name: changedName, format: changedFormat}, {wait: true,
+        changedGroup.save({name: changedName, format: changedFormat,
+            currency: changedCurrency, rate: changedRate}, {wait: true,
             error: function(){$('#invalidPriceName').show()},
             success: function(){$('#invalidPriceName').hide()}});
     },
@@ -101,6 +114,31 @@ var EditGroup = Backbone.View.extend({
         var group = app.Groups.get(currentGroupId);
         var name = this.$el.find('#priceNameInputEdit').val(group.get('name'));
         var format = this.$el.find('#priceFormatSelectEdit').val(group.get('format'));
+        var currency = this.$el.find('#priceCurrencySelectEdit').val(group.get('currency'));
+        var rate = group.get('rate');
+        if (rate != 1){
+            this.$el.find('#priceCurrencyRateSelectEdit').attr('disabled', false);
+            switch (rate)
+            {
+                case 'NBU' : this.$el.find('#priceCurrencyRateSelectEdit').val(rate);
+                    this.$el.find('#priceCurrencyRateEdit').attr('disabled', true);
+                    this.$el.find('#priceCurrencyRateEdit').val('');
+                    break;
+                case 'CBRF' : this.$el.find('#priceCurrencyRateSelectEdit').val(rate);
+                    this.$el.find('#priceCurrencyRateEdit').attr('disabled', true);
+                    this.$el.find('#priceCurrencyRateEdit').val('');
+                    break;
+                case 'NBK' : this.$el.find('#priceCurrencyRateSelectEdit').val(rate);
+                    this.$el.find('#priceCurrencyRateEdit').attr('disabled', true);
+                    this.$el.find('#priceCurrencyRateEdit').val('');
+                    break;
+                default: {
+                    this.$el.find('#priceCurrencyRateSelectEdit').val('custom');
+                    this.$el.find('#priceCurrencyRateEdit').attr('disabled', false);
+                    this.$el.find('#priceCurrencyRateEdit').val(rate);
+                }
+            }
+        }
     },
 
     selectCurrency: function(e){
