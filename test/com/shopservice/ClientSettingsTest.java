@@ -42,14 +42,5 @@ public class ClientSettingsTest {
         server = EbeanServerFactory.create(config);
     }
 
-    @Test
-    public void testName() throws Exception {
-        ClientSettings clientSettings = new ClientSettings();
-        clientSettings.id = "123";
-        clientSettings.currency = Currency.UAH;
 
-        server.find(ClientSettings.class).findList();
-
-
-    }
 }

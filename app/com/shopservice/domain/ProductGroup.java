@@ -19,6 +19,10 @@ public class ProductGroup {
 
     public PriceListType format;
 
+    public Currency currency;
+
+    public double rate;
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     public List<Group2Product> checks = new ArrayList<Group2Product>();

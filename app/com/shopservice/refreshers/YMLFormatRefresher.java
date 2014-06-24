@@ -1,10 +1,14 @@
 package com.shopservice.refreshers;
 
+import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
+import com.shopservice.dao.EbeanProductGroupRepository;
+import com.shopservice.dao.ProductGroupRepository;
 import com.shopservice.domain.Category;
 import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.Product;
+import com.shopservice.domain.ProductGroup;
 import com.shopservice.pricelist.models.yml.*;
 
 import java.util.ArrayList;
@@ -23,16 +27,17 @@ import static com.shopservice.Util.marshal;
  */
 public class YMLFormatRefresher extends AbstractPriceListRefresher {
     @Override
-    public byte[] generate(String clientId, int siteId) throws Exception {
+    public byte[] generate(String clientId, int groupId) throws Exception {
         ClientSettings clientSettings = clientSettingsRepository.findById(clientId);
+        ProductGroup group = MServiceInjector.injector.getInstance(EbeanProductGroupRepository.class).get(new Long(groupId));
 
         YmlCatalog ymlCatalog = new YmlCatalog();
         Shop shop = new Shop();
         ymlCatalog.shop = shop;
 
         Currency currency = new Currency();
-        currency.id = clientSettings.currency.name();
-        currency.rate = clientSettings.currency.getRate();
+        currency.id = group.currency.name();
+        currency.rate = group.rate + "";
         shop.currencies.add(currency);
 
         shop.name = clientSettings.siteName;
@@ -41,10 +46,10 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         Set<Category> categories = new HashSet<Category>();
 
         ProductConditions query = new ProductConditions();
-        query.productIds = getProductIds(clientId, siteId);
+        query.productIds = getProductIds(clientId, groupId);
 
         for (Product product : Services.getProductDAO(clientId).find( query )) {
-            ymlCatalog.shop.offers.add(createOffer(product, clientSettings.currency.name()));
+            ymlCatalog.shop.offers.add(createOffer(product, group.currency.name()));
             categories.add( product.category );
         }
 
