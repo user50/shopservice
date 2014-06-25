@@ -490,7 +490,6 @@ var SearchView = Backbone.View.extend({
 
     search: function(e){
         if(e.keyCode == 13) {
-//        var code = e.keyCode || e.which;
             e.preventDefault();
             this.sendSearchQuery();
         }
@@ -505,15 +504,9 @@ var SearchView = Backbone.View.extend({
         console.log("Search texts: " + text);
         this.$el.find('#searchQueryLabel').html('Результаты поиска по запросу: <em><strong>' + text + '</em></strong>');
         this.$el.find('#searchQueryLabel').show();
-            //TODO  ajax for updating searchResults collection
+
         this.searchResults.setWords(text);
 
-//        if (this.firstQuery){
-//            this.firstQuery = false;
-//            this.searchResultsPaginationView.collection.pager();
-//        }
-
-//        this.searchResultsPaginationView.gotoFirst();
         this.searchResultsPaginationView.collection.pager();
 
         this.searchResultsView.$el.show();

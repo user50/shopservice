@@ -87,8 +87,11 @@ var AddGroup = Backbone.View.extend({
     clear: function(){
         console.log('clear form for creating a price');
         this.$el.find('#invalidNewPriceName').hide();
-        var name = this.$el.find('#priceNameInput').val('');
-        var format = this.$el.find('#priceFormatSelect').val('YML');
+        this.$el.find('#priceNameInput').val('');
+        this.$el.find('#priceFormatSelect').val('YML');
+        this.$el.find('#priceCurrencySelect').val('UAH');
+        this.resetRateType(true);
+        this.resetRate(true);
     }
 });
 
