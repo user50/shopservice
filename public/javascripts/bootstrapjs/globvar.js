@@ -1,6 +1,6 @@
 currentGroupId = -1;
 currentCategoryId = -1;
-clientId = Cookie.get('clientId');
+clientId = $.cookie('clientId');
 
 $(function() {
     $( document ).ajaxStart(function() {
@@ -14,6 +14,7 @@ $(function() {
         $.ajax({url: '/logout',
                 type: 'POST',
             success: function(data, status, xhr) {
+                $.cookie('key', null);
                 window.location.href = '/';
             }});
     });

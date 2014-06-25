@@ -51,6 +51,6 @@ public class LoginController extends Controller {
 
         Cache.remove(cookie.value());
 
-        return redirect("/assets/login.html");
+        return ok();
     }
 }
