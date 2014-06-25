@@ -30,8 +30,8 @@ var AddGroup = Backbone.View.extend({
 
     events: {
         'click #saveNewPrice': 'addGroup',
-        'change #priceCurrencySelect' : 'selectCurrency',
-        'change #priceCurrencyRateSelect' : 'selectRateType'
+        'change #priceCurrencySelect' : function(e){this.setCurrency(e.currentTarget.value)},
+        'change #priceCurrencyRateSelect' : function(e){this.setRateType(e.currentTarget.value)}
     },
 
     initialize: function(){
@@ -54,26 +54,34 @@ var AddGroup = Backbone.View.extend({
             success: function(){$('#invalidNewPriceName').hide()}});
     },
 
-    selectCurrency: function(e){
-        console.log('selected currency is ' + e.currentTarget.value);
-        if ((e.currentTarget.value == 'USD') || (e.currentTarget.value == 'EUR')){
-            this.$el.find('#priceCurrencyRateSelect').attr('disabled', false);
+    setCurrency: function(currency){
+        console.log('selected currency is ' + currency);
+        if ((currency == 'USD') || (currency == 'EUR')){
+            this.resetRateType(false);
+            this.resetRate(true);
         } else {
-            this.$el.find('#priceCurrencyRateSelect').attr('disabled', true);
-            this.$el.find('#priceCurrencyRateSelect').val('none');
-            this.$el.find('#priceCurrencyRate').attr('disabled', true);
-            this.$el.find('#priceCurrencyRate').val('');
+            this.resetRateType(true);
+            this.resetRate(true);
         }
     },
 
-    selectRateType: function(e){
-        console.log('selected rate type is ' + e.currentTarget.value);
-        if (e.currentTarget.value == 'custom'){
-            this.$el.find('#priceCurrencyRate').attr('disabled', false);
+    setRateType: function(rateType){
+        console.log('selected rate type is ' + rateType);
+        if (rateType == 'custom'){
+            this.resetRate(false)
         } else {
-            this.$el.find('#priceCurrencyRate').attr('disabled', true);
-            this.$el.find('#priceCurrencyRate').val('');
+            this.resetRate(true);
         }
+    },
+
+    resetRateType: function(disabled){
+        this.$el.find('#priceCurrencyRateSelect').attr('disabled', disabled);
+        this.$el.find('#priceCurrencyRateSelect').val('none');
+    },
+
+    resetRate: function(disabled){
+        this.$el.find('#priceCurrencyRate').attr('disabled', disabled);
+        this.$el.find('#priceCurrencyRate').val('');
     },
 
     clear: function(){
@@ -89,8 +97,8 @@ var EditGroup = Backbone.View.extend({
 
     events: {
         'click #saveEditedPrice': 'editGroup',
-        'change #priceCurrencySelectEdit' : 'selectCurrency',
-        'change #priceCurrencyRateSelectEdit' : 'selectRateType'
+        'change #priceCurrencySelectEdit' : function(e){this.setCurrency(e.currentTarget.value)},
+        'change #priceCurrencyRateSelectEdit' : function(e){this.setRateType(e.currentTarget.value)}
     },
 
     editGroup: function(e){
@@ -117,50 +125,56 @@ var EditGroup = Backbone.View.extend({
         var currency = this.$el.find('#priceCurrencySelectEdit').val(group.get('currency'));
         var rate = group.get('rate');
         if (rate != 1){
-            this.$el.find('#priceCurrencyRateSelectEdit').attr('disabled', false);
+            this.resetRateType(false, 'none');
             switch (rate)
             {
-                case 'NBU' : this.$el.find('#priceCurrencyRateSelectEdit').val(rate);
-                    this.$el.find('#priceCurrencyRateEdit').attr('disabled', true);
-                    this.$el.find('#priceCurrencyRateEdit').val('');
+                case 'NBU' :
+                    this.resetRateType(false, rate);
+                    this.resetRate(true, '');
                     break;
-                case 'CBRF' : this.$el.find('#priceCurrencyRateSelectEdit').val(rate);
-                    this.$el.find('#priceCurrencyRateEdit').attr('disabled', true);
-                    this.$el.find('#priceCurrencyRateEdit').val('');
+                case 'CBRF' :
+                    this.resetRateType(false, rate);
+                    this.resetRate(true, '');
                     break;
-                case 'NBK' : this.$el.find('#priceCurrencyRateSelectEdit').val(rate);
-                    this.$el.find('#priceCurrencyRateEdit').attr('disabled', true);
-                    this.$el.find('#priceCurrencyRateEdit').val('');
+                case 'NBK' :
+                    this.resetRateType(false, rate);
+                    this.resetRate(true, '');
                     break;
                 default: {
-                    this.$el.find('#priceCurrencyRateSelectEdit').val('custom');
-                    this.$el.find('#priceCurrencyRateEdit').attr('disabled', false);
-                    this.$el.find('#priceCurrencyRateEdit').val(rate);
+                    this.resetRateType(false, 'custom');
+                    this.resetRate(false, rate);
                 }
             }
         }
     },
 
-    selectCurrency: function(e){
-        console.log('selected currency is ' + e.currentTarget.value);
-        if ((e.currentTarget.value == 'USD') || (e.currentTarget.value == 'EUR')){
-            this.$el.find('#priceCurrencyRateSelectEdit').attr('disabled', false);
+    setCurrency: function(currency){
+        console.log('selected currency is ' + currency);
+        if ((currency == 'USD') || (currency == 'EUR')){
+            this.resetRateType(false, 'none');
         } else {
-            this.$el.find('#priceCurrencyRateSelectEdit').attr('disabled', true);
-            this.$el.find('#priceCurrencyRateSelectEdit').val('none');
-            this.$el.find('#priceCurrencyRateEdit').attr('disabled', true);
-            this.$el.find('#priceCurrencyRateEdit').val('');
+            this.resetRateType(true, 'none');
+            this.resetRate(true, '');
         }
     },
 
-    selectRateType: function(e){
-        console.log('selected rate type is ' + e.currentTarget.value);
-        if (e.currentTarget.value == 'custom'){
-            this.$el.find('#priceCurrencyRateEdit').attr('disabled', false);
+    setRateType: function(rateType){
+        console.log('selected rate type is ' + rateType);
+        if (rateType == 'custom'){
+            this.resetRate(false, '');
         } else {
-            this.$el.find('#priceCurrencyRateEdit').attr('disabled', true);
-            this.$el.find('#priceCurrencyRateEdit').val('');
+            this.resetRate(true, '');
         }
+    },
+
+    resetRateType: function(disabled, rateType){
+        this.$el.find('#priceCurrencyRateSelectEdit').attr('disabled', disabled);
+        this.$el.find('#priceCurrencyRateSelectEdit').val(rateType);
+    },
+
+    resetRate: function(disabled, rate){
+        this.$el.find('#priceCurrencyRateEdit').attr('disabled', disabled);
+        this.$el.find('#priceCurrencyRateEdit').val(rate);
     }
 
 });
