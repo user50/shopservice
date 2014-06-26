@@ -35,7 +35,7 @@ public class CachedProductRepository extends ProductRepositoryWrapper {
         conditionsWithoutPaging.limit = null;
         List<Product> products = super.find(conditionsWithoutPaging);
 
-        Cache.set("products:"+cookie.value(), new CachedValue(query, products));
+        Cache.set("products:"+cookie.value(), new CachedValue(query, products), 60 * 5 /* 5 minutes */);
 
         if (query.offset != null && query.limit != null )
             return products.subList(query.offset, Math.min(query.offset + query.limit, products.size()));
