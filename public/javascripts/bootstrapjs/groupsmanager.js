@@ -30,6 +30,7 @@ var AddGroup = Backbone.View.extend({
 
     events: {
         'click #saveNewPrice': 'addGroup',
+        'change #priceRegCurrencySelect' : function(e){this.setRegionCurrency(e.currentTarget.value)},
         'change #priceCurrencySelect' : function(e){this.setCurrency(e.currentTarget.value)},
         'change #priceCurrencyRateSelect' : function(e){this.setRateType(e.currentTarget.value)}
     },
@@ -41,22 +42,35 @@ var AddGroup = Backbone.View.extend({
         //TODO validation
         var name = this.$el.find('#priceNameInput').val();
         var format = this.$el.find('#priceFormatSelect option:selected').val();
+        var regionalCurrency = this.$el.find('#priceRegCurrencySelect option:selected').val();
         var currency = this.$el.find('#priceCurrencySelect option:selected').val();
         var rate = 1;
-        if ((currency == 'USD') || (currency == 'EUR')){
+        if (regionalCurrency != currency){
             rate = this.$el.find('#priceCurrencyRateSelect').val();
             if (rate == 'custom')
                 rate = this.$el.find('#priceCurrencyRate').val();
+        } else {
+            currency = null;
         }
-        var newGroup = new Group({name: name, format: format, currency: currency, rate: rate});
+        var newGroup = new Group({name: name, format: format,
+            regionalCurrency: regionalCurrency, productCurrency: currency, rate: rate});
+
         this.collection.create(newGroup, {wait: true,
             error: function(){$('#invalidNewPriceName').show()},
             success: function(){$('#invalidNewPriceName').hide()}});
     },
 
+    setRegionCurrency: function(regionCurrency){
+        console.log('selected regionCurrency is ' + regionCurrency);
+        this.resetCurrency(false);
+        this.resetRateType(true);
+        this.resetRate(true);
+    },
+
     setCurrency: function(currency){
         console.log('selected currency is ' + currency);
-        if ((currency == 'USD') || (currency == 'EUR')){
+        var regionCurrency = this.$el.find('#priceRegCurrencySelect option:selected').val();
+        if (regionCurrency != currency){
             this.resetRateType(false);
             this.resetRate(true);
         } else {
@@ -74,6 +88,11 @@ var AddGroup = Backbone.View.extend({
         }
     },
 
+    resetCurrency: function(disabled){
+        this.$el.find('#priceCurrencySelect').attr('disabled', disabled);
+        this.$el.find('#priceCurrencySelect').val('none');
+    },
+
     resetRateType: function(disabled){
         this.$el.find('#priceCurrencyRateSelect').attr('disabled', disabled);
         this.$el.find('#priceCurrencyRateSelect').val('none');
@@ -89,7 +108,8 @@ var AddGroup = Backbone.View.extend({
         this.$el.find('#invalidNewPriceName').hide();
         this.$el.find('#priceNameInput').val('');
         this.$el.find('#priceFormatSelect').val('YML');
-        this.$el.find('#priceCurrencySelect').val('UAH');
+        this.$el.find('#priceCurrencySelect').val('none');
+        this.$el.find('#priceRegCurrencySelect').val('none');
         this.resetRateType(true);
         this.resetRate(true);
     }
@@ -100,6 +120,7 @@ var EditGroup = Backbone.View.extend({
 
     events: {
         'click #saveEditedPrice': 'editGroup',
+        'change #priceRegCurrencySelectEdit' : function(e){this.setRegionCurrency(e.currentTarget.value)},
         'change #priceCurrencySelectEdit' : function(e){this.setCurrency(e.currentTarget.value)},
         'change #priceCurrencyRateSelectEdit' : function(e){this.setRateType(e.currentTarget.value)}
     },
@@ -108,14 +129,19 @@ var EditGroup = Backbone.View.extend({
         //TODO validation
         var changedName = this.$el.find('#priceNameInputEdit').val();
         var changedFormat = this.$el.find('#priceFormatSelectEdit option:selected').val();
+        var changedRegionalCurrency = this.$el.find('#priceRegCurrencySelectEdit option:selected').val();
         var changedCurrency = this.$el.find('#priceCurrencySelectEdit option:selected').val();
-        var changedRate = this.$el.find('#priceCurrencyRateEdit').val();
-        if (changedRate == ''){
-            changedRate = this.$el.find('#priceCurrencyRateSelectEdit option:selected').val();
+        var changedRate = 1;
+        if (changedRegionalCurrency != changedCurrency){
+            changedRate = this.$el.find('#priceCurrencyRateSelectEdit').val();
+            if (changedRate == 'custom')
+                changedRate = this.$el.find('#priceCurrencyRateEdit').val();
+        }  else {
+            changedCurrency = null;
         }
         var changedGroup = this.collection.get(currentGroupId);
         changedGroup.save({name: changedName, format: changedFormat,
-            currency: changedCurrency, rate: changedRate}, {wait: true,
+            regionalCurrency: changedRegionalCurrency, productCurrency: changedCurrency, rate: changedRate}, {wait: true,
             error: function(){$('#invalidPriceName').show()},
             success: function(){$('#invalidPriceName').hide()}});
     },
@@ -123,9 +149,16 @@ var EditGroup = Backbone.View.extend({
     render: function(){
         this.$el.find('#invalidPriceName').hide();
         var group = app.Groups.get(currentGroupId);
-        var name = this.$el.find('#priceNameInputEdit').val(group.get('name'));
-        var format = this.$el.find('#priceFormatSelectEdit').val(group.get('format'));
-        var currency = this.$el.find('#priceCurrencySelectEdit').val(group.get('currency'));
+        this.$el.find('#priceNameInputEdit').val(group.get('name'));
+        this.$el.find('#priceFormatSelectEdit').val(group.get('format'));
+        this.setRegionCurrency(group.get('regionalCurrency'));
+        if (group.get('productCurrency') == null){
+            this.resetCurrency(false, group.get('regionalCurrency'));
+            this.resetRateType(true, 'none');
+            this.resetRate(true, '');
+            return;
+        }
+        this.setCurrency(group.get('productCurrency'));
         var rate = group.get('rate');
         if (rate != 1){
             this.resetRateType(false, 'none');
@@ -151,10 +184,21 @@ var EditGroup = Backbone.View.extend({
         }
     },
 
+    setRegionCurrency: function(regCurrency){
+        console.log('selected regionCurrency is ' + regCurrency);
+        this.$el.find('#priceRegCurrencySelectEdit').val(regCurrency);
+        this.resetCurrency(false, 'none');
+        this.resetRateType(true, 'none');
+        this.resetRate(true, '');
+    },
+
     setCurrency: function(currency){
         console.log('selected currency is ' + currency);
-        if ((currency == 'USD') || (currency == 'EUR')){
+        this.$el.find('#priceCurrencySelectEdit').val(currency);
+        var regionCurrency = this.$el.find('#priceRegCurrencySelectEdit option:selected').val();
+        if (regionCurrency != currency){
             this.resetRateType(false, 'none');
+            this.resetRate(true, '');
         } else {
             this.resetRateType(true, 'none');
             this.resetRate(true, '');
@@ -168,6 +212,11 @@ var EditGroup = Backbone.View.extend({
         } else {
             this.resetRate(true, '');
         }
+    },
+
+    resetCurrency: function(disabled, currency){
+        this.$el.find('#priceCurrencySelectEdit').attr('disabled', disabled);
+        this.$el.find('#priceCurrencySelectEdit').val(currency);
     },
 
     resetRateType: function(disabled, rateType){

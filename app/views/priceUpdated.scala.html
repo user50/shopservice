@@ -265,8 +265,22 @@
 
                                                         <div class="row top-buffer">
                                                             <div class="col-xs-6">
-                                                                <label for="priceCurrencySelect">Основная валюта:</label>
+                                                                <label for="priceRegCurrencySelect">Валюта станы, региона:</label>
+                                                                <select id="priceRegCurrencySelect" class="form-control">
+                                                                    <option value="none" disabled>Выбрать валюту региона..</option>
+                                                                    <option value="UAH">Гривны</option>
+                                                                    <option value="RUB">Рубли (рус.)</option>
+                                                                    <option value="BYR">Рубли (бел.)</option>
+                                                                    <option value="KZT">Тенге</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row top-buffer">
+                                                            <div class="col-xs-6">
+                                                                <label for="priceCurrencySelect">Валюта прайс-листа:</label>
                                                                 <select id="priceCurrencySelect" class="form-control">
+                                                                    <option value="none" disabled>Выбрать валюту прайса..</option>
                                                                     <option value="UAH">Гривны</option>
                                                                     <option value="RUB">Рубли (рус.)</option>
                                                                     <option value="BYR">Рубли (бел.)</option>
@@ -336,11 +350,25 @@
                                                             </div>
                                                         </div>
 
+                                                        <div class="row top-buffer">
+                                                            <div class="col-xs-6">
+                                                                <label for="priceRegCurrencySelectEdit">Валюта станы, региона:</label>
+                                                                <select id="priceRegCurrencySelectEdit" class="form-control">
+                                                                    <option value="none" disabled>Выбрать валюту региона..</option>
+                                                                    <option value="UAH">Гривны</option>
+                                                                    <option value="RUB">Рубли (рус.)</option>
+                                                                    <option value="BYR">Рубли (бел.)</option>
+                                                                    <option value="KZT">Тенге</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
 
                                                         <div class="row top-buffer">
                                                             <div class="col-xs-6">
                                                                 <label for="priceCurrencySelectEdit">Основная валюта:</label>
                                                                 <select id="priceCurrencySelectEdit" class="form-control">
+                                                                    <option value="none" disabled>Выбрать валюту прайса..</option>
                                                                     <option value="UAH">Гривны</option>
                                                                     <option value="RUB">Рубли (рус.)</option>
                                                                     <option value="BYR">Рубли (бел.)</option>
