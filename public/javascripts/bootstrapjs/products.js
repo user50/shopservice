@@ -476,7 +476,8 @@ var SearchView = Backbone.View.extend({
     },
 
     initialize: function(){
-        this.firstQuery = true;
+        this.listenTo(vent, 'group: deleted', this.hideSearchForm);
+        this.listenTo(vent, 'group: selected', this.showSearchForm);
 
         this.searchResults = new SearchResults();
         this.searchResultsView = new SearchResultsView ({collection: this.searchResults});
@@ -513,6 +514,14 @@ var SearchView = Backbone.View.extend({
         this.searchResultsPaginationView.$el.show();
 
         app.router.navigate('groups/' + currentGroupId + "/search=" + text, {trigger: true});
+    },
+
+    hideSearchForm: function(){
+        this.$el.find('#searchForm').hide();
+    },
+
+    showSearchForm: function(){
+        this.$el.find('#searchForm').show();
     },
 
     hideResults: function(){

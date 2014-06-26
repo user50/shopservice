@@ -43,6 +43,10 @@ var app = app || {};
         tagName: 'label',
         className : 'btn btn-default btn-md',
 
+        events: {
+            'click' : function(){vent.trigger('group: selected')}
+        },
+
         template: _.template($('#groupViewTemplate').html()),
 
         initialize: function(){
