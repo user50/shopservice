@@ -5,13 +5,9 @@ import com.shopservice.domain.Product;
 import play.cache.Cache;
 import play.mvc.Http;
 
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
 public class CachedProductRepository extends ProductRepositoryWrapper {
-
-    private Map<String, List<Product>> categoryToProducts = new Hashtable<String, List<Product>>();
 
     public CachedProductRepository(ProductRepository productRepository) {
         super(productRepository);
@@ -39,7 +35,7 @@ public class CachedProductRepository extends ProductRepositoryWrapper {
         conditionsWithoutPaging.limit = null;
         List<Product> products = super.find(conditionsWithoutPaging);
 
-        Cache.set("products:"+cookie.value(), new CachedValue(query, products));
+        Cache.set("products:"+cookie.value(), new CachedValue(query, products), 60 * 5 /* 5 minutes */);
 
         if (query.offset != null && query.limit != null )
             return products.subList(query.offset, Math.min(query.offset + query.limit, products.size()));
