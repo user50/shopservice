@@ -4,14 +4,19 @@ var PriceManager = Backbone.View.extend({
     el: '#priceManagerDiv',
 
     initialize: function(){
-        app.AddGroup = new AddGroup({collection: app.Groups});
-        app.EditGroup = new EditGroup({collection: app.Groups});
-        app.DeleteGroup = new DeleteGroup({collection: app.Groups});
+        this.listenTo(vent, 'group: deleted', this.disableButtons);
+        this.listenTo(vent, 'group: selected', this.enableButtons);
+        this.AddGroup = new AddGroup({collection: app.Groups});
+        this.EditGroup = new EditGroup({collection: app.Groups});
+        this.DeleteGroup = new DeleteGroup({collection: app.Groups});
+        if (app. Groups.size() == 0){
+            this.disableButtons();
+        }
     },
 
     events: {
-        'click #createNewPriceBtn': function(){app.AddGroup.clear()},
-        'click #editPriceBtn': function(){app.EditGroup.render()},
+        'click #createNewPriceBtn': function(){this.AddGroup.clear()},
+        'click #editPriceBtn': function(){this.EditGroup.render()},
         'click #downloadPriceBtn': 'downloadPrice'
     },
 
@@ -19,6 +24,18 @@ var PriceManager = Backbone.View.extend({
         console.log('downloading price...');
         var url = "/client/"+clientId + "/groups/" + currentGroupId + "/pricelist";
         window.open(url);
+    },
+
+    disableButtons: function(){
+        this.$el.find('#downloadPriceBtn').attr('disabled', true);
+        this.$el.find('#editPriceBtn').attr('disabled', true);
+        this.DeleteGroup.disable();
+    },
+
+    enableButtons: function(){
+        this.$el.find('#downloadPriceBtn').attr('disabled', false);
+        this.$el.find('#editPriceBtn').attr('disabled', false);
+        this.DeleteGroup.enable();
     }
 });
 
@@ -259,10 +276,19 @@ var DeleteGroup = Backbone.View.extend({
                         new BreadcrumbsView({categoryName: null, groupName: null});
                         app.ProductsView.$el.hide();
                         app.pagination.$el.hide();
+                        vent.trigger('group: deleted');
                     }
                 }
             }
         });
+    },
+
+    enable: function(){
+        this.$el.attr('disabled', false);
+    },
+
+    disable: function(){
+        this.$el.attr('disabled', true);
     }
 });
 
