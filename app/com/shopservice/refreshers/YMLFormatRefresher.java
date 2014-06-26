@@ -37,7 +37,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
 
         if (group.productCurrency != null && group.rate != null)
         {
-            Currency productCurrency = new Currency(group.regionalCurrency.name(), group.rate);
+            Currency productCurrency = new Currency(group.productCurrency.name(), group.rate);
             shop.currencies.add(productCurrency);
         }
 
