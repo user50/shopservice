@@ -50,7 +50,7 @@ public class Services {
     public static ProductRepository getProductDAO(String clientId)
     {
         if (!productDAOs.containsKey(clientId))
-            productDAOs.put( clientId, new SynchronizeProducts(new JdbcProductRepository(clientId), clientId ));
+            productDAOs.put( clientId, new CachedProductRepository(new SynchronizeProducts(new JdbcProductRepository(clientId), clientId )));
 
         return productDAOs.get(clientId);
     }

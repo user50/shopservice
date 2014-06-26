@@ -19,6 +19,17 @@ public class ProductConditions {
 
     public Integer limit;
 
+    public ProductConditions() {
+    }
+
+    public ProductConditions(ProductConditions conditions) {
+        categoryId = conditions.categoryId;
+        productIds = new ArrayList<>(conditions.productIds);
+        words = new ArrayList<>(conditions.words);
+        limit = conditions.limit;
+        offset = conditions.offset;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
