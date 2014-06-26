@@ -32,7 +32,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         Shop shop = new Shop();
         ymlCatalog.shop = shop;
 
-        Currency regionalCurrency = new Currency(group.productCurrency.name() );
+        Currency regionalCurrency = new Currency(group.regionalCurrency.name() );
         shop.currencies.add(regionalCurrency);
 
         if (group.productCurrency != null && group.rate != null)
