@@ -4,12 +4,9 @@ import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
 import com.shopservice.dao.EbeanProductGroupRepository;
-import com.shopservice.dao.ProductGroupRepository;
-import com.shopservice.domain.Category;
-import com.shopservice.domain.ClientSettings;
-import com.shopservice.domain.Product;
-import com.shopservice.domain.ProductGroup;
+import com.shopservice.domain.*;
 import com.shopservice.pricelist.models.yml.*;
+import com.shopservice.pricelist.models.yml.Currency;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -35,10 +32,14 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         Shop shop = new Shop();
         ymlCatalog.shop = shop;
 
-        Currency currency = new Currency();
-        currency.id = group.currency.name();
-        currency.rate = group.rate + "";
-        shop.currencies.add(currency);
+        Currency regionalCurrency = new Currency(group.productCurrency.name() );
+        shop.currencies.add(regionalCurrency);
+
+        if (group.regionalCurrency != null && group.rate != null)
+        {
+            Currency productCurrency = new Currency(group.regionalCurrency.name(), group.rate);
+            shop.currencies.add(productCurrency);
+        }
 
         shop.name = clientSettings.siteName;
         shop.url = clientSettings.siteUrl;
@@ -49,7 +50,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         query.productIds = getProductIds(clientId, groupId);
 
         for (Product product : Services.getProductDAO(clientId).find( query )) {
-            ymlCatalog.shop.offers.add(createOffer(product, group.currency.name()));
+            ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name()));
             categories.add( product.category );
         }
 

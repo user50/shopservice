@@ -19,7 +19,9 @@ public class ProductGroup {
 
     public PriceListType format;
 
-    public Currency currency;
+    public Currency regionalCurrency;
+
+    public Currency productCurrency;
 
     public String rate;
 
