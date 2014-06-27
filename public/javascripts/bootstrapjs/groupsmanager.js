@@ -168,6 +168,13 @@ var EditGroup = Backbone.View.extend({
         var group = app.Groups.get(currentGroupId);
         this.$el.find('#priceNameInputEdit').val(group.get('name'));
         this.$el.find('#priceFormatSelectEdit').val(group.get('format'));
+        this.renderCurrencySettings();
+        var url = "http://mservice.herokuapp.com/client/"+clientId + "/groups/" + currentGroupId + "/pricelist";
+        this.$el.find('#priceLink').text(url);
+    },
+
+    renderCurrencySettings: function(){
+        var group = app.Groups.get(currentGroupId);
         this.setRegionCurrency(group.get('regionalCurrency'));
         if (group.get('productCurrency') == null){
             this.resetCurrency(false, group.get('regionalCurrency'));
