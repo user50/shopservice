@@ -73,8 +73,16 @@ var AddGroup = Backbone.View.extend({
             regionalCurrency: regionalCurrency, productCurrency: currency, rate: rate});
 
         this.collection.create(newGroup, {wait: true,
-            error: function(){$('#invalidNewPriceName').show()},
-            success: function(){$('#invalidNewPriceName').hide()}});
+            error: function(model, response){
+                $('#saveNewPriceAlert').show();
+                $('#saveNewPriceAlert').attr("class","alert alert-danger");
+                $('#saveNewPriceAlert').text("Ошибка! " + response.responseText);
+            },
+            success: function(model, response){
+                $('#saveNewPriceAlert').show();
+                $('#saveNewPriceAlert').attr("class","alert alert-success");
+                $('#saveNewPriceAlert').text("Изменения успешно сохранены!");
+            }});
     },
 
     setRegionCurrency: function(regionCurrency){
@@ -127,6 +135,7 @@ var AddGroup = Backbone.View.extend({
         this.$el.find('#priceFormatSelect').val('YML');
         this.$el.find('#priceCurrencySelect').val('none');
         this.$el.find('#priceRegCurrencySelect').val('none');
+        $('#saveNewPriceAlert').hide();
         this.resetRateType(true);
         this.resetRate(true);
     }
@@ -159,8 +168,16 @@ var EditGroup = Backbone.View.extend({
         var changedGroup = this.collection.get(currentGroupId);
         changedGroup.save({name: changedName, format: changedFormat,
             regionalCurrency: changedRegionalCurrency, productCurrency: changedCurrency, rate: changedRate}, {wait: true,
-            error: function(){$('#invalidPriceName').show()},
-            success: function(){$('#invalidPriceName').hide()}});
+            error: function(model, response){
+                $('#saveEditAlert').show();
+                $('#saveEditAlert').attr("class","alert alert-danger");
+                $('#saveEditAlert').text("Ошибка! " + response.responseText);
+            },
+            success: function(model, response){
+                $('#saveEditAlert').show();
+                $('#saveEditAlert').attr("class","alert alert-success");
+                $('#saveEditAlert').text("Изменения успешно сохранены!");
+            }});
     },
 
     render: function(){
@@ -171,6 +188,7 @@ var EditGroup = Backbone.View.extend({
         this.renderCurrencySettings();
         var url = "http://mservice.herokuapp.com/client/"+clientId + "/groups/" + currentGroupId + "/pricelist";
         this.$el.find('#priceLink').text(url);
+        $('#saveEditAlert').hide();
     },
 
     renderCurrencySettings: function(){
