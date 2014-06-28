@@ -233,8 +233,9 @@
 
                                         <!-- Button trigger create price modal -->
                                         <button id="createNewPriceBtn" class="btn btn-info btn-md" type="button" data-toggle="modal" data-target="#createPriceModal">
-                                            <span class="glyphicon glyphicon glyphicon-plus"></span>
+                                            <span data-toggle="tooltip" data-placement="top" title="Добавить прайс" class="glyphicon glyphicon glyphicon-plus"></span>
                                         </button>
+
 
                                         <!-- Create price Modal -->
                                         <div class="modal fade" id="createPriceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -323,11 +324,11 @@
 
                                         <!-- Button trigger edit price modal -->
                                         <button id="editPriceBtn" class="btn btn-warning btn-md" type="button" data-toggle="modal" data-target="#editPriceModal">
-                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            <span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Редактировать прайс" ></span>
                                         </button>
 
                                         <button id="downloadPriceBtn" class="btn btn-success btn-md" type="button">
-                                            <span class="glyphicon glyphicon-download-alt"></span>
+                                            <span class="glyphicon glyphicon-download-alt" data-toggle="tooltip" data-placement="top" title="Скачать прайс" ></span>
                                         </button>
 
                                         <!-- Edit Modal -->
@@ -424,7 +425,7 @@
                                         </div>
 
                                         <button id="deletePriceButton" class="btn btn-danger btn-md" type="button">
-                                            <span class="glyphicon glyphicon-remove"></span>
+                                            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Удалить прайс" ></span>
                                         </button>
 
                                     <!-- Prices -->
@@ -496,6 +497,17 @@
 
 <!-- Свіжа збірка мінімізованої JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        // Activates Tooltips for Social Links
+        $('.btn').tooltip({
+            selector: "span[data-toggle=tooltip]"
+        });
+    })
+
+</script>
 
 </body>
 </html>
