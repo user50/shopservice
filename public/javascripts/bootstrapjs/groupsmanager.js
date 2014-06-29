@@ -47,6 +47,7 @@ var AddGroup = Backbone.View.extend({
 
     events: {
         'click #saveNewPrice': 'addGroup',
+        'change #priceFormatSelect' : function(e){this.setFormat(e.currentTarget.value)},
         'change #priceRegCurrencySelect' : function(e){this.setRegionCurrency(e.currentTarget.value)},
         'change #priceCurrencySelect' : function(e){this.setCurrency(e.currentTarget.value)},
         'change #priceCurrencyRateSelect' : function(e){this.setRateType(e.currentTarget.value)}
@@ -83,6 +84,30 @@ var AddGroup = Backbone.View.extend({
                 $('#saveNewPriceAlert').attr("class","alert alert-success");
                 $('#saveNewPriceAlert').text("Изменения успешно сохранены!");
             }});
+    },
+
+    setFormat: function(format){
+        console.log('selected format is ' + format);
+        this.resetCurrency(false);
+        this.resetRateType(true);
+        this.resetRate(true);
+        if (format == 'price'){
+            this.$el.find('option[value=RUB]').attr("disabled", true);
+            this.$el.find('option[value=BYR]').attr("disabled", true);
+            this.$el.find('option[value=KZT]').attr("disabled", true);
+            this.$el.find('option[value=EUR]').attr("disabled", true);
+            this.$el.find('option[value=NBU]').attr("disabled", true);
+            this.$el.find('option[value=CBRF]').attr("disabled", true);
+            this.$el.find('option[value=NBK]').attr("disabled", true);
+        } else {
+            this.$el.find('option[value=RUB]').attr("disabled", false);
+            this.$el.find('option[value=BYR]').attr("disabled", false);
+            this.$el.find('option[value=KZT]').attr("disabled", false);
+            this.$el.find('option[value=EUR]').attr("disabled", false);
+            this.$el.find('option[value=NBU]').attr("disabled", false);
+            this.$el.find('option[value=CBRF]').attr("disabled", false);
+            this.$el.find('option[value=NBK]').attr("disabled", false);
+        }
     },
 
     setRegionCurrency: function(regionCurrency){
@@ -146,6 +171,7 @@ var EditGroup = Backbone.View.extend({
 
     events: {
         'click #saveEditedPrice': 'editGroup',
+        'change #priceFormatSelectEdit' : function(e){this.setFormat(e.currentTarget.value)},
         'change #priceRegCurrencySelectEdit' : function(e){this.setRegionCurrency(e.currentTarget.value)},
         'change #priceCurrencySelectEdit' : function(e){this.setCurrency(e.currentTarget.value)},
         'change #priceCurrencyRateSelectEdit' : function(e){this.setRateType(e.currentTarget.value)}
@@ -223,6 +249,30 @@ var EditGroup = Backbone.View.extend({
                     this.resetRate(false, rate);
                 }
             }
+        }
+    },
+
+    setFormat: function(format){
+        console.log('selected format is ' + format);
+        this.resetCurrency(false, 'none');
+        this.resetRateType(true, 'none');
+        this.resetRate(true, '');
+        if (format == 'price'){
+            this.$el.find('option[value=RUB]').attr("disabled", true);
+            this.$el.find('option[value=BYR]').attr("disabled", true);
+            this.$el.find('option[value=KZT]').attr("disabled", true);
+            this.$el.find('option[value=EUR]').attr("disabled", true);
+            this.$el.find('option[value=NBU]').attr("disabled", true);
+            this.$el.find('option[value=CBRF]').attr("disabled", true);
+            this.$el.find('option[value=NBK]').attr("disabled", true);
+        } else {
+            this.$el.find('option[value=RUB]').attr("disabled", false);
+            this.$el.find('option[value=BYR]').attr("disabled", false);
+            this.$el.find('option[value=KZT]').attr("disabled", false);
+            this.$el.find('option[value=EUR]').attr("disabled", false);
+            this.$el.find('option[value=NBU]').attr("disabled", false);
+            this.$el.find('option[value=CBRF]').attr("disabled", false);
+            this.$el.find('option[value=NBK]').attr("disabled", false);
         }
     },
 

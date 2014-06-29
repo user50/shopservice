@@ -24,7 +24,7 @@ var app = app || {};
 
     var CategoryView = Backbone.View.extend({
         tagName: 'a',
-        className: 'list-group-item',
+        className: 'list-group-item cursorPointer',
 
         events: {
             'click' : 'onClick'
