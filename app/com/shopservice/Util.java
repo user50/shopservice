@@ -1,6 +1,9 @@
 package com.shopservice;
 
 
+import play.cache.Cache;
+import play.mvc.Http;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -34,6 +37,13 @@ public class Util {
             sum = sum+i;
 
         return sum;
+    }
+
+    public static String getCurrentClientId()
+    {
+        String cookie = Http.Context.current().request().cookie("key").value();
+
+        return (String) Cache.get(cookie);
     }
 
 }
