@@ -234,7 +234,7 @@ var EditGroup = Backbone.View.extend({
         this.$el.find('#invalidPriceName').hide();
         var group = app.Groups.get(currentGroupId);
         this.$el.find('#priceNameInputEdit').val(group.get('name'));
-        this.$el.find('#priceFormatSelectEdit').val(group.get('format'));
+        this.setFormat(group.get('format'));
         this.renderCurrencySettings();
         var url = "http://mservice.herokuapp.com/client/"+clientId + "/groups/" + currentGroupId + "/pricelist";
         this.$el.find('#priceLink').text(url);
@@ -278,6 +278,7 @@ var EditGroup = Backbone.View.extend({
 
     setFormat: function(format){
         console.log('selected format is ' + format);
+        this.$el.find('#priceFormatSelectEdit').val(format);
         this.resetCurrency(false, 'none');
         this.resetRateType(true, 'none');
         this.resetRate(true, '');
