@@ -32,23 +32,16 @@ public class Validator {
         if (group.format == null)
             throw new ValidationException(new Description("Format must be specified", 103));
 
-        if (group.format.equals(PriceListType.price) &&  ( group.productCurrency == null || group.regionalCurrency == null ))
+        if ((group.format.equals(PriceListType.price) || group.format.equals(PriceListType.YML))
+                && ( group.productCurrency == null || group.regionalCurrency == null ))
         throw new ValidationException(new Description("Currency must be specified", 104 ));
 
-        if (group.format.equals(PriceListType.price) && group.productCurrency != null && group.regionalCurrency != null
-                && group.regionalCurrency != group.productCurrency && group.rate == null)
-            throw new ValidationException(new Description("Rate cannot be empty", 107 ));
-
-        if (group.format.equals(PriceListType.YML) && group.regionalCurrency == null) {
-            throw new ValidationException(new Description("Regional Currency must be specify for YML format",105));
-        }
-
-        if (group.format.equals(PriceListType.YML) &&  ( group.productCurrency == null || group.regionalCurrency == null ))
-            throw new ValidationException(new Description("Currency must be specified", 104 ));
-
-        if (group.format.equals(PriceListType.YML) && group.productCurrency != null && group.regionalCurrency != null
-                && group.regionalCurrency != group.productCurrency && group.rate == null)
-            throw new ValidationException(new Description("Rate cannot be empty", 107 ));
+        if ((group.format.equals(PriceListType.price) || group.format.equals(PriceListType.YML))
+                && group.productCurrency != null
+                && group.regionalCurrency != null
+                && group.regionalCurrency != group.productCurrency
+                && group.rate == null)
+            throw new ValidationException(new Description("Rate cannot be empty", 105 ));
     }
 
 }

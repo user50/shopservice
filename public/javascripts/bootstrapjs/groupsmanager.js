@@ -86,7 +86,7 @@ var AddGroup = Backbone.View.extend({
             error: function(model, response){
                 $('#saveNewPriceAlert').show();
                 $('#saveNewPriceAlert').attr("class","alert alert-danger");
-                $('#saveNewPriceAlert').text("Ошибка! " + response.responseText);
+                $('#saveNewPriceAlert').text("Ошибка! " + errorMessages[response.responseJSON.code]);
             },
             success: function(model, response){
                 $('#saveNewPriceAlert').show();
@@ -221,7 +221,7 @@ var EditGroup = Backbone.View.extend({
             error: function(model, response){
                 $('#saveEditAlert').show();
                 $('#saveEditAlert').attr("class","alert alert-danger");
-                $('#saveEditAlert').text("Ошибка! " + response.responseText);
+                $('#saveEditAlert').text("Ошибка! " + errorMessages[response.responseJSON.code]);
             },
             success: function(model, response){
                 $('#saveEditAlert').show();
