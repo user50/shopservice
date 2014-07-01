@@ -60,18 +60,27 @@ var AddGroup = Backbone.View.extend({
         //TODO validation
         var name = this.$el.find('#priceNameInput').val();
         var format = this.$el.find('#priceFormatSelect option:selected').val();
+        var newGroup = new Group({name: name, format: format});
         var regionalCurrency = this.$el.find('#priceRegCurrencySelect option:selected').val();
+        if (regionalCurrency != 'none')
+            newGroup.set('regionalCurrency', regionalCurrency);
         var currency = this.$el.find('#priceCurrencySelect option:selected').val();
-        var rate = 1;
-        if (regionalCurrency != currency){
-            rate = this.$el.find('#priceCurrencyRateSelect').val();
-            if (rate == 'custom')
-                rate = this.$el.find('#priceCurrencyRate').val();
-        } else {
-            currency = null;
-        }
-        var newGroup = new Group({name: name, format: format,
-            regionalCurrency: regionalCurrency, productCurrency: currency, rate: rate});
+        if (currency != 'none')
+            newGroup.set('productCurrency', currency);
+        var rate = this.$el.find('#priceCurrencyRateSelect').val();
+        if (rate == 'custom')
+            rate = this.$el.find('#priceCurrencyRate').val();
+        if (rate != '' && rate != 'none' && rate != null)
+            newGroup.set('rate', rate);
+//        if (regionalCurrency != currency){
+//            rate = this.$el.find('#priceCurrencyRateSelect').val();
+//            if (rate == 'custom')
+//                rate = this.$el.find('#priceCurrencyRate').val();
+//        } else {
+//            currency = null;
+//        }
+//        var newGroup = new Group({name: name, format: format,
+//            regionalCurrency: regionalCurrency, productCurrency: currency, rate: rate});
 
         this.collection.create(newGroup, {wait: true,
             error: function(model, response){
@@ -178,22 +187,37 @@ var EditGroup = Backbone.View.extend({
     },
 
     editGroup: function(e){
-        //TODO validation
+        var changedGroup = this.collection.get(currentGroupId);
+
         var changedName = this.$el.find('#priceNameInputEdit').val();
         var changedFormat = this.$el.find('#priceFormatSelectEdit option:selected').val();
+
+        changedGroup.set('name', changedName);
+        changedGroup.set('format', changedFormat);
+
         var changedRegionalCurrency = this.$el.find('#priceRegCurrencySelectEdit option:selected').val();
-        var changedCurrency = this.$el.find('#priceCurrencySelectEdit option:selected').val();
-        var changedRate = 1;
-        if (changedRegionalCurrency != changedCurrency){
-            changedRate = this.$el.find('#priceCurrencyRateSelectEdit').val();
-            if (changedRate == 'custom')
-                changedRate = this.$el.find('#priceCurrencyRateEdit').val();
-        }  else {
-            changedCurrency = null;
+        if (changedRegionalCurrency != 'none'){
+            changedGroup.set('regionalCurrency', changedRegionalCurrency);
+        } else {
+            changedGroup.unset('regionalCurrency');
         }
-        var changedGroup = this.collection.get(currentGroupId);
-        changedGroup.save({name: changedName, format: changedFormat,
-            regionalCurrency: changedRegionalCurrency, productCurrency: changedCurrency, rate: changedRate}, {wait: true,
+        var changedCurrency = this.$el.find('#priceCurrencySelectEdit option:selected').val();
+        if (changedCurrency != 'none'){
+            changedGroup.set('productCurrency', changedCurrency);
+        } else {
+            changedGroup.unset('productCurrency');
+        }
+        var changedRate = this.$el.find('#priceCurrencyRateSelectEdit').val();
+        if (changedRate == 'custom')
+            changedRate = this.$el.find('#priceCurrencyRateEdit').val();
+        if (changedRate != '' && changedRate != 'none' && changedRate != null){
+            changedGroup.set('rate', changedRate);
+        } else {
+            changedGroup.unset('rate');
+        }
+
+        var group = changedGroup.toJSON();
+        changedGroup.save(group, {wait: true,
             error: function(model, response){
                 $('#saveEditAlert').show();
                 $('#saveEditAlert').attr("class","alert alert-danger");
@@ -228,7 +252,7 @@ var EditGroup = Backbone.View.extend({
         }
         this.setCurrency(group.get('productCurrency'));
         var rate = group.get('rate');
-        if (rate != 1){
+        if (rate != 1 && rate != null){
             this.resetRateType(false, 'none');
             switch (rate)
             {

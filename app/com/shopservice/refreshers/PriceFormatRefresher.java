@@ -36,7 +36,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
         Price price = new Price();
         price.setName( clientSettings.siteName ) ;
         price.setUrl( clientSettings.siteUrl );
-        price.setRate(group.rate.equals("1") ? null : group.rate);
+        price.setRate(group.rate == null ? null : group.rate);
 
         Set<Category> categories = new HashSet<Category>();
 
