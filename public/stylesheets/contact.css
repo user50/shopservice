@@ -1,0 +1,33 @@
+/* Social Icons Styles */
+.list-social-icons {
+    margin-bottom: 45px;
+}
+
+.tooltip-social a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.facebook-link a:hover {
+    color: #3b5998;
+}
+
+.linkedin-link a:hover {
+    color: #007fb1;
+}
+
+.twitter-link a:hover {
+    color: #39a9e0;
+}
+
+.google-plus-link a:hover {
+    color: #d14836;
+}
+
+#sendMessageSuccess{
+    display: none;
+}
+
+#sendMessageError{
+    display: none;
+}
