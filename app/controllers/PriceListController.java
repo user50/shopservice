@@ -16,13 +16,13 @@ public class PriceListController extends Controller {
     private static ProductGroupRepository productGroupRepository = MServiceInjector.injector.getInstance(ProductGroupRepository.class);
     private static ClientSettingsRepository clientSettingsRepository = injector.getInstance(ClientSettingsRepository.class);
 
-    public static Result generatePriceList(String clientId, Long siteId, String format) throws Exception {
+    public static Result generatePriceList(String clientId, Long groupId) throws Exception {
 
-        byte[] priceList = PriceListType.valueOf(format).getHandler().generate(clientId, siteId.intValue());
+        byte[] priceList = productGroupRepository.get(groupId).format.getHandler().generate(clientId, groupId.intValue());
 
         ClientSettings clientSettings = clientSettingsRepository.findById(clientId);
 
-        response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ productGroupRepository.getName(siteId.intValue())+".xml\"" );
+        response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ productGroupRepository.getName(groupId.intValue())+".xml\"" );
         return ok(priceList).as("application/force-download");
     }
 

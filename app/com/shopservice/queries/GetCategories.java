@@ -1,5 +1,6 @@
 package com.shopservice.queries;
 
+import com.shopservice.Queries;
 import com.shopservice.Services;
 import com.shopservice.domain.Category;
 
@@ -15,7 +16,7 @@ public class GetCategories extends CategoryQuery {
 
     @Override
     public String getRawSql() {
-        return Services.queries.getCategoriesQuery(clientId);
+        return Queries.getInstance().getCategoriesQuery(clientId);
     }
 
     @Override

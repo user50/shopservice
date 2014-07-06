@@ -1,7 +1,189 @@
-@(message: String)
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>MService</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-@main("Welcome to Play 2.0") {
-    
-    @play20.welcome(message, style = "Java")
-    
-}
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- Додаткові теми -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+    <link href="assets/stylesheets/contact.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="container">
+    <!-- Top menu -->
+    <div class="row clearfix">
+        <div class="col-lg-12 column">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">MService</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-wrench"></i>&nbsp; Сервисы<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/assets/pricelist-generator.html">Генератор прайс-листов</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/assets/contact.html"><i class="fa fa-phone"></i>&nbsp; Контакты</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    <div class="row clearfix">
+
+        <div class="col-md-6">
+            <img class="img-responsive" src="assets/images/banner.jpg">
+        </div>
+        <div class="col-md-6">
+            <h2>&nbsp;</h2>
+            <blockquote>В процессе ведения любого бизнеса, возникает ряд задач, требующих немалого количества времени и сил:
+                работа с прайсами поставщиков, размещение рекламы, обработка новых поступлений, выбор оптимальных цен,
+                анализ цен конкурентов и т.д. Множество из этих задач, требуют выполнения  рутинной работы.</br></br>
+            Наша цель - разработка програмных средств, которые  помогут владельцам малого и среднего
+            бизнеса автоматизировать  большую часть этой рутинной работы, и дадут возможность сосредоточиться
+            на других важных задачах.</blockquote>
+
+        </div>
+
+    </div>
+
+    <!-- What we offer -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Мы предлагаем</h2>
+        </div>
+
+        <div class="col-sm-4">
+            <h3>Web-сервисы</h3>
+            <p><i class="fa fa-sitemap pull-left fa-4x"></i>Веб-сервисы - это готовые инструменты, доступные через интернет с
+                любих устройств (компютер, планшет, смартфон). Благодаря им, вы сможете автоматизировать ряд задач,
+                возникающих при обслуживании вашего интернет-магазина. Сервисы легко интегрируються с интернет-магазинами,
+                независимо от платформы или CMS, на которой они реализованы.</br>
+                <i class="fa fa-check"></i>&nbsp; <a href="/assets/pricelist-generator.html">Генератор прайс-листов</a>
+                </p>
+        </div>
+
+        <div class="col-sm-4">
+            <h3>Программное обеспечение</h3>
+            <p><i class="fa fa-laptop pull-left fa-4x"></i>
+                Мы можем создать новые веб-сервисы или улучшить уже существующие под заказ.
+                Также мы разрабатываем программы для решения спецефических задач вашего бизнеса.</p>
+        </div>
+
+        <div class="col-sm-4">
+            <h3>Техническая поддержка</h3>
+            <p><i class="fa fa-gears pull-left fa-4x"></i>Мы обеспечиваем постоянную поддержку
+                пользователей наших приложений и всегда готовы оветить на ваши вопросы.
+                Будем благодарны за идеи, советы и пожелания, касательно улучшения сервисов,
+                так как разработка простых и эффективных инструментов невозможна без сотрудничества
+                с теми, кто ими пользуется.
+                </p>
+        </div>
+
+    </div>
+
+    <!-- Team Member Profiles -->
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h2 class="page-header">Наша команда</h2>
+        </div>
+
+        <div class="col-sm-4">
+            <img class="img-responsive" src="/assets/images/team_member_yevhen.jpg">
+            <h3>Лозов Евгений
+                <small>Java Developer</small>
+            </h3>
+            <p>Веб-разработчик c многолетним опытом разработки серверных приложений и пользовательских интерфейсов веб-приложений</p>
+            <ul class="list-unstyled list-inline list-social-icons">
+                <li class="tooltip-social facebook-link"><a href="https://www.facebook.com/profile.php?id=100001730723465" target="_blank" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook-square fa-2x"></i></a>
+                </li>
+                <li class="tooltip-social linkedin-link"><a href="http://www.linkedin.com/profile/view?id=290254528" target="_blank" data-toggle="tooltip" data-placement="top" title="LinkedIn"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                </li>
+                <li class="tooltip-social google-plus-link"><a href="https://plus.google.com/u/0/118429521804438519671/about" target="_blank" data-toggle="tooltip" data-placement="top" title="Google+"><i class="fa fa-google-plus-square fa-2x"></i></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-sm-4">
+            <img class="img-responsive" src="/assets/images/team_member_oleg.jpg">
+            <h3>Огинский Олег
+                <small>Java Developer</small>
+            </h3>
+            <p>Java Developer c многолетним опытом разработки клиент-серверных приложений.</p>
+            <ul class="list-unstyled list-inline list-social-icons">
+                <li class="tooltip-social linkedin-link"><a href="http://ua.linkedin.com/pub/oleg-oginskiy/89/774/2b2/en" target="_blank" data-toggle="tooltip" data-placement="top" title="LinkedIn"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                </li>
+                <li class="tooltip-social google-plus-link"><a href="https://plus.google.com/116969707835202736131/posts" data-toggle="tooltip" target="_blank" data-placement="top" title="Google+"><i class="fa fa-google-plus-square fa-2x"></i></a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Our Customers -->
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h2 class="page-header">Наши клиенты</h2>
+        </div>
+
+        <div class="col-md-2 col-sm-4 col-xs-6"><a href="http://domosed.ua" target="_blank">
+            <img class="img-responsive img-customer" src="assets/images/domosed-logo1.png"></a>
+        </div>
+
+        <div class="col-md-2 col-sm-4 col-xs-6"><a href="http://mebel-alliance.kiev.ua" target="_blank">
+            <img class="img-responsive img-customer" src="assets/images/mebel-alliance-logo.png"></a>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Company 2014</p>
+            </div>
+        </div>
+    </footer>
+</div>
+    <script type="text/javascript" src="assets/javascripts/backbonejs/jquery-1.10.2.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/javascripts/jquery.cookie.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        // Activates Tooltips for Social Links
+        $('.tooltip-social').tooltip({
+            selector: "a[data-toggle=tooltip]"
+        });
+    })
+
+</script>
+</body>
+</html>

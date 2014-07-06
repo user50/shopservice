@@ -1,12 +1,16 @@
 package com.shopservice;
 
 
+import play.cache.Cache;
+import play.mvc.Http;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.util.Collection;
+import java.util.List;
 
 public class Util {
 
@@ -34,4 +38,12 @@ public class Util {
 
         return sum;
     }
+
+    public static String getCurrentClientId()
+    {
+        String cookie = Http.Context.current().request().cookie("key").value();
+
+        return (String) Cache.get(cookie);
+    }
+
 }

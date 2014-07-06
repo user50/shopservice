@@ -29,6 +29,7 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
         return entries;
     }
 
+
     @Override
     public void add(String clientsId, Collection<ProductEntry> productsToAdd) throws Exception {
         ClientSettings clientSettings = clientSettingsRepository.findById(clientsId);
@@ -103,5 +104,31 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
                 .eq("client_settings_id", clientId)
                 .eq("category_id",categoryId)
                 .findSet();
+    }
+
+    @Override
+    public Set<ProductEntry> get(String clientId) {
+        return Ebean.find(ProductEntry.class)
+                .where()
+                .eq("client_settings_id", clientId)
+                .findSet();
+    }
+
+    @Override
+    public List<ProductEntry> get(int groupId, Collection<String> ids) {
+        List<SqlRow> rows = Ebean.createSqlQuery("SELECT\n" +
+                "  product_entry.*,\n" +
+                "  group2product.id IS NOT NULL AS checked\n" +
+                "FROM product_entry\n" +
+                "  LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ?\n" +
+                "WHERE product_entry.product_id IN("+( ids.isEmpty() ? "''" : ids.toString().replace("[", "").replace("]", ""))+" ) ")
+                .setParameter(1, groupId)
+                .findList();
+
+        List<ProductEntry> entries = new ArrayList<ProductEntry>();
+        for (SqlRow row : rows)
+            entries.add(new ProductEntry(row));
+
+        return entries;
     }
 }
