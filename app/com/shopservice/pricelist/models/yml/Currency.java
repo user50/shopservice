@@ -14,6 +14,20 @@ import javax.xml.bind.annotation.XmlAttribute;
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class Currency {
+
+    public Currency(String id, String rate) {
+        this.id = id;
+        this.rate = rate;
+    }
+
+    public Currency(String id) {
+        this.id = id;
+        this.rate = "1";
+    }
+
+    public Currency() {
+    }
+
     @XmlAttribute
     public String id;
 
