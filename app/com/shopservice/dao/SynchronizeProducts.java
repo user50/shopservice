@@ -11,6 +11,7 @@ import com.shopservice.domain.ProductEntry;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by user50 on 21.06.2014.
@@ -41,25 +42,19 @@ public class SynchronizeProducts extends ProductRepositoryWrapper {
     }
 
     private void syncProducts() {
-        Runnable runnable = new Runnable() {
-            public void run() {
-                List<Product> products = productRepository.find();
-                Set<ProductEntry> productEntriesFromClient = new HashSet<ProductEntry>();
-                for (Product product : products)
-                    productEntriesFromClient.add(new ProductEntry(product));
+        new Thread(() -> {
+            List<Product> products = productRepository.find();
+            Set<ProductEntry> productEntriesFromClient = products.stream().map(ProductEntry::new).collect(Collectors.toSet());
 
-                Set<ProductEntry> productEntriesFromSettings = productEntryRepository.get(clientId);
+            Set<ProductEntry> productEntriesFromSettings = productEntryRepository.get(clientId);
 
-                try {
-                    productEntryRepository.delete(Sets.difference(productEntriesFromSettings, productEntriesFromClient));
-                    productEntryRepository.add(clientId, Sets.difference(productEntriesFromClient, productEntriesFromSettings));
-                } catch (Exception e) {
-                    MailService.getInstance().report(e);
-                }
-
+            try {
+                productEntryRepository.delete(Sets.difference(productEntriesFromSettings, productEntriesFromClient));
+                productEntryRepository.add(clientId, Sets.difference(productEntriesFromClient, productEntriesFromSettings));
+            } catch (Exception e) {
+                MailService.getInstance().report(e);
             }
-        };
 
-        new Thread(runnable).start();
+        }).start();
     }
 }
