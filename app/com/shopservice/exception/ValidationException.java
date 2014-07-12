@@ -14,4 +14,9 @@ public class ValidationException extends RuntimeException {
     public Description getDescription() {
         return description;
     }
+
+    @Override
+    public String getMessage() {
+        return description.message;
+    }
 }
