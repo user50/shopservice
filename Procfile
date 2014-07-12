@@ -1,0 +1,1 @@
+web: target/universal/stage/bin/testapp -Dhttp.port=${PORT}  -DapplyDownEvolutions.default=false -DapplyEvolutions.default=false

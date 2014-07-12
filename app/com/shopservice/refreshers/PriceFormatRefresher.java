@@ -1,8 +1,12 @@
 package com.shopservice.refreshers;
 
+import com.shopservice.MServiceInjector;
+import com.shopservice.ProductConditions;
 import com.shopservice.Services;
+import com.shopservice.dao.EbeanProductGroupRepository;
 import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.Product;
+import com.shopservice.domain.ProductGroup;
 import com.shopservice.pricelist.models.price.Category;
 import com.shopservice.pricelist.models.price.Item;
 import com.shopservice.pricelist.models.price.Price;
@@ -25,16 +29,21 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
 
     @Override
-    public byte[] generate(String clientId, int siteId) throws Exception {
+    public byte[] generate(String clientId, int groupId) throws Exception {
         ClientSettings clientSettings = clientSettingsRepository.findById(clientId);
+        ProductGroup group = MServiceInjector.injector.getInstance(EbeanProductGroupRepository.class).get(new Long(groupId));
 
         Price price = new Price();
         price.setName( clientSettings.siteName ) ;
         price.setUrl( clientSettings.siteUrl );
+        price.setRate(group.rate == null ? null : group.rate);
 
         Set<Category> categories = new HashSet<Category>();
 
-        for (Product product : Services.getProductDAO(clientId).getProducts( getProductIds(clientId, siteId))) {
+        ProductConditions query = new ProductConditions();
+        query.productIds = getProductIds(clientId, groupId);
+
+        for (Product product : Services.getProductDAO(clientId).find( query)) {
             price.addItem( createItem(clientId, product) );
             categories.add( new Category( product.category.id, product.category.name) );
         }

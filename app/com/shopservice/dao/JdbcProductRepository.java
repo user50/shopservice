@@ -1,14 +1,12 @@
 package com.shopservice.dao;
 
 import com.shopservice.DatabaseManager;
+import com.shopservice.ProductConditions;
 import com.shopservice.Services;
 import com.shopservice.domain.Product;
-import com.shopservice.queries.GetProductsByCategory;
-import com.shopservice.queries.GetProductsByIds;
+import com.shopservice.queries.JdbcProductQuery;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class JdbcProductRepository implements ProductRepository {
@@ -27,21 +25,23 @@ public class JdbcProductRepository implements ProductRepository {
     }
 
     @Override
-    public List<Product> getProducts(String categoryId) {
+    public List<Product> find(ProductConditions query) {
         try {
-            return  databaseManager.executeQueryForList(new GetProductsByCategory(clientId, categoryId));
+            return databaseManager.executeQueryForList(new JdbcProductQuery( clientId, query));
         } catch (SQLException e) {
-            //todo log
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public List<Product> getProducts(Collection<String> productId) {
-        try {
-            return databaseManager.executeQueryForList(new GetProductsByIds(clientId, new ArrayList<String>( productId )));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public List<Product> find() {
+        return find(new ProductConditions());
+    }
+
+    @Override
+    public int size(ProductConditions conditions) {
+        conditions.limit = null;
+        conditions.offset = null;
+        return find(conditions).size();
     }
 }

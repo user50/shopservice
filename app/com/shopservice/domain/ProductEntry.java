@@ -15,6 +15,7 @@ public class ProductEntry {
 
     @JsonIgnore
     public String productId;
+
     public String categoryId;
 
     @Transient
@@ -31,6 +32,9 @@ public class ProductEntry {
 
     @Transient
     public boolean checked;
+
+    @Transient
+    public String categoryName;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)

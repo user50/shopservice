@@ -25,6 +25,9 @@ public abstract class AbstractPriceListRefresher implements PriceListRefresher {
         for (ProductEntry productEntry : productEntryRepository.findSelected(clientId, siteId))
             setOfProductIds.add(productEntry.productId);
 
+        if (setOfProductIds.isEmpty())
+            setOfProductIds.add("nonExistingProductId"); //crutch
+
         return setOfProductIds;
     }
 

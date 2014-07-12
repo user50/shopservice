@@ -27,14 +27,13 @@
 <div class="container">
 
     <form id="loginform" class="form-signin" role="form">
-        <h4 class="form-signin-heading">Please sign in</h4>
         <div id="errorMessage" class="error">Invalid username and/or password!</div>
         <input type="text" class="form-control" name="j_username" placeholder="Username" required="" autofocus="">
         <input type="password" class="form-control" name="j_password" placeholder="Password" required="">
         <label class="checkbox">
-            <input type="checkbox" value="remember-me"> Remember me
+             <em>Демо аккаунт <br> username: demo, password: demo </em>
         </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
     </form>
 
 </div>
@@ -57,7 +56,7 @@
                                 $('#errorMessage').css('display', 'inline');
                             },
                             200: function() {
-                                window.location.replace("/price");
+                                window.location.replace("/priceUpdated");
                             }
                         }
                     });

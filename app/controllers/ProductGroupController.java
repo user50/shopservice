@@ -1,6 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import com.shopservice.Validator;
 import com.shopservice.dao.ClientSettingsRepository;
 import com.shopservice.dao.Group2ProductRepository;
 import com.shopservice.dao.ProductGroupRepository;
@@ -33,12 +34,7 @@ public class ProductGroupController extends Controller {
 
         ProductGroup productGroup = Json.fromJson( request().body().asJson(), ProductGroup.class );
 
-        if (productGroup.name.isEmpty() )
-            return badRequest("Name cannot be empty");
-
-        if (productGroupRepository.exist(clientId, productGroup.name))
-            return badRequest("Group with specified name already exists");
-
+        Validator.validate(productGroup);
         settings.productGroups.add(productGroup);
 
         clientSettingsRepository.save(settings);
@@ -60,12 +56,15 @@ public class ProductGroupController extends Controller {
         if (group == null)
             return notFound();
 
-        group.name = Json.fromJson(request().body().asJson(), ProductGroup.class).name;
-        group.format = Json.fromJson(request().body().asJson(), ProductGroup.class).format;
+        ProductGroup fromRequest = Json.fromJson(request().body().asJson(), ProductGroup.class);
 
-        if (productGroupRepository.exist(clientId, group.name))
-            return badRequest("Group with specified name already exists");
+        group.name = fromRequest.name;
+        group.format = fromRequest.format;
+        group.regionalCurrency = fromRequest.regionalCurrency;
+        group.productCurrency = fromRequest.productCurrency;
+        group.rate = fromRequest.rate;
 
+        Validator.validate(group);
         productGroupRepository.save(group);
 
         return ok(Json.toJson(group));

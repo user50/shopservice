@@ -1,8 +1,5 @@
 package com.shopservice.pricelist.models.price;
 
-import com.shopservice.pricelist.models.price.Currency;
-import com.shopservice.pricelist.models.price.Item;
-
 import javax.xml.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,7 +23,7 @@ public class Price {
 
     private String url;
 
-    private Currency currency = new Currency();
+    private String rate;
 
     @XmlElementWrapper(name="catalog")
     @XmlElements({
@@ -43,7 +40,6 @@ public class Price {
     public Price() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         date = dateFormat.format(new Date());
-
     }
 
     public String getDate() {
@@ -58,12 +54,12 @@ public class Price {
         return url;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public String getRate() {
+        return rate;
     }
 
-    public List<Category> getCatalog() {
-        return catalog;
+    public void setRate(String rate) {
+        this.rate = rate;
     }
 
     public void addCategory(Category category){
