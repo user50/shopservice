@@ -84,14 +84,12 @@ var AddGroup = Backbone.View.extend({
 
         this.collection.create(newGroup, {wait: true,
             error: function(model, response){
-                $('#saveNewPriceAlert').show();
-                $('#saveNewPriceAlert').attr("class","alert alert-danger");
-                $('#saveNewPriceAlert').text("Ошибка! " + errorMessages[response.responseJSON.code]);
+                $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],
+                    {ele: '#createPriceModal', type: 'danger', width: 350});
             },
             success: function(model, response){
-                $('#saveNewPriceAlert').show();
-                $('#saveNewPriceAlert').attr("class","alert alert-success");
-                $('#saveNewPriceAlert').text("Изменения успешно сохранены!");
+                $.bootstrapGrowl("Изменения успешно сохранены!",
+                    {ele: '#createPriceModal', type: 'success', width: 350});
             }});
     },
 
@@ -169,7 +167,6 @@ var AddGroup = Backbone.View.extend({
         this.$el.find('#priceFormatSelect').val('YML');
         this.$el.find('#priceCurrencySelect').val('none');
         this.$el.find('#priceRegCurrencySelect').val('none');
-        $('#saveNewPriceAlert').hide();
         this.resetRateType(true);
         this.resetRate(true);
     }
@@ -219,14 +216,12 @@ var EditGroup = Backbone.View.extend({
         var group = changedGroup.toJSON();
         changedGroup.save(group, {wait: true,
             error: function(model, response){
-                $('#saveEditAlert').show();
-                $('#saveEditAlert').attr("class","alert alert-danger");
-                $('#saveEditAlert').text("Ошибка! " + errorMessages[response.responseJSON.code]);
+                $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],
+                    {ele: '#editPriceModal', type: 'danger', width: 350});
             },
             success: function(model, response){
-                $('#saveEditAlert').show();
-                $('#saveEditAlert').attr("class","alert alert-success");
-                $('#saveEditAlert').text("Изменения успешно сохранены!");
+                $.bootstrapGrowl("Изменения успешно сохранены!",
+                    {ele: '#editPriceModal', type: 'success', width: 350});
             }});
     },
 
@@ -238,7 +233,6 @@ var EditGroup = Backbone.View.extend({
         this.renderCurrencySettings();
         var url = "http://mservice.herokuapp.com/client/"+clientId + "/groups/" + currentGroupId + "/pricelist";
         this.$el.find('#priceLink').text(url);
-        $('#saveEditAlert').hide();
     },
 
     renderCurrencySettings: function(){
@@ -371,12 +365,15 @@ var DeleteGroup = Backbone.View.extend({
                     label: "Удалить",
                     className: "btn-danger",
                     callback: function() {
+                        var name = app.Groups.get(currentGroupId).get('name');
                         app.Groups.get(currentGroupId).destroy();
                         app.categories.reset();
                         new BreadcrumbsView({categoryName: null, groupName: null});
                         app.ProductsView.$el.hide();
                         app.pagination.$el.hide();
                         vent.trigger('group: deleted');
+                        $.bootstrapGrowl("Прайс-лист \"" + name + "\" был удален!",
+                            {ele: 'body', type: 'success', width: 350});
                     }
                 }
             }
