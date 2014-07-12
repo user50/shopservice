@@ -19,6 +19,7 @@ public class UrlGeneratorStorage {
 
         add(new Domosed());
         add(new MebelAlliance());
+        add(new Demo());
     }
 
     public UrlGenerator get(String clientId)
