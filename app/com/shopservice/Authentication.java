@@ -18,13 +18,7 @@ public class Authentication extends Action.Simple {
         final Http.Cookie cookie = context.request().cookie("key");
 
         if (cookie == null || Cache.get(cookie.value()) == null || repository.findById((String) Cache.get(cookie.value())) == null )
-            return F.Promise.promise( new F.Function0<play.mvc.SimpleResult>()
-            {
-                @Override
-                public play.mvc.SimpleResult apply() throws Throwable {
-                    return redirect("/assets/login.html");
-                }
-            });
+            return F.Promise.promise(() -> redirect("/assets/login.html"));
 
 
         return delegate.call(context);
