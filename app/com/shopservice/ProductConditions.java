@@ -22,6 +22,10 @@ public class ProductConditions {
     public ProductConditions() {
     }
 
+    public ProductConditions(Collection<String> productIds) {
+        this.productIds = productIds;
+    }
+
     public ProductConditions(ProductConditions conditions) {
         categoryId = conditions.categoryId;
         productIds = new ArrayList<>(conditions.productIds);

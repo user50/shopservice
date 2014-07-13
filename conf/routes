@@ -38,6 +38,16 @@ PUT    /clients/:id/groups/:groupId                                       contro
 PUT    /clients/:id/groups/:groupId/merge                                 controllers.ProductGroupController.merge( id, groupId:Long )
 PUT    /clients/:id/groups/:groupId/diff                                  controllers.ProductGroupController.diff( id, groupId:Long )
 
+# Product Provider operations
+GET    /clients/:id/providers                                             controllers.ProductProviderController.find( id )
+POST   /clients/:id/providers                                             controllers.ProductProviderController.create( id )
+PUT    /clients/:id/providers/:providerId                                 controllers.ProductProviderController.update( id, providerId : Integer )
+DELETE /clients/:id/providers/:providerId                                 controllers.ProductProviderController.remove( id, providerId : Integer )
+
+# Product Provider operations
+GET    /clients/:id/providers/:providerId/linkedProductEntries            controllers.LinkedProductController.find( id, providerId: Integer)
+POST   /clients/:id/providers/:providerId/linkedProductEntries            controllers.LinkedProductController.create( id, providerId: Integer)
+
 POST /authentication                                                      controllers.LoginController.authentication()
 POST /logout                                                              controllers.LoginController.logout()
 

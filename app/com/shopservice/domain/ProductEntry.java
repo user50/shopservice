@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Access(AccessType.FIELD)
 public class ProductEntry {
 
     @Id

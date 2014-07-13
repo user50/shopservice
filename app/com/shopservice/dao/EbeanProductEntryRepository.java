@@ -80,6 +80,11 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
     }
 
     @Override
+    public ProductEntry find(String productEntryId) {
+        return Ebean.find(ProductEntry.class, productEntryId);
+    }
+
+    @Override
     public Map<String, Integer> getCountPerCategory(String clientId, String groupId) {
         List<SqlRow> rows = Ebean.createSqlQuery("SELECT category_id, count(product_entry.id) AS total FROM product_entry " +
                 "JOIN group2product ON group2product.product_entry_id = product_entry.id " +
