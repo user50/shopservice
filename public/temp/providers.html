@@ -52,20 +52,32 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-3 column">
+            <button id="createNewPriceBtn" class="btn btn-primary btn-xs" type="button" data-toggle="modal" data-target="#createPriceModal">
+                <span data-toggle="tooltip" data-placement="top" title="Добавить поставщика" class="glyphicon glyphicon glyphicon-plus"></span>
+                Добавить поставщика
+            </button>
+           <p></p>
+        </div>
+    </div>
     <div class="row clearfix">
         <div class="col-md-12 column">
             <table class="table table-striped">
                 <tr>
-                    <th></th>
+                    <th>
+
+                    </th>
                     <th>Название поставщика</th>
-                    <th></th>
                     <th>Источник</th>
+                    <th></th>
                 </tr>
                 <tr>
                     <td>
                         <input type="checkbox">
                     </td>
                     <td>Kpi Service</td>
+                    <td>Доступен</td>
                     <td>
                         <button type="button" class="btn btn-warning btn-sm">
                             <span data-toggle="tooltip" data-placement="top" title="Редактировать" class="glyphicon glyphicon-pencil"></span>
@@ -77,8 +89,10 @@
                         <button type="button" class="btn btn-info btn-sm">
                             <span data-toggle="tooltip" data-placement="top" title="Просмотреть сввязанные товары" class="glyphicon glyphicon-eye-open"></span>
                         </button>
+                        <button class="btn btn-danger btn-sm" type="button">
+                            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Удалить поставщика" ></span>
+                        </button>
                     </td>
-                    <td>Доступен</td>
                 </tr>
 
                 <tr>
@@ -86,6 +100,7 @@
                         <input type="checkbox">
                     </td>
                     <td>DiaTrade</td>
+                    <td>Доступен</td>
                     <td>
                         <button type="button" class="btn btn-warning btn-sm">
                             <span data-toggle="tooltip" data-placement="top" title="Редактировать" class="glyphicon glyphicon-pencil"></span>
@@ -97,8 +112,10 @@
                         <button type="button" class="btn btn-info btn-sm">
                             <span data-toggle="tooltip" data-placement="top" title="Просмотреть сввязанные товары" class="glyphicon glyphicon-eye-open"></span>
                         </button>
+                        <button class="btn btn-danger btn-sm" type="button">
+                            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Удалить поставщика" ></span>
+                        </button>
                     </td>
-                    <td>Доступен</td>
                 </tr>
                 <tr>
                     <td>
@@ -106,6 +123,9 @@
                     </td>
                     <td>KTD Group</td>
                     <td>
+                        <input type="file">
+                    </td>
+                    <td>
                         <button type="button" class="btn btn-warning btn-sm">
                             <span data-toggle="tooltip" data-placement="top" title="Редактировать" class="glyphicon glyphicon-pencil"></span>
                         </button>
@@ -116,9 +136,9 @@
                         <button type="button" class="btn btn-info btn-sm">
                             <span data-toggle="tooltip" data-placement="top" title="Просмотреть сввязанные товары" class="glyphicon glyphicon-eye-open"></span>
                         </button>
-                    </td>
-                    <td>
-                        <input type="file">
+                        <button class="btn btn-danger btn-sm" type="button">
+                            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Удалить поставщика" ></span>
+                        </button>
                     </td>
                 </tr>
             </table>
