@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Обновление цен и наличия - MService</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Свіжа збірка мінімізованих CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- Додаткові теми -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <!-- Top menu -->
+    <div class="row clearfix">
+        <div class="col-lg-12 column">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">MService</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-wrench"></i>&nbsp; Сервисы<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/assets/pricelist-generator.html">Генератор прайс-листов</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/assets/contact.html"><i class="fa fa-phone"></i>&nbsp; Контакты</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a id="logoutLink" href="#"><i class="fa fa-sign-out"></i>&nbsp; Выйти</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 column">
+            <button id="createNewPriceBtn" class="btn btn-default btn-xs" type="button" data-toggle="modal" data-target="#addProviderModal">
+                <span data-toggle="tooltip" data-placement="top" title="Добавить поставщика" class="glyphicon glyphicon glyphicon-plus"></span>
+                &nbsp;Добавить поставщика
+            </button>
+
+            <button id="deleteProvidersBtn" class="btn btn-default btn-xs" type="button">
+                <span data-toggle="tooltip" data-placement="top" title="Добавить поставщика" class="glyphicon glyphicon-remove"></span>
+                &nbsp;Удалить поставщика(-ов)
+            </button>
+            <p></p>
+            <!-- Add provider  Modal -->
+            <div class="modal fade" id="addProviderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Добавить поставщика</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="input-group">
+                                <div class="form-group">
+                                    <label class="control-label" for="providerNameInput">Название поставщика:</label>
+                                    <input type="text" class="form-control" id="providerNameInput">
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <div class="form-group">
+                                    <label class="control-label" for="providerUrlInput">Ссылка на прайс поставщика:</label>
+                                    <input type="text" class="form-control" id="providerUrlInput">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button id="saveNewPrice" type="button" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>Название поставщика</th>
+                    <th>Источник</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>Kpi Service</td>
+                    <td>Доступен</td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editProviderModal">
+                            <span data-toggle="tooltip" data-placement="top" title="Редактировать" class="glyphicon glyphicon-pencil"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-primary btn-sm">
+                            <span data-toggle="tooltip" data-placement="top" title="Связать товары" class="glyphicon glyphicon-link"></span>
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm">
+                            <span data-toggle="tooltip" data-placement="top" title="Просмотреть сввязанные товары" class="glyphicon glyphicon-eye-open"></span>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>DiaTrade</td>
+                    <td>Доступен</td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editProviderModal">
+                            <span data-toggle="tooltip" data-placement="top" title="Редактировать" class="glyphicon glyphicon-pencil"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-primary btn-sm">
+                            <span data-toggle="tooltip" data-placement="top" title="Связать товары" class="glyphicon glyphicon-link"></span>
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm">
+                            <span data-toggle="tooltip" data-placement="top" title="Просмотреть сввязанные товары" class="glyphicon glyphicon-eye-open"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>KTD Group</td>
+                    <td>
+                        <input type="file">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editProviderModal">
+                            <span data-toggle="tooltip" data-placement="top" title="Редактировать" class="glyphicon glyphicon-pencil"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-primary btn-sm">
+                            <span data-toggle="tooltip" data-placement="top" title="Связать товары" class="glyphicon glyphicon-link"></span>
+                        </button>
+                        <button type="button" class="btn btn-info btn-sm">
+                            <span data-toggle="tooltip" data-placement="top" title="Просмотреть сввязанные товары" class="glyphicon glyphicon-eye-open"></span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary btn-lg">Обновить</button>
+        </div>
+    </div>
+
+    <!-- Edit provider  Modal -->
+    <div class="modal fade" id="editProviderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel1">Редактировать поставщика</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="input-group">
+                        <div class="form-group">
+                            <label class="control-label" for="providerNameInputEdit">Название поставщика:</label>
+                            <input type="text" class="form-control" id="providerNameInputEdit">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="form-group">
+                            <label class="control-label" for="providerUrlInputEdit">Ссылка на прайс поставщика:</label>
+                            <input type="text" class="form-control" id="providerUrlInputEdit">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    <button id="saveNewPrice" type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script type="text/javascript" src="assets/javascripts/backbonejs/jquery-1.10.2.js"></script>
+
+<!-- Свіжа збірка мінімізованої JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+</body>
+</html>
