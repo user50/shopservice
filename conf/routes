@@ -43,8 +43,9 @@ GET    /clients/:id/providers                                             contro
 POST   /clients/:id/providers                                             controllers.ProductProviderController.create( id )
 PUT    /clients/:id/providers/:providerId                                 controllers.ProductProviderController.update( id, providerId : Integer )
 DELETE /clients/:id/providers/:providerId                                 controllers.ProductProviderController.remove( id, providerId : Integer )
+GET    /clients/:id/providers/:providerId/products                        controllers.ProductProviderController.getProducts( id, providerId : Integer, linked : Boolean )
 
-# Product Provider operations
+# Linked Product Entry operations
 GET    /clients/:id/providers/:providerId/linkedProductEntries            controllers.LinkedProductController.find( id, providerId: Integer)
 POST   /clients/:id/providers/:providerId/linkedProductEntries            controllers.LinkedProductController.create( id, providerId: Integer)
 
