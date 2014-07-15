@@ -23,4 +23,8 @@ public class Application extends Controller {
         return ok(priceUpdated.render());
     }
 
+    public static Result actualization() throws SQLException {
+        return ok(actualization.render());
+    }
+
 }
