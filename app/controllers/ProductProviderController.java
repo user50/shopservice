@@ -54,7 +54,7 @@ public class ProductProviderController extends Controller {
         return ok();
     }
 
-    public static Result getProducts(String clientId, Integer providerId, Boolean linked )
+    public static Result getProducts(String clientId, Integer providerId, Boolean linked, String words )
     {
         List<LinkedProductEntry> entries = linkedEntryRepository.find(providerId);
         Set<String> linkedNames = new HashSet<String>();
@@ -64,9 +64,23 @@ public class ProductProviderController extends Controller {
         List<Product> notLinkedProducts = new ArrayList<>();
         ProductSource source = new ProviderSourceStub();
         for (Product product : source.get(providerId))
-            if (!linkedNames.contains(product.name))
+            if (!linkedNames.contains(product.name) && contain(product.name, words))
                 notLinkedProducts.add(product);
 
         return ok(Json.toJson(notLinkedProducts));
+    }
+
+    private static boolean contain(String name, String words) {
+        if (words==null)
+            return true;
+
+        String[] splited = words.split("");
+
+        for (String likeWord : splited) {
+            if (!name.matches(".*"+likeWord+".*"))
+                return false;
+        }
+
+        return true;
     }
 }
