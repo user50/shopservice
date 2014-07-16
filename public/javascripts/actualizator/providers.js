@@ -70,6 +70,7 @@ var ProvidersView = Backbone.View.extend({
         tags.on('add', this.render, this);
         tags.on('remove', this.render, this);
         tags.on('fetch', this.test, this);
+        this.render();
     },
 
     events: {
@@ -114,6 +115,4 @@ var ProvidersView = Backbone.View.extend({
     }
 });
 
-app1.Providers = new Providers();
-app1.Providers.fetch();
-app1.ProvidersView = new ProvidersView({collection: app1.Providers});
+
