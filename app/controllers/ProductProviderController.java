@@ -1,11 +1,21 @@
 package controllers;
 
 import com.shopservice.MServiceInjector;
+import com.shopservice.dao.LinkedProductEntryRepository;
 import com.shopservice.dao.ProductProviderRepository;
+import com.shopservice.domain.LinkedProductEntry;
+import com.shopservice.domain.Product;
 import com.shopservice.domain.ProductProvider;
+import com.shopservice.productsources.ProductSource;
+import com.shopservice.productsources.ProviderSourceStub;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by user50 on 13.07.2014.
@@ -13,6 +23,7 @@ import play.mvc.Result;
 public class ProductProviderController extends Controller {
 
     private static ProductProviderRepository productProviderRepository = MServiceInjector.injector.getInstance(ProductProviderRepository.class);
+    private static LinkedProductEntryRepository linkedEntryRepository = MServiceInjector.injector.getInstance(LinkedProductEntryRepository.class);
 
     public static Result find(String clientId)
     {
@@ -41,5 +52,21 @@ public class ProductProviderController extends Controller {
         productProviderRepository.remove(providerId);
 
         return ok();
+    }
+
+    public static Result getProducts(String clientId, Integer providerId, Boolean linked )
+    {
+        List<LinkedProductEntry> entries = linkedEntryRepository.find(providerId);
+        Set<String> linkedNames = new HashSet<String>();
+        for (LinkedProductEntry entry : entries)
+            linkedNames.add(entry.name);
+
+        List<Product> notLinkedProducts = new ArrayList<>();
+        ProductSource source = new ProviderSourceStub();
+        for (Product product : source.get(providerId))
+            if (!linkedNames.contains(product.name))
+                notLinkedProducts.add(product);
+
+        return ok(Json.toJson(notLinkedProducts));
     }
 }

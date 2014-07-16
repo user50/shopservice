@@ -1,5 +1,8 @@
 package com.shopservice.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class Product {
     public String id;
     public String model;
@@ -16,5 +19,14 @@ public class Product {
     public Boolean published;
     public Category category;
 
-    public boolean checked;
+    public Product() {
+    }
+
+    public Product(String name, double price, Boolean published ) {
+        this.name = name;
+        this.price = price;
+        this.published = published;
+    }
+
+
 }

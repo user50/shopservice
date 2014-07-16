@@ -17,7 +17,10 @@ var ProviderView = Backbone.View.extend({
 
     events: {
         'click .btn-danger' : 'removeThis',
-        'click .btn-warning' : 'editThis'
+        'click .btn-warning' : 'editThis',
+        'click .btn-primary' : function(){
+            app1.actualizationRouter.navigate('providers/' + this.model.id + "/linkProducts", {trigger: true});
+        }
     },
 
     template: _.template($('#providerViewTemplate').html()),
@@ -70,6 +73,7 @@ var ProvidersView = Backbone.View.extend({
         tags.on('add', this.render, this);
         tags.on('remove', this.render, this);
         tags.on('fetch', this.test, this);
+        this.render();
     },
 
     events: {
@@ -114,6 +118,4 @@ var ProvidersView = Backbone.View.extend({
     }
 });
 
-app1.Providers = new Providers();
-app1.Providers.fetch();
-app1.ProvidersView = new ProvidersView({collection: app1.Providers});
+

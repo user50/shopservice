@@ -5,7 +5,10 @@ var ProviderPage = Backbone.View.extend({
     el: '#providers',
 
     initialize: function(){
-        this.AddProvider = new AddProvider({collection: app1.Providers});
+        this.Providers = new Providers();
+        this.Providers.fetch();
+        this.ProvidersView = new ProvidersView({collection: this.Providers});
+        this.AddProvider = new AddProvider({collection: this.Providers});
         this.EditProvider = new EditProvider({model: new Provider({name: '', url: ''})});
     },
 
@@ -66,7 +69,7 @@ var EditProvider = Backbone.View.extend({
     },
 
     editGroup: function(){
-        var changedProvider = app1.Providers.get(this.model.id);
+        var changedProvider = app1.ProviderPage.Providers.get(this.model.id);
 
         var changedName = this.$el.find('#providerNameInputEdit').val();
         var changedUrl = this.$el.find('#providerUrlInputEdit').val();
