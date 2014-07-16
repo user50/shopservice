@@ -17,7 +17,10 @@ var ProviderView = Backbone.View.extend({
 
     events: {
         'click .btn-danger' : 'removeThis',
-        'click .btn-warning' : 'editThis'
+        'click .btn-warning' : 'editThis',
+        'click .btn-primary' : function(){
+            app1.actualizationRouter.navigate('providers/' + this.model.id + "/linkProducts", {trigger: true});
+        }
     },
 
     template: _.template($('#providerViewTemplate').html()),
