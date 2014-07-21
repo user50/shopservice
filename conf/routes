@@ -41,6 +41,7 @@ PUT    /clients/:id/groups/:groupId/diff                                  contro
 
 # Product Provider operations
 GET    /clients/:id/providers                                             controllers.ProductProviderController.find( id )
+GET    /clients/:id/providers/:providerId                                 controllers.ProductProviderController.findById( id, providerId )
 POST   /clients/:id/providers                                             controllers.ProductProviderController.create( id )
 PUT    /clients/:id/providers/:providerId                                 controllers.ProductProviderController.update( id, providerId : Integer )
 DELETE /clients/:id/providers/:providerId                                 controllers.ProductProviderController.remove( id, providerId : Integer )

@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import com.shopservice.MServiceInjector;
 import com.shopservice.dao.LinkedProductEntryRepository;
 import com.shopservice.dao.ProductProviderRepository;
@@ -30,6 +31,11 @@ public class ProductProviderController extends Controller {
         return ok(Json.toJson(productProviderRepository.find(clientId)));
     }
 
+    public static Result findById(String clientId, String providerId)
+    {
+        return ok(Json.toJson(Ebean.find(ProductProvider.class, providerId) ));
+    }
+
     public static Result create(String clientId)
     {
         ProductProvider provider = Json.fromJson(request().body().asJson(), ProductProvider.class );
@@ -42,7 +48,7 @@ public class ProductProviderController extends Controller {
     public static Result update(String clientId, Integer providerId)
     {
         ProductProvider provider = Json.fromJson(request().body().asJson(), ProductProvider.class );
-        Object result = productProviderRepository.update( provider);
+        Object result = productProviderRepository.update(provider);
 
         return ok(Json.toJson(result));
     }
