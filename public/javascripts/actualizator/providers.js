@@ -2,7 +2,11 @@ var app1 = app1 || {};
 
 var clientId = "client1";
 
-var Provider = Backbone.Model.extend();
+var Provider = Backbone.Model.extend({
+    urlRoot: function(){
+        return '/clients/'+clientId+'/providers';
+    }
+});
 
 var Providers = Backbone.Collection.extend({
     model: Provider,
@@ -37,7 +41,7 @@ var ProviderView = Backbone.View.extend({
     },
 
     editThis: function(){
-        app1.ProviderPage.renderEditView(this.model);
+        actVent.trigger('provider:edit', this.model.id);
     },
 
     removeThis: function(){
@@ -66,14 +70,14 @@ var ProviderView = Backbone.View.extend({
 });
 
 var ProvidersView = Backbone.View.extend({
-    el : '#providersTable',
+    tagName: 'table',
+    className: 'table table-striped',
 
     initialize : function () {
         var tags = this.collection;
         tags.on('add', this.render, this);
         tags.on('remove', this.render, this);
         tags.on('fetch', this.test, this);
-        this.render();
     },
 
     events: {
@@ -117,5 +121,8 @@ var ProvidersView = Backbone.View.extend({
         console.log("Header is rendered...");
     }
 });
+
+app1.Providers = new Providers();
+app1.Providers.fetch();
 
 

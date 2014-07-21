@@ -2,23 +2,24 @@ var app1 = app1 || {};
 
 
 var UnlinkedPage = Backbone.View.extend({
-    el: '#unlinkedPage',
+    tagName: 'div',
 
-    initialize: function(){
+    initialize: function(options){
+        this.options = options;
+
+        var providerId = this.options.providerId; // провайдер, для якого рендериться сторінка
+
+        this.Provider = new Provider({id: providerId});
+        this.Provider.fetch();
+
+        this.UnlinkedBreadcrumbsView = new UnlinkedBreadcrumbsView({model: this.Provider});
         this.UnlinkedProducts = new UnlinkedProducts();
-        this.UnlinkedProducts.fetch();
+        this.UnlinkedProductsView = new UnlinkedProductsView({collection: this.UnlinkedProducts})
 
-        this.UnlinkedProductsView = new UnlinkedProductsView({collection: this.UnlinkedProducts});
-        this.UnlinkedBreadcrumbsView = new UnlinkedBreadcrumbsView({model: new Provider({id: '', name: '', url: ''})});
+        this.$el.append(this.UnlinkedBreadcrumbsView.render().el);
     },
 
     events: {
-    },
-
-    setProvider: function(providerModel){
-        this.UnlinkedBreadcrumbsView = new UnlinkedBreadcrumbsView(providerModel.toJSON());
     }
 
 });
-
-app1.UnlinkedPage = new UnlinkedPage();

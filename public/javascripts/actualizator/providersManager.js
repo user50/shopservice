@@ -2,31 +2,50 @@ var app1 = app1 || {};
 
 
 var ProviderPage = Backbone.View.extend({
-    el: '#providers',
+
+    tagName: 'div',
+    className: 'row clearfix',
 
     initialize: function(){
         this.Providers = new Providers();
         this.Providers.fetch();
         this.ProvidersView = new ProvidersView({collection: this.Providers});
         this.AddProvider = new AddProvider({collection: this.Providers});
-        this.EditProvider = new EditProvider({model: new Provider({name: '', url: ''})});
+        this.EditProvider = new EditProvider({model: new Provider({name: 'zg', url: 'sdfg'})});
+
+        this.listenTo(actVent, 'provider:edit', this.renderEditView);
     },
 
     events: {
-        'click #addProviderBtn': function(){this.AddProvider.clear()}
+        'click #addProviderBtn': function(){this.AddProvider.clear()},
+        'click #editProvider': function(){
+            if (this.EditProvider) this.EditProvider.close();
+        }
     },
 
-    renderEditView: function(model){
+    renderEditView: function(modelId){
+        var model = this.Providers.get(modelId);
         this.EditProvider.model.set(model.toJSON());
+    },
+
+    render: function(){
+        this.$el.append(this.AddProvider.render().el);
+        this.$el.append(this.ProvidersView.render().el);
+        this.$el.append(this.EditProvider.render().el);
+        return this;
     }
 
 });
 
 var AddProvider = Backbone.View.extend({
-    el: '#addProviderModal',
+
+    tagName: 'div',
+    className: 'row',
 
     initialize: function() {
     },
+
+    template: _.template($('#addProviderTpl').html()),
 
     events: {
         'click #saveNewProvider' : 'addProvider'
@@ -53,23 +72,42 @@ var AddProvider = Backbone.View.extend({
         console.log('clear form for creating a provider');
         this.$el.find('#providerNameInput').val('');
         this.$el.find('#providerUrlInput').val('');
+    },
+
+    render: function(){
+        var template = this.template();
+        this.$el.html( template );
+        return this;
     }
 });
 
 var EditProvider = Backbone.View.extend({
-    el: '#editProviderModal',
+    id: 'editProviderModal',
+    tagName: 'div',
+    className: 'modal fade',
+
+    attributes: {
+        tabindex: -1,
+        role: 'dialog',
+        'aria-labelledby': 'myModalLabel1',
+        'aria-hidden': true
+    },
 
     initialize: function(){
         var tags = this.model;
         tags.on('change', this.render, this);
+        this.render();
     },
+
+    template: _.template($('#editProviderTpl').html()),
 
     events: {
         'click #editProvider': 'editGroup'
     },
 
     editGroup: function(){
-        var changedProvider = app1.ProviderPage.Providers.get(this.model.id);
+        var changedProvider = new Provider({id: this.model.id});
+        changedProvider.fetch();
 
         var changedName = this.$el.find('#providerNameInputEdit').val();
         var changedUrl = this.$el.find('#providerUrlInputEdit').val();
@@ -91,14 +129,10 @@ var EditProvider = Backbone.View.extend({
     },
 
     render: function(){
-        if (this.model == null)
-            return this;
-
-        this.$el.find('#providerNameInputEdit').val(this.model.get('name'));
-        this.$el.find('#providerUrlInputEdit').val(this.model.get('url'));
-
+        var template = this.template(this.model.toJSON());
+        this.$el.html( template );
         return this;
     }
 });
 
-app1.ProviderPage = new ProviderPage();
+//app1.ProviderPage = new ProviderPage();

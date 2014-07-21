@@ -1,15 +1,18 @@
 var app1 = app1 || {};
 
 var clientId = "client1";
-var currentProviderId = 8;
 
 var UnlinkedProduct = Backbone.Model.extend();
 
 var UnlinkedProducts = Backbone.Collection.extend({
     model: UnlinkedProduct,
 
+    setProviderId: function(providerId){
+        this.providerId = providerId;
+    },
+
     url: function(){
-        return '/clients/'+clientId+'/providers/' + currentProviderId + "/products?linked=true";
+        return '/clients/'+clientId+'/providers/' + this.providerId + "/products?linked=true";
     }
 });
 
@@ -43,7 +46,8 @@ var UnlinkedProductView = Backbone.View.extend({
 });
 
 var UnlinkedProductsView = Backbone.View.extend({
-    el: '#unlinkedProducts',
+    tagName: 'div',
+    className: 'list-group',
 
     initialize: function(){
         this.collection.on('add', this.addOne, this);
