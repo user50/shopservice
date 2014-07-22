@@ -15,23 +15,15 @@ var ActualizationRouter = Backbone.Router.extend({
     start: function(){
         console.log('Hello!');
         this.ProviderPage = new ProviderPage();
-        $('#contents').html(this.ProviderPage.render().el);
+        $('#contents').empty();
+        this.ProviderPage.render();
+        console.log('Hello!');
     },
 
     linkProducts: function(providerId){
-        console.log('Link products of provider: ' + providerId);
-
-        this.Provider = new Provider({id: providerId});
-        this.Provider.fetch();
-
-        this.UnlinkedBreadcrumbsView = new UnlinkedBreadcrumbsView({model: this.Provider});
-        this.UnlinkedProducts = new UnlinkedProducts();
-        this.UnlinkedProducts.setProviderId(providerId);
-        this.UnlinkedProductsView = new UnlinkedProductsView({collection: this.UnlinkedProducts});
-        this.UnlinkedProducts.fetch();
-
-        $('#contents').html(this.UnlinkedBreadcrumbsView.render().el);
-        $('#contents').append(this.UnlinkedProductsView.render().el);
+        this.UnlinkedPage = new UnlinkedPage({providerId: providerId});
+        $('#contents').empty();
+        this.UnlinkedPage.render();
     }
 });
 app1.actualizationRouter = new ActualizationRouter();

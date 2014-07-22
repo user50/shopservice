@@ -77,14 +77,6 @@ var ProvidersView = Backbone.View.extend({
         var tags = this.collection;
         tags.on('add', this.render, this);
         tags.on('remove', this.render, this);
-        tags.on('fetch', this.test, this);
-    },
-
-    events: {
-    },
-
-    test: function(){
-        console.log("products are fetched..");
     },
 
     addOne : function ( item ) {
@@ -93,16 +85,8 @@ var ProvidersView = Backbone.View.extend({
     },
 
     render: function(){
-        console.log('Rendering of ProviderView...');
+        console.log('Rendering of ProvidersView...');
         this.$el.empty();
-
-        if (this.collection.length == 0){
-            var emptyRow = $('<tr/>');
-            emptyRow.append($('<th/>').text('Список поставщиков пуст.'));
-            this.$el.append(emptyRow);
-            return this;
-        }
-
         this.renderHeader();
         this.collection.each(this.addOne, this);
         return this;
@@ -121,8 +105,5 @@ var ProvidersView = Backbone.View.extend({
         console.log("Header is rendered...");
     }
 });
-
-app1.Providers = new Providers();
-app1.Providers.fetch();
 
 

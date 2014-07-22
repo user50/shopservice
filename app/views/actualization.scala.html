@@ -107,14 +107,14 @@
                     <div class="input-group">
                         <div class="form-group">
                             <label class="control-label" for="providerNameInputEdit">Название поставщика:</label>
-                            <input type="text" class="form-control" id="providerNameInputEdit" value=" <%= name %>">
+                            <input type="text" class="form-control" id="providerNameInputEdit" value="<%= name %>">
                         </div>
                     </div>
 
                     <div class="input-group">
                         <div class="form-group">
                             <label class="control-label" for="providerUrlInputEdit">Ссылка на прайс поставщика:</label>
-                            <input type="text" class="form-control" id="providerUrlInputEdit" value=" <%= url %> ">
+                            <input type="text" class="form-control" id="providerUrlInputEdit" value="<%= url %>">
                         </div>
                     </div>
 
@@ -132,6 +132,12 @@
         <div class="col-md-12">
             <div id="unlinkedProducts" class="list-group">
             </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="updateBtnTpl">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary btn-lg">Обновить</button>
         </div>
     </script>
 </head>
@@ -173,13 +179,6 @@
 
     <div id="contents">
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-primary btn-lg">Обновить</button>
-        </div>
-    </div>
-
 
 </div>
 

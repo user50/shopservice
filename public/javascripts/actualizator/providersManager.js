@@ -3,35 +3,35 @@ var app1 = app1 || {};
 
 var ProviderPage = Backbone.View.extend({
 
-    tagName: 'div',
-    className: 'row clearfix',
+    el: '#contents',
 
     initialize: function(){
         this.Providers = new Providers();
         this.Providers.fetch();
         this.ProvidersView = new ProvidersView({collection: this.Providers});
         this.AddProvider = new AddProvider({collection: this.Providers});
-        this.EditProvider = new EditProvider({model: new Provider({name: 'zg', url: 'sdfg'})});
+        this.EditProvider = new EditProvider({model: new Provider({name: '', url: ''})});
+        this.UpdateButton = new UpdateButton();
 
         this.listenTo(actVent, 'provider:edit', this.renderEditView);
     },
 
     events: {
-        'click #addProviderBtn': function(){this.AddProvider.clear()},
-        'click #editProvider': function(){
-            if (this.EditProvider) this.EditProvider.close();
-        }
+        'click #addProviderBtn': function(){this.AddProvider.clear()}
     },
 
     renderEditView: function(modelId){
-        var model = this.Providers.get(modelId);
-        this.EditProvider.model.set(model.toJSON());
+        this.EditProvider.$el.remove();
+
+        this.EditProvider = new EditProvider({model: this.Providers.get(modelId)});
+        this.$el.append(this.EditProvider.render().el);
     },
 
     render: function(){
         this.$el.append(this.AddProvider.render().el);
         this.$el.append(this.ProvidersView.render().el);
         this.$el.append(this.EditProvider.render().el);
+        this.$el.append(this.UpdateButton.render().el);
         return this;
     }
 
@@ -106,18 +106,15 @@ var EditProvider = Backbone.View.extend({
     },
 
     editGroup: function(){
-        var changedProvider = new Provider({id: this.model.id});
-        changedProvider.fetch();
-
         var changedName = this.$el.find('#providerNameInputEdit').val();
         var changedUrl = this.$el.find('#providerUrlInputEdit').val();
 
-        changedProvider.set('name', changedName);
-        changedProvider.set('url', changedUrl);
+        this.model.set('name', changedName);
+        this.model.set('url', changedUrl);
 
-        var provider = changedProvider.toJSON();
+        var provider = this.model.toJSON();
 
-        changedProvider.save(provider, {wait: true,
+        this.model.save(provider, {wait: true,
             error: function(model, response){
                 $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],
                     {ele: '#editProviderModal', type: 'danger', width: 350});
@@ -135,4 +132,14 @@ var EditProvider = Backbone.View.extend({
     }
 });
 
-//app1.ProviderPage = new ProviderPage();
+var UpdateButton = Backbone.View.extend({
+    tagName: 'div',
+    className: 'row',
+
+    template: _.template($('#updateBtnTpl').html()),
+
+    render: function(){
+        this.$el.html( this.template );
+        return this;
+    }
+});
