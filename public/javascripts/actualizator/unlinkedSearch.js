@@ -11,11 +11,12 @@ var UnlinkedSearch = Backbone.View.extend({
     },
 
     events: {
-        'click #unlinkedSearchBtn' : function(){
-            var text = this.$el.find('#searchText').val();
-            if (text == '')
-                return;
-            app1.actualizationRouter.navigate('/providers/' + this.options.providerId+ "/linkProducts/search/" + text, {trigger: true});
+        'click #unlinkedSearchBtn' : 'search',
+        'keydown #searchText' : function(e){
+            if(e.keyCode == 13) {
+                e.preventDefault();
+                this.search();
+            }
         }
     },
 
@@ -23,6 +24,13 @@ var UnlinkedSearch = Backbone.View.extend({
         var template = this.template({text: text});
         this.$el.html( template );
         return this;
+    },
+
+    search: function(){
+        var text = this.$el.find('#searchText').val();
+        if (text == '')
+            return;
+        app1.actualizationRouter.navigate('/providers/' + this.options.providerId+ "/linkProducts/search/" + text, {trigger: true});
     }
 });
 
