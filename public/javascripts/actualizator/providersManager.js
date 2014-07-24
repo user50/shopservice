@@ -3,7 +3,7 @@ var app1 = app1 || {};
 
 var ProviderPage = Backbone.View.extend({
 
-    el: '#contents',
+    tagName: 'div',
 
     initialize: function(){
         this.Providers = new Providers();

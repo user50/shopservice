@@ -49,7 +49,7 @@
     <script type="text/template" id="unlinkedProductsBreadcrumbsTpl">
             <li><a href="#">Поставщики</a></li>
             <li><strong><%= name %></strong></li>
-            <li class="active"><strong>Список незвязанных товаров</strong></li>
+            <li class="active"><strong><a href="#providers/<%= id %>/linkProducts">Список незвязанных товаров</a></strong></li>
     </script>
 
     <script type="text/template" id="addProviderTpl">
@@ -140,6 +140,20 @@
             <button type="button" class="btn btn-primary btn-lg">Обновить</button>
         </div>
     </script>
+
+    <script type="text/template" id="unlinkedSearchTpl">
+        <div class="col-md-6 column">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchText" value="<%= text%>">
+                    <span class="input-group-btn">
+                      <button id="unlinkedSearchBtn" class="btn btn-default" type="button"><i class="fa fa-search"></i>&nbsp;</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </script>
+
 </head>
 <body>
 <div class="container">
@@ -183,13 +197,6 @@
 </div>
 
 <div id="unlinkedPage">
-    <div class="row">
-        <div class="col-md-12 column">
-            <ol id="unlinkedProductsBreadcrumbs" class="breadcrumb">
-            </ol>
-            <p></p>
-        </div>
-    </div>
 
     <div class="row clearfix">
         <div class="col-md-12">
@@ -218,7 +225,6 @@
         <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
     </ul>
 </div>
-    <div id="content"></div>
 </div>
 
 </div>
@@ -235,6 +241,7 @@
 <script type="text/javascript" src="assets/javascripts/actualizator/unlinkedProducts.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/breadcrumbs.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/unlinkedPage.js"></script>
+<script type="text/javascript" src="assets/javascripts/actualizator/unlinkedSearch.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/routes.js"></script>
 
 <!-- Свіжа збірка мінімізованої JavaScript -->
