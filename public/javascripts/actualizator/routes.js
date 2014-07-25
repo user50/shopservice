@@ -16,18 +16,18 @@ var ActualizationRouter = Backbone.Router.extend({
     start: function(){
         console.log('Hello!');
         this.ProviderPage = new ProviderPage();
-        $('#contents').html(this.ProviderPage.render().el);
+        $('#content').html(this.ProviderPage.render().el);
     },
 
     linkProducts: function(providerId){
         this.UnlinkedPage = new UnlinkedPage({providerId: providerId});
-        $('#contents').html(this.UnlinkedPage.render().el);
+        $('#content').html(this.UnlinkedPage.render().el);
     },
 
     unlinkedSearch: function(providerId, text){
         this.UnlinkedPage = new UnlinkedPage({providerId: providerId});
         this.UnlinkedPage.search(text);
-        $('#contents').html(this.UnlinkedPage.el);
+        $('#content').html(this.UnlinkedPage.el);
     }
 });
 app1.actualizationRouter = new ActualizationRouter();

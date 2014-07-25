@@ -18,7 +18,7 @@ var UnlinkedPage = Backbone.View.extend({
         this.Provider.fetch();
 
         this.UnlinkedBreadcrumbsView = new UnlinkedBreadcrumbsView({model: this.Provider});
-
+        this.LinkAutomaticBtn = new LinkAutomaticBtn();
     },
 
     render: function(){
@@ -30,6 +30,7 @@ var UnlinkedPage = Backbone.View.extend({
         this.UnlinkedSearch = new UnlinkedSearch({providerId: this.providerId});
 
         this.$el.append(this.UnlinkedBreadcrumbsView.render().el);
+        this.$el.append(this.LinkAutomaticBtn.render().el);
         this.$el.append(this.UnlinkedSearch.render('').el);
         this.$el.append(this.UnlinkedProductsView.render().el);
         return this;
@@ -48,8 +49,23 @@ var UnlinkedPage = Backbone.View.extend({
         this.UnlinkedSearchResults.fetch();
 
         this.$el.append(this.UnlinkedBreadcrumbsView.render().el);
+        this.$el.append(this.LinkAutomaticBtn.render().el);
         this.$el.append(this.UnlinkedSearch.render(text).el);
         this.$el.append(this.UnlinkedSearchResultsView.render().el);
+    }
+
+});
+
+var LinkAutomaticBtn = Backbone.View.extend({
+    tagName: 'div',
+    className: 'row',
+
+    template: _.template($('#linkAutomaticBtn').html()),
+
+    render: function(){
+        var template = this.template();
+        this.$el.html( template );
+        return this;
     }
 
 });
