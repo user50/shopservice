@@ -5,7 +5,6 @@ var UnlinkedPage = Backbone.View.extend({
     tagName: 'div',
 
     events: {
-        'click #unlinkedSearchBtn' : 'search'
     },
 
     initialize: function(options){
