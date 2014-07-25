@@ -54,4 +54,7 @@ POST   /clients/:id/providers/:providerId/linkedProductEntries            contro
 POST /authentication                                                      controllers.LoginController.authentication()
 POST /logout                                                              controllers.LoginController.logout()
 
+# Client's Products operations
+GET    /clients/:id/products                                              controllers.ClientProductController.find(id, like : String ?= null, contain : String ?= null )
+
 POST /assets/contact                                                             controllers.FeedbackController.feedbackNotify()
