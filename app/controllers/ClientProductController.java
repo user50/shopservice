@@ -9,6 +9,7 @@ import play.mvc.Result;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ClientProductController extends Controller {
 
@@ -19,7 +20,10 @@ public class ClientProductController extends Controller {
         if (contain != null)
             conditions.words = Arrays.asList(contain.split(" "));
 
-        Object response = Services.getProductDAO(clientId).find(conditions);
+        List response = Services.getProductDAO(clientId).find(conditions);
+
+        if (like != null)
+            return ok(Json.toJson(response.subList(0, 10)));
 
         return ok(Json.toJson(response));
     }
