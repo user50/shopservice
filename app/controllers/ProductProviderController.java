@@ -67,7 +67,7 @@ public class ProductProviderController extends Controller {
     {
         productProviderRepository.remove(providerId);
 
-        return ok();
+        return ok(Json.toJson(service.getNotLinkedProducts(clientId, providerId, null)));
     }
 
     public static Result getProducts(String clientId, Integer providerId, Boolean linked, String words )
