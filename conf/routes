@@ -43,7 +43,7 @@ PUT    /clients/:id/groups/:groupId/diff                                  contro
 GET    /clients/:id/providers                                             controllers.ProductProviderController.find( id )
 GET    /clients/:id/providers/:providerId                                 controllers.ProductProviderController.findById( id, providerId )
 POST   /clients/:id/providers                                             controllers.ProductProviderController.create( id )
-POST   /clients/:id/providers/:providerId/autolink                        controllers.ProductProviderController.autoLink( id, providerId : Integer )
+GET    /clients/:id/providers/:providerId/autolink                        controllers.ProductProviderController.autoLink( id, providerId : Integer )
 PUT    /clients/:id/providers/:providerId                                 controllers.ProductProviderController.update( id, providerId : Integer )
 DELETE /clients/:id/providers/:providerId                                 controllers.ProductProviderController.remove( id, providerId : Integer )
 GET    /clients/:id/providers/:providerId/products                        controllers.ProductProviderController.getProducts( id, providerId : Integer, linked : Boolean ?= true, words : String ?= null )
