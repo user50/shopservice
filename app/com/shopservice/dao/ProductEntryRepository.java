@@ -27,4 +27,6 @@ public interface ProductEntryRepository {
     List<ProductEntry> getWithCheckedPage(String clientId, String categoryId, int groupId, int offset, int limit);
 
     ProductEntry find(String productEntryId);
+
+    ProductEntry find(String clientId, String clientsProductId);
 }

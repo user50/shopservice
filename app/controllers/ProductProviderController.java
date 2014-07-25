@@ -1,6 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import com.shopservice.ActualisationService;
 import com.shopservice.MServiceInjector;
 import com.shopservice.Util;
 import com.shopservice.dao.LinkedProductEntryRepository;
@@ -26,6 +27,7 @@ public class ProductProviderController extends Controller {
 
     private static ProductProviderRepository productProviderRepository = MServiceInjector.injector.getInstance(ProductProviderRepository.class);
     private static LinkedProductEntryRepository linkedEntryRepository = MServiceInjector.injector.getInstance(LinkedProductEntryRepository.class);
+    private static ActualisationService service = new ActualisationService();
 
     public static Result find(String clientId)
     {
@@ -54,6 +56,13 @@ public class ProductProviderController extends Controller {
         return ok(Json.toJson(result));
     }
 
+    public static Result autoLink(String clientId, Integer providerId)
+    {
+        service.autoLink(clientId, providerId);
+
+        return ok();
+    }
+
     public static Result remove(String clientId, Integer providerId)
     {
         productProviderRepository.remove(providerId);
@@ -63,33 +72,10 @@ public class ProductProviderController extends Controller {
 
     public static Result getProducts(String clientId, Integer providerId, Boolean linked, String words )
     {
-        List<LinkedProductEntry> entries = linkedEntryRepository.find(providerId);
-        Set<String> linkedNames = new HashSet<String>();
-        for (LinkedProductEntry entry : entries)
-            linkedNames.add(entry.name);
-
-        List<Product> notLinkedProducts = new ArrayList<>();
-        ProductSource source = new ProviderSourceStub();
-        for (Product product : source.get(providerId))
-            if (!linkedNames.contains(product.name) && contain(product.name, words))
-                notLinkedProducts.add(product);
-
-        return ok(Json.toJson(notLinkedProducts));
+        return ok(Json.toJson(service.getNotLinkedProducts(clientId, providerId, words)));
     }
 
-    private static boolean contain(String name, String words) {
-        if (words==null)
-            return true;
 
-        String[] splited = words.split(" ");
-
-        for (String likeWord : splited) {
-            if (!Util.matches(".*"+likeWord+".*", name))
-                return false;
-        }
-
-        return true;
-    }
 
 
 }
