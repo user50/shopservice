@@ -52,6 +52,13 @@
             <li class="active"><strong><a href="#providers/<%= id %>/linkProducts">Список незвязанных товаров</a></strong></li>
     </script>
 
+    <script type="text/template" id="linkingPageBreadcrumbsTpl">
+        <li><a href="#">Поставщики</a></li>
+        <li><%= providerName %></li>
+        <li>Связать товар</li>
+        <li class="active"><strong><%= providerProductName %></strong></li>
+    </script>
+
     <script type="text/template" id="addProviderTpl">
         <div class="col-md-6 column">
             <button id="addProviderBtn" class="btn btn-default btn-xs" type="button" data-toggle="modal" data-target="#addProviderModal">
@@ -167,6 +174,16 @@
                 <p></p>
             </div>
     </script>
+
+    <script type="text/template" id="linkingBackBtnsTpl">
+        <div class="col-md-12">
+            <button id="toUnlinkedList" type="button" class="btn btn-info btn-sm">
+                <span data-toggle="tooltip" data-placement="top" title="к списку несвязанных товаров" class="glyphicon glyphicon-arrow-left"></span>
+                &nbsp; К списку
+            </button>
+            <button type="button" class="btn btn-danger btn-sm">Отсутствует</button>
+        </div>
+    </script>
 </head>
 <body>
 <div class="container">
@@ -225,6 +242,7 @@
 <script type="text/javascript" src="assets/javascripts/actualizator/breadcrumbs.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/unlinkedPage.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/unlinkedSearch.js"></script>
+<script type="text/javascript" src="assets/javascripts/actualizator/linkingPage.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/routes.js"></script>
 
 <!-- Свіжа збірка мінімізованої JavaScript -->

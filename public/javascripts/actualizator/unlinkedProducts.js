@@ -13,6 +13,13 @@ var UnlinkedProducts = Backbone.Collection.extend({
 
     url: function(){
         return '/clients/'+clientId+'/providers/' + this.providerId + "/products?linked=true";
+    },
+
+    fetchAutolink: function (options) {
+        options = options || {};
+        options.url = '/clients/'+clientId+'/providers/' + this.providerId + "/autolink";
+
+        return Backbone.Model.prototype.fetch.call(this, options);
     }
 });
 
@@ -28,11 +35,12 @@ var UnlinkedProductView = Backbone.View.extend({
 
     initialize: function(){
         this.model.on('change', this.render, this);
+        this.model.on('remove', this.remove, this);
     },
 
     render: function(){
-        console.log("Render UnlinkedProductView to a UnlinkedProduct model with id: " + this.model.id);
-        this.$el.attr('id', this.model.id);
+        console.log("Render UnlinkedProductView to a UnlinkedProduct model with id: " + this.model.cid);
+        this.$el.attr('id', this.model.cid);
         var template = this.template(this.model.toJSON());
         this.$el.html( template );
         return this;
@@ -40,8 +48,7 @@ var UnlinkedProductView = Backbone.View.extend({
 
     onClick: function(){
         console.log('Selected unlinkedProduct with name : ' + this.model.get('name'));
-//        currentCategoryId = this.model.id;
-//        app.router.navigate('groups/' + currentGroupId + '/categories/' + this.model.id, {trigger: true});
+        actVent.trigger('unlinked:selected', this.model.get('name'));
     }
 });
 
@@ -51,6 +58,7 @@ var UnlinkedProductsView = Backbone.View.extend({
 
     initialize: function(){
         this.collection.on('add', this.addOne, this);
+        this.collection.on('change', this.render, this);
         this.collection.on('reset', this.render, this);
     },
     render: function(){

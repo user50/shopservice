@@ -19,10 +19,20 @@ var UnlinkedPage = Backbone.View.extend({
 
         this.UnlinkedBreadcrumbsView = new UnlinkedBreadcrumbsView({model: this.Provider});
         this.LinkAutomaticBtn = new LinkAutomaticBtn();
+
+        this.UnlinkedProducts = new UnlinkedProducts();
+
+        this.listenTo(actVent, 'unlinked:selected', function(unlinkedId){
+            app1.actualizationRouter.navigate('providers/' + this.providerId+ "/linkingProduct/" + unlinkedId, {trigger: true});
+        });
+
+        this.listenTo(actVent, 'unlinked:autolink', function(){
+            this.UnlinkedProducts.fetchAutolink();
+        })
     },
 
     render: function(){
-        this.UnlinkedProducts = new UnlinkedProducts();
+
         this.UnlinkedProducts.setProviderId(this.providerId);
         this.UnlinkedProductsView = new UnlinkedProductsView({collection: this.UnlinkedProducts});
         this.UnlinkedProducts.fetch();
@@ -61,6 +71,10 @@ var LinkAutomaticBtn = Backbone.View.extend({
     className: 'row',
 
     template: _.template($('#linkAutomaticBtn').html()),
+
+    events: {
+        'click' : function(){actVent.trigger('unlinked:autolink')}
+    },
 
     render: function(){
         var template = this.template();
