@@ -2,6 +2,7 @@ package controllers;
 
 import com.avaje.ebean.Ebean;
 import com.shopservice.MServiceInjector;
+import com.shopservice.Util;
 import com.shopservice.dao.LinkedProductEntryRepository;
 import com.shopservice.dao.ProductProviderRepository;
 import com.shopservice.domain.LinkedProductEntry;
@@ -80,13 +81,15 @@ public class ProductProviderController extends Controller {
         if (words==null)
             return true;
 
-        String[] splited = words.split("");
+        String[] splited = words.split(" ");
 
         for (String likeWord : splited) {
-            if (!name.matches(".*"+likeWord+".*"))
+            if (!Util.matches(".*"+likeWord+".*", name))
                 return false;
         }
 
         return true;
     }
+
+
 }

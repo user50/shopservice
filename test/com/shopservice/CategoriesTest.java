@@ -15,9 +15,7 @@ public class CategoriesTest {
 
     @Test
     public void testName() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        List<ProductEntry> productEntries = objectMapper.readValue("[{\"id\":\"1\"}]", new TypeReference<List<ProductEntry>>() { });
+        Util.matches(".*П.*", "Парта");
 
     }
 }

@@ -11,6 +11,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Util {
 
@@ -44,6 +46,15 @@ public class Util {
         String cookie = Http.Context.current().request().cookie("key").value();
 
         return (String) Cache.get(cookie);
+    }
+
+    public static boolean matches(String regex, String sentence)
+    {
+        Pattern pattern = Pattern.compile(regex,
+                Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+        Matcher matcher = pattern.matcher(sentence);
+
+        return matcher.find();
     }
 
 }

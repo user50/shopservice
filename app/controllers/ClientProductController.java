@@ -14,9 +14,6 @@ public class ClientProductController extends Controller {
 
     public static Result find(String clientId, String like, String contain)
     {
-        if (like != null)
-            return ok(Json.toJson(new ArrayList<Product>()));
-
         ProductConditions conditions = new ProductConditions();
 
         if (contain != null)
