@@ -79,8 +79,7 @@ var UnlinkedSearchResultView = Backbone.View.extend({
 
     onClick: function(){
         console.log('Selected unlinkedProduct with name : ' + this.model.get('name'));
-//        currentCategoryId = this.model.id;
-//        app.router.navigate('groups/' + currentGroupId + '/categories/' + this.model.id, {trigger: true});
+        actVent.trigger('unlinked:selected', this.model.get('name'));
     }
 });
 

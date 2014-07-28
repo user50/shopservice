@@ -22,8 +22,8 @@ var UnlinkedPage = Backbone.View.extend({
 
         this.UnlinkedProducts = new UnlinkedProducts();
 
-        this.listenTo(actVent, 'unlinked:selected', function(unlinkedId){
-            app1.actualizationRouter.navigate('providers/' + this.providerId+ "/linkingProduct/" + unlinkedId, {trigger: true});
+        this.listenTo(actVent, 'unlinked:selected', function(unlinkedName){
+            app1.actualizationRouter.navigate('providers/' + this.providerId+ "/linkingProduct/" + unlinkedName, {trigger: true});
         });
 
         this.listenTo(actVent, 'unlinked:autolink', function(){
@@ -62,6 +62,7 @@ var UnlinkedPage = Backbone.View.extend({
         this.$el.append(this.LinkAutomaticBtn.render().el);
         this.$el.append(this.UnlinkedSearch.render(text).el);
         this.$el.append(this.UnlinkedSearchResultsView.render().el);
+        return this;
     }
 
 });

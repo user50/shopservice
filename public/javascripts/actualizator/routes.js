@@ -7,7 +7,8 @@ var ActualizationRouter = Backbone.Router.extend({
         '' : 'start',
         'providers/:providerId/linkProducts' : 'linkProducts',
         'providers/:providerId/linkProducts/search/:text' : 'unlinkedSearch',
-        'providers/:providerId/linkingProduct/:name' : 'linkingProduct'
+        'providers/:providerId/linkingProduct/:name' : 'linkingProduct',
+        'providers/:providerId/linkingProduct/:name/search/:text' : 'linkingProductSearch'
     },
 
     initialize: function(){
@@ -36,8 +37,7 @@ var ActualizationRouter = Backbone.Router.extend({
             this.UnlinkedPage.remove();
         }
         this.UnlinkedPage = new UnlinkedPage({providerId: providerId});
-        this.UnlinkedPage.search(text);
-        $('#content').html(this.UnlinkedPage.el);
+        $('#content').html(this.UnlinkedPage.search(text).el);
     },
 
     linkingProduct: function(providerId, name){
@@ -48,6 +48,14 @@ var ActualizationRouter = Backbone.Router.extend({
         }
         this.LinkingPage = new LinkingPage({providerId: providerId, providerProductName: name});
         $('#content').html(this.LinkingPage.render().el);
+    },
+
+    linkingProductSearch: function(providerId, name, text){
+        if (this.LinkingPage != null){
+            this.LinkingPage.remove();
+        }
+        this.LinkingPage = new LinkingPage({providerId: providerId, providerProductName: name});
+        $('#content').html(this.LinkingPage.search(text).el);
     }
 });
 app1.actualizationRouter = new ActualizationRouter();

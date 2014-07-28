@@ -17,7 +17,7 @@ var LinkingPage = Backbone.View.extend({
         this.Provider = new Provider({id: this.providerId});
         this.Provider.fetch();
 
-        this.LinkingSearch = new LinkingSearch({providerId: this.providerId})
+        this.LinkingSearch = new LinkingSearch({providerId: this.providerId});
 
         this.LinkingPageBreadcrumbs = new LinkingPageBreadcrumbs({model: this.Provider,
             providerProductName: this.providerProductName});
@@ -25,10 +25,15 @@ var LinkingPage = Backbone.View.extend({
         this.BackButtons = new BackButtons();
 
         this.listenTo(actVent,'product:linked', this.linkProduct);
+        this.listenTo(actVent,'product:search', function(text){
+            app1.actualizationRouter.navigate('providers/' + this.providerId + "/linkingProduct/"
+                + this.providerProductName + '/search/'  + text, {trigger: true});
+        });
     },
 
     render: function(){
         this.Products = new Products();
+        this.Products.setText(this.providerProductName);
         this.ProductsView = new ProductsView({collection: this.Products});
         this.Products.fetch();
 
@@ -71,6 +76,20 @@ var LinkingPage = Backbone.View.extend({
 
     toUnlinkedList: function(){
         app1.actualizationRouter.navigate('providers/' + this.providerId+ "/linkProducts", {trigger: true});
+    },
+
+    search: function(text){
+        console.log("Search product by text " +text + " for linking to " + this.providerProductName);
+        this.Products = new SearchProducts();
+        this.Products.setText(text);
+        this.ProductsView = new ProductsView({collection: this.Products});
+        this.Products.fetch();
+
+        this.$el.append(this.LinkingPageBreadcrumbs.render().el);
+        this.$el.append(this.LinkingSearch.render(text).el);
+        this.$el.append(this.ProductsView.render().el);
+        this.$el.append(this.BackButtons.render().el);
+        return this;
     }
 });
 
@@ -101,7 +120,21 @@ var Products = Backbone.Collection.extend({
     model: Product,
 
     url: function(){
-        return '/clients/' + clientId + '/products?like=test';
+        return '/clients/' + clientId + '/products?like=' + this.text;
+    },
+    setText: function(text){
+        this.text = text;
+    }
+});
+
+var SearchProducts = Backbone.Collection.extend({
+    model: Product,
+
+    url: function(){
+        return '/clients/' + clientId + '/products?contain=' + this.text;
+    },
+    setText: function(text){
+        this.text = text;
     }
 });
 
@@ -175,13 +208,13 @@ var LinkingSearch = Backbone.View.extend({
     },
 
     events: {
-//        'click #unlinkedSearchBtn' : 'searchText',
-//        'keydown #searchText' : function(e){
-//            if(e.keyCode == 13) {
-//                e.preventDefault();
-//                this.searchText();
-//            }
-//        }
+        'click #unlinkedSearchBtn' : 'searchText',
+        'keydown #searchText' : function(e){
+            if(e.keyCode == 13) {
+                e.preventDefault();
+                this.searchText();
+            }
+        }
     },
 
     render: function(text){
@@ -195,6 +228,6 @@ var LinkingSearch = Backbone.View.extend({
         if (text == '')
             return;
         else
-            app1.actualizationRouter.navigate('/providers/' + this.options.providerId+ "/linkProducts/search/" + text, {trigger: true});
+            actVent.trigger('product:search', text);
     }
 });
