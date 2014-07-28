@@ -30,7 +30,7 @@ public class LinkedProductController extends Controller {
         LinkedProductEntry linkedEntry = Json.fromJson(request().body().asJson(), LinkedProductEntry.class );
 
         linkedEntry.productProvider = productProviderRepository.find(providerId);
-        linkedEntry.productEntry = productEntryRepository.find(linkedEntry.productEntryId);
+        linkedEntry.productEntry = productEntryRepository.find(clientId, linkedEntry.clientProductId);
         Object result = linkedEntryRepository.create(linkedEntry);
 
         return ok(Json.toJson(result));

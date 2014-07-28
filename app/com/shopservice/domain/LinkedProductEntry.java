@@ -24,6 +24,9 @@ public class LinkedProductEntry {
     @Transient
     public String productEntryId;
 
+    @Transient
+    public String clientProductId;
+
     @JsonIgnore
     @ManyToOne
     public ProductProvider productProvider;
