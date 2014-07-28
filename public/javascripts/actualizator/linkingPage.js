@@ -4,9 +4,7 @@ var LinkingPage = Backbone.View.extend({
     tagName: 'div',
 
     events: {
-        'click #toUnlinkedList' : function(){
-            app1.actualizationRouter.navigate('providers/' + this.providerId+ "/linkProducts", {trigger: true});
-        }
+        'click #toUnlinkedList' : 'toUnlinkedList'
     },
 
     initialize: function(options){
@@ -22,6 +20,8 @@ var LinkingPage = Backbone.View.extend({
             providerProductName: this.providerProductName});
 
         this.BackButtons = new BackButtons();
+
+        this.listenTo(actVent,'product:linked', this.linkProduct);
     },
 
     render: function(){
@@ -34,6 +34,32 @@ var LinkingPage = Backbone.View.extend({
         this.$el.append(this.ProductsView.render().el);
         this.$el.append(this.BackButtons.render().el);
         return this;
+    },
+
+    linkProduct: function(productEntryId){
+        var url = '/clients/' + clientId + '/providers/' + this.Provider.id + '/linkedProductEntries';
+        var linkedProductEntry = {clientProductId: productEntryId,
+                                  name: this.providerProductName};
+        var self = this;
+        $.ajax({
+            url:url,
+            type: 'POST',
+            data: JSON.stringify(linkedProductEntry),
+            contentType: 'application/json',
+            success: function(){
+                $.bootstrapGrowl("Изменения успешно сохранены!",
+                    {ele: 'body', type: 'success', width: 350});
+                self.toUnlinkedList();
+            },
+            error: function(){
+                $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],
+                    {ele: 'body', type: 'danger', width: 350});
+            }
+        });
+    },
+
+    toUnlinkedList: function(){
+        app1.actualizationRouter.navigate('providers/' + this.providerId+ "/linkProducts", {trigger: true});
     }
 });
 
@@ -92,7 +118,7 @@ var ProductView = Backbone.View.extend({
 
     onClick: function(){
         console.log('Selected roduct with name : ' + this.model.get('name'));
-//        actVent.trigger('unlinked:selected', this.model.get('name'));
+        actVent.trigger('product:linked', this.model.id);
     }
 });
 
