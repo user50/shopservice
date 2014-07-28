@@ -4,7 +4,10 @@ var LinkingPage = Backbone.View.extend({
     tagName: 'div',
 
     events: {
-        'click #toUnlinkedList' : 'toUnlinkedList'
+        'click #toUnlinkedList' : 'toUnlinkedList',
+        'click #absent' : function(){
+            this.linkProduct(null, this.providerProductName);
+        }
     },
 
     initialize: function(options){
@@ -41,17 +44,23 @@ var LinkingPage = Backbone.View.extend({
         var linkedProductEntry = {clientProductId: productEntryId,
                                   name: this.providerProductName};
         var self = this;
-        var providerProductName = this.providerProductName;
         $.ajax({
             url:url,
             type: 'POST',
             data: JSON.stringify(linkedProductEntry),
             contentType: 'application/json',
-            success: function(){
-                $.bootstrapGrowl("Товар \"" + productEntryName +
-                                 "\" успешно связан с товаром поставщика \"" + providerProductName + "\"!",
-                    {ele: 'body', type: 'success', width: 500});
-                self.toUnlinkedList();
+            success: function(data, status){
+                if (data.clientProductId == null){
+                    $.bootstrapGrowl("Товар поставщика \"" + data.name +
+                        "\" добавлен в список ожидающих товаров!",
+                        {ele: 'body', type: 'info', width: 500});
+                    self.toUnlinkedList();
+                } else {
+                        $.bootstrapGrowl("Товар \"" + productEntryName +
+                            "\" успешно связан с товаром поставщика \"" + data.name + "\"!",
+                            {ele: 'body', type: 'success', width: 500});
+                        self.toUnlinkedList();
+                }
             },
             error: function(){
                 $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],
