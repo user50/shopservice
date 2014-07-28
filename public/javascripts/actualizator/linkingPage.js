@@ -36,19 +36,21 @@ var LinkingPage = Backbone.View.extend({
         return this;
     },
 
-    linkProduct: function(productEntryId){
+    linkProduct: function(productEntryId, productEntryName){
         var url = '/clients/' + clientId + '/providers/' + this.Provider.id + '/linkedProductEntries';
         var linkedProductEntry = {clientProductId: productEntryId,
                                   name: this.providerProductName};
         var self = this;
+        var providerProductName = this.providerProductName;
         $.ajax({
             url:url,
             type: 'POST',
             data: JSON.stringify(linkedProductEntry),
             contentType: 'application/json',
             success: function(){
-                $.bootstrapGrowl("Изменения успешно сохранены!",
-                    {ele: 'body', type: 'success', width: 350});
+                $.bootstrapGrowl("Товар \"" + productEntryName +
+                                 "\" успешно связан с товаром поставщика \"" + providerProductName + "\"!",
+                    {ele: 'body', type: 'success', width: 500});
                 self.toUnlinkedList();
             },
             error: function(){
@@ -118,7 +120,7 @@ var ProductView = Backbone.View.extend({
 
     onClick: function(){
         console.log('Selected roduct with name : ' + this.model.get('name'));
-        actVent.trigger('product:linked', this.model.id);
+        actVent.trigger('product:linked', this.model.id, this.model.get('name'));
     }
 });
 
