@@ -24,6 +24,9 @@ var ProviderView = Backbone.View.extend({
         'click .btn-warning' : 'editThis',
         'click .btn-primary' : function(){
             app1.actualizationRouter.navigate('providers/' + this.model.id + "/linkProducts", {trigger: true});
+        },
+        'click .btn-info' : function(){
+            app1.actualizationRouter.navigate('providers/' + this.model.id + "/linkedProducts", {trigger: true});
         }
     },
 

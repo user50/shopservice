@@ -49,7 +49,7 @@
     <script type="text/template" id="unlinkedProductsBreadcrumbsTpl">
             <li><a href="#">Поставщики</a></li>
             <li><strong><%= name %></strong></li>
-            <li class="active"><strong><a href="#providers/<%= id %>/linkProducts">Список незвязанных товаров</a></strong></li>
+            <li class="active"><strong><a href="#providers/<%= id %>/linkProducts">Список несвязанных товаров</a></strong></li>
     </script>
 
     <script type="text/template" id="linkingPageBreadcrumbsTpl">
@@ -57,6 +57,12 @@
         <li><%= providerName %></li>
         <li>Связать товар</li>
         <li class="active"><strong><%= providerProductName %></strong></li>
+    </script>
+
+    <script type="text/template" id="linkedPageBreadcrumbsTpl">
+        <li><a href="#">Поставщики</a></li>
+        <li><strong><%= name %></strong></li>
+        <li class="active"><strong><a href="#providers/<%= id %>/linkProducts">Список связанных товаров</a></strong></li>
     </script>
 
     <script type="text/template" id="addProviderTpl">
@@ -177,13 +183,33 @@
 
     <script type="text/template" id="linkingBackBtnsTpl">
         <div class="col-md-12">
-            <button id="toUnlinkedList" type="button" class="btn btn-info btn-sm">
-                <span data-toggle="tooltip" data-placement="top" title="к списку несвязанных товаров" class="glyphicon glyphicon-arrow-left"></span>
-                &nbsp; К списку
-            </button>
             <button id="absent" type="button" class="btn btn-danger btn-sm">Отсутствует</button>
+            <button id="toLinkedList" type="button" class="btn btn-info btn-sm pull-right">
+                Связанные товары &nbsp;
+                <span data-toggle="tooltip" data-placement="top" title="к списку несвязанных товаров" class="glyphicon glyphicon-arrow-right"></span>
+            </button>
+            <button id="toUnlinkedList" type="button" class="btn btn-info btn-sm pull-right">
+                <span data-toggle="tooltip" data-placement="top" title="к списку несвязанных товаров" class="glyphicon glyphicon-arrow-left"></span>
+                &nbsp; Несвязанные товары
+            </button>
         </div>
     </script>
+
+    <script type="text/template" id="linkedProductViewTpl">
+
+        <td><%= name %></td>
+        <td><%= clientProductsName %></td>
+        <td>
+            <button type="button" class="btn btn-primary btn-sm">
+                <span data-toggle="tooltip" data-placement="top" title="Связать товар" class="glyphicon glyphicon-link"></span>
+            </button>
+            <button class="btn btn-danger btn-sm" type="button">
+                <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Отменить связывание" ></span>
+            </button>
+        </td>
+
+    </script>
+
 </head>
 <body>
 <div class="container">
@@ -243,6 +269,7 @@
 <script type="text/javascript" src="assets/javascripts/actualizator/unlinkedPage.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/unlinkedSearch.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/linkingPage.js"></script>
+<script type="text/javascript" src="assets/javascripts/actualizator/linkedPage.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/routes.js"></script>
 
 <!-- Свіжа збірка мінімізованої JavaScript -->

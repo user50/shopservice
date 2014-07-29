@@ -32,7 +32,7 @@ var UnlinkedPage = Backbone.View.extend({
     },
 
     render: function(){
-
+        this.$el.empty();
         this.UnlinkedProducts.setProviderId(this.providerId);
         this.UnlinkedProductsView = new UnlinkedProductsView({collection: this.UnlinkedProducts});
         this.UnlinkedProducts.fetch();

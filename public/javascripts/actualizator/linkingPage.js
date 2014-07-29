@@ -5,6 +5,9 @@ var LinkingPage = Backbone.View.extend({
 
     events: {
         'click #toUnlinkedList' : 'toUnlinkedList',
+        'click #toLinkedList' : function(){
+            app1.actualizationRouter.navigate('providers/' + this.providerId+ "/linkedProducts", {trigger: true});
+        },
         'click #absent' : function(){
             this.linkProduct(null, this.providerProductName);
         }
@@ -32,6 +35,7 @@ var LinkingPage = Backbone.View.extend({
     },
 
     render: function(){
+        this.$el.empty();
         this.Products = new Products();
         this.Products.setText(this.providerProductName);
         this.ProductsView = new ProductsView({collection: this.Products});
@@ -48,7 +52,6 @@ var LinkingPage = Backbone.View.extend({
         var url = '/clients/' + clientId + '/providers/' + this.Provider.id + '/linkedProductEntries';
         var linkedProductEntry = {clientProductId: productEntryId,
                                   name: this.providerProductName};
-        var self = this;
         $.ajax({
             url:url,
             type: 'POST',
@@ -59,12 +62,10 @@ var LinkingPage = Backbone.View.extend({
                     $.bootstrapGrowl("Товар поставщика \"" + data.name +
                         "\" добавлен в список ожидающих товаров!",
                         {ele: 'body', type: 'info', width: 500});
-                    self.toUnlinkedList();
                 } else {
                         $.bootstrapGrowl("Товар \"" + productEntryName +
                             "\" успешно связан с товаром поставщика \"" + data.name + "\"!",
                             {ele: 'body', type: 'success', width: 500});
-                        self.toUnlinkedList();
                 }
             },
             error: function(){
@@ -79,6 +80,7 @@ var LinkingPage = Backbone.View.extend({
     },
 
     search: function(text){
+        this.$el.empty();
         console.log("Search product by text " +text + " for linking to " + this.providerProductName);
         this.Products = new SearchProducts();
         this.Products.setText(text);

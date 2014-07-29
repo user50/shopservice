@@ -56,7 +56,7 @@ public class LinkedProductAssembler {
         List<LinkedProductEntry> filteredResult = new ArrayList<>();
 
         for (LinkedProductEntry entry : entries)
-            if (entry.productEntry != null ^ linked)
+            if (entry.productEntry != null ^ !linked)
                 filteredResult.add(entry);
 
         return filteredResult;
