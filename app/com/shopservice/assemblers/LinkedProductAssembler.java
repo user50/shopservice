@@ -33,7 +33,8 @@ public class LinkedProductAssembler {
 
         List<String> productIds = new ArrayList<>();
         for (LinkedProductEntry entry : entries)
-            productIds.add(entry.productEntry.productId);
+            if (entry.productEntry != null)
+                productIds.add(entry.productEntry.productId);
 
         List<Product> products = Services.getProductDAO(clientId).find(new ProductConditions(productIds));
 
