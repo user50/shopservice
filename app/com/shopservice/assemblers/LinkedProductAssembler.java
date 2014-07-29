@@ -27,14 +27,16 @@ public class LinkedProductAssembler {
         return instance;
     }
 
-    public List<LinkedProductEntry> find(String clientId, Integer providerId)
+    public List<LinkedProductEntry> find(String clientId, Integer providerId, Boolean linked)
     {
-        List<LinkedProductEntry> entries = repository.find(providerId);
+        List<LinkedProductEntry> entries = filterLinkedEntries(repository.find(providerId), linked);
+
+        if (!linked)
+            return entries;
 
         List<String> productIds = new ArrayList<>();
         for (LinkedProductEntry entry : entries)
-            if (entry.productEntry != null)
-                productIds.add(entry.productEntry.productId);
+            productIds.add(entry.productEntry.productId);
 
         List<Product> products = Services.getProductDAO(clientId).find(new ProductConditions(productIds));
 
@@ -43,13 +45,20 @@ public class LinkedProductAssembler {
             productMap.put(product.id, product);
 
         for (LinkedProductEntry entry : entries) {
-            if (entry.productEntry != null)
-            {
-                entry.productEntryId = entry.productEntry.id;
-                entry.clientProductsName = productMap.get(entry.productEntry.productId).name;
-            }
+            entry.productEntryId = entry.productEntry.id;
+            entry.clientProductsName = productMap.get(entry.productEntry.productId).name;
         }
 
         return entries;
+    }
+
+    private List<LinkedProductEntry> filterLinkedEntries(List<LinkedProductEntry> entries, boolean linked) {
+        List<LinkedProductEntry> notLinkedEntries = new ArrayList<>();
+
+        for (LinkedProductEntry entry : entries)
+            if (entry.productEntry != null ^ linked)
+                notLinkedEntries.add(entry);
+
+        return notLinkedEntries;
     }
 }

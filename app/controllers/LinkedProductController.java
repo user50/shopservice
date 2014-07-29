@@ -20,9 +20,9 @@ public class LinkedProductController extends Controller {
     private static ProductEntryRepository productEntryRepository = MServiceInjector.injector.getInstance(ProductEntryRepository.class);
     private static LinkedProductAssembler assembler = LinkedProductAssembler.getInstance();
 
-    public static Result find(String clientId, Integer providerId)
+    public static Result find(String clientId, Integer providerId, Boolean linked)
     {
-        return ok(Json.toJson(assembler.find(clientId, providerId)));
+        return ok(Json.toJson(assembler.find(clientId, providerId, linked)));
     }
 
     public static Result create(String clientId, Integer providerId)
