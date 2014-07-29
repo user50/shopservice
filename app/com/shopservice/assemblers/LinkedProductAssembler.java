@@ -53,12 +53,12 @@ public class LinkedProductAssembler {
     }
 
     private List<LinkedProductEntry> filterLinkedEntries(List<LinkedProductEntry> entries, boolean linked) {
-        List<LinkedProductEntry> notLinkedEntries = new ArrayList<>();
+        List<LinkedProductEntry> filteredResult = new ArrayList<>();
 
         for (LinkedProductEntry entry : entries)
             if (entry.productEntry != null ^ linked)
-                notLinkedEntries.add(entry);
+                filteredResult.add(entry);
 
-        return notLinkedEntries;
+        return filteredResult;
     }
 }
