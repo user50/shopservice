@@ -52,6 +52,7 @@ GET    /clients/:id/providers/:providerId/products                        contro
 GET    /clients/:id/providers/:providerId/linkedProductEntries                     controllers.LinkedProductController.find( id, providerId: Integer)
 POST   /clients/:id/providers/:providerId/linkedProductEntries                     controllers.LinkedProductController.create( id, providerId: Integer)
 DELETE   /clients/:id/providers/:providerId/linkedProductEntries/:linedEntryId     controllers.LinkedProductController.remove( id, providerId: Integer, linedEntryId:Integer)
+PUT    /clients/:id/providers/:providerId/linkedProductEntries/:linedEntryId       controllers.LinkedProductController.update( id, providerId: Integer, linedEntryId:Integer)
 
 POST /authentication                                                      controllers.LoginController.authentication()
 POST /logout                                                              controllers.LoginController.logout()

@@ -36,6 +36,19 @@ public class LinkedProductController extends Controller {
         return ok(Json.toJson(result));
     }
 
+    public static Result update(String clientId, Integer providerId, Integer linkedEntryId)
+    {
+        linkedEntryRepository.remove(linkedEntryId);
+
+        LinkedProductEntry linkedEntry = Json.fromJson(request().body().asJson(), LinkedProductEntry.class );
+
+        linkedEntry.productProvider = productProviderRepository.find(providerId);
+        linkedEntry.productEntry = productEntryRepository.find(clientId, linkedEntry.clientProductId);
+        Object result = linkedEntryRepository.create(linkedEntry);
+
+        return ok(Json.toJson(result));
+    }
+
     public static Result remove(String clientId, Integer providerId, Integer linkedEntryId)
     {
         linkedEntryRepository.remove(linkedEntryId);
