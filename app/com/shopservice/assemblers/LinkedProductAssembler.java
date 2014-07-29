@@ -43,9 +43,11 @@ public class LinkedProductAssembler {
             productMap.put(product.id, product);
 
         for (LinkedProductEntry entry : entries) {
-            entry.productEntryId = entry.productEntry.id;
             if (entry.productEntry != null)
+            {
+                entry.productEntryId = entry.productEntry.id;
                 entry.clientProductsName = productMap.get(entry.productEntry.productId).name;
+            }
         }
 
         return entries;
