@@ -210,6 +210,42 @@
 
     </script>
 
+    <script type="text/template" id="paginationTpl">
+        <div class="col-md-12 column">
+            <ul id="paginationView" class="pagination pagination-sm">
+                <% if (currentPage > firstPage) { %>
+                <li>
+                    <a href="#" class="serverprevious">Пред.</a>
+                </li>
+                <% } else { %>
+                <li>
+                    <a href="#">Пред.</a>
+                </li>
+                <% } %>
+
+                <% for(p=1;p<=totalPages;p++){
+                %>
+                <% if (currentPage == p) { %>
+                <li class="active">
+                    <a href="#"><%= p %></a>
+                </li>
+                <% } else { %>
+                <li>
+                    <a href="#" class="page"><%= p %></a>
+                </li>
+                <% } %>
+                <%
+                }%>
+
+                <% if (currentPage < totalPages) { %>
+                <li>
+                    <a href="#" class="servernext">След.</a>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+    </script>
+
 </head>
 <body>
 <div class="container">
@@ -262,6 +298,7 @@
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/backbone.paginator.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/jquery.bootstrap-growl.min.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/bootbox.js"></script>
+<script type="text/javascript" src="assets/javascripts/actualizator/pagination.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/providers.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/providersManager.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/unlinkedProducts.js"></script>
