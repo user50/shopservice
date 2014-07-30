@@ -62,7 +62,7 @@
     <script type="text/template" id="linkedPageBreadcrumbsTpl">
         <li><a href="#">Поставщики</a></li>
         <li><strong><%= name %></strong></li>
-        <li class="active"><strong><a href="#providers/<%= id %>/linkProducts">Список связанных товаров</a></strong></li>
+        <li class="active"><strong><a href="#providers/<%= id %>/linkedProducts">Список связанных товаров</a></strong></li>
     </script>
 
     <script type="text/template" id="addProviderTpl">
@@ -219,7 +219,7 @@
                 </li>
                 <% } else { %>
                 <li>
-                    <a href="#">Пред.</a>
+                    <a href="">Пред.</a>
                 </li>
                 <% } %>
 
@@ -286,6 +286,7 @@
     <div id="content">
     </div>
 
+    <div id="loader"><div class="anim"><img src="assets/images/download.gif"></div></div>
 </div>
 </div>
 
@@ -312,5 +313,13 @@
 <!-- Свіжа збірка мінімізованої JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+    $( document ).ajaxStart(function() {
+        $( "#loader" ).show();
+    });
+    $( document ).ajaxStop(function() {
+        $( "#loader" ).hide();
+    });
+</script>
 </body>
 </html>

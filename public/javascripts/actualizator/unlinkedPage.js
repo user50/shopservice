@@ -27,7 +27,7 @@ var UnlinkedPage = Backbone.View.extend({
         });
 
         this.listenTo(actVent, 'unlinked:autolink', function(){
-            this.UnlinkedProducts.fetchAutolink();
+            this.autolink();
         })
     },
 
@@ -35,6 +35,7 @@ var UnlinkedPage = Backbone.View.extend({
         this.$el.empty();
         this.UnlinkedProducts.setProviderId(this.providerId);
         this.UnlinkedProductsView = new UnlinkedProductsView({collection: this.UnlinkedProducts});
+        this.UnlinkedProductsPagination = new PaginationView({collection: this.UnlinkedProducts});
         this.UnlinkedProducts.fetch();
 
         this.UnlinkedSearch = new UnlinkedSearch({providerId: this.providerId});
@@ -43,6 +44,7 @@ var UnlinkedPage = Backbone.View.extend({
         this.$el.append(this.LinkAutomaticBtn.render().el);
         this.$el.append(this.UnlinkedSearch.render('').el);
         this.$el.append(this.UnlinkedProductsView.render().el);
+        this.$el.append(this.UnlinkedProductsPagination.render().el);
         return this;
     },
 
@@ -56,13 +58,34 @@ var UnlinkedPage = Backbone.View.extend({
         this.UnlinkedSearchResults.setProviderId(this.providerId);
         this.UnlinkedSearchResults.setWords(text);
         this.UnlinkedSearchResultsView = new UnlinkedSearchResultsView({collection: this.UnlinkedSearchResults});
+        this.UnlinkedSearchResultsPagination = new PaginationView({collection: this.UnlinkedSearchResults});
         this.UnlinkedSearchResults.fetch();
 
         this.$el.append(this.UnlinkedBreadcrumbsView.render().el);
         this.$el.append(this.LinkAutomaticBtn.render().el);
         this.$el.append(this.UnlinkedSearch.render(text).el);
         this.$el.append(this.UnlinkedSearchResultsView.render().el);
+        this.$el.append(this.UnlinkedSearchResultsPagination.render().el);
         return this;
+    },
+
+    autolink: function(){
+        var url = '/clients/'+clientId+'/providers/' + this.providerId + "/autolink";
+        var providerId = this.providerId;
+        var unlinkedProducts = this.UnlinkedProducts;
+        $.ajax({
+            'url' : url,
+            'type' : 'POST',
+            success: function(data, status){
+                    $.bootstrapGrowl("Часть товаров была связана автоматически!",
+                        {ele: 'body', type: 'info', width: 500});
+                    actVent.trigger('autolink:finished');
+                },
+            error: function(){
+                $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],
+                    {ele: 'body', type: 'danger', width: 350});
+            }
+        });
     }
 
 });

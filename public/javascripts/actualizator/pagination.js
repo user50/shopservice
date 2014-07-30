@@ -17,10 +17,10 @@ var PaginationView = Backbone.View.extend({
     template: _.template($('#paginationTpl').html()),
 
     initialize: function () {
-//        this.listenTo(vent, 'selectedCategory',
-//            function(){
-//                this.gotoFirst();
-//            }, this);
+        this.listenTo(actVent, 'autolink:finished',
+            function(){
+                this.gotoFirst();
+            }, this);
 
         this.collection.on('reset', this.render, this);
         this.collection.on('sync', this.render, this);
