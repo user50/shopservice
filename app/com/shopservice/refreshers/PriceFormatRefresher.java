@@ -4,6 +4,7 @@ import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
 import com.shopservice.dao.EbeanProductGroupRepository;
+import com.shopservice.dao.JdbcProductRepository;
 import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.Product;
 import com.shopservice.domain.ProductGroup;
@@ -43,7 +44,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
         ProductConditions query = new ProductConditions();
         query.productIds = getProductIds(clientId, groupId);
 
-        for (Product product : Services.getProductDAO(clientId).find( query)) {
+        for (Product product : new JdbcProductRepository(clientId).find( query)) {
             price.addItem( createItem(clientId, product) );
             categories.add( new Category( product.category.id, product.category.name) );
         }
