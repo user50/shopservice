@@ -61,7 +61,7 @@ public class ProductProviderController extends Controller {
     {
         service.autoLink(clientId, providerId);
 
-        return ok(Json.toJson(service.getNotLinkedProducts(clientId, providerId, null)));
+        return ok();
     }
 
     public static Result remove(String clientId, Integer providerId)
