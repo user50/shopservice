@@ -26,7 +26,6 @@ public class Authentication extends Action.Simple {
                 }
             });
 
-
         return delegate.call(context);
     }
 }
