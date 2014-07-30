@@ -74,7 +74,7 @@ public class ProductProviderController extends Controller {
     public static Result getProducts(String clientId, Integer providerId, Boolean linked, String words, Integer offset, Integer limit )
     {
         List products = service.getNotLinkedProducts(clientId, providerId, words);
-        PaginationResult result = new PaginationResult(products.size(), products.subList(offset, offset + limit));
+        PaginationResult result = new PaginationResult(products.size(), products.subList(offset, Math.min(products.size(), offset + limit)   ));
 
         return ok(Json.toJson(result));
     }
