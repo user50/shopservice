@@ -58,6 +58,6 @@ POST /authentication                                                      contro
 POST /logout                                                              controllers.LoginController.logout()
 
 # Client's Products operations
-GET    /clients/:id/products                                              controllers.ClientProductController.find(id, like : String ?= null, contain : String ?= null )
+GET    /clients/:id/products                                              controllers.ClientProductController.find(id, like : String ?= null, contain : String ?= null, offset: Integer ?= 0, limit: Integer ?= 100 )
 
 POST /assets/contact                                                             controllers.FeedbackController.feedbackNotify()
