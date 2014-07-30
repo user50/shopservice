@@ -4,6 +4,7 @@ import com.avaje.ebean.Ebean;
 import com.shopservice.ActualisationService;
 import com.shopservice.MServiceInjector;
 import com.shopservice.Util;
+import com.shopservice.assemblers.PaginationResult;
 import com.shopservice.dao.LinkedProductEntryRepository;
 import com.shopservice.dao.ProductProviderRepository;
 import com.shopservice.domain.LinkedProductEntry;
@@ -70,9 +71,12 @@ public class ProductProviderController extends Controller {
         return ok();
     }
 
-    public static Result getProducts(String clientId, Integer providerId, Boolean linked, String words )
+    public static Result getProducts(String clientId, Integer providerId, Boolean linked, String words, Integer offset, Integer limit )
     {
-        return ok(Json.toJson(service.getNotLinkedProducts(clientId, providerId, words)));
+        List products = service.getNotLinkedProducts(clientId, providerId, words);
+        PaginationResult result = new PaginationResult(products.size(), products.subList(offset, offset + limit));
+
+        return ok(Json.toJson(result));
     }
 
 
