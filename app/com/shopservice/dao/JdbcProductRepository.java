@@ -3,7 +3,7 @@ package com.shopservice.dao;
 import com.shopservice.DatabaseManager;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 import com.shopservice.queries.JdbcProductQuery;
 
 import java.sql.SQLException;

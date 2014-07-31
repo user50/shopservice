@@ -3,23 +3,15 @@ package controllers;
 import com.avaje.ebean.Ebean;
 import com.shopservice.ActualisationService;
 import com.shopservice.MServiceInjector;
-import com.shopservice.Util;
 import com.shopservice.assemblers.PaginationResult;
 import com.shopservice.dao.LinkedProductEntryRepository;
 import com.shopservice.dao.ProductProviderRepository;
-import com.shopservice.domain.LinkedProductEntry;
-import com.shopservice.domain.Product;
 import com.shopservice.domain.ProductProvider;
-import com.shopservice.productsources.ProductSource;
-import com.shopservice.productsources.ProviderSourceStub;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by user50 on 13.07.2014.

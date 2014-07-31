@@ -1,6 +1,6 @@
 package com.shopservice.dao;
 
-import com.shopservice.domain.Category;
+import com.shopservice.transfer.Category;
 
 import java.util.Collection;
 import java.util.List;

@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import com.shopservice.Services;
 import com.shopservice.dao.ClientSettingsRepository;
 import com.shopservice.dao.ProductEntryRepository;
-import com.shopservice.domain.Category;
+import com.shopservice.transfer.Category;
 import com.shopservice.domain.ProductEntry;
 
 import java.util.ArrayList;

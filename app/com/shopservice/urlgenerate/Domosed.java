@@ -1,7 +1,7 @@
 package com.shopservice.urlgenerate;
 
 import com.shopservice.dao.ClientSettingsRepository;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 
 import static com.shopservice.MServiceInjector.injector;
 

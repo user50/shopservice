@@ -1,10 +1,9 @@
 package com.shopservice.assemblers;
 
-import com.google.inject.Inject;
 import com.shopservice.Util;
 import com.shopservice.dao.CategoryRepository;
 import com.shopservice.dao.ProductEntryRepository;
-import com.shopservice.domain.Category;
+import com.shopservice.transfer.Category;
 
 import java.util.Collection;
 import java.util.HashMap;

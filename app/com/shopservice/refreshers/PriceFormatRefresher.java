@@ -2,11 +2,10 @@ package com.shopservice.refreshers;
 
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
-import com.shopservice.Services;
 import com.shopservice.dao.EbeanProductGroupRepository;
 import com.shopservice.dao.JdbcProductRepository;
 import com.shopservice.domain.ClientSettings;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 import com.shopservice.domain.ProductGroup;
 import com.shopservice.pricelist.models.price.Category;
 import com.shopservice.pricelist.models.price.Item;
