@@ -39,11 +39,11 @@ var UnlinkedSearchResult = Backbone.Model.extend({
 
 });
 
-var UnlinkedSearchResults = Backbone.Collection.extend({
+var UnlinkedSearchResults = Backbone.Paginator.requestPager.extend({
     model: UnlinkedSearchResult,
 
     url: function(){
-        return "/clients/" + clientId + "/providers/" + this.providerId + "/products?linked=true&words=" + this.words;
+        return "/clients/" + clientId + "/providers/" + this.providerId + "/products";
     },
 
     setProviderId: function(providerId){
@@ -52,6 +52,34 @@ var UnlinkedSearchResults = Backbone.Collection.extend({
 
     setWords: function(words){
         this.words = words;
+    },
+
+    paginator_core: {
+        type: 'GET',
+        dataType: 'json',
+        url: function(){
+            return this.url();
+        }
+    },
+
+    paginator_ui: {
+        firstPage: 1,
+        currentPage: 1,
+        perPage: 10,
+        totalPages: 10
+    },
+
+    server_api: {
+        'offset': function() { return this.currentPage * this.perPage - this.perPage},
+        'limit' : function() { return this.perPage},
+        'words' : function() { return this.words;},
+        'linked' : 'true'
+    },
+
+    parse: function (response) {
+        this.totalPages = Math.floor(response.totalCount/this.perPage) + 1;
+        this.totalRecords = this.totalPages * this.perPage;
+        return response.collectionResult;
     }
 });
 
@@ -67,6 +95,7 @@ var UnlinkedSearchResultView = Backbone.View.extend({
 
     initialize: function(){
         this.model.on('change', this.render, this);
+        this.model.on('remove', this.remove, this);
     },
 
     render: function(){

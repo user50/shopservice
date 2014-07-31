@@ -4,7 +4,7 @@ var clientId = "client1";
 
 var UnlinkedProduct = Backbone.Model.extend();
 
-var UnlinkedProducts = Backbone.Collection.extend({
+var UnlinkedProducts = Backbone.Paginator.requestPager.extend({
     model: UnlinkedProduct,
 
     setProviderId: function(providerId){
@@ -12,14 +12,34 @@ var UnlinkedProducts = Backbone.Collection.extend({
     },
 
     url: function(){
-        return '/clients/'+clientId+'/providers/' + this.providerId + "/products?linked=true";
+        return '/clients/'+clientId+'/providers/' + this.providerId + "/products";
     },
 
-    fetchAutolink: function (options) {
-        options = options || {};
-        options.url = '/clients/'+clientId+'/providers/' + this.providerId + "/autolink";
+    paginator_core: {
+        type: 'GET',
+        dataType: 'json',
+        url: function(){
+            return this.url();
+        }
+    },
 
-        return Backbone.Model.prototype.fetch.call(this, options);
+    paginator_ui: {
+        firstPage: 1,
+        currentPage: 1,
+        perPage: 5,
+        totalPages: 10
+    },
+
+    server_api: {
+        'offset': function() { return this.currentPage * this.perPage - this.perPage},
+        'limit' : function() { return this.perPage},
+        'linked' : 'true'
+    },
+
+    parse: function (response) {
+        this.totalPages = Math.floor(response.totalCount/this.perPage) + 1;
+        this.totalRecords = this.totalPages * this.perPage;
+        return response.collectionResult;
     }
 });
 
@@ -60,6 +80,7 @@ var UnlinkedProductsView = Backbone.View.extend({
         this.collection.on('add', this.addOne, this);
         this.collection.on('change', this.render, this);
         this.collection.on('reset', this.render, this);
+//        this.collection.pager();
     },
     render: function(){
         this.$el.empty();

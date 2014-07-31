@@ -39,11 +39,13 @@ var LinkingPage = Backbone.View.extend({
         this.Products = new Products();
         this.Products.setText(this.providerProductName);
         this.ProductsView = new ProductsView({collection: this.Products});
+        this.ProductsPaginationView = new PaginationView({collection: this.Products});
         this.Products.fetch();
 
         this.$el.append(this.LinkingPageBreadcrumbs.render().el);
         this.$el.append(this.LinkingSearch.render().el);
         this.$el.append(this.ProductsView.render().el);
+        this.$el.append(this.ProductsPaginationView.render().el);
         this.$el.append(this.BackButtons.render().el);
         return this;
     },
@@ -85,11 +87,13 @@ var LinkingPage = Backbone.View.extend({
         this.Products = new SearchProducts();
         this.Products.setText(text);
         this.ProductsView = new ProductsView({collection: this.Products});
+        this.SearchResultPaginationView = new PaginationView({collection: this.Products});
         this.Products.fetch();
 
         this.$el.append(this.LinkingPageBreadcrumbs.render().el);
         this.$el.append(this.LinkingSearch.render(text).el);
         this.$el.append(this.ProductsView.render().el);
+        this.$el.append(this.SearchResultPaginationView.render().el);
         this.$el.append(this.BackButtons.render().el);
         return this;
     }
@@ -118,25 +122,81 @@ var LinkingPageBreadcrumbs = Backbone.View.extend({
 
 var Product = Backbone.Model.extend({});
 
-var Products = Backbone.Collection.extend({
+var Products = Backbone.Paginator.requestPager.extend({
     model: Product,
 
     url: function(){
-        return '/clients/' + clientId + '/products?like=' + this.text;
+        return '/clients/' + clientId + '/products';
     },
+
     setText: function(text){
         this.text = text;
+    },
+
+    paginator_core: {
+        type: 'GET',
+        dataType: 'json',
+        url: function(){
+            return this.url();
+        }
+    },
+
+    paginator_ui: {
+        firstPage: 1,
+        currentPage: 1,
+        perPage: 50,
+        totalPages: 10
+    },
+
+    server_api: {
+        'offset': function() { return this.currentPage * this.perPage - this.perPage},
+        'limit' : function() { return this.perPage},
+        'like' : function() { return this.text}
+    },
+
+    parse: function (response) {
+        this.totalPages = Math.floor(response.totalCount/this.perPage) + 1;
+        this.totalRecords = this.totalPages * this.perPage;
+        return response.collectionResult;
     }
 });
 
-var SearchProducts = Backbone.Collection.extend({
+var SearchProducts = Backbone.Paginator.requestPager.extend({
     model: Product,
 
     url: function(){
-        return '/clients/' + clientId + '/products?contain=' + this.text;
+        return '/clients/' + clientId + '/products';
     },
+
     setText: function(text){
         this.text = text;
+    },
+
+    paginator_core: {
+        type: 'GET',
+        dataType: 'json',
+        url: function(){
+            return this.url();
+        }
+    },
+
+    paginator_ui: {
+        firstPage: 1,
+        currentPage: 1,
+        perPage: 5,
+        totalPages: 10
+    },
+
+    server_api: {
+        'offset': function() { return this.currentPage * this.perPage - this.perPage},
+        'limit' : function() { return this.perPage},
+        'contain' : function() { return this.text}
+    },
+
+    parse: function (response) {
+        this.totalPages = Math.floor(response.totalCount/this.perPage) + 1;
+        this.totalRecords = this.totalPages * this.perPage;
+        return response.collectionResult;
     }
 });
 
@@ -152,6 +212,7 @@ var ProductView = Backbone.View.extend({
 
     initialize: function(){
         this.model.on('change', this.render, this);
+        this.model.on('remove', this.remove, this);
     },
 
     render: function(){

@@ -62,7 +62,7 @@
     <script type="text/template" id="linkedPageBreadcrumbsTpl">
         <li><a href="#">Поставщики</a></li>
         <li><strong><%= name %></strong></li>
-        <li class="active"><strong><a href="#providers/<%= id %>/linkProducts">Список связанных товаров</a></strong></li>
+        <li class="active"><strong><a href="#providers/<%= id %>/linkedProducts">Список связанных товаров</a></strong></li>
     </script>
 
     <script type="text/template" id="addProviderTpl">
@@ -210,6 +210,42 @@
 
     </script>
 
+    <script type="text/template" id="paginationTpl">
+        <div class="col-md-12 column">
+            <ul id="paginationView" class="pagination pagination-sm">
+                <% if (currentPage > firstPage) { %>
+                <li>
+                    <a href="#" class="serverprevious">Пред.</a>
+                </li>
+                <% } else { %>
+                <li>
+                    <a href="">Пред.</a>
+                </li>
+                <% } %>
+
+                <% for(p=1;p<=totalPages;p++){
+                %>
+                <% if (currentPage == p) { %>
+                <li class="active">
+                    <a href="#"><%= p %></a>
+                </li>
+                <% } else { %>
+                <li>
+                    <a href="#" class="page"><%= p %></a>
+                </li>
+                <% } %>
+                <%
+                }%>
+
+                <% if (currentPage < totalPages) { %>
+                <li>
+                    <a href="#" class="servernext">След.</a>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+    </script>
+
 </head>
 <body>
 <div class="container">
@@ -250,6 +286,7 @@
     <div id="content">
     </div>
 
+    <div id="loader"><div class="anim"><img src="assets/images/download.gif"></div></div>
 </div>
 </div>
 
@@ -262,6 +299,7 @@
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/backbone.paginator.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/jquery.bootstrap-growl.min.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/bootbox.js"></script>
+<script type="text/javascript" src="assets/javascripts/actualizator/pagination.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/providers.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/providersManager.js"></script>
 <script type="text/javascript" src="assets/javascripts/actualizator/unlinkedProducts.js"></script>
@@ -275,5 +313,13 @@
 <!-- Свіжа збірка мінімізованої JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+    $( document ).ajaxStart(function() {
+        $( "#loader" ).show();
+    });
+    $( document ).ajaxStop(function() {
+        $( "#loader" ).hide();
+    });
+</script>
 </body>
 </html>
