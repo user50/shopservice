@@ -183,7 +183,7 @@ var SearchProducts = Backbone.Paginator.requestPager.extend({
     paginator_ui: {
         firstPage: 1,
         currentPage: 1,
-        perPage: 5,
+        perPage: 50,
         totalPages: 10
     },
 

@@ -14,7 +14,7 @@ var ActualizationRouter = Backbone.Router.extend({
     },
 
     initialize: function(){
-
+        $('#header').html(new HeaderView().render().el);
     },
 
     start: function(){
