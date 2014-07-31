@@ -1,5 +1,3 @@
-var app1 = app1 || {};
-
 var clientId = "client1";
 
 var Provider = Backbone.Model.extend({
@@ -23,10 +21,10 @@ var ProviderView = Backbone.View.extend({
         'click .btn-danger' : 'removeThis',
         'click .btn-warning' : 'editThis',
         'click .btn-primary' : function(){
-            app1.actualizationRouter.navigate('providers/' + this.model.id + "/linkProducts", {trigger: true});
+            actualizationRouter.navigate('providers/' + this.model.id + "/linkProducts", {trigger: true});
         },
         'click .btn-info' : function(){
-            app1.actualizationRouter.navigate('providers/' + this.model.id + "/linkedProducts", {trigger: true});
+            actualizationRouter.navigate('providers/' + this.model.id + "/linkedProducts", {trigger: true});
         }
     },
 

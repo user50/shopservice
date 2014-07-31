@@ -1,5 +1,4 @@
-var app1 = app1 || {};
-
+var clientId = "client1";
 var actVent = _.extend({}, Backbone.Events);
 
 var ActualizationRouter = Backbone.Router.extend({
@@ -69,6 +68,6 @@ var ActualizationRouter = Backbone.Router.extend({
         $('#content').html(this.LinkedPage.render().el);
     }
 });
-app1.actualizationRouter = new ActualizationRouter();
+actualizationRouter = new ActualizationRouter();
 Backbone.history.start();
 

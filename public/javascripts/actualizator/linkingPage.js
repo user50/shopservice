@@ -1,12 +1,10 @@
-var app1 = app1 || {};
-
 var LinkingPage = Backbone.View.extend({
     tagName: 'div',
 
     events: {
         'click #toUnlinkedList' : 'toUnlinkedList',
         'click #toLinkedList' : function(){
-            app1.actualizationRouter.navigate('providers/' + this.providerId+ "/linkedProducts", {trigger: true});
+            actualizationRouter.navigate('providers/' + this.providerId+ "/linkedProducts", {trigger: true});
         },
         'click #absent' : function(){
             this.linkProduct(null, this.providerProductName);
@@ -29,7 +27,7 @@ var LinkingPage = Backbone.View.extend({
 
         this.listenTo(actVent,'product:linked', this.linkProduct);
         this.listenTo(actVent,'product:search', function(text){
-            app1.actualizationRouter.navigate('providers/' + this.providerId + "/linkingProduct/"
+            actualizationRouter.navigate('providers/' + this.providerId + "/linkingProduct/"
                 + this.providerProductName + '/search/'  + text, {trigger: true});
         });
     },
@@ -78,7 +76,7 @@ var LinkingPage = Backbone.View.extend({
     },
 
     toUnlinkedList: function(){
-        app1.actualizationRouter.navigate('providers/' + this.providerId+ "/linkProducts", {trigger: true});
+        actualizationRouter.navigate('providers/' + this.providerId+ "/linkProducts", {trigger: true});
     },
 
     search: function(text){

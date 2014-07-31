@@ -1,5 +1,3 @@
-var app1 = app1 || {};
-
 var HeaderView = Backbone.View.extend({
     template: _.template($('#headerTpl').html()),
 

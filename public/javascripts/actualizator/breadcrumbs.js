@@ -1,5 +1,3 @@
-var app = app || {};
-
 var UnlinkedBreadcrumbsView = Backbone.View.extend({
     tagName: 'ol',
     className: 'breadcrumb',

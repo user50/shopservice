@@ -1,5 +1,3 @@
-var app1 = app1 || {};
-
 var PaginationView = Backbone.View.extend({
     tagName: 'div',
     className: 'row',

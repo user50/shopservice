@@ -1,6 +1,3 @@
-var app1 = app1 || {};
-
-
 var ProviderPage = Backbone.View.extend({
 
     tagName: 'div',

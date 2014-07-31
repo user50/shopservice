@@ -1,5 +1,3 @@
-var app1 = app1 || {};
-
 var LinkedPage = Backbone.View.extend({
     tagName: 'div',
 
@@ -23,7 +21,7 @@ var LinkedPage = Backbone.View.extend({
         this.LinkedSearch = new LinkedSearch();
 
         this.listenTo(actVent, 'linkedProduct:relink', function(linkedName){
-            app1.actualizationRouter.navigate('providers/' + this.providerId+ "/linkingProduct/" + linkedName, {trigger: true});
+            actualizationRouter.navigate('providers/' + this.providerId+ "/linkingProduct/" + linkedName, {trigger: true});
         });
 //
 //        this.listenTo(actVent, 'unlinked:autolink', function(){

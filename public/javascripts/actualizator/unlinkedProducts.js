@@ -1,7 +1,3 @@
-var app1 = app1 || {};
-
-var clientId = "client1";
-
 var UnlinkedProduct = Backbone.Model.extend();
 
 var UnlinkedProducts = Backbone.Paginator.requestPager.extend({

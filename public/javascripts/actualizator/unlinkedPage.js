@@ -1,6 +1,3 @@
-var app1 = app1 || {};
-
-
 var UnlinkedPage = Backbone.View.extend({
     tagName: 'div',
 
@@ -23,7 +20,7 @@ var UnlinkedPage = Backbone.View.extend({
         this.UnlinkedProducts = new UnlinkedProducts();
 
         this.listenTo(actVent, 'unlinked:selected', function(unlinkedName){
-            app1.actualizationRouter.navigate('providers/' + this.providerId+ "/linkingProduct/" + unlinkedName, {trigger: true});
+            actualizationRouter.navigate('providers/' + this.providerId+ "/linkingProduct/" + unlinkedName, {trigger: true});
         });
 
         this.listenTo(actVent, 'unlinked:autolink', function(){

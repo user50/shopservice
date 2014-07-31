@@ -1,5 +1,3 @@
-var app1 = app1 || {};
-
 var UnlinkedSearch = Backbone.View.extend({
     tagName: 'div',
     className: 'row',
@@ -31,7 +29,7 @@ var UnlinkedSearch = Backbone.View.extend({
         if (text == '')
             return;
         else
-            app1.actualizationRouter.navigate('/providers/' + this.options.providerId+ "/linkProducts/search/" + text, {trigger: true});
+            actualizationRouter.navigate('/providers/' + this.options.providerId+ "/linkProducts/search/" + text, {trigger: true});
     }
 });
 
