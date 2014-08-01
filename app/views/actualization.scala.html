@@ -59,12 +59,17 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-    $( document ).ajaxStart(function() {
-        $( "#loader" ).show();
-    });
-    $( document ).ajaxStop(function() {
-        $( "#loader" ).hide();
-    });
+    $(document).ready(function() {
+        $( document ).ajaxStart(function() {
+            $( "#loader" ).show();
+        });
+        $( document ).ajaxStop(function() {
+            $( "#loader" ).hide();
+        });
+        $('#content').tooltip({
+            selector: "span[data-toggle=tooltip]"
+        });
+    })
 </script>
 </body>
 </html>
