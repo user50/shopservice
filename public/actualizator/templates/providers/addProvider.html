@@ -1,0 +1,41 @@
+<div class="col-md-6 column">
+    <button id="addProviderBtn" class="btn btn-default btn-xs" type="button" data-toggle="modal" data-target="#addProviderModal">
+        <span data-toggle="tooltip" data-placement="top" title="Добавить поставщика" class="glyphicon glyphicon glyphicon-plus"></span>
+        &nbsp;Добавить поставщика
+    </button>
+
+    <p></p>
+    <!-- Add provider  Modal -->
+    <div class="modal fade" id="addProviderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Добавить поставщика</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="input-group">
+                        <div class="form-group">
+                            <label class="control-label" for="providerNameInput">Название поставщика:</label>
+                            <input type="text" class="form-control" id="providerNameInput">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="form-group">
+                            <label class="control-label" for="providerUrlInput">Ссылка на прайс поставщика:</label>
+                            <input type="text" class="form-control" id="providerUrlInput">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    <button id="saveNewProvider" type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

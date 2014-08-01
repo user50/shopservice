@@ -1,0 +1,30 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel1">Редактировать поставщика</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="input-group">
+                <div class="form-group">
+                    <label class="control-label" for="providerNameInputEdit">Название поставщика:</label>
+                    <input type="text" class="form-control" id="providerNameInputEdit" value="<%= name %>">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group">
+                    <label class="control-label" for="providerUrlInputEdit">Ссылка на прайс поставщика:</label>
+                    <input type="text" class="form-control" id="providerUrlInputEdit" value="<%= url %>">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            <button id="editProvider" type="button" class="btn btn-primary">Сохранить</button>
+        </div>
+    </div>
+</div>

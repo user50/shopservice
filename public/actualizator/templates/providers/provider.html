@@ -1,0 +1,21 @@
+<td>
+    <input id="<%= id %>" type="checkbox" >
+</td>
+<td><%= name %></td>
+<td>Доступен</td>
+<td>
+    <button type="button" class="btn btn-warning btn-sm editProvider" data-toggle="modal" data-target="#editProviderModal">
+        <span data-toggle="tooltip" data-placement="top" title="Редактировать" class="glyphicon glyphicon-pencil"></span>
+    </button>
+
+    <button type="button" class="btn btn-primary btn-sm">
+        <span data-toggle="tooltip" data-placement="top" title="Связать товары" class="glyphicon glyphicon-link"></span>
+    </button>
+    <button type="button" class="btn btn-info btn-sm">
+        <span data-toggle="tooltip" data-placement="top" title="Просмотреть сввязанные товары" class="glyphicon glyphicon-eye-open"></span>
+    </button>
+
+    <button class="btn btn-danger btn-sm" type="button">
+        <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Удалить поставщика" ></span>
+    </button>
+</td>

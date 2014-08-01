@@ -2,13 +2,13 @@
 
 var ActualizationRouter = Backbone.Router.extend({
     routes: {
-        '' : 'start',
-        'providers/:providerId/linkProducts' : 'linkProducts',
-        'providers/:providerId/linkProducts/search/:text' : 'unlinkedSearch',
-        'providers/:providerId/linkingProduct/:name' : 'linkingProduct',
-        'providers/:providerId/linkingProduct/:name/search/:text' : 'linkingProductSearch',
-        'providers/:providerId/linkedProducts' : 'linkedProducts',
-        'providers/:providerId/linkedProducts/search/:text' : 'linkedSearch'
+        '' : 'start'
+//        'providers/:providerId/linkProducts' : 'linkProducts',
+//        'providers/:providerId/linkProducts/search/:text' : 'unlinkedSearch',
+//        'providers/:providerId/linkingProduct/:name' : 'linkingProduct',
+//        'providers/:providerId/linkingProduct/:name/search/:text' : 'linkingProductSearch',
+//        'providers/:providerId/linkedProducts' : 'linkedProducts',
+//        'providers/:providerId/linkedProducts/search/:text' : 'linkedSearch'
     },
 
     initialize: function(){
