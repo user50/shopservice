@@ -4,7 +4,7 @@ import com.shopservice.dao.LinkedProductEntryRepository;
 import com.shopservice.dao.ProductEntryRepository;
 import com.shopservice.dao.ProductProviderRepository;
 import com.shopservice.domain.LinkedProductEntry;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 import com.shopservice.domain.ProductEntry;
 import com.shopservice.productsources.ProductSource;
 import com.shopservice.productsources.ProviderSourceStub;

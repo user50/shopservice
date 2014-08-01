@@ -2,6 +2,7 @@ package com.shopservice.domain;
 
 import com.avaje.ebean.SqlRow;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.shopservice.transfer.Product;
 import tyrex.services.UUID;
 
 import javax.persistence.*;

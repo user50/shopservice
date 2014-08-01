@@ -1,7 +1,7 @@
 package com.shopservice.dao;
 
 import com.shopservice.ProductConditions;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 import play.cache.Cache;
 import play.mvc.Http;
 

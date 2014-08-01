@@ -2,12 +2,13 @@ package com.shopservice.refreshers;
 
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
-import com.shopservice.Services;
 import com.shopservice.dao.EbeanProductGroupRepository;
 import com.shopservice.dao.JdbcProductRepository;
 import com.shopservice.domain.*;
 import com.shopservice.pricelist.models.yml.*;
 import com.shopservice.pricelist.models.yml.Currency;
+import com.shopservice.transfer.Category;
+import com.shopservice.transfer.Product;
 
 import java.util.ArrayList;
 import java.util.HashSet;

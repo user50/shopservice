@@ -3,8 +3,8 @@ package com.shopservice.queries;
 import com.shopservice.ProductConditions;
 import com.shopservice.Queries;
 import com.shopservice.Services;
-import com.shopservice.domain.Category;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Category;
+import com.shopservice.transfer.Product;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

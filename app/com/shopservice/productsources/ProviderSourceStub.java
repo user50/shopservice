@@ -1,6 +1,6 @@
 package com.shopservice.productsources;
 
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 
 import java.util.ArrayList;
 import java.util.List;

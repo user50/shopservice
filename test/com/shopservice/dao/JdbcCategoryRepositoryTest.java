@@ -2,7 +2,7 @@ package com.shopservice.dao;
 
 import com.shopservice.DatabaseManager;
 import com.shopservice.HikariConnectionPool;
-import com.shopservice.domain.Category;
+import com.shopservice.transfer.Category;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

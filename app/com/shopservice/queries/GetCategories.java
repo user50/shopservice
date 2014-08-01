@@ -1,11 +1,8 @@
 package com.shopservice.queries;
 
 import com.shopservice.Queries;
-import com.shopservice.Services;
-import com.shopservice.domain.Category;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GetCategories extends CategoryQuery {

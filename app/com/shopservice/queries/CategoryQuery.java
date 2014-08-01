@@ -1,6 +1,6 @@
 package com.shopservice.queries;
 
-import com.shopservice.domain.Category;
+import com.shopservice.transfer.Category;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

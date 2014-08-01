@@ -3,12 +3,10 @@ package controllers;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
 import com.shopservice.assemblers.PaginationResult;
-import com.shopservice.domain.Product;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

@@ -5,7 +5,7 @@ import com.shopservice.ProductConditions;
 import com.shopservice.Services;
 import com.shopservice.dao.LinkedProductEntryRepository;
 import com.shopservice.domain.LinkedProductEntry;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
