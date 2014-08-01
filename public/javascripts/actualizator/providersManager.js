@@ -40,9 +40,8 @@ var AddProvider = Backbone.View.extend({
     className: 'row',
 
     initialize: function() {
+        this.template = _.template(tpl.get('addProviderTpl').text);
     },
-
-    template: _.template($('#addProviderTpl').html()),
 
     events: {
         'click #saveNewProvider' : 'addProvider'
@@ -91,12 +90,12 @@ var EditProvider = Backbone.View.extend({
     },
 
     initialize: function(){
+        this.template = _.template(tpl.get('editProviderTpl').text);
+
         var tags = this.model;
         tags.on('change', this.render, this);
         this.render();
     },
-
-    template: _.template($('#editProviderTpl').html()),
 
     events: {
         'click #editProvider': 'editGroup'
@@ -133,7 +132,9 @@ var UpdateButton = Backbone.View.extend({
     tagName: 'div',
     className: 'row',
 
-    template: _.template($('#updateBtnTpl').html()),
+    initialize: function(){
+        this.template = _.template(tpl.get('updateBtnTpl').text)
+    },
 
     render: function(){
         this.$el.html( this.template );

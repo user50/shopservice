@@ -12,9 +12,9 @@ var PaginationView = Backbone.View.extend({
         'click .btn-group button': 'changeCount'
     },
 
-    template: _.template($('#paginationTpl').html()),
 
     initialize: function () {
+        this.template = _.template(tpl.get('paginationTpl').text);
         this.listenTo(actVent, 'autolink:finished',
             function(){
                 this.gotoFirst();

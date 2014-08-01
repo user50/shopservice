@@ -2,10 +2,9 @@ var UnlinkedSearch = Backbone.View.extend({
     tagName: 'div',
     className: 'row',
 
-    template: _.template($('#unlinkedSearchTpl').html()),
-
     initialize: function(options){
         this.options = options;
+        this.template = _.template(tpl.get('unlinkedSearchTpl').text);
     },
 
     events: {
@@ -89,9 +88,9 @@ var UnlinkedSearchResultView = Backbone.View.extend({
         'click' : 'onClick'
     },
 
-    template: _.template($('#unlinkedProductTpl').html()),
-
     initialize: function(){
+        this.template=  _.template(tpl.get('unlinkedProductTpl').text);
+
         this.model.on('change', this.render, this);
         this.model.on('remove', this.remove, this);
     },

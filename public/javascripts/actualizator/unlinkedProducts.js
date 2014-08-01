@@ -47,9 +47,10 @@ var UnlinkedProductView = Backbone.View.extend({
         'click' : 'onClick'
     },
 
-    template: _.template($('#unlinkedProductTpl').html()),
 
     initialize: function(){
+        this.template = _.template(tpl.get('unlinkedProductTpl').text);
+
         this.model.on('change', this.render, this);
         this.model.on('remove', this.remove, this);
     },

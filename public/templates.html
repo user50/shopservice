@@ -1,0 +1,263 @@
+<script type="text/template" id="headerTpl">
+    <div class="row clearfix">
+        <div class="col-lg-12 column">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">MService</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-wrench"></i>&nbsp; Сервисы<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/assets/pricelist-generator.html">Генератор прайс-листов</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/assets/contact.html"><i class="fa fa-phone"></i>&nbsp; Контакты</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a id="logoutLink" href="#"><i class="fa fa-sign-out"></i>&nbsp; Выйти</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="providerViewTemplate">
+
+    <td>
+        <input id="<%= id %>" type="checkbox" >
+    </td>
+    <td><%= name %></td>
+    <td>Доступен</td>
+    <td>
+        <button type="button" class="btn btn-warning btn-sm editProvider" data-toggle="modal" data-target="#editProviderModal">
+            <span data-toggle="tooltip" data-placement="top" title="Редактировать" class="glyphicon glyphicon-pencil"></span>
+        </button>
+
+        <button type="button" class="btn btn-primary btn-sm">
+            <span data-toggle="tooltip" data-placement="top" title="Связать товары" class="glyphicon glyphicon-link"></span>
+        </button>
+        <button type="button" class="btn btn-info btn-sm">
+            <span data-toggle="tooltip" data-placement="top" title="Просмотреть сввязанные товары" class="glyphicon glyphicon-eye-open"></span>
+        </button>
+
+        <button class="btn btn-danger btn-sm" type="button">
+            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Удалить поставщика" ></span>
+        </button>
+    </td>
+</script>
+
+<script type="text/template" id="unlinkedProductTpl">
+    <%= name %>
+</script>
+
+<script type="text/template" id="unlinkedProductsBreadcrumbsTpl">
+    <li><a href="#">Поставщики</a></li>
+    <li><strong><%= name %></strong></li>
+    <li class="active"><strong><a href="#providers/<%= id %>/linkProducts">Список несвязанных товаров</a></strong></li>
+</script>
+
+<script type="text/template" id="linkingPageBreadcrumbsTpl">
+    <li><a href="#">Поставщики</a></li>
+    <li><%= providerName %></li>
+    <li>Связать товар</li>
+    <li class="active"><strong><%= providerProductName %></strong></li>
+</script>
+
+<script type="text/template" id="linkedPageBreadcrumbsTpl">
+    <li><a href="#">Поставщики</a></li>
+    <li><strong><%= name %></strong></li>
+    <li class="active"><strong><a href="#providers/<%= id %>/linkedProducts">Список связанных товаров</a></strong></li>
+</script>
+
+<script type="text/template" id="addProviderTpl">
+    <div class="col-md-6 column">
+        <button id="addProviderBtn" class="btn btn-default btn-xs" type="button" data-toggle="modal" data-target="#addProviderModal">
+            <span data-toggle="tooltip" data-placement="top" title="Добавить поставщика" class="glyphicon glyphicon glyphicon-plus"></span>
+            &nbsp;Добавить поставщика
+        </button>
+
+        <p></p>
+        <!-- Add provider  Modal -->
+        <div class="modal fade" id="addProviderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Добавить поставщика</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="input-group">
+                            <div class="form-group">
+                                <label class="control-label" for="providerNameInput">Название поставщика:</label>
+                                <input type="text" class="form-control" id="providerNameInput">
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="form-group">
+                                <label class="control-label" for="providerUrlInput">Ссылка на прайс поставщика:</label>
+                                <input type="text" class="form-control" id="providerUrlInput">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button id="saveNewProvider" type="button" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="editProviderTpl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel1">Редактировать поставщика</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="input-group">
+                    <div class="form-group">
+                        <label class="control-label" for="providerNameInputEdit">Название поставщика:</label>
+                        <input type="text" class="form-control" id="providerNameInputEdit" value="<%= name %>">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="form-group">
+                        <label class="control-label" for="providerUrlInputEdit">Ссылка на прайс поставщика:</label>
+                        <input type="text" class="form-control" id="providerUrlInputEdit" value="<%= url %>">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button id="editProvider" type="button" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="unlinkedProductsTpl">
+    <div class="col-md-12">
+        <div id="unlinkedProducts" class="list-group">
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="updateBtnTpl">
+    <div class="col-md-12">
+        <button type="button" class="btn btn-primary btn-lg">Обновить</button>
+    </div>
+</script>
+
+<script type="text/template" id="unlinkedSearchTpl">
+    <div class="col-md-6 column">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" id="searchText" value="<%= text%>">
+                    <span class="input-group-btn">
+                      <button id="unlinkedSearchBtn" class="btn btn-default" type="button"><i class="fa fa-search"></i>&nbsp;</button>
+                    </span>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="pagination">
+    <ul class="pagination">
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+    </ul>
+</script>
+
+<script type="text/template" id="linkAutomaticBtn">
+    <div class="col-md-12">
+        <button type="button" class="btn btn-primary btn-md">Связать автоматически</button>
+        <p></p>
+    </div>
+</script>
+
+<script type="text/template" id="linkingBackBtnsTpl">
+    <div class="col-md-12">
+        <button id="absent" type="button" class="btn btn-danger btn-sm">Отсутствует</button>
+        <button id="toLinkedList" type="button" class="btn btn-info btn-sm pull-right">
+            Связанные товары &nbsp;
+            <span data-toggle="tooltip" data-placement="top" title="к списку несвязанных товаров" class="glyphicon glyphicon-arrow-right"></span>
+        </button>
+        <button id="toUnlinkedList" type="button" class="btn btn-info btn-sm pull-right">
+            <span data-toggle="tooltip" data-placement="top" title="к списку несвязанных товаров" class="glyphicon glyphicon-arrow-left"></span>
+            &nbsp; Несвязанные товары
+        </button>
+    </div>
+</script>
+
+<script type="text/template" id="linkedProductViewTpl">
+
+    <td><%= name %></td>
+    <td><%= clientProductsName %></td>
+    <td>
+        <button type="button" class="btn btn-primary btn-sm">
+            <span data-toggle="tooltip" data-placement="top" title="Связать товар" class="glyphicon glyphicon-link"></span>
+        </button>
+        <button class="btn btn-danger btn-sm" type="button">
+            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Отменить связывание" ></span>
+        </button>
+    </td>
+
+</script>
+
+<script type="text/template" id="paginationTpl">
+    <div class="col-md-12 column">
+        <ul id="paginationView" class="pagination pagination-sm">
+            <% if (currentPage > firstPage) { %>
+            <li>
+                <a href="#" class="serverprevious">Пред.</a>
+            </li>
+            <% } else { %>
+            <li>
+                <a href="">Пред.</a>
+            </li>
+            <% } %>
+
+            <% for(p=1;p<=totalPages;p++){
+            %>
+            <% if (currentPage == p) { %>
+            <li class="active">
+                <a href="#"><%= p %></a>
+            </li>
+            <% } else { %>
+            <li>
+                <a href="#" class="page"><%= p %></a>
+            </li>
+            <% } %>
+            <%
+            }%>
+
+            <% if (currentPage < totalPages) { %>
+            <li>
+                <a href="#" class="servernext">След.</a>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+</script>

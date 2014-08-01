@@ -44,10 +44,9 @@ var LinkedBreadcrumbsView = Backbone.View.extend({
     tagName: 'ol',
     className: 'breadcrumb',
 
-    template: _.template($('#linkedPageBreadcrumbsTpl').html()),
-
     initialize: function(options) {
         this.options = options || {};
+        this.template = _.template(tpl.get('linkedPageBreadcrumbsTpl').text);
         this.model.bind("change", this.render, this);
     },
 
@@ -62,10 +61,9 @@ var LinkedSearch = Backbone.View.extend({
     tagName: 'div',
     className: 'row',
 
-    template: _.template($('#unlinkedSearchTpl').html()),
-
     initialize: function(options){
         this.options = options;
+        this.template = _.template(tpl.get('unlinkedSearchTpl').text);
     },
 
     events: {
@@ -86,9 +84,7 @@ var LinkedSearch = Backbone.View.extend({
 
     searchText: function(){
         var text = this.$el.find('#searchText').val();
-        if (text == '')
-            return;
-        else
+        if (text != '')
             actVent.trigger('linked:search', text);
     }
 });
@@ -105,9 +101,9 @@ var LinkedProductView = Backbone.View.extend({
         }
     },
 
-    template: _.template($('#linkedProductViewTpl').html()),
-
     initialize: function(){
+        this.template = _.template(tpl.get('linkedProductViewTpl').text);
+
         this.model.on('change', this.render, this);
         this.model.on('destroy', this.remove, this);
     },

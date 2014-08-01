@@ -91,7 +91,9 @@ var LinkAutomaticBtn = Backbone.View.extend({
     tagName: 'div',
     className: 'row',
 
-    template: _.template($('#linkAutomaticBtn').html()),
+    initialize: function(){
+        this.template = _.template(tpl.get('linkAutomaticBtn').text);
+    },
 
     events: {
         'click' : function(){actVent.trigger('unlinked:autolink')}

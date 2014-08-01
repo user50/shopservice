@@ -2,10 +2,9 @@ var UnlinkedBreadcrumbsView = Backbone.View.extend({
     tagName: 'ol',
     className: 'breadcrumb',
 
-    template: _.template($('#unlinkedProductsBreadcrumbsTpl').html()),
 
-    initialize: function(options) {
-//        this.options = options || {};
+    initialize: function() {
+        this.template = _.template(tpl.get('unlinkedProductsBreadcrumbsTpl').text);
         this.model.bind("change", this.render, this);
     },
 

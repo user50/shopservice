@@ -1,8 +1,11 @@
 var HeaderView = Backbone.View.extend({
-    template: _.template($('#headerTpl').html()),
+
+    initialize: function(){
+        this.template = _.template(tpl.get('headerTpl').text);
+    },
 
     render: function(){
-        var template = this.template;
+        var template = this.template();
         this.$el.html( template );
         return this;
     }

@@ -101,12 +101,10 @@ var LinkingPageBreadcrumbs = Backbone.View.extend({
     tagName: 'ol',
     className: 'breadcrumb',
 
-    template: _.template($('#linkingPageBreadcrumbsTpl').html()),
-
     initialize: function(options) {
         this.options = options || {};
+        this.template = _.template(tpl.get('linkingPageBreadcrumbsTpl').text);
         this.providerProductName = this.options.providerProductName;
-
         this.model.bind("change", this.render, this);
     },
 
@@ -206,9 +204,9 @@ var ProductView = Backbone.View.extend({
         'click' : 'onClick'
     },
 
-    template: _.template($('#unlinkedProductTpl').html()),
-
     initialize: function(){
+        this.template = _.template(tpl.get('unlinkedProductTpl').text);
+
         this.model.on('change', this.render, this);
         this.model.on('remove', this.remove, this);
     },
@@ -250,7 +248,11 @@ var ProductsView = Backbone.View.extend({
 var BackButtons = Backbone.View.extend({
     tagName: 'div',
     className: 'row',
-    template: _.template($('#linkingBackBtnsTpl').html()),
+
+    initialize: function(){
+        this.template = _.template(tpl.get('linkingBackBtnsTpl').text);
+    },
+
     render: function(){
         var template = this.template();
         this.$el.html( template );
@@ -262,10 +264,9 @@ var LinkingSearch = Backbone.View.extend({
     tagName: 'div',
     className: 'row',
 
-    template: _.template($('#unlinkedSearchTpl').html()),
-
     initialize: function(options){
         this.options = options;
+        this.template = _.template(tpl.get('unlinkedSearchTpl').text);
     },
 
     events: {
@@ -286,9 +287,7 @@ var LinkingSearch = Backbone.View.extend({
 
     searchText: function(){
         var text = this.$el.find('#searchText').val();
-        if (text == '')
-            return;
-        else
+        if (text != '')
             actVent.trigger('product:search', text);
     }
 });

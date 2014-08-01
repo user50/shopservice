@@ -1,5 +1,4 @@
-var clientId = "client1";
-var actVent = _.extend({}, Backbone.Events);
+
 
 var ActualizationRouter = Backbone.Router.extend({
     routes: {
@@ -68,6 +67,13 @@ var ActualizationRouter = Backbone.Router.extend({
         $('#content').html(this.LinkedPage.render().el);
     }
 });
-actualizationRouter = new ActualizationRouter();
-Backbone.history.start();
+
+tpl.loadTemplates(function () {
+    clientId = "client1";
+    actVent = _.extend({}, Backbone.Events);
+
+    actualizationRouter = new ActualizationRouter();
+    Backbone.history.start();
+});
+
 

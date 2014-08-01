@@ -28,9 +28,8 @@ var ProviderView = Backbone.View.extend({
         }
     },
 
-    template: _.template($('#providerViewTemplate').html()),
-
     initialize: function(){
+        this.template = _.template(tpl.get('providerViewTemplate').text);
         this.model.on('change', this.render, this);
         this.model.on('destroy', this.remove, this);
     },
