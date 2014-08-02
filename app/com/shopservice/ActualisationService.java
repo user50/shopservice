@@ -19,7 +19,7 @@ public class ActualisationService {
 
     public List<Product> getNotLinkedProducts(String clientId, Integer providerId, String words)
     {
-        List<LinkedProductEntry> entries = linkedEntryRepository.find(providerId);
+        List<LinkedProductEntry> entries = linkedEntryRepository.find(new LinkedEntryCondition(providerId));
         Set<String> linkedNames = new HashSet<String>();
         for (LinkedProductEntry entry : entries)
             linkedNames.add(entry.name);

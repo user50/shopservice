@@ -1,5 +1,6 @@
 package com.shopservice.assemblers;
 
+import com.shopservice.LinkedEntryCondition;
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
@@ -7,10 +8,7 @@ import com.shopservice.dao.LinkedProductEntryRepository;
 import com.shopservice.domain.LinkedProductEntry;
 import com.shopservice.transfer.Product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by user50 on 13.07.2014.
@@ -27,12 +25,29 @@ public class LinkedProductAssembler {
         return instance;
     }
 
-    public List<LinkedProductEntry> find(String clientId, Integer providerId, Boolean linked)
+    public List<LinkedProductEntry> find(String clientId, Integer providerId, Boolean linked, String contains, Integer limit, Integer offset)
     {
-        List<LinkedProductEntry> entries = filterLinkedEntries(repository.find(providerId), linked);
 
-        if (!linked)
+        if (contains != null)
+        {
+            List<String> productIds = new ArrayList<>();
+
+            ProductConditions conditions = new ProductConditions();
+            conditions.words = Arrays.asList(contains.split(" "));
+
+            List<Product> products = Services.getProductDAO(clientId).find(conditions);
+
+            for (Product product : products) {
+                productIds.add(product.id);
+            }
+
+            List<LinkedProductEntry> entries = repository.find(new LinkedEntryCondition(providerId, linked, productIds, limit, offset));
+            fillLinkedEntries(entries, products);
+
             return entries;
+        }
+
+        List<LinkedProductEntry> entries = repository.find(new LinkedEntryCondition(providerId, linked, limit, offset));
 
         List<String> productIds = new ArrayList<>();
         for (LinkedProductEntry entry : entries)
@@ -40,6 +55,12 @@ public class LinkedProductAssembler {
 
         List<Product> products = Services.getProductDAO(clientId).find(new ProductConditions(productIds));
 
+        fillLinkedEntries(entries, products);
+        return entries;
+    }
+
+    private void fillLinkedEntries(List<LinkedProductEntry> entries, List<Product> products)
+    {
         Map<String,Product> productMap = new HashMap<>();
         for (Product product : products)
             productMap.put(product.id, product);
@@ -48,8 +69,6 @@ public class LinkedProductAssembler {
             entry.productEntryId = entry.productEntry.id;
             entry.clientProductsName = productMap.get(entry.productEntry.productId).name;
         }
-
-        return entries;
     }
 
     private List<LinkedProductEntry> filterLinkedEntries(List<LinkedProductEntry> entries, boolean linked) {
