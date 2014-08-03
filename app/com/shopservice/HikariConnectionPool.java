@@ -2,7 +2,6 @@ package com.shopservice;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import play.Logger;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -34,10 +33,7 @@ public class HikariConnectionPool implements ConnectionPool {
 
     @Override
     public Connection getConnection() throws SQLException {
-        long start = System.currentTimeMillis();
-        Connection connection = dataSource.getConnection();
-        Logger.info("The operation 'getConnection' takes "+(System.currentTimeMillis() - start));
-        return connection;
+        return dataSource.getConnection();
     }
 
     @Override
