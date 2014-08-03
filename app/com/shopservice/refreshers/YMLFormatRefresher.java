@@ -4,6 +4,7 @@ import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
 import com.shopservice.dao.EbeanProductGroupRepository;
+import com.shopservice.dao.JdbcProductRepository;
 import com.shopservice.domain.*;
 import com.shopservice.pricelist.models.yml.*;
 import com.shopservice.pricelist.models.yml.Currency;
@@ -49,7 +50,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         ProductConditions query = new ProductConditions();
         query.productIds = getProductIds(clientId, groupId);
 
-        for (Product product : Services.getProductDAO(clientId).find( query )) {
+        for (Product product : new JdbcProductRepository(clientId).find(query)) {
             ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name()));
             categories.add( product.category );
         }

@@ -2,7 +2,9 @@ package com.shopservice;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
@@ -15,16 +17,17 @@ public class MailService {
 
     private static MailService instance;
 
-    private MailService(){}
+    private MailService() {
+    }
 
-    public static  MailService getInstance(){
+    public static MailService getInstance() {
         if (instance == null)
             instance = new MailService();
 
         return instance;
     }
 
-    public void report( String subject, String body, List<String> recipients) throws MessagingException {
+    public void report(String subject, String body, List<String> recipients) throws MessagingException {
 
         final String username = "oleg@themidnightcoders.com";
         final String password = "Changeme123";
@@ -46,9 +49,19 @@ public class MailService {
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("from-email@gmail.com"));
-            message.addRecipients(Message.RecipientType.TO, InternetAddress.parse( recipients.toString().replace("[","").replace("]","") ));
-            message.setSubject(subject);
-            message.setText(body);
+            message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients.toString().replace("[", "").replace("]", "")));
+
+            Multipart multipart = new MimeMultipart();
+
+            if (body != null) {
+                MimeBodyPart textPart = new MimeBodyPart();
+                textPart.setContent(body, "text/plain; charset=utf-8");
+                multipart.addBodyPart(textPart);
+            }
+
+            message.setContent(multipart);
+
+            message.setHeader("Content-Type", "text/html; charset=UTF-8");
 
             Transport.send(message);
 
@@ -59,7 +72,7 @@ public class MailService {
 
     }
 
-    public void report(Throwable throwable)  {
+    public void report(Throwable throwable) {
         try {
             report(throwable.getMessage(), getStackTrace(throwable), OWNERS);
         } catch (MessagingException e) {
@@ -67,6 +80,7 @@ public class MailService {
         }
 
     }
+
     public String getStackTrace(Throwable t) {
         StringWriter stringWritter = new StringWriter();
         PrintWriter printWritter = new PrintWriter(stringWritter, true);
