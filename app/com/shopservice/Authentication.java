@@ -26,6 +26,22 @@ public class Authentication extends Action.Simple {
                 }
             });
 
+        initConnectionToClientsDB((String) Cache.get(cookie.value()));
+
         return delegate.call(context);
+    }
+
+    private void initConnectionToClientsDB(final String clientId)
+    {
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+
+                    Services.getCategoryDAO(clientId).getCategories();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }
