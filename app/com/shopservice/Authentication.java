@@ -26,7 +26,7 @@ public class Authentication extends Action.Simple {
                 }
             });
 
-        initConnectionToClientsDB((String) Cache.get(cookie.value()));
+//        initConnectionToClientsDB((String) Cache.get(cookie.value()));
 
         return delegate.call(context);
     }

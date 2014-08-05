@@ -2,6 +2,7 @@ package com.shopservice;
 
 import com.shopservice.queries.Query;
 import com.shopservice.queries.Update;
+import play.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +27,11 @@ public class DatabaseManager {
     }
 
     public <T> List<T> executeQueryForList(Query<T> query) throws SQLException {
+
+        long start = System.currentTimeMillis();
         Connection connection = connectionPool.getConnection();
+        Logger.info("Get connection "+(System.currentTimeMillis() - start));
+
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
@@ -34,7 +39,9 @@ public class DatabaseManager {
             preparedStatement = connection.prepareStatement(rawSql);
             query.prepare(preparedStatement);
 
+            start = System.currentTimeMillis();
             resultSet = preparedStatement.executeQuery();
+            Logger.info("Execute Query "+(System.currentTimeMillis() - start));
 
             List<T> list = new ArrayList<T>();
 

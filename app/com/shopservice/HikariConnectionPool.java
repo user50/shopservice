@@ -23,7 +23,7 @@ public class HikariConnectionPool implements ConnectionPool {
     public HikariConnectionPool(String url) {
         HikariConfig config = new HikariConfig();
         config.setConnectionTestQuery("SELECT version()");
-        config.setConnectionTimeout(1000L);
+        config.setConnectionTimeout(10000L);
         config.setMaximumPoolSize(CONNECTION_POOL_SIZE);
         config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
         config.addDataSourceProperty("url", url);
