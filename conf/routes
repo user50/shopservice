@@ -49,7 +49,7 @@ DELETE /clients/:id/providers/:providerId                                       
 GET    /clients/:id/providers/:providerId/products                                 controllers.ProductProviderController.getProducts( id, providerId : Integer, linked : Boolean ?= true, words : String ?= null,  offset: Integer ?= 0, limit: Integer ?= 100 )
 
 # Linked Product Entry operations
-GET    /clients/:id/providers/:providerId/linkedProductEntries                     controllers.LinkedProductController.find( id, providerId: Integer, linked: Boolean ?= true )
+GET    /clients/:id/providers/:providerId/linkedProductEntries                     controllers.LinkedProductController.find( id, providerId: Integer, linked: Boolean ?= true, contains : String ?= null, limit : Integer ?= 10, offset : Integer ?= 0 )
 POST   /clients/:id/providers/:providerId/linkedProductEntries                     controllers.LinkedProductController.create( id, providerId: Integer)
 DELETE /clients/:id/providers/:providerId/linkedProductEntries/:linedEntryId       controllers.LinkedProductController.remove( id, providerId: Integer, linedEntryId:Integer)
 PUT    /clients/:id/providers/:providerId/linkedProductEntries/:linedEntryId       controllers.LinkedProductController.update( id, providerId: Integer, linedEntryId:Integer)

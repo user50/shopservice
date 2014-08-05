@@ -1,5 +1,6 @@
 package com.shopservice.dao;
 
+import com.shopservice.LinkedEntryCondition;
 import com.shopservice.domain.LinkedProductEntry;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface LinkedProductEntryRepository {
 
-    public List<LinkedProductEntry> find(Integer providerId);
+    public List<LinkedProductEntry> find(LinkedEntryCondition condition);
 
     public LinkedProductEntry create(LinkedProductEntry linkedProductEntry);
 

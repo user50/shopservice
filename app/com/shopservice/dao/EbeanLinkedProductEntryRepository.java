@@ -1,6 +1,8 @@
 package com.shopservice.dao;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.ExpressionList;
+import com.shopservice.LinkedEntryCondition;
 import com.shopservice.domain.LinkedProductEntry;
 
 import java.util.List;
@@ -11,8 +13,19 @@ import java.util.List;
 public class EbeanLinkedProductEntryRepository implements LinkedProductEntryRepository {
 
     @Override
-    public List<LinkedProductEntry> find(Integer providerId) {
-        return Ebean.find(LinkedProductEntry.class).fetch("productEntry").where().eq("product_provider_id", providerId).findList();
+    public List<LinkedProductEntry> find(LinkedEntryCondition condition) {
+        ExpressionList<LinkedProductEntry> expression = Ebean.find(LinkedProductEntry.class).fetch("productEntry").where();
+
+        if (condition.providerId != null)
+            expression = expression.eq("product_provider_id", condition.providerId);
+
+        if (condition.linked != null)
+            expression = condition.linked ? expression.isNotNull("product_id") : expression.isNull("product_id");
+
+//        if (condition.offset != null && condition.limit != null)
+//            return expression.setMaxRows(condition.limit).setFirstRow(condition.offset).findList();
+
+        return expression.findList();
     }
 
     @Override
