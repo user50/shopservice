@@ -51,7 +51,9 @@
         <button type="button" class="btn btn-info btn-sm">
             <span data-toggle="tooltip" data-placement="top" title="Просмотреть сввязанные товары" class="glyphicon glyphicon-eye-open"></span>
         </button>
-
+        <button type="button" class="btn btn-default btn-sm">
+            <span data-toggle="tooltip" data-placement="top" title="Просмотреть ожидающие товары" class="glyphicon glyphicon-time"></span>
+        </button>
         <button class="btn btn-danger btn-sm" type="button">
             <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Удалить поставщика" ></span>
         </button>
@@ -73,6 +75,12 @@
     <li><%= providerName %></li>
     <li>Связать товар</li>
     <li class="active"><strong><%= providerProductName %></strong></li>
+</script>
+
+<script type="text/template" id="waitingPageBreadcrumbsTpl">
+    <li><a href="#">Поставщики</a></li>
+    <li><strong><%= providerName %></strong></li>
+    <li class="active"><strong><a href="#providers/<%= providerId %>/waitingProducts">Список ожидающих товаров</a></strong></li>
 </script>
 
 <script type="text/template" id="linkedPageBreadcrumbsTpl">
@@ -224,6 +232,15 @@
         </button>
     </td>
 
+</script>
+
+<script type="text/template" id="waitingProductViewTpl">
+    <td><%= name %></td>
+    <td>
+        <button class="btn btn-danger btn-sm" type="button">
+            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Перенести в список несвязанных" ></span>
+        </button>
+    </td>
 </script>
 
 <script type="text/template" id="paginationTpl">

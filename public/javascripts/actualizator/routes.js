@@ -8,7 +8,8 @@ var ActualizationRouter = Backbone.Router.extend({
         'providers/:providerId/linkingProduct/:name' : 'linkingProduct',
         'providers/:providerId/linkingProduct/:name/search/:text' : 'linkingProductSearch',
         'providers/:providerId/linkedProducts' : 'linkedProducts',
-        'providers/:providerId/linkedProducts/search/:text' : 'linkedSearch'
+        'providers/:providerId/linkedProducts/search/:text' : 'linkedSearch',
+        'providers/:providerId/waitingProducts' : 'waitingProducts'
     },
 
     initialize: function(){
@@ -65,6 +66,15 @@ var ActualizationRouter = Backbone.Router.extend({
         }
         this.LinkedPage = new LinkedPage({providerId: providerId});
         $('#content').html(this.LinkedPage.render().el);
+    },
+
+    waitingProducts: function(providerId){
+        console.log("Waiting products for provider " + providerId);
+        if (this.WaitingPage != null){
+            this.WaitingPage.remove();
+        }
+        this.WaitingPage = new WaitingPage({providerId: providerId});
+        $('#content').html(this.WaitingPage.render().el);
     }
 });
 
