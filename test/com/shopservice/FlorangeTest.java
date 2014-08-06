@@ -47,4 +47,19 @@ public class FlorangeTest {
         }
 
     }
+
+    @Test
+    public void testName1() throws Exception {
+        Document doc = Jsoup.connect("http://florange.ua/ru/production/catalog/").get();
+
+        Elements categories = doc.select(".nav").first().children();
+
+        for (Element category : categories){
+            String url = category.child(0).attributes().get("href");
+            System.out.println(url);
+        }
+
+
+
+    }
 }
