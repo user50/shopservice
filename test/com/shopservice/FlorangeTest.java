@@ -1,5 +1,6 @@
 package com.shopservice;
 
+import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
 import com.shopservice.productsources.Florange;
 import org.jsoup.Jsoup;
@@ -65,10 +66,18 @@ public class FlorangeTest {
                 if (!images.isEmpty())
                     imageUrl = images.get(i).attributes().get("src");
 
+                Element cat = doc.select(".nav > li > ul").get(0);
+                String categoryName = cat.parent().select("a").first().attributes().get("title");
+
+                Category category = new Category();
+                category.id = String.valueOf(categoryName.hashCode());
+                category.name = categoryName;
+
+                product.id = String.valueOf(productName.hashCode());
                 product.name = productName;
                 product.price = Double.valueOf(productPrice.replace(",", "."));
                 product.imageUrl = imageUrl;
-
+                product.category = category;
                 products.add(product);
 
                 i++;
@@ -116,7 +125,6 @@ public class FlorangeTest {
             return urls;
 
         Document sectionPage = Jsoup.connect(sectionUrl).get();
-
         Elements categories = null;
         if (!sectionPage.select(".cat_onelevel").isEmpty())
             categories = sectionPage.select(".cat_onelevel").first().children();
@@ -155,7 +163,7 @@ public class FlorangeTest {
 
     @Test
     public void testName1() throws Exception {
-        List<Product> products = getProducts("http://florange.ua/ru/production/catalog2/dolcevita/bell/");
+        List<Product> products = getProducts("http://florange.ua/ru/production/clutch/jour_d_ete/");
     }
 
     @Test
@@ -167,6 +175,6 @@ public class FlorangeTest {
     public void testGet() throws Exception {
         Florange florangeProductSource = new Florange();
         List<Product> products = florangeProductSource.get(null);
-
+        System.out.println();
     }
 }

@@ -1,5 +1,6 @@
 package com.shopservice.productsources;
 
+import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attributes;
@@ -67,11 +68,18 @@ public class Florange implements ProductSource {
                 if (!images.isEmpty())
                     imageUrl = images.get(i).attributes().get("src");
 
+                Element cat = doc.select(".nav > li > ul").get(0);
+                String categoryName = cat.parent().select("a").first().attributes().get("title");
+
+                Category category = new Category();
+                category.id = String.valueOf(categoryName.hashCode());
+                category.name = categoryName;
+
                 product.id = String.valueOf(productName.hashCode());
                 product.name = productName;
                 product.price = Double.valueOf(productPrice.replace(",", "."));
                 product.imageUrl = imageUrl;
-
+                product.category = category;
                 products.add(product);
 
                 i++;
