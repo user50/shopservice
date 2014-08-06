@@ -1,5 +1,6 @@
 package com.shopservice.productsources;
 
+import com.shopservice.Util;
 import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
 import org.jsoup.Jsoup;
@@ -8,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import play.Logger;
+import play.api.libs.Crypto;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class Florange implements ProductSource {
         List<Product> products = new ArrayList<>();
 
         try{
-            Document doc = Jsoup.connect(url).get();
+            Document doc = Util.connect(url);
 
             String generalName = doc.select(".name").first().text();
 
@@ -80,12 +82,15 @@ public class Florange implements ProductSource {
                 product.price = Double.valueOf(productPrice.replace(",", "."));
                 product.imageUrl = imageUrl;
                 product.category = category;
+                product.available = true;
+                product.published = true;
+
                 products.add(product);
 
                 i++;
             }
         } catch (Exception e){
-            Logger.error("Error while parsing " + url);
+            Logger.error("Error while parsing " + url +" ; "+ e.getMessage());
         }
         return  products;
     }
@@ -109,7 +114,7 @@ public class Florange implements ProductSource {
     private List<String> getSectionsUrls() throws IOException {
         List<String> urls = new ArrayList<>();
 
-        Document doc = Jsoup.connect(SITE_URL + "/ru/production/catalog/").get();
+        Document doc = Util.connect(SITE_URL + "/ru/production/catalog/");
 
         Elements sections = doc.select(".nav > li > a");
 
@@ -126,7 +131,7 @@ public class Florange implements ProductSource {
         if (sectionUrl.equals(""))
             return urls;
 
-        Document sectionPage = Jsoup.connect(sectionUrl).get();
+        Document sectionPage = Util.connect(sectionUrl);
 
         Elements categories = null;
         if (!sectionPage.select(".cat_onelevel").isEmpty())
@@ -148,7 +153,7 @@ public class Florange implements ProductSource {
         if (categoryUrl.equals(""))
             return urls;
 
-        Document categoryPage = Jsoup.connect(categoryUrl).get();
+        Document categoryPage = Util.connect(categoryUrl);
 
         if (!categoryPage.select(".cat_onelevel").isEmpty()){
             urls.add(categoryUrl);

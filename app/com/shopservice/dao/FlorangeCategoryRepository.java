@@ -1,10 +1,12 @@
 package com.shopservice.dao;
 
+import com.shopservice.Util;
 import com.shopservice.domain.Category;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import play.api.libs.Crypto;
 
 import java.util.*;
 
@@ -15,7 +17,7 @@ public class FlorangeCategoryRepository implements CategoryRepository {
     public List<Category> getCategories() throws Exception {
         List<Category> categories = new ArrayList<>();
 
-        Document doc = Jsoup.connect(SITE_URL + "/ru/production/catalog/").get();
+        Document doc = Util.connect(SITE_URL + "/ru/production/catalog/");
 
         Elements categoryElements = doc.select(".nav > li > a");
 

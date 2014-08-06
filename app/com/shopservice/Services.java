@@ -4,6 +4,7 @@ import com.shopservice.assemblers.CategoryAssembler;
 import com.shopservice.dao.*;
 import com.shopservice.urlgenerate.UrlGenerator;
 import com.shopservice.urlgenerate.UrlGeneratorStorage;
+import play.api.libs.Crypto;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -41,16 +42,24 @@ public class Services {
 
     public static CategoryRepository getCategoryDAO(String clientId)
     {
-        if (!categoryDAOs.containsKey(clientId))
-            categoryDAOs.put( clientId, new CachedCategoryRepository(new JdbcCategoryRepository(clientId)));
+        if (!categoryDAOs.containsKey(clientId)) {
+            if (clientId.equals("artem"))
+                categoryDAOs.put(clientId, new CachedCategoryRepository(new FlorangeCategoryRepository() ) );
+
+            categoryDAOs.put(clientId, new CachedCategoryRepository(new JdbcCategoryRepository(clientId)));
+        }
 
         return categoryDAOs.get(clientId);
     }
 
     public static ProductRepository getProductDAO(String clientId)
     {
-        if (!productDAOs.containsKey(clientId))
-            productDAOs.put( clientId, new CachedProductRepository(new SynchronizeProducts(new JdbcProductRepository(clientId), clientId )));
+        if (!productDAOs.containsKey(clientId)) {
+            if (clientId.equals("artem"))
+                productDAOs.put(clientId, new SynchronizeProducts(new FlorangeProductRepository(), clientId));
+
+            productDAOs.put(clientId, new CachedProductRepository(new SynchronizeProducts(new JdbcProductRepository(clientId), clientId)));
+        }
 
         return productDAOs.get(clientId);
     }
