@@ -80,7 +80,8 @@ public class Florange implements ProductSource {
                 product.id = String.valueOf(productName.hashCode());
                 product.name = productName;
                 product.price = Double.valueOf(productPrice.replace(",", "."));
-                product.imageUrl = imageUrl;
+                product.url = url;
+                product.imageUrl = SITE_URL + imageUrl;
                 product.category = category;
                 product.available = true;
                 product.published = true;
