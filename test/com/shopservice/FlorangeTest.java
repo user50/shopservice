@@ -1,5 +1,6 @@
 package com.shopservice;
 
+import com.shopservice.dao.FlorangeCategoryRepository;
 import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
 import com.shopservice.productsources.Florange;
@@ -176,5 +177,11 @@ public class FlorangeTest {
         Florange florangeProductSource = new Florange();
         List<Product> products = florangeProductSource.get(null);
         System.out.println();
+    }
+
+    @Test
+    public void testGetCategories() throws Exception {
+        FlorangeCategoryRepository categoryRepository = new FlorangeCategoryRepository();
+        System.out.println(categoryRepository.getCategories());
     }
 }
