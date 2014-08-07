@@ -25,7 +25,11 @@ public class SynchronizeProducts extends ProductRepositoryWrapper {
     public SynchronizeProducts(ProductRepository productRepository, String clientId) {
         super(productRepository);
         this.clientId = clientId;
-        this.productRepository = new JdbcProductRepository(clientId);
+
+        if (clientId.equals("artem"))
+            this.productRepository = productRepository;
+        else
+            this.productRepository = new JdbcProductRepository(clientId);
     }
 
     @Override
