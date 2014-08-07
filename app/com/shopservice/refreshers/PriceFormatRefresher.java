@@ -44,7 +44,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
         ProductConditions query = new ProductConditions();
         query.productIds = getProductIds(clientId, groupId);
 
-        for (Product product : Services.getProductDAO(clientId).find( query)) {
+        for (Product product : new JdbcProductRepository(clientId).find( query)) {
             price.addItem( createItem(clientId, product) );
             categories.add( new Category( product.category.id, product.category.name) );
         }
