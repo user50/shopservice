@@ -46,8 +46,6 @@ public abstract class FileStorage<T> {
 
         if (!file.getParentFile().exists())
             file.getParentFile().mkdirs();
-
-        file.createNewFile();
     }
 
     protected abstract T construct(JsonNode node);

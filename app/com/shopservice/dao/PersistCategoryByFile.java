@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class PersistCategoryByFile implements CategoryRepository {
 
-    private static final String STORAGE_FILE = "public"+File.separator+"florange"+ File.separator+"categories";
+    private static final String STORAGE_FILE = System.getProperty("user.dir")+File.separator+"florange"+ File.separator+"categories";
 
     private CategoryRepository repository;
     private FileStorage<List<Category>> storage;
