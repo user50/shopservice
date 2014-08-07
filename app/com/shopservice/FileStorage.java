@@ -41,11 +41,13 @@ public abstract class FileStorage<T> {
         fileWriter.close();
     }
 
-    private void createDirectory() {
+    private void createDirectory() throws IOException {
         File file = new File(fileName);
 
         if (!file.getParentFile().exists())
             file.getParentFile().mkdirs();
+
+        file.createNewFile();
     }
 
     protected abstract T construct(JsonNode node);
