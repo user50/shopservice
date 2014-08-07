@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.shopservice.FileStorage;
 import com.shopservice.MailService;
 import com.shopservice.domain.Product;
+import play.Logger;
 import play.libs.Json;
 
 import java.io.File;
@@ -52,6 +53,7 @@ public class PersistenceByFile implements ProductSource {
             return products;
         } catch (IOException e) {
             MailService.getInstance().report(e);
+            Logger.error("Error during reading/writing file", e);
 
             return source.get(providerId);
         }
