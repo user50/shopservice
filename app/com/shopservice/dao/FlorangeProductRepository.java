@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class FlorangeProductRepository implements ProductRepository {
 
-    private static final String FILE_TO_STORE = "florange;products";
+    private static final String FILE_TO_STORE = "florange"+File.separator+"products";
 
     private ProductSource source = new PersistenceByFile( new Florange(), FILE_TO_STORE);
 
