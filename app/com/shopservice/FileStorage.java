@@ -6,6 +6,7 @@ import com.shopservice.domain.Product;
 import play.libs.Json;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,7 +28,7 @@ public abstract class FileStorage<T> {
     }
 
     public T get() throws IOException {
-        String persistedText =  new String(Files.readAllBytes(Paths.get(fileName)), "utf8");
+        String persistedText = new String(Files.readAllBytes(Paths.get(fileName)), "utf8");
         return construct(Json.parse(persistedText));
     }
 
@@ -36,9 +37,9 @@ public abstract class FileStorage<T> {
         createDirectory();
 
         String textToPersist = Json.toJson(t).toString();
-        FileWriter fileWriter = new FileWriter(fileName);
-        fileWriter.write(textToPersist);
-        fileWriter.close();
+        FileOutputStream output = new FileOutputStream(fileName);
+        output.write(textToPersist.getBytes("utf8"));
+        output.close();
     }
 
     private void createDirectory() throws IOException {
