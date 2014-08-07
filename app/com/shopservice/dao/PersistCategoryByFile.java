@@ -8,6 +8,7 @@ import com.shopservice.domain.Category;
 import com.shopservice.domain.Product;
 import play.libs.Json;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +17,7 @@ import java.util.Set;
 
 public class PersistCategoryByFile implements CategoryRepository {
 
-    private static final String STORAGE_FILE = "florange;categories";
+    private static final String STORAGE_FILE = "florange"+ File.separator+"categories";
 
     private CategoryRepository repository;
     private FileStorage<List<Category>> storage;

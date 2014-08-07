@@ -33,10 +33,19 @@ public abstract class FileStorage<T> {
 
 
     public void save(T t) throws IOException {
+        createDirectory();
+
         String textToPersist = Json.toJson(t).toString();
         FileWriter fileWriter = new FileWriter(fileName);
         fileWriter.write(textToPersist);
         fileWriter.close();
+    }
+
+    private void createDirectory() {
+        File file = new File(fileName);
+
+        if (!file.getParentFile().exists())
+            file.getParentFile().mkdirs();
     }
 
     protected abstract T construct(JsonNode node);
