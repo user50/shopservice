@@ -27,7 +27,7 @@ public abstract class FileStorage<T> {
     }
 
     public T get() throws IOException {
-        String persistedText = new String(Files.readAllBytes(Paths.get(fileName)), "UTF-8");
+        String persistedText = new String(Files.readAllBytes(Paths.get(fileName)), "utf8");
         return construct(Json.parse(persistedText));
     }
 
