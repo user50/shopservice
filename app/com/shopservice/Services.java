@@ -44,9 +44,9 @@ public class Services {
     {
         if (!categoryDAOs.containsKey(clientId)) {
             if (clientId.equals("artem"))
-                categoryDAOs.put(clientId, new CachedCategoryRepository(new FlorangeCategoryRepository() ) );
-
-            categoryDAOs.put(clientId, new CachedCategoryRepository(new JdbcCategoryRepository(clientId)));
+                categoryDAOs.put(clientId, new PersistCategoryByFile(new FlorangeCategoryRepository() ) );
+            else
+                categoryDAOs.put(clientId, new CachedCategoryRepository(new JdbcCategoryRepository(clientId)));
         }
 
         return categoryDAOs.get(clientId);
@@ -57,8 +57,8 @@ public class Services {
         if (!productDAOs.containsKey(clientId)) {
             if (clientId.equals("artem"))
                 productDAOs.put(clientId, new SynchronizeProducts(new FlorangeProductRepository(), clientId));
-
-            productDAOs.put(clientId, new CachedProductRepository(new SynchronizeProducts(new JdbcProductRepository(clientId), clientId)));
+            else
+                productDAOs.put(clientId, new CachedProductRepository(new SynchronizeProducts(new JdbcProductRepository(clientId), clientId)));
         }
 
         return productDAOs.get(clientId);

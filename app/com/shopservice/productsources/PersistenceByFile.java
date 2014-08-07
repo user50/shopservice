@@ -1,6 +1,8 @@
 package com.shopservice.productsources;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.shopservice.FileStorage;
 import com.shopservice.MailService;
 import com.shopservice.domain.Product;
 import play.libs.Json;
@@ -19,45 +21,35 @@ import java.util.List;
 public class PersistenceByFile implements ProductSource {
 
     private ProductSource source;
-    private String fileName;
+
+    private FileStorage<List<Product>> storage;
 
     public PersistenceByFile(ProductSource source, String fileName) {
         this.source = source;
-        this.fileName = fileName;
+        storage = new FileStorage<List<Product>>(fileName) {
+            @Override
+            protected List<Product> construct(JsonNode node) {
+                ArrayNode array = (ArrayNode)node;
+
+                List<Product> persistedProducts = new ArrayList<>();
+                for (int i=0;i<array.size(); i++)
+                    persistedProducts.add(Json.fromJson(array.get(i),Product.class ));
+
+                return persistedProducts;
+            }
+        };
     }
 
     @Override
     public List<Product> get(Integer providerId) {
-        File file = new File(fileName);
-        if (!file.exists())
-        {
-            List<Product> products = source.get(providerId);
-
-            try {
-
-                String textToPersist = Json.toJson(products).toString();
-                FileWriter fileWriter = new FileWriter(fileName);
-                fileWriter.write(textToPersist);
-                fileWriter.close();
-
-                return products;
-
-            } catch (IOException e) {
-                MailService.getInstance().report(e);
-                return products;
-            }
-        }
-
         try {
-            String persistedText = new String(Files.readAllBytes(Paths.get( fileName )));
-            ArrayNode array = (ArrayNode)Json.parse(persistedText);
+            if (storage.isExist())
+                return storage.get();
 
-             List<Product> persistedProducts = new ArrayList<>();
-            for (int i=0;i<array.size(); i++)
-                persistedProducts.add(Json.fromJson(array.get(i),Product.class ));
+            List<Product> products = source.get(providerId);
+            storage.save(products);
 
-            return persistedProducts;
-
+            return products;
         } catch (IOException e) {
             MailService.getInstance().report(e);
 
