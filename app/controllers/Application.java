@@ -1,12 +1,14 @@
 package controllers;
 
 import com.shopservice.Authentication;
+import com.shopservice.InitDemoAccount;
 import play.mvc.*;
 
 import views.html.*;
 
 import java.sql.SQLException;
 
+@With(InitDemoAccount.class)
 public class Application extends Controller {
 
     public static Result index() throws SQLException {
