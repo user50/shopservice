@@ -4,6 +4,7 @@ import com.mongodb.*;
 import com.mongodb.util.JSON;
 import com.shopservice.MongoDataBase;
 import com.shopservice.ProductConditions;
+import com.shopservice.Util;
 import com.shopservice.domain.Product;
 import play.libs.Json;
 
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Created by user50 on 09.08.2014.
  */
-public class MongoProductRepository implements ProductRepository {
+public class FlorangeProductRepositoryByMongo implements ProductRepository {
 
     private final static String COLLECTION_NAME = "products";
     private DB dataBase = MongoDataBase.get();
@@ -58,21 +59,15 @@ public class MongoProductRepository implements ProductRepository {
 
         if (!conditions.words.isEmpty())
         {
-            BasicDBObject search = new BasicDBObject("$search", toString(conditions.words));
-            query.append("$text", search);
+            BasicDBList list = new BasicDBList();
+
+            for (String word : conditions.words)
+                list.add(new BasicDBObject("name", new BasicDBObject("$regex", ".*"+word+".*").append("$options", "-i")) );
+
+            query.append("$or", list);
         }
 
         return query;
-    }
-
-    private String toString(Collection<String> words)
-    {
-        StringBuilder buffer = new StringBuilder();
-        for (String word : words) {
-            buffer.append(word).append(" ");
-        }
-
-        return buffer.toString();
     }
 
     private List<Product> toProductList(List<DBObject> objects)
