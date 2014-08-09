@@ -64,4 +64,28 @@ public class Util {
         return Jsoup.connect(url).timeout(10 * 1000).get();
     }
 
+    public static String reverseFistChar(String text)
+    {
+        char[] chars = text.toCharArray();
+        char c = chars[0];
+
+        if (Character.isUpperCase(c))
+            chars[0] = Character.toLowerCase(c);
+        else if (Character.isLowerCase(c))
+            chars[0] = Character.toUpperCase(c);
+
+        return new String(chars);
+    }
+
+    public static String stringify(Collection<String> words)
+    {
+        StringBuilder buffer = new StringBuilder();
+        for (String word : words) {
+            buffer.append(word).append(" ");
+            buffer.append(Util.reverseFistChar(word)).append(" ");
+        }
+
+        return buffer.toString();
+    }
+
 }
