@@ -41,16 +41,24 @@ public class Services {
 
     public static CategoryRepository getCategoryDAO(String clientId)
     {
-        if (!categoryDAOs.containsKey(clientId))
-            categoryDAOs.put( clientId, new CachedCategoryRepository(new JdbcCategoryRepository(clientId)));
+        if (!categoryDAOs.containsKey(clientId)) {
+            if (clientId.equals("artem"))
+                categoryDAOs.put(clientId, new PersistCategoryByFile(new FlorangeCategoryRepository() ) );
+            else
+                categoryDAOs.put(clientId, new CachedCategoryRepository(new JdbcCategoryRepository(clientId)));
+        }
 
         return categoryDAOs.get(clientId);
     }
 
     public static ProductRepository getProductDAO(String clientId)
     {
-        if (!productDAOs.containsKey(clientId))
-            productDAOs.put( clientId, new CachedProductRepository(new SynchronizeProducts(new JdbcProductRepository(clientId), clientId )));
+        if (!productDAOs.containsKey(clientId)) {
+            if (clientId.equals("artem"))
+                productDAOs.put(clientId, new FlorangeProductRepository());
+            else
+                productDAOs.put(clientId, new CachedProductRepository(new SynchronizeProducts(new JdbcProductRepository(clientId), clientId)));
+        }
 
         return productDAOs.get(clientId);
     }
