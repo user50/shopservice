@@ -3,6 +3,7 @@ package com.shopservice.productsources;
 import com.mongodb.*;
 import com.mongodb.util.JSON;
 import com.shopservice.MailService;
+import com.shopservice.MongoDataBase;
 import com.shopservice.domain.Product;
 import play.Logger;
 import play.libs.Json;
@@ -16,31 +17,10 @@ import java.util.List;
  */
 public class PersistByMongo extends ProductSourceWrapper {
 
-    private DB dataBase;
+    private DB dataBase = MongoDataBase.get();
 
     public PersistByMongo(ProductSource source) {
         super(source);
-
-        MongoClient mongoClient = createMongoClient();
-        dataBase = mongoClient.getDB("heroku_app23077977");
-    }
-
-    private MongoClient createMongoClient()
-    {
-        try {
-            String url = System.getenv("MONGOLAB_URI");
-
-            if (url != null)
-                return new MongoClient( new MongoClientURI(url) );
-            else
-                return new MongoClient( new MongoClientURI("mongodb://heroku_app23077977:s75c3rqqo1c6h7l838v71osr5@dbh73.mongolab.com:27737/heroku_app23077977"));
-        } catch (UnknownHostException e) {
-            Logger.error( "Error during creating mongo client", e);
-            MailService.getInstance().report(e);
-
-            throw new RuntimeException(e);
-        }
-
     }
 
     @Override
