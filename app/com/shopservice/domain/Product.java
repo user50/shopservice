@@ -1,6 +1,18 @@
 package com.shopservice.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mongodb.DBObject;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
+    public Product() {
+    }
+
+    public Product(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public String id;
     public String model;
     public String manufacturer;

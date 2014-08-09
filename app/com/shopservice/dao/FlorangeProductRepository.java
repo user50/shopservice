@@ -4,6 +4,7 @@ import com.shopservice.ProductConditions;
 import com.shopservice.Util;
 import com.shopservice.domain.Product;
 import com.shopservice.productsources.Florange;
+import com.shopservice.productsources.PersistByMongo;
 import com.shopservice.productsources.PersistenceByFile;
 import com.shopservice.productsources.ProductSource;
 
@@ -18,7 +19,7 @@ public class FlorangeProductRepository implements ProductRepository {
 
     private static final String FILE_TO_STORE = System.getProperty("user.dir")+File.separator+"florange"+ File.separator+"products";
 
-    private ProductSource source = new PersistenceByFile( new Florange(), FILE_TO_STORE);
+    private ProductSource source = new PersistByMongo( new Florange());
 
     @Override
     public List<Product> find(ProductConditions conditions) {

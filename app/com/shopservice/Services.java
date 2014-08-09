@@ -56,7 +56,7 @@ public class Services {
     {
         if (!productDAOs.containsKey(clientId)) {
             if (clientId.equals("artem"))
-                productDAOs.put(clientId, new SynchronizeProducts(new FlorangeProductRepository(), clientId));
+                productDAOs.put(clientId, new FlorangeProductRepository());
             else
                 productDAOs.put(clientId, new CachedProductRepository(new SynchronizeProducts(new JdbcProductRepository(clientId), clientId)));
         }
