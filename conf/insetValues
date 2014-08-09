@@ -3,3 +3,5 @@ VALUES ('client1', 'domosed', 'http://domosed.com', 'jdbc:mysql://91.200.40.60/n
 
 INSERT INTO `shopservice`.`client_settings` (`id`, `site_name`, `site_url`, `database_url`, `path_to_product_page`, `path_to_product_image`, `password`, `encoding`)
 VALUES ('client2', 'lora', 'http://mebel-alliance.kiev.ua/', 'jdbc:mysql://localhost/mebel_alliance_dump?user=root&password=neuser50', 'http://mebel-alliance.kiev.ua/', 'http://mebel-alliance.kiev.ua/', 'neuser50', 'cp1251');
+
+INSERT INTO `shopservice`.`client_settings` (`id`, `site_name`, `site_url`, `password`, `encoding`) VALUES ('artem', 'artem', 'http://florange.ua', 'neuser50', 'utf8');

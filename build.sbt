@@ -13,6 +13,7 @@ libraryDependencies ++= Seq(
   "com.zaxxer" % "HikariCP" % "1.1.8",
   "org.mockito" % "mockito-all" % "1.8.4",
   "javax.mail" % "mail" % "1.4",
+  "org.jsoup" % "jsoup" % "1.7.2"
   "org.mongodb" % "mongo-java-driver" % "2.10.1"
 )
 

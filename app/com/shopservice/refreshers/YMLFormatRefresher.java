@@ -50,7 +50,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         ProductConditions query = new ProductConditions();
         query.productIds = getProductIds(clientId, groupId);
 
-        for (Product product : new JdbcProductRepository(clientId).find(query)) {
+        for (Product product : Services.getProductDAO(clientId).find(query)) {
             ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name()));
             categories.add( product.category );
         }
