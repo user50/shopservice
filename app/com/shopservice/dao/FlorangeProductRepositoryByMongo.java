@@ -64,7 +64,7 @@ public class FlorangeProductRepositoryByMongo implements ProductRepository {
             for (String word : conditions.words)
                 list.add(new BasicDBObject("name", new BasicDBObject("$regex", ".*"+word+".*").append("$options", "-i")) );
 
-            query.append("$or", list);
+            query.append("$and", list);
         }
 
         return query;
