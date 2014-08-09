@@ -43,4 +43,11 @@ public class FlorangeTest {
         FlorangeCategoryRepository categoryRepository = new FlorangeCategoryRepository();
         System.out.println(categoryRepository.getCategories());
     }
+
+    @Test
+    public void testGetProducts() throws Exception {
+        String url = "http://florange.ua/ru/production/business/learn/uspeh/";
+        Florange florange = new Florange();
+        List<Product> products = florange.getProducts(url);
+    }
 }
