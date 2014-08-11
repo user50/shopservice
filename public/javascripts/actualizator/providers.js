@@ -1,5 +1,3 @@
-var clientId = "client1";
-
 var Provider = Backbone.Model.extend({
     urlRoot: function(){
         return '/clients/'+clientId+'/providers';
