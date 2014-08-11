@@ -24,6 +24,9 @@ public class ClientProductController extends Controller {
         List response = Services.getProductDAO(clientId).find(conditions);
         int total = Services.getProductDAO(clientId).size(conditions);
 
+        if (total > 20)
+            total = 20;
+
         PaginationResult result = new PaginationResult(total, response);
 
         return ok(Json.toJson(result));
