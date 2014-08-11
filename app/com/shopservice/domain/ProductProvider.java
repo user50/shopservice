@@ -11,5 +11,7 @@ public class ProductProvider {
 
     public String name;
 
+    public double margin;
+
     public String url;
 }
