@@ -36,6 +36,7 @@ public class EbeanProductProviderRepository implements ProductProviderRepository
 
         persistedProvider.name = productProvider.name;
         persistedProvider.url = productProvider.url;
+        persistedProvider.margin = productProvider.margin;
 
         Ebean.save(persistedProvider);
 
