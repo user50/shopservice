@@ -49,6 +49,9 @@ public class LinkedProductAssembler {
 
         List<LinkedProductEntry> entries = repository.find(new LinkedEntryCondition(providerId, linked, limit, offset));
 
+        if (!linked){
+            return entries;
+        }
         List<String> productIds = new ArrayList<>();
         for (LinkedProductEntry entry : entries)
             productIds.add(entry.productEntry.productId);

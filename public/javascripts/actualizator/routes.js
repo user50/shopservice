@@ -81,7 +81,7 @@ var ActualizationRouter = Backbone.Router.extend({
 tpl.loadTemplates(function () {
     clientId = "client1";
     actVent = _.extend({}, Backbone.Events);
-
+    clientId = $.cookie('clientId');
     actualizationRouter = new ActualizationRouter();
     Backbone.history.start();
 });

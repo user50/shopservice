@@ -7,7 +7,7 @@ var ProviderPage = Backbone.View.extend({
         this.Providers.fetch();
         this.ProvidersView = new ProvidersView({collection: this.Providers});
         this.AddProvider = new AddProvider({collection: this.Providers});
-        this.EditProvider = new EditProvider({model: new Provider({name: '', url: ''})});
+        this.EditProvider = new EditProvider({model: new Provider({name: '', url: '', margin: ''})});
         this.UpdateButton = new UpdateButton();
 
         this.listenTo(actVent, 'provider:edit', this.renderEditView);
@@ -50,8 +50,9 @@ var AddProvider = Backbone.View.extend({
     addProvider: function(){
         var name = this.$el.find('#providerNameInput').val();
         var url = this.$el.find('#providerUrlInput').val();
+        var margin = this.$el.find('#providerMarginInput').val();
 
-        var newProvider = new Provider({name: name, url: url});
+        var newProvider = new Provider({name: name, url: url, margin: margin});
 
         this.collection.create(newProvider, {wait: true,
             error: function(model, response){
@@ -68,6 +69,7 @@ var AddProvider = Backbone.View.extend({
         console.log('clear form for creating a provider');
         this.$el.find('#providerNameInput').val('');
         this.$el.find('#providerUrlInput').val('');
+        this.$el.find('#providerMarginInput').val('');
     },
 
     render: function(){
@@ -104,9 +106,11 @@ var EditProvider = Backbone.View.extend({
     editGroup: function(){
         var changedName = this.$el.find('#providerNameInputEdit').val();
         var changedUrl = this.$el.find('#providerUrlInputEdit').val();
+        var changedMargin = this.$el.find('#providerMarginInputEdit').val();
 
         this.model.set('name', changedName);
         this.model.set('url', changedUrl);
+        this.model.set('margin', changedMargin);
 
         var provider = this.model.toJSON();
 
