@@ -1,6 +1,6 @@
 package com.shopservice.urlgenerate;
 
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 
 public abstract class UrlGenerator {
 

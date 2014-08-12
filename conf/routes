@@ -6,39 +6,58 @@
 GET     /                                   controllers.Application.index()
 GET     /price                              controllers.Application.price()
 GET     /priceUpdated                       controllers.Application.priceUpdated()
+GET     /actualization                       controllers.Application.actualization()
 
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # ClientSettings operations
-GET     /clients                                                        controllers.ClientSettingsController.getClientSettings()
-GET     /clients/:id                                                    controllers.ClientSettingsController.getClientSetting(id)
-POST    /clients                                                        controllers.ClientSettingsController.createClientSettings()
-PUT     /clients/:id                                                    controllers.ClientSettingsController.updateClientSettings(id)
-DELETE  /clients/:id                                                    controllers.ClientSettingsController.deleteClientSettings(id)
+GET     /clients                                                                   controllers.ClientSettingsController.getClientSettings()
+GET     /clients/:id                                                               controllers.ClientSettingsController.getClientSetting(id)
+POST    /clients                                                                   controllers.ClientSettingsController.createClientSettings()
+PUT     /clients/:id                                                               controllers.ClientSettingsController.updateClientSettings(id)
+DELETE  /clients/:id                                                               controllers.ClientSettingsController.deleteClientSettings(id)
 
 # ProductEntry operations
-GET     /clients/:id/groups/:groupId/products                             controllers.ProductController.getProductsPage(id, groupId: Long,  categoryId ?= null, words:String ?= null ,offset: Long ?= 0, limit: Long ?= 100)
-PUT     /clients/:id/groups/:groupId/products/:productId                  controllers.ProductController.updateProduct(id, groupId: Long, productId )
-PUT     /clients/:id/groups/:groupId/products                             controllers.ProductController.updateProducts(id, groupId: Long, categoryId: String ?= null, checked : Boolean )
+GET     /clients/:id/groups/:groupId/products                                      controllers.ProductController.getProductsPage(id, groupId: Long,  categoryId ?= null, words:String ?= null ,offset: Long ?= 0, limit: Long ?= 100)
+PUT     /clients/:id/groups/:groupId/products/:productId                           controllers.ProductController.updateProduct(id, groupId: Long, productId )
+PUT     /clients/:id/groups/:groupId/products                                      controllers.ProductController.updateProducts(id, groupId: Long, categoryId: String ?= null, checked : Boolean )
 
 # Category operations
-GET     /clients/:id/categories                                           controllers.CategoryController.getCategories(id, groupId)
+GET     /clients/:id/categories                                                    controllers.CategoryController.getCategories(id, groupId)
 
 # PriceList operations
-GET    /client/:id/groups/:groupId/pricelist                              controllers.PriceListController.generatePriceList( id, groupId:Long)
-GET    /formats                                                           controllers.PriceListController.getPriceListFormats()
+GET    /client/:id/groups/:groupId/pricelist                                       controllers.PriceListController.generatePriceList( id, groupId:Long)
+GET    /formats                                                                    controllers.PriceListController.getPriceListFormats()
 
 # Group operations
-GET    /clients/:id/groups                                                controllers.ProductGroupController.get( id )
-POST   /clients/:id/groups                                                controllers.ProductGroupController.add( id )
-DELETE /clients/:id/groups/:groupId                                       controllers.ProductGroupController.remove( id, groupId:Long )
-PUT    /clients/:id/groups/:groupId                                       controllers.ProductGroupController.update( id, groupId:Long )
-PUT    /clients/:id/groups/:groupId/merge                                 controllers.ProductGroupController.merge( id, groupId:Long )
-PUT    /clients/:id/groups/:groupId/diff                                  controllers.ProductGroupController.diff( id, groupId:Long )
+GET    /clients/:id/groups                                                         controllers.ProductGroupController.get( id )
+POST   /clients/:id/groups                                                         controllers.ProductGroupController.add( id )
+DELETE /clients/:id/groups/:groupId                                                controllers.ProductGroupController.remove( id, groupId:Long )
+PUT    /clients/:id/groups/:groupId                                                controllers.ProductGroupController.update( id, groupId:Long )
+PUT    /clients/:id/groups/:groupId/merge                                          controllers.ProductGroupController.merge( id, groupId:Long )
+PUT    /clients/:id/groups/:groupId/diff                                           controllers.ProductGroupController.diff( id, groupId:Long )
 
-POST /authentication                                                      controllers.LoginController.authentication()
-POST /logout                                                              controllers.LoginController.logout()
+# Product Provider operations
+GET    /clients/:id/providers                                                      controllers.ProductProviderController.find( id )
+GET    /clients/:id/providers/:providerId                                          controllers.ProductProviderController.findById( id, providerId )
+POST   /clients/:id/providers                                                      controllers.ProductProviderController.create( id )
+POST   /clients/:id/providers/:providerId/autolink                                 controllers.ProductProviderController.autoLink( id, providerId : Integer )
+PUT    /clients/:id/providers/:providerId                                          controllers.ProductProviderController.update( id, providerId : Integer )
+DELETE /clients/:id/providers/:providerId                                          controllers.ProductProviderController.remove( id, providerId : Integer )
+GET    /clients/:id/providers/:providerId/products                                 controllers.ProductProviderController.getProducts( id, providerId : Integer, linked : Boolean ?= true, words : String ?= null,  offset: Integer ?= 0, limit: Integer ?= 100 )
 
-POST /assets/contact                                                             controllers.FeedbackController.feedbackNotify()
+# Linked Product Entry operations
+GET    /clients/:id/providers/:providerId/linkedProductEntries                     controllers.LinkedProductController.find( id, providerId: Integer, linked: Boolean ?= true, contains : String ?= null, limit : Integer ?= 10, offset : Integer ?= 0 )
+POST   /clients/:id/providers/:providerId/linkedProductEntries                     controllers.LinkedProductController.create( id, providerId: Integer)
+DELETE /clients/:id/providers/:providerId/linkedProductEntries/:linedEntryId       controllers.LinkedProductController.remove( id, providerId: Integer, linedEntryId:Integer)
+PUT    /clients/:id/providers/:providerId/linkedProductEntries/:linedEntryId       controllers.LinkedProductController.update( id, providerId: Integer, linedEntryId:Integer)
+
+POST /authentication                                                               controllers.LoginController.authentication()
+POST /logout                                                                       controllers.LoginController.logout()
+
+# Client's Products operations
+GET    /clients/:id/products                                                       controllers.ClientProductController.find(id, like : String ?= null, contain : String ?= null, offset: Integer ?= 0, limit: Integer ?= 100 )
+
+POST /assets/contact                                                               controllers.FeedbackController.feedbackNotify()

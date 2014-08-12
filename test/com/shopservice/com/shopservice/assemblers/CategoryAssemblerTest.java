@@ -3,7 +3,7 @@ package com.shopservice.com.shopservice.assemblers;
 import com.shopservice.assemblers.CategoryAssembler;
 import com.shopservice.dao.CategoryRepository;
 import com.shopservice.dao.ProductEntryRepository;
-import com.shopservice.domain.Category;
+import com.shopservice.transfer.Category;
 import org.junit.Before;
 import org.junit.Test;
 

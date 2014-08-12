@@ -4,5 +4,5 @@
 /logs
 /logs
 /logs
-/target
 /conf/evolutions/default
+/target

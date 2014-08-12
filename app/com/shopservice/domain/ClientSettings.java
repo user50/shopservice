@@ -27,4 +27,8 @@ public class ClientSettings {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     public List<ProductGroup> productGroups = new ArrayList<ProductGroup>();
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<ProductProvider> productProviders = new ArrayList<ProductProvider>();
 }
