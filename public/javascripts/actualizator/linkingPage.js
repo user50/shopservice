@@ -25,6 +25,9 @@ var LinkingPage = Backbone.View.extend({
 
         this.BackButtons = new BackButtons();
 
+        this.Tip = new TipView({text: "Выберите товар вашего интернет-магазина, " +
+            "c которым вы хотите связать товар поставщика <strong>" + this.providerProductName + "<strong>."});
+
         this.listenTo(actVent,'product:linked', this.linkProduct);
         this.listenTo(actVent,'product:search', function(text){
             actualizationRouter.navigate('providers/' + this.providerId + "/linkingProduct/"
@@ -38,9 +41,10 @@ var LinkingPage = Backbone.View.extend({
         this.Products.setText(this.providerProductName);
         this.ProductsView = new ProductsView({collection: this.Products});
         this.ProductsPaginationView = new PaginationView({collection: this.Products});
-        this.Products.fetch();
+        this.Products.fetch({wait: true});
 
         this.$el.append(this.LinkingPageBreadcrumbs.render().el);
+        this.$el.append(this.Tip.render().el);
         this.$el.append(this.LinkingSearch.render().el);
         this.$el.append(this.ProductsView.render().el);
         this.$el.append(this.ProductsPaginationView.render().el);
@@ -86,9 +90,10 @@ var LinkingPage = Backbone.View.extend({
         this.Products.setText(text);
         this.ProductsView = new ProductsView({collection: this.Products});
         this.SearchResultPaginationView = new PaginationView({collection: this.Products});
-        this.Products.fetch();
+        this.Products.fetch({wait: true});
 
         this.$el.append(this.LinkingPageBreadcrumbs.render().el);
+        this.$el.append(this.Tip.render().el)
         this.$el.append(this.LinkingSearch.render(text).el);
         this.$el.append(this.ProductsView.render().el);
         this.$el.append(this.SearchResultPaginationView.render().el);
@@ -140,7 +145,7 @@ var Products = Backbone.Paginator.requestPager.extend({
     paginator_ui: {
         firstPage: 1,
         currentPage: 1,
-        perPage: 25,
+        perPage: 10,
         totalPages: 10
     },
 
@@ -179,7 +184,7 @@ var SearchProducts = Backbone.Paginator.requestPager.extend({
     paginator_ui: {
         firstPage: 1,
         currentPage: 1,
-        perPage: 25,
+        perPage: 10,
         totalPages: 10
     },
 

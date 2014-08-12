@@ -31,7 +31,7 @@ var LinkedPage = Backbone.View.extend({
 
     render: function(){
         this.$el.empty();
-        this.LinkedProducts.fetch();
+        this.LinkedProducts.fetch({wait: true});
 
         this.$el.append(this.LinkedBreadcrumbsView.render().el);
         this.$el.append(this.LinkedSearch.render().el);

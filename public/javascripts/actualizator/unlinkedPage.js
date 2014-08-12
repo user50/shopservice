@@ -19,6 +19,10 @@ var UnlinkedPage = Backbone.View.extend({
 
         this.UnlinkedProducts = new UnlinkedProducts();
 
+        this.Tip = new TipView({text: "Выберите товар из прайса поставщика, " +
+            "который вы хотите связать с товаром вашего интернет-магазина. <br>" +
+            "Чтобы связать часть товаров поставщика с товарами интернет-магазина автоматически, нажмите кнопку \"Связать автоматически\"."});
+
         this.listenTo(actVent, 'unlinked:selected', function(unlinkedName){
             actualizationRouter.navigate('providers/' + this.providerId+ "/linkingProduct/" + unlinkedName, {trigger: true});
         });
@@ -33,11 +37,12 @@ var UnlinkedPage = Backbone.View.extend({
         this.UnlinkedProducts.setProviderId(this.providerId);
         this.UnlinkedProductsView = new UnlinkedProductsView({collection: this.UnlinkedProducts});
         this.UnlinkedProductsPagination = new PaginationView({collection: this.UnlinkedProducts});
-        this.UnlinkedProducts.fetch();
+        this.UnlinkedProducts.fetch({wait: true});
 
         this.UnlinkedSearch = new UnlinkedSearch({providerId: this.providerId});
 
         this.$el.append(this.UnlinkedBreadcrumbsView.render().el);
+        this.$el.append(this.Tip.render().el);
         this.$el.append(this.LinkAutomaticBtn.render().el);
         this.$el.append(this.UnlinkedSearch.render('').el);
         this.$el.append(this.UnlinkedProductsView.render().el);
@@ -56,9 +61,10 @@ var UnlinkedPage = Backbone.View.extend({
         this.UnlinkedSearchResults.setWords(text);
         this.UnlinkedSearchResultsView = new UnlinkedSearchResultsView({collection: this.UnlinkedSearchResults});
         this.UnlinkedSearchResultsPagination = new PaginationView({collection: this.UnlinkedSearchResults});
-        this.UnlinkedSearchResults.fetch();
+        this.UnlinkedSearchResults.fetch({wait: true});
 
         this.$el.append(this.UnlinkedBreadcrumbsView.render().el);
+        this.$el.append(this.Tip.render().el)
         this.$el.append(this.LinkAutomaticBtn.render().el);
         this.$el.append(this.UnlinkedSearch.render(text).el);
         this.$el.append(this.UnlinkedSearchResultsView.render().el);
@@ -68,12 +74,10 @@ var UnlinkedPage = Backbone.View.extend({
 
     autolink: function(){
         var url = '/clients/'+clientId+'/providers/' + this.providerId + "/autolink";
-        var providerId = this.providerId;
-        var unlinkedProducts = this.UnlinkedProducts;
         $.ajax({
             'url' : url,
             'type' : 'POST',
-            success: function(data, status){
+            success: function(){
                     $.bootstrapGrowl("Часть товаров была связана автоматически!",
                         {ele: 'body', type: 'info', width: 500});
                     actVent.trigger('autolink:finished');

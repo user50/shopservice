@@ -18,7 +18,7 @@ var WaitingPage = Backbone.View.extend({
 
         this.WaitingProducts = new WaitingProducts({providerId: this.providerId});
         this.WaitingProductsView = new WaitingProductsView({collection: this.WaitingProducts});
-        this.WaitingProducts.fetch({data: {linked: false}});
+        this.WaitingProducts.fetch({data: {linked: false}, wait: true});
 
         this.$el.append(this.WaitingPageBreadcrumbs.render().el);
         this.$el.append(this.WaitingSearch.render().el);
