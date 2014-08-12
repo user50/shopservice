@@ -5,7 +5,7 @@ import com.mongodb.util.JSON;
 import com.shopservice.MongoDataBase;
 import com.shopservice.ProductConditions;
 import com.shopservice.Util;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 import play.libs.Json;
 
 import java.util.ArrayList;

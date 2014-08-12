@@ -2,6 +2,7 @@ package com.shopservice.refreshers;
 
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
+import com.shopservice.Services;
 import com.shopservice.dao.EbeanProductGroupRepository;
 import com.shopservice.dao.JdbcProductRepository;
 import com.shopservice.domain.*;

@@ -5,6 +5,8 @@ import com.shopservice.transfer.Category;
 
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class Product {
+
+
     public String id;
     public String model;
     public String manufacturer;
@@ -20,14 +22,17 @@ public class Product {
     public Boolean published;
     public Category category;
 
-    public Product() {
-    }
-
     public Product(String name, double price, Boolean published ) {
         this.name = name;
         this.price = price;
         this.published = published;
     }
 
+    public Product() {
+    }
 
+    public Product(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

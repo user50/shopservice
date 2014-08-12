@@ -4,7 +4,7 @@ import com.mongodb.*;
 import com.mongodb.util.JSON;
 import com.shopservice.MailService;
 import com.shopservice.MongoDataBase;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 import play.Logger;
 import play.libs.Json;
 
