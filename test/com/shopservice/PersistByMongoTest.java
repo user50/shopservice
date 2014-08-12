@@ -1,8 +1,8 @@
 package com.shopservice;
 
-import com.shopservice.domain.Product;
 import com.shopservice.productsources.PersistByMongo;
 import com.shopservice.productsources.ProductSource;
+import com.shopservice.transfer.Product;
 import org.junit.Test;
 
 import java.util.ArrayList;

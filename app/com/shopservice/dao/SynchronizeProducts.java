@@ -4,8 +4,7 @@ import com.google.common.collect.Sets;
 import com.shopservice.MServiceInjector;
 import com.shopservice.MailService;
 import com.shopservice.ProductConditions;
-import com.shopservice.Services;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 import com.shopservice.domain.ProductEntry;
 
 import java.util.HashSet;

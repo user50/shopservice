@@ -8,6 +8,8 @@ import com.shopservice.dao.JdbcProductRepository;
 import com.shopservice.domain.*;
 import com.shopservice.pricelist.models.yml.*;
 import com.shopservice.pricelist.models.yml.Currency;
+import com.shopservice.transfer.Category;
+import com.shopservice.transfer.Product;
 
 import java.util.ArrayList;
 import java.util.HashSet;

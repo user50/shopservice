@@ -1,8 +1,8 @@
 package com.shopservice.productsources;
 
 import com.shopservice.Util;
-import com.shopservice.domain.Category;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Category;
+import com.shopservice.transfer.Product;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Document;

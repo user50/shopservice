@@ -1,7 +1,7 @@
 package com.shopservice.dao;
 
 import com.shopservice.Util;
-import com.shopservice.domain.Category;
+import com.shopservice.transfer.Category;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

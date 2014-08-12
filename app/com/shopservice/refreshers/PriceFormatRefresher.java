@@ -6,7 +6,7 @@ import com.shopservice.Services;
 import com.shopservice.dao.EbeanProductGroupRepository;
 import com.shopservice.dao.JdbcProductRepository;
 import com.shopservice.domain.ClientSettings;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 import com.shopservice.domain.ProductGroup;
 import com.shopservice.pricelist.models.price.Category;
 import com.shopservice.pricelist.models.price.Item;

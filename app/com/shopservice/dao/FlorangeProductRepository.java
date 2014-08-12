@@ -2,11 +2,11 @@ package com.shopservice.dao;
 
 import com.shopservice.ProductConditions;
 import com.shopservice.Util;
-import com.shopservice.domain.Product;
 import com.shopservice.productsources.Florange;
 import com.shopservice.productsources.PersistByMongo;
 import com.shopservice.productsources.PersistenceByFile;
 import com.shopservice.productsources.ProductSource;
+import com.shopservice.transfer.Product;
 
 import java.io.File;
 import java.util.ArrayList;
