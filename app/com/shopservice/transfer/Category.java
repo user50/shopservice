@@ -1,5 +1,8 @@
 package com.shopservice.transfer;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Category {
     public String id;
     public String name;
