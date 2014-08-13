@@ -2,7 +2,7 @@ package com.shopservice.dao;
 
 import com.shopservice.DatabaseManager;
 import com.shopservice.Services;
-import com.shopservice.domain.Category;
+import com.shopservice.transfer.Category;
 import com.shopservice.queries.GetCategories;
 import com.shopservice.queries.GetParentCategories;
 

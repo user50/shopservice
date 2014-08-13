@@ -2,11 +2,10 @@ package com.shopservice;
 
 import com.shopservice.dao.FlorangeCategoryRepository;
 import com.shopservice.dao.FlorangeProductRepository;
-import com.shopservice.domain.Category;
-import com.shopservice.domain.Product;
 import com.shopservice.productsources.Florange;
 import com.shopservice.productsources.PersistenceByFile;
 import com.shopservice.productsources.ProductSource;
+import com.shopservice.transfer.Product;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Document;
@@ -42,5 +41,12 @@ public class FlorangeTest {
     public void testGetCategories() throws Exception {
         FlorangeCategoryRepository categoryRepository = new FlorangeCategoryRepository();
         System.out.println(categoryRepository.getCategories());
+    }
+
+    @Test
+    public void testGetProducts() throws Exception {
+        String url = "http://florange.ua/ru/production/business/learn/uspeh/";
+        Florange florange = new Florange();
+        List<Product> products = florange.getProducts(url);
     }
 }

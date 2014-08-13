@@ -5,7 +5,7 @@ import com.shopservice.CollectionTransformer;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
 import com.shopservice.dao.ProductEntryRepository;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Product;
 import com.shopservice.domain.ProductEntry;
 
 import java.util.*;

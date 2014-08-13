@@ -1,8 +1,8 @@
 package com.shopservice.productsources;
 
 import com.shopservice.Util;
-import com.shopservice.domain.Category;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Category;
+import com.shopservice.transfer.Product;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Document;
@@ -13,14 +13,27 @@ import play.api.libs.Crypto;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by user50 on 06.08.2014.
  */
 public class Florange implements ProductSource {
     public static final String SITE_URL = "http://florange.ua";
-
+    private static final Map<Integer, Integer> descIndexes;
+    static
+    {
+        descIndexes = new HashMap<>();
+        descIndexes.put(0, 1);
+        descIndexes.put(1, 3);
+        descIndexes.put(2, 5);
+        descIndexes.put(3, 7);
+        descIndexes.put(4, 9);
+        descIndexes.put(5, 11);
+        descIndexes.put(6, 13);
+    }
     @Override
     public List<Product> get(Integer providerId) {
         List<Product> products = new ArrayList<>();
@@ -36,7 +49,7 @@ public class Florange implements ProductSource {
         return products;
     }
 
-    private List<Product> getProducts(String url) throws IOException {
+    public List<Product> getProducts(String url) throws IOException {
         System.out.println("Parsing of the " + url);
         List<Product> products = new ArrayList<>();
 
@@ -58,8 +71,8 @@ public class Florange implements ProductSource {
                 Product product = new Product();
 
                 Element tabImg = tabLi.getElementsByTag("img").get(0);
-                Attributes attr = tabImg.attributes();
-                String productName = attr.get("title") + " " + generalName;
+                String title = tabImg.attributes().get("title");
+                String productName = title + " " + generalName;
 
                 String productPrice = prices.get(i).text().replace("грн.", "");
                 if (productPrice.matches( ". шт -.*" ))
@@ -80,6 +93,7 @@ public class Florange implements ProductSource {
                 product.id = String.valueOf(productName.hashCode());
                 product.name = productName;
                 product.price = Double.valueOf(productPrice.replace(",", "."));
+                product.description = getDescription(doc, title);
                 product.url = url;
                 product.imageUrl = SITE_URL + imageUrl;
                 product.category = category;
@@ -88,12 +102,39 @@ public class Florange implements ProductSource {
 
                 products.add(product);
 
+                System.out.println("Product: " + productName + " is added. " +
+                        ((product.description != null) ? "With description" : "Without description"));
                 i++;
             }
         } catch (Exception e){
             Logger.error("Error while parsing " + url +" ; "+ e.getMessage());
         }
         return  products;
+    }
+
+    private String getDescription(Document page, String title){
+        Elements descElements = page.select(".description > p");
+        Elements descTitles = page.select(".description > p > strong");
+
+        int descIndex = -1;
+
+        for (Element descTitle: descTitles){
+            if (descTitle.text().toLowerCase().contains(title.toLowerCase())){
+                descIndex = descTitles.indexOf(descTitle);
+                break;
+            }
+
+            if (title.split("\\s+")[0].toLowerCase().contains(descTitle.text().toLowerCase())){
+                descIndex = descTitles.indexOf(descTitle);
+                break;
+            }
+
+        }
+
+        if (descIndex != -1)
+            return descElements.get(descIndexes.get(descIndex)).text();
+
+        return null;
     }
 
     public List<String> productUrls () throws IOException {

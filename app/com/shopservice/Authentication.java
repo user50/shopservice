@@ -22,6 +22,8 @@ public class Authentication extends Action.Simple {
             {
                 @Override
                 public play.mvc.SimpleResult apply() throws Throwable {
+                    context.response().setCookie("pageToRedirect", context.request().uri());
+
                     return redirect("/assets/login.html");
                 }
             });

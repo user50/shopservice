@@ -4,8 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.shopservice.FileStorage;
 import com.shopservice.MailService;
-import com.shopservice.domain.Category;
-import com.shopservice.domain.Product;
+import com.shopservice.transfer.Category;
 import play.Logger;
 import play.libs.Json;
 

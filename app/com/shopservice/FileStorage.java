@@ -2,7 +2,6 @@ package com.shopservice;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.shopservice.domain.Product;
 import play.libs.Json;
 
 import java.io.File;

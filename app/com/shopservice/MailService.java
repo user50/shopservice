@@ -28,6 +28,8 @@ public class MailService {
     }
 
     public void report(String subject, String body, List<String> recipients) throws MessagingException {
+        if (true)
+            return;
 
         final String username = "oleg@themidnightcoders.com";
         final String password = "Changeme123";
