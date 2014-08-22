@@ -7,10 +7,14 @@ import com.shopservice.assemblers.PaginationResult;
 import com.shopservice.dao.LinkedProductEntryRepository;
 import com.shopservice.dao.ProductProviderRepository;
 import com.shopservice.domain.ProductProvider;
+import play.api.mvc.MultipartFormData;
 import play.libs.Json;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 
+import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -69,6 +73,20 @@ public class ProductProviderController extends Controller {
         PaginationResult result = new PaginationResult(products.size(), products.subList(offset, Math.min(products.size(), offset + limit)   ));
 
         return ok(Json.toJson(result));
+    }
+
+    public static Result uploadFile(String clientId, Integer providerId){
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart picture = body.getFiles().get(0);
+        if (picture != null) {
+            String fileName = picture.getFilename();
+            String contentType = picture.getContentType();
+            File file = picture.getFile();
+            return ok(Json.toJson(Arrays.asList(fileName)));
+        } else {
+            flash("error", "Missing file");
+            return badRequest();
+        }
     }
 
 
