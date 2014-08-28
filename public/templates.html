@@ -43,9 +43,18 @@
         <input id="<%= id %>" type="checkbox" >
     </td>
     <td><%= name %></td>
-    <td>Доступен</td>
     <td>
-        <button type="button" class="btn btn-warning btn-sm editProvider" data-toggle="modal" data-target="#editProviderModal">
+        <% if (url == '') { %>
+        <button id="uploadPriceBtn" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#uploadPriceModal">
+            <span data-toggle="tooltip" data-placement="top" title="Загрузить прайс" class="glyphicon glyphicon-cloud-upload"></span>
+        </button>
+        <% } else { %>
+        Доступен
+        <% } %>
+
+    </td>
+    <td>
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editProviderModal">
             <span data-toggle="tooltip" data-placement="top" title="Редактировать" class="glyphicon glyphicon-pencil"></span>
         </button>
 
@@ -55,7 +64,7 @@
         <button type="button" class="btn btn-info btn-sm">
             <span data-toggle="tooltip" data-placement="top" title="Просмотреть сввязанные товары" class="glyphicon glyphicon-eye-open"></span>
         </button>
-        <button type="button" class="btn btn-default btn-sm">
+        <button id="waitingProductsBtn" type="button" class="btn btn-default btn-sm">
             <span data-toggle="tooltip" data-placement="top" title="Просмотреть ожидающие товары" class="glyphicon glyphicon-time"></span>
         </button>
         <button class="btn btn-danger btn-sm" type="button">
@@ -178,6 +187,29 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                 <button id="editProvider" type="button" class="btn btn-primary">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="priceUploaderTpl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel2">Загрзить прайс поставщика <%= name %></h4>
+            </div>
+            <div class="modal-body">
+
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Выберите файл</span>
+                    <!-- The file input field used as target for the file upload widget -->
+                    <input id="fileupload" type="file" name="files[]" multiple>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
             </div>
         </div>
     </div>

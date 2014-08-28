@@ -21,12 +21,13 @@ var ProviderView = Backbone.View.extend({
         'click .btn-primary' : function(){
             actualizationRouter.navigate('providers/' + this.model.id + "/linkProducts", {trigger: true});
         },
-        'click .btn-default' : function(){
+        'click #waitingProductsBtn' : function(){
             actualizationRouter.navigate('providers/' + this.model.id + "/waitingProducts", {trigger: true});
         },
         'click .btn-info' : function(){
             actualizationRouter.navigate('providers/' + this.model.id + "/linkedProducts", {trigger: true});
-        }
+        },
+        'click #uploadPriceBtn': 'uploadPrice'
     },
 
     initialize: function(){
@@ -43,6 +44,10 @@ var ProviderView = Backbone.View.extend({
 
     editThis: function(){
         actVent.trigger('provider:edit', this.model.id);
+    },
+
+    uploadPrice: function(){
+        actVent.trigger('provider:uploadPrice', this.model.id);
     },
 
     removeThis: function(){

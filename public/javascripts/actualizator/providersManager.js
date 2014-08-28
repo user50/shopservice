@@ -8,9 +8,11 @@ var ProviderPage = Backbone.View.extend({
         this.ProvidersView = new ProvidersView({collection: this.Providers});
         this.AddProvider = new AddProvider({collection: this.Providers});
         this.EditProvider = new EditProvider({model: new Provider({name: '', url: '', margin: ''})});
+        this.PriceUploader = new PriceUploader({model: new Provider({name: '', url: '', margin: ''})});
         this.UpdateButton = new UpdateButton();
 
         this.listenTo(actVent, 'provider:edit', this.renderEditView);
+        this.listenTo(actVent, 'provider:uploadPrice', this.renderPriceUploadView);
     },
 
     events: {
@@ -22,6 +24,13 @@ var ProviderPage = Backbone.View.extend({
 
         this.EditProvider = new EditProvider({model: this.Providers.get(modelId)});
         this.$el.append(this.EditProvider.render().el);
+    },
+
+    renderPriceUploadView: function(modelId){
+        this.PriceUploader.$el.remove();
+
+        this.PriceUploader = new PriceUploader({model: this.Providers.get(modelId)});
+        this.$el.append(this.PriceUploader.render().el);
     },
 
     render: function(){
@@ -132,6 +141,38 @@ var EditProvider = Backbone.View.extend({
     }
 });
 
+var PriceUploader = Backbone.View.extend({
+    id: 'uploadPriceModal',
+    tagName: 'div',
+    className: 'modal fade',
+
+    attributes: {
+        tabindex: -1,
+        role: 'dialog',
+        'aria-labelledby': 'myModalLabel2',
+        'aria-hidden': true
+    },
+
+    initialize: function(){
+        this.template = _.template(tpl.get('priceUploaderTpl').text);
+
+        var tags = this.model;
+        tags.on('change', this.render, this);
+        this.render();
+
+    },
+
+    getUploadUrl: function(){
+        return '/clients/' + clientId + '/providers/' + this.model.id + '/upload';
+    },
+
+    render: function(){
+        var template = this.template(this.model.toJSON());
+        this.$el.html( template );
+        return this;
+    }
+});
+
 var UpdateButton = Backbone.View.extend({
     tagName: 'div',
     className: 'row',
@@ -145,3 +186,4 @@ var UpdateButton = Backbone.View.extend({
         return this;
     }
 });
+
