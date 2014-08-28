@@ -153,13 +153,62 @@ var PriceUploader = Backbone.View.extend({
         'aria-hidden': true
     },
 
+    events: {
+        'click #uploadBtn' : 'uploadFile',
+        'change input[type=file]' : 'prepareUpload'
+    },
     initialize: function(){
         this.template = _.template(tpl.get('priceUploaderTpl').text);
 
         var tags = this.model;
         tags.on('change', this.render, this);
         this.render();
+    },
 
+    prepareUpload: function (event)
+    {
+        this.files = event.target.files;
+        this.$el.find('#uploadFileName').val(this.files[0].name);
+    },
+
+    uploadFile: function(event){
+            event.stopPropagation(); // Stop stuff happening
+            event.preventDefault(); // Totally stop stuff happening
+
+        if (this.files == null)
+        {
+            $.bootstrapGrowl("Ошибка! Вы не выбрали файл прайса поставщика для загрузки!",
+                {ele: 'body', type: 'danger', width: 350});
+            return;
+        }
+        // Create a formdata object and add the files
+        var data = new FormData();
+        $.each(this.files, function(key, value)
+        {
+            data.append(key, value);
+        });
+
+        var providerName = this.model.get('name');
+
+        $.ajax({
+            url: this.getUploadUrl(),
+            type: 'POST',
+            data: data,
+            cache: false,
+            dataType: 'json',
+            processData: false, // Don't process the files
+            contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+            success: function(data)
+            {
+                $.bootstrapGrowl("Файл прайс листа \"" + data[0] + "\" для \"" + providerName + "\" успешно загружен!",
+                    {ele: 'body', type: 'info', width: 500});
+            },
+            error: function()
+            {
+                $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],
+                    {ele: 'body', type: 'danger', width: 350});
+            }
+        });
     },
 
     getUploadUrl: function(){

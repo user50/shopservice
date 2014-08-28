@@ -197,15 +197,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel2">Загрзить прайс поставщика <%= name %></h4>
+                <h4 class="modal-title" id="myModalLabel2">Загрузить прайс поставщика "<%= name %>"</h4>
             </div>
             <div class="modal-body">
 
-                    <i class="glyphicon glyphicon-plus"></i>
-                    <span>Выберите файл</span>
-                    <!-- The file input field used as target for the file upload widget -->
-                    <input id="fileupload" type="file" name="files[]" multiple>
-
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <span data-toggle="tooltip" data-placement="top" class="btn btn-primary btn-file" title="Нажмите, чтобы выбрать файл">
+                        <span data-toggle="tooltip" data-placement="top" title="Загрузить прайс" class="glyphicon glyphicon-folder-open"></span>
+                        &nbsp; Выбрать файл <input type="file" multiple>
+                        </span>
+                    </span>
+                    <input id="uploadFileName" type="text" class="form-control" readonly>
+                </div>
+                <button id="uploadBtn" type="button" class="btn btn-default btn-md">
+                    <span data-toggle="tooltip" data-placement="top" title="Загрузить прайс" class="glyphicon glyphicon-cloud-upload"></span>
+                    &nbsp; Загрузить
+                </button>
             </div>
 
             <div class="modal-footer">
