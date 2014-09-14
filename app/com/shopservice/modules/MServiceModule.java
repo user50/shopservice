@@ -15,6 +15,7 @@ public class MServiceModule extends AbstractModule {
         bind(ProductEntryRepository.class).to(EbeanProductEntryRepository.class).in(Singleton.class);
         bind(ProductProviderRepository.class).to(EbeanProductProviderRepository.class).in(Singleton.class);
         bind(LinkedProductEntryRepository.class).to(EbeanLinkedProductEntryRepository.class).in(Singleton.class);
+        bind(ClientsCategoryRepository.class).to(EbeanClientsCategoryRepository.class).in(Singleton.class);
 
         bind(ClientSettingsRepository.class).to(CachedClientSettingsRepository.class).in(Singleton.class);
         bind(ClientSettingsRepository.class).annotatedWith(Names.named(CachedClientSettingsRepository.BASE)).to(EbeanClientSettingsRepository.class).in(Singleton.class);
