@@ -454,7 +454,22 @@
     <!-- product categories -->
     <div class="row clearfix">
         <div class="col-md-12 column">
-             <div id="categories" class="list-group"></div>
+
+            <!-- Nav tabs -->
+            <ul id="categoriesTabs" class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#clientsCategories" role="tab" data-toggle="tab">Категории магазина</a></li>
+                <li><a href="#customCategories" role="tab" data-toggle="tab">Категории для прайса</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="clientsCategories">
+                    <div id="categories" class="list-group"></div>
+                </div>
+                <div class="tab-pane" id="customCategories">Страница в процессе разработки.</div>
+                <div class="tab-pane" id="messages">...</div>
+                <div class="tab-pane" id="settings">...</div>
+            </div>
         </div>
     </div>
 
