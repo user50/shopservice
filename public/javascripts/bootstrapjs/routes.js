@@ -16,7 +16,7 @@ var Router = Backbone.Router.extend({
         new BreadcrumbsView({categoryName: app.categories.get(categoryId).get('name'),
                              groupName: app.Groups.get(currentGroupId).get('name')});
         app.SearchView.hideResults();
-        app.categoriesView.$el.hide();
+        $('#categoriesTabs').hide();
         vent.trigger('selectedCategory');
         app.ProductsView.$el.show();
         app.pagination.$el.show();
@@ -29,11 +29,11 @@ var Router = Backbone.Router.extend({
         app.ProductsView.$el.hide();
         app.pagination.$el.hide();
         app.SearchView.hideResults();
-        app.categoriesView.$el.show();
+        $('#categoriesTabs').show();
     },
 
     searchProduct: function(groupId, searchText){
-        app.categoriesView.$el.hide();
+        $('#categoriesTabs').hide();
         app.ProductsView.$el.hide();
         app.pagination.$el.hide();
     }
