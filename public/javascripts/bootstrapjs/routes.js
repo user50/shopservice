@@ -9,6 +9,7 @@ var Router = Backbone.Router.extend({
     },
     start: function(){
         console.log('Hello!');
+        $('#categoriesTabs').hide();
     },
 
     showProductsTable: function(groupId, categoryId){
