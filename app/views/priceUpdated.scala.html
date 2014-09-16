@@ -65,6 +65,22 @@
 
 </script>
 
+<script type="text/template" id="customCategoryViewTpl">
+
+    <td>
+        <%= name %>
+    </td>
+    <td>
+        <%= parentName %>
+    </td>
+    <td>
+        <button class="btn btn-danger btn-sm" type="button">
+            <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Удалить категорию" ></span>
+        </button>
+    </td>
+
+</script>
+
 <script type="text/template" id="searchResultViewTemplate">
 
     <td>
@@ -466,10 +482,41 @@
                 <div class="tab-pane active" id="clientsCategories">
                     <div id="categories" class="list-group"></div>
                 </div>
-                <div class="tab-pane" id="customCategories">Страница в процессе разработки.</div>
-            </div>
+                <div class="tab-pane" id="customCategories">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Добавить новую категорию</div>
+                                    <div class="panel-body">
+                                        <form class="form-inline" role="form">
+                                            <div class="form-group">
+                                                <label class="sr-only" for="customCategoryName">Название категории</label>
+                                                <input type="text" class="form-control" id="customCategoryName" placeholder="Название категории">
+                                            </div>
+                                            <div class="form-group">
+                                                <select id="customCategoryParent" class="form-control">
+                                                </select>
+                                            </div>
+                                            <button id="addCustomCategoryBtn" type="button" class="btn btn-default">Добавить</button>
+                                        </form>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Список категорий</div>
+                                    <div class="panel-body">
+                                        <table id="customCategoriesTable" class="table table-striped table-hover"></table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+             </div>
         </div>
-    </div>
 
     <!-- products table -->
     <div class="row clearfix">
@@ -495,6 +542,7 @@
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/globvar.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/breadcrumbs.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/categories.js"></script>
+<script type="text/javascript" src="assets/javascripts/bootstrapjs/customCategories.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/groups.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/products.js"></script>
 <script type="text/javascript" src="assets/javascripts/bootstrapjs/groupsmanager.js"></script>
