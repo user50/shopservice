@@ -141,7 +141,31 @@ var CustomCategoriesSelectView = Backbone.View.extend({
     render: function(){
         console.log('Rendering of CustomCategoriesSelectView...');
         this.$el.find('option').remove()
-            .end().append('<option value="null" selected disabled>Родительская категория</option>');
+            .end().append('<option value="null" selected>Родительская категория</option>');
+        this.collection.each(this.addOne, this);
+        return this;
+    }
+});
+
+var CustomCategoriesSelectForEditView = Backbone.View.extend({
+    el: '#customProductCategory',
+
+    initialize : function () {
+        var tags = this.collection;
+        tags.on('add', this.render, this);
+        tags.on('remove', this.render, this);
+        this.render();
+    },
+
+    addOne : function ( item ) {
+        var view = new CustomCategoryOptionView({model:item});
+        this.$el.append(view.render().el);
+    },
+
+    render: function(){
+        console.log('Rendering of CustomCategoriesSelectView...');
+        this.$el.find('option').remove()
+            .end().append('<option value="null" selected>Такая же</option>');
         this.collection.each(this.addOne, this);
         return this;
     }
@@ -174,5 +198,6 @@ var CustomCategoryAddView = Backbone.View.extend({
 app.customCategories = new CustomCategories();
 app.customCategoriesView = new CustomCategoriesView({collection: app.customCategories});
 app.customCategoriesSelectView = new CustomCategoriesSelectView({collection: app.customCategories});
+app.customCategoriesSelectForEditView = new CustomCategoriesSelectForEditView({collection: app.customCategories});
 app.addCustomCategoryBtn = new CustomCategoryAddView({collection: app.customCategories});
 app.customCategories.fetch();

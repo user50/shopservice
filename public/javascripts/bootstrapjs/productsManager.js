@@ -32,5 +32,6 @@ var EditProduct = Backbone.View.extend({
 
     render: function(){
         this.$el.find('#productNameInputEdit').val(this.model.get('productName'));
+        this.$el.find('#productCategory').val(this.model.get('categoryName'));
     }
 });
