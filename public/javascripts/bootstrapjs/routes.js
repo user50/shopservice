@@ -7,6 +7,12 @@ var Router = Backbone.Router.extend({
         'groups/:groupId' : 'showGroup',
         'groups/:groupId/search=*searchText' : 'searchProduct'
     },
+
+    initialize: function(){
+        this.EditProduct = new EditProduct({model: new Product()});
+        this.listenTo(vent, 'product:edit', this.renderEditProductView);
+    },
+
     start: function(){
         console.log('Hello!');
     },
@@ -36,6 +42,11 @@ var Router = Backbone.Router.extend({
         $('#categoriesTabs').hide();
         app.ProductsView.$el.hide();
         app.pagination.$el.hide();
+    },
+
+    renderEditProductView: function(modelId){
+        this.EditProduct = new EditProduct({model: app.Products.get(modelId)});
+        this.EditProduct.render();
     }
 });
 

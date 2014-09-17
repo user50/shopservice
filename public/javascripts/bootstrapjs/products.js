@@ -76,7 +76,8 @@ var ProductView = Backbone.View.extend({
     },
 
     events: {
-        'click .productCheck' : 'productToggle'
+        'click .productCheck' : 'productToggle',
+        'click .btn-warning' : 'editThis'
     },
 
     render : function () {
@@ -86,6 +87,10 @@ var ProductView = Backbone.View.extend({
 
     productToggle: function(){
         this.model.toggle();
+    },
+
+    editThis: function(){
+        vent.trigger('product:edit', this.model.id);
     }
 });
 
@@ -161,9 +166,10 @@ var ProductsView = Backbone.View.extend({
         var th = $('<th class="col-md-1"></th>');
         th.append(checkAll);
         tr.append(th);
-        tr.append('<th  class="col-md-6">Наименование товара</th>');
+        tr.append('<th  class="col-md-5">Наименование товара</th>');
         tr.append('<th class="col-md-3">Цена</th>');
         tr.append('<th class="col-md-2">Опубликован</th>');
+        tr.append('<th class="col-md-1"></th>');
         this.$el.append(tr);
         console.log("Header is rendered...");
     }
