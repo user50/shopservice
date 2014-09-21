@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by user50 on 14.09.2014.
  */
-@Entity
+@Entity(name = "clients_category")
 @Access(AccessType.FIELD)
 public class ClientsCategory {
 
@@ -19,7 +19,12 @@ public class ClientsCategory {
 
     public String name;
 
+    @Column(name = "parent_id")
     public Integer parentId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_settings_id")
+    public ClientSettings clientSettings;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)

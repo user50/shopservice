@@ -182,7 +182,12 @@ var CustomCategoryAddView = Backbone.View.extend({
         var name = $('#customCategoryName').val();
         var parentId = $('#customCategoryParent').val();
 
-        var newGroup = new CustomCategory({name : name, parentId : parentId});
+        var newGroup = null;
+        if (parentId == 'null')
+            newGroup = new CustomCategory({name : name});
+        else
+            newGroup = new CustomCategory({name : name, parentId : parentId});
+
         this.collection.create(newGroup, {wait: true,
             error: function(model, response){
                 $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],

@@ -1,7 +1,6 @@
 package com.shopservice;
 
 import com.shopservice.dao.ClientSettingsRepository;
-import play.cache.Cache;
 import play.libs.F;
 import play.mvc.Action;
 import play.mvc.Http;
@@ -21,7 +20,7 @@ public class InitDemoAccount extends Action.Simple {
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    if(repository.findById("demo") != null)
+                    if(repository.get("demo") != null)
                         Services.getCategoryDAO("demo").getCategories();
                 } catch (Exception e) {
                     e.printStackTrace();

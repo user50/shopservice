@@ -4,7 +4,6 @@ version := "1.0-SNAPSHOT"
 
 libraryDependencies ++= Seq(
   javaJdbc,
-  javaEbean,
   cache,
   "mysql" % "mysql-connector-java" % "5.1.18",
   "postgresql" % "postgresql" % "8.4-702.jdbc4",
@@ -15,7 +14,8 @@ libraryDependencies ++= Seq(
   "javax.mail" % "mail" % "1.4",
   "org.jsoup" % "jsoup" % "1.7.2",
   "org.mongodb" % "mongo-java-driver" % "2.10.1",
-  "org.hibernate" % "hibernate-entitymanager" % "4.3.4.Final"
+  "org.hibernate" % "hibernate-entitymanager" % "4.3.6.Final",
+  "org.avaje.ebeanorm" % "avaje-ebeanorm" % "3.2.4"
 )
 
 play.Project.playJavaSettings

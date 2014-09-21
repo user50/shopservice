@@ -28,7 +28,7 @@ public class ProductGroupController extends Controller {
 
     public static Result add( String clientId )
     {
-        ClientSettings settings = clientSettingsRepository.findById(clientId);
+        ClientSettings settings = clientSettingsRepository.get(clientId);
         if (settings == null)
             return badRequest("Client with id "+clientId+" doesn't exist ");
 

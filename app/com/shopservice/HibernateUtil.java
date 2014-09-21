@@ -1,7 +1,9 @@
 package com.shopservice;
 
 import com.shopservice.domain.*;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
@@ -12,7 +14,8 @@ public class HibernateUtil {
             Configuration configuration = new Configuration();
             addAnnotatedClasses( configuration );
             addProperties( configuration );
-            sessionFactory = configuration.buildSessionFactory();
+            StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+            sessionFactory = configuration.buildSessionFactory(ssrb.build());
         } catch (ExceptionInInitializerError ex) {
             System.err.println("Initial SessionFactory creation failed: " + ex);
             throw new ExceptionInInitializerError(ex);
@@ -33,7 +36,7 @@ public class HibernateUtil {
     private static void addProperties(Configuration configuration)
     {
         configuration.setProperty( "hibernate.connection.driver_class", "com.mysql.jdbc.Driver" )
-                .setProperty( "hibernate.connection.url", "jdbc:mysql://localhost/library" )
+                .setProperty( "hibernate.connection.url", "jdbc:mysql://localhost/shopservice" )
                 .setProperty( "hibernate.connection.username", "root" )
                 .setProperty( "hibernate.connection.password", "neuser50" )
                 .setProperty( "hibernate.connection.autocommit", "true" )
@@ -52,5 +55,33 @@ public class HibernateUtil {
      */
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    public static <T> T execute(Query query)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        T result = (T) query.execute(session);
+        session.flush();
+        session.close();
+
+        return result;
+    }
+
+    public static void execute(Update update)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        update.execute(session);
+        session.flush();
+        session.close();
+    }
+
+    public static interface Query<T>
+    {
+        public <T> T execute(Session session);
+    }
+
+    public static interface Update
+    {
+        public void execute(Session session);
     }
 }

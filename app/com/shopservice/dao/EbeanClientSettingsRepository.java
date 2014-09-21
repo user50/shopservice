@@ -7,12 +7,12 @@ import java.util.List;
 
 public class EbeanClientSettingsRepository implements ClientSettingsRepository {
     @Override
-    public ClientSettings findById(String id) {
+    public ClientSettings get(String id) {
         return Ebean.find(ClientSettings.class, id);
     }
 
     @Override
-    public List<ClientSettings> getAll() {
+    public List<ClientSettings> get() {
         return Ebean.find(ClientSettings.class).findList();
     }
 

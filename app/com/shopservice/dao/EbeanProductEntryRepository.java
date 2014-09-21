@@ -32,7 +32,7 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
 
     @Override
     public void add(String clientsId, Collection<ProductEntry> productsToAdd) throws Exception {
-        ClientSettings clientSettings = clientSettingsRepository.findById(clientsId);
+        ClientSettings clientSettings = clientSettingsRepository.get(clientsId);
         clientSettings.productEntries.addAll(productsToAdd);
         Ebean.save(clientSettings);    }
 
@@ -91,9 +91,12 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
 
     @Override
     public Map<String, Integer> getCountPerCategory(String clientId, String groupId) {
-        List<SqlRow> rows = Ebean.createSqlQuery("SELECT category_id, count(product_entry.id) AS total FROM product_entry " +
-                "JOIN group2product ON group2product.product_entry_id = product_entry.id " +
-                "WHERE client_settings_id = ? AND product_group_id = ? " +
+        List<SqlRow> rows = Ebean.createSqlQuery("SELECT\n" +
+                "  category_id,\n" +
+                "  count(product_entry.id) AS total\n" +
+                "FROM product_entry\n" +
+                "  JOIN group2product ON group2product.product_entry_id = product_entry.id\n" +
+                "WHERE client_settings_id = ? AND product_group_id = ?\n" +
                 "GROUP BY category_id")
                 .setParameter(1, clientId)
                 .setParameter(2, groupId)

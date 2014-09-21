@@ -8,7 +8,7 @@ import tyrex.services.UUID;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity(name = "product_entry")
 @Access(AccessType.FIELD)
 public class ProductEntry {
 
@@ -16,9 +16,17 @@ public class ProductEntry {
     public String id;
 
     @JsonIgnore
+    @Column(name = "product_id")
     public String productId;
 
+    @Column(name = "category_id")
     public String categoryId;
+
+    @Column(name = "custom_category_id")
+    public String customCategoryId;
+
+    @Column(columnDefinition="TEXT")
+    public String description;
 
     @Transient
     public String productName;
@@ -39,10 +47,12 @@ public class ProductEntry {
     public String categoryName;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productEntry")
     public List<Group2Product> checks;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_settings_id")
+    public ClientSettings clientSettings;
 
     public ProductEntry(SqlRow row) {
         id = row.getString("id");

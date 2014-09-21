@@ -20,7 +20,7 @@ public class PriceListController extends Controller {
 
         byte[] priceList = productGroupRepository.get(groupId).format.getHandler().generate(clientId, groupId.intValue());
 
-        ClientSettings clientSettings = clientSettingsRepository.findById(clientId);
+        ClientSettings clientSettings = clientSettingsRepository.get(clientId);
 
         response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ productGroupRepository.getName(groupId.intValue())+".xml\"" );
         return ok(priceList).as("application/force-download");

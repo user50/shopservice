@@ -30,7 +30,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
     @Override
     public byte[] generate(String clientId, int groupId) throws Exception {
-        ClientSettings clientSettings = clientSettingsRepository.findById(clientId);
+        ClientSettings clientSettings = clientSettingsRepository.get(clientId);
         ProductGroup group = MServiceInjector.injector.getInstance(EbeanProductGroupRepository.class).get(new Long(groupId));
 
         Price price = new Price();

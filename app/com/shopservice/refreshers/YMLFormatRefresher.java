@@ -4,7 +4,6 @@ import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
 import com.shopservice.dao.EbeanProductGroupRepository;
-import com.shopservice.dao.JdbcProductRepository;
 import com.shopservice.domain.*;
 import com.shopservice.pricelist.models.yml.*;
 import com.shopservice.pricelist.models.yml.Currency;
@@ -28,7 +27,7 @@ import static com.shopservice.Util.marshal;
 public class YMLFormatRefresher extends AbstractPriceListRefresher {
     @Override
     public byte[] generate(String clientId, int groupId) throws Exception {
-        ClientSettings clientSettings = clientSettingsRepository.findById(clientId);
+        ClientSettings clientSettings = clientSettingsRepository.get(clientId);
         ProductGroup group = MServiceInjector.injector.getInstance(EbeanProductGroupRepository.class).get(new Long(groupId));
 
         YmlCatalog ymlCatalog = new YmlCatalog();

@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ClientSettingsRepository {
 
-    ClientSettings findById(String id);
+    ClientSettings get(String id);
 
-    List<ClientSettings> getAll();
+    List<ClientSettings> get();
 
     void remove(String id);
 

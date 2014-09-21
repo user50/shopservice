@@ -11,9 +11,11 @@ public class Group2Product {
     public boolean checked;
 
     @ManyToOne
+    @JoinColumn(name = "product_group_id")
     public ProductGroup productGroup;
 
     @ManyToOne
+    @JoinColumn(name = "product_entry_id")
     public ProductEntry productEntry;
 
     public Group2Product() {
