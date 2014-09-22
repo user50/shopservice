@@ -39,4 +39,15 @@ public class HibernateProductEntryRepositoryTest {
 
         repository.add(settings.id, Arrays.asList(productEntry));
     }
+
+    @Test
+    public void testDelete() throws Exception {
+        ProductEntry productEntry = new ProductEntry();
+        productEntry.id = UUID.randomUUID().toString();
+        productEntry.productId = UUID.randomUUID().toString();
+
+        repository.add(settings.id, Arrays.asList(productEntry));
+
+        repository.delete(Arrays.asList(productEntry));
+    }
 }
