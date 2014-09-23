@@ -1,6 +1,9 @@
 package com.shopservice.dao;
 
+import com.shopservice.HibernateUtil;
 import com.shopservice.domain.ClientSettings;
+import org.hibernate.ScrollableResults;
+import org.hibernate.Session;
 import org.junit.Test;
 
 import java.util.UUID;
