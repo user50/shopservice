@@ -22,7 +22,7 @@ public class ProductEntry {
     @Column(name = "category_id")
     public String categoryId;
 
-    @Column(name = "custom_category_id")
+    @Column(name = "clients_category_id")
     public String customCategoryId;
 
     @Column(columnDefinition="TEXT")
@@ -49,6 +49,10 @@ public class ProductEntry {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productEntry")
     public List<Group2Product> checks;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productEntry")
+    public List<LinkedProductEntry> linkedProductEntries;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_settings_id")
