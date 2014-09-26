@@ -37,7 +37,7 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
                     productEntry.clientSettings = clientSettings;
 
                 clientSettings.productEntries.addAll(productEntries);
-                session.persist(clientSettings);
+                session.save(clientSettings);
             }
         });
     }

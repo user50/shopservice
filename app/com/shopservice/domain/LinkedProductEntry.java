@@ -29,10 +29,12 @@ public class LinkedProductEntry {
 
     @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "product_provider_id")
     public ProductProvider productProvider;
 
     @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "product_entry_id")
     public ProductEntry productEntry;
 
 

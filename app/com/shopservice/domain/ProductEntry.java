@@ -50,6 +50,10 @@ public class ProductEntry {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productEntry")
     public List<Group2Product> checks;
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productEntry")
+    public List<LinkedProductEntry> linkedProductEntries;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_settings_id")
     public ClientSettings clientSettings;
