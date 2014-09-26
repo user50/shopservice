@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by user50 on 13.07.2014.
  */
 
-@Entity
+@Entity(name = "linked_product_entry")
 @Access(AccessType.FIELD)
 public class LinkedProductEntry {
 
