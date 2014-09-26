@@ -39,4 +39,16 @@ public class HibernateProductEntryRepositoryTest {
 
         repository.add(settings.id, Arrays.asList(productEntry));
     }
+
+    @Test
+    public void testFindByClientProductId() throws Exception {
+        ProductEntry productEntry = new ProductEntry();
+        productEntry.id = UUID.randomUUID().toString();
+        productEntry.productId = UUID.randomUUID().toString();
+
+        repository.add(settings.id, Arrays.asList(productEntry));
+
+        repository.find(settings.id, productEntry.productId);
+
+    }
 }

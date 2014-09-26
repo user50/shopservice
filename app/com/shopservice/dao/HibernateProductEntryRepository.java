@@ -3,7 +3,11 @@ package com.shopservice.dao;
 import com.shopservice.HibernateUtil;
 import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.ProductEntry;
+import com.shopservice.domain.ProductGroup;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.Collection;
 import java.util.List;
@@ -39,7 +43,12 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
 
     @Override
     public void delete(Collection<ProductEntry> productsToDelete) throws Exception {
+        execute(new Update() {
+            @Override
+            public void execute(Session session) {
 
+            }
+        });
     }
 
     @Override
@@ -73,12 +82,27 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
     }
 
     @Override
-    public ProductEntry find(String productEntryId) {
-        return null;
+    public ProductEntry find(final String productEntryId) {
+        return execute(new Query() {
+            @Override
+            public ProductEntry execute(Session session) {
+                return (ProductEntry) session.get(ProductEntry.class, productEntryId);
+            }
+        });
     }
 
     @Override
-    public ProductEntry find(String clientId, String clientsProductId) {
-        return null;
+    public ProductEntry find(final String clientId, final String clientsProductId) {
+        return execute(new Query() {
+            @Override
+            public ProductEntry execute(Session session) {
+                return (ProductEntry) session.createCriteria(ProductEntry.class, "productEntry")
+                        .setFetchMode("productEntry.clientSettings", FetchMode.JOIN)
+                        .createAlias("productEntry.clientSettings", "settings", CriteriaSpecification.LEFT_JOIN)
+                        .add(Restrictions.eq("settings.id", clientId))
+                        .add(Restrictions.eq("clientsProductId", clientsProductId))
+                        .uniqueResult();
+            }
+        });
     }
 }

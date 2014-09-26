@@ -22,7 +22,7 @@ public class ProductEntry {
     @Column(name = "category_id")
     public String categoryId;
 
-    @Column(name = "custom_category_id")
+    @Column(name = "clients_category_id")
     public String customCategoryId;
 
     @Column(columnDefinition="TEXT")
