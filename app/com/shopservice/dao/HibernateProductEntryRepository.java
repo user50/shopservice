@@ -9,10 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.shopservice.HibernateUtil.*;
 
@@ -35,25 +32,39 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
             @Override
             public void execute(Session session) {
                 ClientSettings clientSettings = (ClientSettings) session.get(ClientSettings.class, clientsId);
+
+                for (ProductEntry productEntry : productEntries)
+                    productEntry.clientSettings = clientSettings;
+
                 clientSettings.productEntries.addAll(productEntries);
-                session.save(clientSettings);
+                session.persist(clientSettings);
             }
         });
     }
 
     @Override
-    public void delete(Collection<ProductEntry> productsToDelete) throws Exception {
+    public void delete(final Collection<ProductEntry> productsToDelete) throws Exception {
+        final List<String> ids = new ArrayList<>();
+        for (ProductEntry productEntry : productsToDelete)
+            ids.add(productEntry.id);
+
         execute(new Update() {
             @Override
             public void execute(Session session) {
-
+                session.createSQLQuery("DELETE FROM product_entry  WHERE product_entry.id IN (:values)")
+                        .setParameter("values", ids ).executeUpdate();
             }
         });
     }
 
     @Override
     public List<ProductEntry> getWithChecked(String clientId, String categoryId, int groupId) throws Exception {
-        return null;
+        return execute(new Query() {
+            @Override
+            public List<ProductEntry> execute(Session session) {
+                return null;
+            }
+        });
     }
 
     @Override

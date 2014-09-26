@@ -29,7 +29,6 @@ public class EbeanProductEntryRepository implements ProductEntryRepository {
         return entries;
     }
 
-
     @Override
     public void add(String clientsId, Collection<ProductEntry> productsToAdd) throws Exception {
         ClientSettings clientSettings = clientSettingsRepository.get(clientsId);
