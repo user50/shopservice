@@ -27,6 +27,6 @@ public class ClientsCategory {
     public ClientSettings clientSettings;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientsCategory")
     public List<ProductEntry> productEntries = new ArrayList<ProductEntry>();
 }

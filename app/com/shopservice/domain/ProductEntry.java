@@ -58,6 +58,10 @@ public class ProductEntry {
     @JoinColumn(name = "client_settings_id")
     public ClientSettings clientSettings;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clients_category_id", insertable = false, updatable = false)
+    public ClientSettings clientsCategory;
+
     public ProductEntry(SqlRow row) {
         id = row.getString("id");
         categoryId = row.getString("category_id");
