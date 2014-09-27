@@ -1,6 +1,5 @@
 package com.shopservice.domain;
 
-import com.avaje.ebean.SqlRow;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shopservice.transfer.Product;
 import tyrex.services.UUID;
@@ -22,7 +21,7 @@ public class ProductEntry {
     @Column(name = "category_id")
     public String categoryId;
 
-    @Column(name = "clients_category_id")
+    @Column(name = "custom_category_id")
     public String customCategoryId;
 
     @Column(columnDefinition="TEXT")
@@ -57,19 +56,6 @@ public class ProductEntry {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_settings_id")
     public ClientSettings clientSettings;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clients_category_id", insertable = false, updatable = false)
-    public ClientSettings clientsCategory;
-
-    public ProductEntry(SqlRow row) {
-        id = row.getString("id");
-        categoryId = row.getString("category_id");
-        productId = row.getString("product_id");
-
-        if (row.getString("checked") != null)
-            checked = row.getString("checked").equals("1") ;
-    }
 
     @Override
     public boolean equals(Object o) {

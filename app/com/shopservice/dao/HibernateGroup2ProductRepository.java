@@ -15,12 +15,11 @@ public class HibernateGroup2ProductRepository implements Group2ProductRepository
                 @Override
                 public void execute(Session session) {
                     session.createSQLQuery("INSERT INTO group2product (`product_group_id`, `product_entry_id`) " +
-                            "SELECT ?, product_entry.id FROM product_entry " +
-                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
-                            "WHERE product_entry.id = ? AND group2product.id IS NULL")
-                            .setParameter(1, groupId)
-                            .setParameter(2, groupId)
-                            .setParameter(3, productId)
+                            "SELECT :groupId , product_entry.id FROM product_entry " +
+                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = :groupId " +
+                            "WHERE product_entry.id = :productId AND group2product.id IS NULL")
+                            .setParameter("groupId", groupId)
+                            .setParameter("productId", productId)
                             .executeUpdate();
                 }
             });
@@ -29,10 +28,10 @@ public class HibernateGroup2ProductRepository implements Group2ProductRepository
                 @Override
                 public void execute(Session session) {
                     session.createSQLQuery("DELETE group2product.* FROM product_entry " +
-                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
-                            "WHERE product_entry.id = ? AND group2product.id IS NOT NULL")
-                            .setParameter(1, groupId)
-                            .setParameter(2, productId)
+                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = :groupId " +
+                            "WHERE product_entry.id = :productId AND group2product.id IS NOT NULL")
+                            .setParameter("groupId", groupId)
+                            .setParameter("productId", productId)
                             .executeUpdate();
                 }
             });
@@ -45,13 +44,12 @@ public class HibernateGroup2ProductRepository implements Group2ProductRepository
                 @Override
                 public void execute(Session session) {
                     session.createSQLQuery("INSERT INTO group2product (`product_group_id`, `product_entry_id`) " +
-                            "SELECT ?, product_entry.id FROM product_entry " +
-                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
-                            "WHERE client_settings_id = ? AND category_id = ? AND group2product.id IS NULL")
-                            .setParameter(1, groupId)
-                            .setParameter(2, groupId)
-                            .setParameter(3, clientId)
-                            .setParameter(4, categoryId)
+                            "SELECT :groupId, product_entry.id FROM product_entry " +
+                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = :groupId " +
+                            "WHERE client_settings_id = :clientId AND category_id = :categoryId AND group2product.id IS NULL")
+                            .setParameter("groupId", groupId)
+                            .setParameter("clientId", clientId)
+                            .setParameter("categoryId", categoryId)
                             .executeUpdate();
                 }
             });
@@ -60,11 +58,11 @@ public class HibernateGroup2ProductRepository implements Group2ProductRepository
                 @Override
                 public void execute(Session session) {
                     session.createSQLQuery("DELETE group2product.* FROM product_entry " +
-                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
-                            "WHERE client_settings_id = ? AND category_id = ? AND group2product.id IS NOT NULL")
-                            .setParameter(1, groupId)
-                            .setParameter(2, clientId)
-                            .setParameter(3, categoryId)
+                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = :groupId " +
+                            "WHERE client_settings_id = :clientId AND category_id = :categoryId AND group2product.id IS NOT NULL")
+                            .setParameter("groupId", groupId)
+                            .setParameter("clientId", clientId)
+                            .setParameter("categoryId", categoryId)
                             .executeUpdate();
                 }
             });
@@ -113,16 +111,12 @@ public class HibernateGroup2ProductRepository implements Group2ProductRepository
                 @Override
                 public void execute(Session session) {
                     org.hibernate.Query query = session.createSQLQuery("INSERT INTO group2product (`product_group_id`, `product_entry_id`) " +
-                            "SELECT ?, product_entry.id FROM product_entry " +
-                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
-                            "WHERE client_settings_id = ? AND product_entry.id IN (" + Arrays.asList(abc).toString().replace("[", "").replace("]", "") + ") AND group2product.id IS NULL")
-                            .setParameter(1, groupId)
-                            .setParameter(2, groupId)
-                            .setParameter(3, clientId);
-
-                    int i = 4;
-                    for (String entryId : productEntriesIds)
-                        query.setParameter(i++, entryId);
+                            "SELECT :groupId , product_entry.id FROM product_entry " +
+                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = :groupId " +
+                            "WHERE client_settings_id = :clientId AND product_entry.id IN (:list) AND group2product.id IS NULL")
+                            .setParameter("groupId", groupId)
+                            .setParameter("clientId", clientId)
+                            .setParameterList("list", productEntriesIds);
 
                     query.executeUpdate();
                 }
@@ -132,14 +126,11 @@ public class HibernateGroup2ProductRepository implements Group2ProductRepository
                 @Override
                 public void execute(Session session) {
                     org.hibernate.Query query = session.createSQLQuery("DELETE group2product.* FROM product_entry " +
-                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = ? " +
-                            "WHERE client_settings_id = ? AND product_entry.id IN (" + Arrays.asList(abc).toString().replace("[", "").replace("]", "") + ") AND group2product.id IS NOT NULL")
-                            .setParameter(1, groupId)
-                            .setParameter(2, clientId);
-
-                    int i = 3;
-                    for (String entryId : productEntriesIds)
-                        query.setParameter(i++, entryId);
+                            "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = :groupId " +
+                            "WHERE client_settings_id = :clientId AND product_entry.id IN (:ids) AND group2product.id IS NOT NULL")
+                            .setParameter("groupId", groupId)
+                            .setParameter("clientId", clientId)
+                            .setParameterList("ids", productEntriesIds);
 
                     query.executeUpdate();
                 }

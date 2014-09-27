@@ -1,6 +1,5 @@
 package controllers;
 
-import com.avaje.ebean.Ebean;
 import com.shopservice.ActualisationService;
 import com.shopservice.MServiceInjector;
 import com.shopservice.assemblers.PaginationResult;
@@ -29,7 +28,7 @@ public class ProductProviderController extends Controller {
 
     public static Result findById(String clientId, String providerId)
     {
-        return ok(Json.toJson(Ebean.find(ProductProvider.class, providerId) ));
+        return ok(Json.toJson(productProviderRepository.find(providerId) ));
     }
 
     public static Result create(String clientId)

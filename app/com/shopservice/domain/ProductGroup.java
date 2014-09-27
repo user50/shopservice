@@ -23,16 +23,20 @@ public class ProductGroup {
     public Integer id;
     public String name;
 
+    @Enumerated(EnumType.ORDINAL)
     public PriceListType format;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "regional_currency")
     public Currency regionalCurrency;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "product_currency")
     public Currency productCurrency;
 
     public String rate;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_settings_id")
     public ClientSettings clientSettings;

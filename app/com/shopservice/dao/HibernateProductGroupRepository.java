@@ -84,7 +84,17 @@ public class HibernateProductGroupRepository implements ProductGroupRepository {
         return execute(new Query() {
             @Override
             public ProductGroup execute(Session session) {
-                return  (ProductGroup)session.get(ProductGroup.class, groupId);
+                return  (ProductGroup)session.get(ProductGroup.class, groupId.intValue());
+            }
+        });
+    }
+
+    @Override
+    public void update(final ProductGroup group) {
+        execute(new Update() {
+            @Override
+            public void execute(Session session) {
+                session.update(group);
             }
         });
     }

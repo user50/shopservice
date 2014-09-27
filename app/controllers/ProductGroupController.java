@@ -1,6 +1,5 @@
 package controllers;
 
-import com.avaje.ebean.Ebean;
 import com.shopservice.Validator;
 import com.shopservice.dao.ClientSettingsRepository;
 import com.shopservice.dao.Group2ProductRepository;
@@ -35,9 +34,8 @@ public class ProductGroupController extends Controller {
         ProductGroup productGroup = Json.fromJson( request().body().asJson(), ProductGroup.class );
 
         Validator.validate(productGroup);
-        settings.productGroups.add(productGroup);
-
-        clientSettingsRepository.save(settings);
+        productGroup.clientSettings = settings;
+        productGroupRepository.save( productGroup );
 
         return ok( Json.toJson(productGroup) );
     }
@@ -51,7 +49,7 @@ public class ProductGroupController extends Controller {
 
     public static Result update(String clientId, Long groupId)
     {
-        ProductGroup group = Ebean.find(ProductGroup.class, groupId);
+        ProductGroup group = productGroupRepository.get( groupId);
 
         if (group == null)
             return notFound();
@@ -65,7 +63,7 @@ public class ProductGroupController extends Controller {
         group.rate = fromRequest.rate;
 
         Validator.validate(group);
-        productGroupRepository.save(group);
+        productGroupRepository.update(group);
 
         return ok(Json.toJson(group));
     }

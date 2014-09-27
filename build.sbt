@@ -14,8 +14,7 @@ libraryDependencies ++= Seq(
   "javax.mail" % "mail" % "1.4",
   "org.jsoup" % "jsoup" % "1.7.2",
   "org.mongodb" % "mongo-java-driver" % "2.10.1",
-  "org.hibernate" % "hibernate-entitymanager" % "4.3.6.Final",
-  "org.avaje.ebeanorm" % "avaje-ebeanorm" % "3.2.4"
+  "org.hibernate" % "hibernate-entitymanager" % "4.3.6.Final"
 )
 
 play.Project.playJavaSettings
