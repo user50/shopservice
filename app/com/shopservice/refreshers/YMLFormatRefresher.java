@@ -26,7 +26,7 @@ import static com.shopservice.Util.marshal;
  */
 public class YMLFormatRefresher extends AbstractPriceListRefresher {
     @Override
-    public byte[] generate(String clientId, int groupId) throws Exception {
+    public byte[] generate(String clientId, int groupId, boolean useCustomCategories) throws Exception {
         ClientSettings clientSettings = clientSettingsRepository.get(clientId);
         ProductGroup group = MServiceInjector.injector.getInstance(HibernateProductGroupRepository.class).get(new Long(groupId));
 
@@ -49,7 +49,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         Set<Category> categories = new HashSet<Category>();
 
         ProductConditions query = new ProductConditions();
-        query.productIds = getProductIds(clientId, groupId);
+        query.productIds = getProductIds(clientId, groupId, useCustomCategories);
 
         for (Product product : Services.getProductDAO(clientId).find(query)) {
             ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name()));
