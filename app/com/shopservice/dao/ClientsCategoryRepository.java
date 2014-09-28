@@ -9,4 +9,5 @@ public interface ClientsCategoryRepository {
     ClientsCategory add(String clientId, ClientsCategory clientsCategory);
     ClientsCategory update(String clientId, ClientsCategory clientsCategory);
     void delete(int clientsCategoryId);
+    List<ClientsCategory> getByParent(Integer parentId);
 }

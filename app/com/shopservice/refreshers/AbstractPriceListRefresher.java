@@ -19,10 +19,10 @@ public abstract class AbstractPriceListRefresher implements PriceListRefresher {
     protected ProductEntryRepository productEntryRepository = injector.getInstance(ProductEntryRepository.class);
     protected ClientSettingsRepository clientSettingsRepository = injector.getInstance(ClientSettingsRepository.class);
 
-    protected Set<String> getProductIds(String clientId, int siteId) throws Exception {
+    protected Set<String> getProductIds(String clientId, int groupId, boolean useCustomCategories) throws Exception {
         Set<String> setOfProductIds = new HashSet<String>();
 
-        for (ProductEntry productEntry : productEntryRepository.findSelected(clientId, siteId))
+        for (ProductEntry productEntry : productEntryRepository.findSelected(clientId, groupId, useCustomCategories))
             setOfProductIds.add(productEntry.productId);
 
         if (setOfProductIds.isEmpty())

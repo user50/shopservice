@@ -45,7 +45,7 @@ var Router = Backbone.Router.extend({
     },
 
     renderEditProductView: function(modelId){
-        this.EditProduct = new EditProduct({model: app.Products.get(modelId)});
+        this.EditProduct.updateModel(modelId);
         this.EditProduct.render();
     }
 });

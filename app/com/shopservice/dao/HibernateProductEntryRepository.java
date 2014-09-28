@@ -17,13 +17,13 @@ import static com.shopservice.HibernateUtil.*;
 
 public class HibernateProductEntryRepository implements ProductEntryRepository {
     @Override
-    public List<ProductEntry> findSelected(final String clientSettingsId, final int groupId) throws Exception {
+    public List<ProductEntry> findSelected(final String clientSettingsId, final int groupId, final boolean useCustomCategories) throws Exception {
         return execute(new Query() {
             @Override
             public List<ProductEntry> execute(Session session) {
                 return session.createSQLQuery("SELECT product_entry.* FROM product_entry " +
                         "JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = :groupId " +
-                        "WHERE client_settings_id = :clientSettingsId").addEntity(ProductEntry.class)
+                        "WHERE client_settings_id = :clientSettingsId " + (useCustomCategories ? "AND custom_category_id IS NOT NULL" : "") ).addEntity(ProductEntry.class)
                         .setParameter("groupId", groupId)
                         .setParameter("clientSettingsId", clientSettingsId)
                         .list();
@@ -236,6 +236,16 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
                         .add(Restrictions.eq("settings.id", clientId))
                         .add(Restrictions.eq("clientsProductId", clientsProductId))
                         .uniqueResult();
+            }
+        });
+    }
+
+    @Override
+    public void update(final ProductEntry entry) {
+        execute(new Update() {
+            @Override
+            public void execute(Session session) {
+                session.update(entry);
             }
         });
     }

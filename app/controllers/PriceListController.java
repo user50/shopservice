@@ -16,9 +16,9 @@ public class PriceListController extends Controller {
     private static ProductGroupRepository productGroupRepository = MServiceInjector.injector.getInstance(ProductGroupRepository.class);
     private static ClientSettingsRepository clientSettingsRepository = injector.getInstance(ClientSettingsRepository.class);
 
-    public static Result generatePriceList(String clientId, Long groupId) throws Exception {
+    public static Result generatePriceList(String clientId, Long groupId, Boolean useCustomCategories) throws Exception {
 
-        byte[] priceList = productGroupRepository.get(groupId).format.getHandler().generate(clientId, groupId.intValue());
+        byte[] priceList = productGroupRepository.get(groupId).format.getHandler().generate(clientId, groupId.intValue(), useCustomCategories);
 
         ClientSettings clientSettings = clientSettingsRepository.get(clientId);
 

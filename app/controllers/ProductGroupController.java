@@ -33,7 +33,7 @@ public class ProductGroupController extends Controller {
 
         ProductGroup productGroup = Json.fromJson( request().body().asJson(), ProductGroup.class );
 
-        Validator.validate(productGroup);
+        Validator.validateCreate(productGroup);
         productGroup.clientSettings = settings;
         productGroupRepository.save( productGroup );
 
@@ -62,7 +62,7 @@ public class ProductGroupController extends Controller {
         group.productCurrency = fromRequest.productCurrency;
         group.rate = fromRequest.rate;
 
-        Validator.validate(group);
+        Validator.validateCreate(group);
         productGroupRepository.update(group);
 
         return ok(Json.toJson(group));

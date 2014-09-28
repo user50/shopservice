@@ -29,7 +29,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
 
     @Override
-    public byte[] generate(String clientId, int groupId) throws Exception {
+    public byte[] generate(String clientId, int groupId, boolean useCustomCategories) throws Exception {
         ClientSettings clientSettings = clientSettingsRepository.get(clientId);
         ProductGroup group = MServiceInjector.injector.getInstance(ProductGroupRepository.class).get(new Long(groupId));
 
@@ -41,7 +41,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
         Set<Category> categories = new HashSet<Category>();
 
         ProductConditions query = new ProductConditions();
-        query.productIds = getProductIds(clientId, groupId);
+        query.productIds = getProductIds(clientId, groupId, useCustomCategories);
 
         for (Product product : new JdbcProductRepository(clientId).find( query)) {
             price.addItem( createItem(clientId, product) );

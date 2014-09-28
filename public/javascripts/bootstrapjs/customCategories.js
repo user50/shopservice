@@ -43,9 +43,17 @@ var CustomCategoryView = Backbone.View.extend({
                     label: "Удалить",
                     className: "btn-danger",
                     callback: function() {
-                        model.destroy();
-                        $.bootstrapGrowl("Категория \"" + model.get('name') + "\" была удалена!",
-                            {ele: 'body', type: 'success', width: 350});
+                        model.destroy(
+                            {success: function(model, response) {
+                                $.bootstrapGrowl("Категория \"" + model.get('name') + "\" была удалена!",
+                                {ele: 'body', type: 'success', width: 350});
+                            },
+                            error : function(model, response){
+                                    $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],
+                                        {ele: 'body', type: 'danger', width: 350});
+                                },
+                        wait: true
+                        });
                     }
                 }
             }

@@ -67,4 +67,15 @@ public class HibernateClientsCategoryRepository implements ClientsCategoryReposi
             }
         });
     }
+
+    @Override
+    public List<ClientsCategory> getByParent(final Integer parentId) {
+        return execute(new Query() {
+            @Override
+            public List<ClientsCategory> execute(Session session) {
+                return session.createCriteria(ClientsCategory.class)
+                        .add(Restrictions.eq("parentId", parentId)).list();
+            }
+        });
+    }
 }

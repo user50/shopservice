@@ -8,5 +8,5 @@ package com.shopservice.refreshers;
  * To change this template use File | Settings | File Templates.
  */
 public interface PriceListRefresher {
-    public byte[] generate(String clientId, int siteId) throws Exception;
+    public byte[] generate(String clientId, int siteId, boolean useCustomCategories) throws Exception;
 }

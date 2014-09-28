@@ -1,6 +1,7 @@
 package controllers;
 
 import com.shopservice.MServiceInjector;
+import com.shopservice.Validator;
 import com.shopservice.dao.ClientsCategoryRepository;
 import com.shopservice.domain.ClientsCategory;
 import play.libs.Json;
@@ -29,9 +30,10 @@ public class ClientsCategoryController extends Controller{
     }
 
     public static Result delete(String clientId, Integer clientCategoryId){
+        Validator.validateDelete(clientCategoryId);
         clientsCategoryRepository.delete(clientCategoryId);
 
-        return ok();
+        return ok(Json.toJson(clientCategoryId));
     }
 
 }

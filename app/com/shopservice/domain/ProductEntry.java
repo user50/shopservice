@@ -40,7 +40,7 @@ public class ProductEntry {
     public Boolean published = false;
 
     @Transient
-    public boolean checked;
+    public Boolean checked;
 
     @Transient
     public String categoryName;
@@ -53,6 +53,7 @@ public class ProductEntry {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productEntry")
     public List<LinkedProductEntry> linkedProductEntries;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_settings_id")
     public ClientSettings clientSettings;

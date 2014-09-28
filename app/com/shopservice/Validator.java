@@ -1,6 +1,8 @@
 package com.shopservice;
 
+import com.shopservice.dao.ClientsCategoryRepository;
 import com.shopservice.dao.ProductGroupRepository;
+import com.shopservice.domain.ClientsCategory;
 import com.shopservice.domain.ProductGroup;
 import com.shopservice.exception.Description;
 import com.shopservice.exception.ValidationException;
@@ -12,8 +14,9 @@ import static com.shopservice.MServiceInjector.injector;
  */
 public class Validator {
     private static ProductGroupRepository productGroupRepository = injector.getInstance(ProductGroupRepository.class);
+    private static ClientsCategoryRepository clientsCategoryRepository = injector.getInstance(ClientsCategoryRepository.class);
 
-    public static void validate(ProductGroup group)
+    public static void validateCreate(ProductGroup group)
     {
         if (group.name != null && group.name.isEmpty())
             throw new ValidationException(new Description("Name cannot be empty", 101));
@@ -44,4 +47,8 @@ public class Validator {
             throw new ValidationException(new Description("Rate cannot be empty", 105 ));
     }
 
+    public static void validateDelete (Integer categoryId){
+        if (!clientsCategoryRepository.getByParent(categoryId).isEmpty())
+            throw new ValidationException(new Description("Trying to delete category with children!", 106));
+    }
 }
