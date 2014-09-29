@@ -2,6 +2,7 @@ package com.shopservice.dao;
 
 import com.shopservice.domain.ClientsCategory;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface ClientsCategoryRepository {
@@ -10,4 +11,6 @@ public interface ClientsCategoryRepository {
     ClientsCategory update(String clientId, ClientsCategory clientsCategory);
     void delete(int clientsCategoryId);
     List<ClientsCategory> getByParent(Integer parentId);
+
+    List<ClientsCategory>  getParents(Collection<Integer> categoryIds);
 }

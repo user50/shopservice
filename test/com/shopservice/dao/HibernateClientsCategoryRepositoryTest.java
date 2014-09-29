@@ -5,6 +5,7 @@ import com.shopservice.domain.ClientsCategory;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 public class HibernateClientsCategoryRepositoryTest {
@@ -67,5 +68,22 @@ public class HibernateClientsCategoryRepositoryTest {
         repository.add(settings.id, clientsCategory);
 
         repository.delete(clientsCategory.id);
+    }
+
+    @Test
+    public void testGetParents() throws Exception {
+        ClientsCategory parent = new ClientsCategory();
+        parent.name = "1234";
+
+        repository.add(settings.id, parent);
+
+        ClientsCategory child = new ClientsCategory();
+        child.name = "123133";
+        child.parentId = parent.id;
+
+        repository.add(settings.id, child);
+
+        repository.getParents(Arrays.asList(child.id ));
+
     }
 }

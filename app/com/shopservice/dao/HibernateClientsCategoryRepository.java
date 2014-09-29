@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.Collection;
 import java.util.List;
 
 import static com.shopservice.HibernateUtil.*;
@@ -75,6 +76,19 @@ public class HibernateClientsCategoryRepository implements ClientsCategoryReposi
             public List<ClientsCategory> execute(Session session) {
                 return session.createCriteria(ClientsCategory.class)
                         .add(Restrictions.eq("parentId", parentId)).list();
+            }
+        });
+    }
+
+    @Override
+    public List<ClientsCategory> getParents(final Collection<Integer> categoryIds) {
+        return execute(new Query() {
+            @Override
+            public List<ClientsCategory> execute(Session session) {
+                return session.createQuery("select parent " +
+                        "from com.shopservice.domain.ClientsCategory as parent, " +
+                        "com.shopservice.domain.ClientsCategory as child\n" +
+                        "WHERE parent.id = child.parentId and child.id in(:ids)").setParameterList("ids", categoryIds).list();
             }
         });
     }

@@ -36,6 +36,7 @@ public class ProductGroup {
 
     public String rate;
 
+    @Column(name = "use_custom_categories")
     public boolean useCustomCategories;
 
     @JsonIgnore

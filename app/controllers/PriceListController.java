@@ -18,7 +18,7 @@ public class PriceListController extends Controller {
 
     public static Result generatePriceList(String clientId, Long groupId, Boolean useCustomCategories) throws Exception {
 
-        byte[] priceList = productGroupRepository.get(groupId).format.getHandler().generate(clientId, groupId.intValue(), useCustomCategories);
+        byte[] priceList = productGroupRepository.get(groupId).format.getHandler().generate(clientId, groupId.intValue());
 
         ClientSettings clientSettings = clientSettingsRepository.get(clientId);
 
