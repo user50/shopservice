@@ -60,7 +60,8 @@ var AddGroup = Backbone.View.extend({
         //TODO validation
         var name = this.$el.find('#priceNameInput').val();
         var format = this.$el.find('#priceFormatSelect option:selected').val();
-        var newGroup = new Group({name: name, format: format});
+        var useCustomCategories = this.$el.find('#categoriesTypeSelect option:selected').val();
+        var newGroup = new Group({name: name, format: format, useCustomCategories: useCustomCategories});
         var regionalCurrency = this.$el.find('#priceRegCurrencySelect option:selected').val();
         if (regionalCurrency != 'none')
             newGroup.set('regionalCurrency', regionalCurrency);
@@ -167,6 +168,7 @@ var AddGroup = Backbone.View.extend({
         this.$el.find('#priceFormatSelect').val('YML');
         this.$el.find('#priceCurrencySelect').val('none');
         this.$el.find('#priceRegCurrencySelect').val('none');
+        this.$el.find('#categoriesTypeSelect').val('false');
         this.resetRateType(true);
         this.resetRate(true);
     }
@@ -188,9 +190,11 @@ var EditGroup = Backbone.View.extend({
 
         var changedName = this.$el.find('#priceNameInputEdit').val();
         var changedFormat = this.$el.find('#priceFormatSelectEdit option:selected').val();
+        var changedUseCustomCategories = this.$el.find('#categoriesTypeSelectEdit option:selected').val();
 
         changedGroup.set('name', changedName);
         changedGroup.set('format', changedFormat);
+        changedGroup.set('useCustomCategories', changedUseCustomCategories);
 
         var changedRegionalCurrency = this.$el.find('#priceRegCurrencySelectEdit option:selected').val();
         if (changedRegionalCurrency != 'none'){
@@ -229,6 +233,7 @@ var EditGroup = Backbone.View.extend({
         this.$el.find('#invalidPriceName').hide();
         var group = app.Groups.get(currentGroupId);
         this.$el.find('#priceNameInputEdit').val(group.get('name'));
+        this.$el.find('#categoriesTypeSelectEdit').val(group.get('useCustomCategories').toString());
         this.setFormat(group.get('format'));
         this.renderCurrencySettings();
         var url = "http://mservice.herokuapp.com/client/"+clientId + "/groups/" + currentGroupId + "/pricelist";

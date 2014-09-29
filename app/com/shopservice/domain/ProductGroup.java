@@ -36,6 +36,8 @@ public class ProductGroup {
 
     public String rate;
 
+    public boolean useCustomCategories;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_settings_id")
