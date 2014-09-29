@@ -60,6 +60,7 @@ public class ProductGroupController extends Controller {
         group.format = fromRequest.format;
         group.regionalCurrency = fromRequest.regionalCurrency;
         group.productCurrency = fromRequest.productCurrency;
+        group.useCustomCategories = fromRequest.useCustomCategories;
         group.rate = fromRequest.rate;
 
         Validator.validateCreate(group);
