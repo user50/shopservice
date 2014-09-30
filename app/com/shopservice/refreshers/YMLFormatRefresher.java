@@ -3,6 +3,7 @@ package com.shopservice.refreshers;
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
+import com.shopservice.dao.ClientsCategoryRepository;
 import com.shopservice.dao.HibernateProductGroupRepository;
 import com.shopservice.domain.*;
 import com.shopservice.pricelist.models.yml.*;
@@ -12,6 +13,7 @@ import com.shopservice.transfer.Product;
 
 import java.util.*;
 
+import static com.shopservice.MServiceInjector.injector;
 import static com.shopservice.Util.marshal;
 
 /**
@@ -22,6 +24,8 @@ import static com.shopservice.Util.marshal;
  * To change this template use File | Settings | File Templates.
  */
 public class YMLFormatRefresher extends AbstractPriceListRefresher {
+    private static ClientsCategoryRepository clientsCategoryRepository = injector.getInstance(ClientsCategoryRepository.class);
+
     @Override
     public byte[] generate(String clientId, int groupId) throws Exception {
         ClientSettings clientSettings = clientSettingsRepository.get(clientId);
@@ -50,7 +54,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
 
         if (group.useCustomCategories)
         {
-            Map<String,Category> idToCategory = getCategories(query.productIds);
+            Map<String,Category> idToCategory = getCategories(clientId, query.productIds);
             for (Product product : Services.getProductDAO(clientId).find(query)) {
                 ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name(), idToCategory.get(product.id).id ));
                 categories.add( idToCategory.get(product.id) );
@@ -104,9 +108,26 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         return result;
     }
 
-    private Map<String,Category> getCategories(Collection<String> productIds )
+    private Map<String,Category> getCategories(String clientId, Collection<String> productIds)
     {
-        return null;
+        Map<String, ClientsCategory> productIdToClientsCategory =
+                clientsCategoryRepository.getByProductIds(clientId, productIds);
+
+        Map<String, Category> result = new HashMap<>();
+
+        for (Map.Entry<String, ClientsCategory> entry : productIdToClientsCategory.entrySet()) {
+            String productId = entry.getKey();
+
+            Category category = new Category(entry.getValue().id.toString());
+            category.name = entry.getValue().name;
+
+            if (entry.getValue().parentId != null)
+                category.parentId = entry.getValue().parentId.toString();
+
+            result.put(productId, category);
+        }
+
+        return result;
     }
 
 

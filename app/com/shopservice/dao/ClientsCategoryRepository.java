@@ -4,6 +4,7 @@ import com.shopservice.domain.ClientsCategory;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public interface ClientsCategoryRepository {
     List<ClientsCategory> get(String clientId);
@@ -13,4 +14,6 @@ public interface ClientsCategoryRepository {
     List<ClientsCategory> getByParent(Integer parentId);
 
     List<ClientsCategory>  getParents(Collection<Integer> categoryIds);
+
+    Map<String,ClientsCategory> getByProductIds(String clientId, Collection<String> productIds);
 }

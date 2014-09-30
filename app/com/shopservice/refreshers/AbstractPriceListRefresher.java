@@ -96,7 +96,8 @@ public abstract class AbstractPriceListRefresher implements PriceListRefresher {
             for (ClientsCategory clientsCategory : repository.getParents(ids)) {
                 Category category = new Category(clientsCategory.id.toString());
                 category.name = clientsCategory.name;
-                category.parentId = clientsCategory.parentId.toString();
+                if (clientsCategory.parentId != null)
+                    category.parentId = clientsCategory.parentId.toString();
             }
 
             return categories;
