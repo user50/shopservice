@@ -36,6 +36,4 @@ public class LinkedProductEntry {
     @ManyToOne
     @JoinColumn(name = "product_entry_id")
     public ProductEntry productEntry;
-
-
 }

@@ -16,6 +16,7 @@ import java.util.List;
 import static com.shopservice.MServiceInjector.injector;
 
 @Entity(name = "product_group")
+@Access(AccessType.FIELD)
 public class ProductGroup {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
