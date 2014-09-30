@@ -10,10 +10,7 @@ import com.shopservice.pricelist.models.yml.Currency;
 import com.shopservice.transfer.Category;
 import com.shopservice.transfer.Product;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.shopservice.Util.marshal;
 
@@ -51,9 +48,20 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         ProductConditions query = new ProductConditions();
         query.productIds = getProductIds(clientId, groupId, group.useCustomCategories);
 
-        for (Product product : Services.getProductDAO(clientId).find(query)) {
-            ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name()));
-            categories.add( product.category );
+        if (group.useCustomCategories)
+        {
+            Map<String,Category> idToCategory = getCategories(query.productIds);
+            for (Product product : Services.getProductDAO(clientId).find(query)) {
+                ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name(), idToCategory.get(product.id).id ));
+                categories.add( idToCategory.get(product.id) );
+            }
+        }
+        else
+        {
+            for (Product product : Services.getProductDAO(clientId).find(query)) {
+                ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name(), product.category.id));
+                categories.add( product.category );
+            }
         }
 
         CategorySource categorySource = group.useCustomCategories ? new CustomCategorySource():new DefaultCategorySource(clientId);
@@ -66,12 +74,12 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
 
     }
 
-    private Offer createOffer(Product product, String currency) {
+    private Offer createOffer(Product product, String currency, String categoryId) {
         Offer offer = new Offer();
         offer.price = product.price;
         offer.currencyId = currency;
         offer.id = product.id + product.category.id;
-        offer.categoryId = product.category.id;
+        offer.categoryId = categoryId;
         offer.description = product.description;
         offer.vendor = product.manufacturer;
         offer.name = product.name;
@@ -94,6 +102,11 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         }
 
         return result;
+    }
+
+    private Map<String,Category> getCategories(Collection<String> productIds )
+    {
+        return null;
     }
 
 
