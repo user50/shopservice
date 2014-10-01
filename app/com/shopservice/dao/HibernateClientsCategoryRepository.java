@@ -8,10 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.shopservice.HibernateUtil.*;
 
@@ -83,6 +80,9 @@ public class HibernateClientsCategoryRepository implements ClientsCategoryReposi
 
     @Override
     public List<ClientsCategory> getParents(final Collection<Integer> categoryIds) {
+        if (categoryIds.isEmpty())
+            return new ArrayList<>();
+
         return execute(new Query() {
             @Override
             public List<ClientsCategory> execute(Session session) {
