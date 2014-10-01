@@ -19,7 +19,8 @@ var EditProduct = Backbone.View.extend({
 
         console.log(this.model.get('productName'));
         this.model.set('productName', changedName);
-        this.model.set('description', changedDesc);
+        if (changedDesc != null && changedDesc != '')
+            this.model.set('description', changedDesc);
         this.model.set('customCategoryId', changedCustomCategoryId);
 
         var product = this.model.toJSON();
