@@ -35,15 +35,14 @@ public class HibernateUtil {
 
     private static void addProperties(Configuration configuration)
     {
-        configuration.setProperty( "hibernate.connection.driver_class", "com.mysql.jdbc.Driver" )
-                .setProperty( "hibernate.connection.url", "jdbc:mysql://localhost/shopservice" )
-                .setProperty( "hibernate.connection.username", "root" )
-                .setProperty( "hibernate.connection.password", "neuser50" )
+        configuration.setProperty( "hibernate.connection.url", "jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d?useUnicode=yes&characterEncoding=utf8" )
+                .setProperty( "hibernate.connection.username", "b02276676df1a5" )
+                .setProperty( "hibernate.connection.password", "2c270044" )
                 .setProperty( "hibernate.connection.autocommit", "true" )
                 .setProperty( "show_sql", "true" )
                 .setProperty( "dialect", "org.hibernate.dialect.MySQLDialect" )
-                .setProperty( "hibernate.c3p0.min_size", "5" )
-                .setProperty( "hibernate.c3p0.max_size", "20" )
+                .setProperty( "hibernate.c3p0.min_size", "2" )
+                .setProperty( "hibernate.c3p0.max_size", "2" )
                 .setProperty( "hibernate.c3p0.timeout", "1800" )
                 .setProperty( "hibernate.c3p0.max_statements", "50" )
                 .setProperty("hibernate.hbm2ddl.auto", "update");
