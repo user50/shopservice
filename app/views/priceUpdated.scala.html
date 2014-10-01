@@ -58,9 +58,15 @@
     </td>
     <td>
         <% if (published) { %>
-        <span class="label label-success">ДА</span>
+        <span class="label label-success"><span class="glyphicon glyphicon-ok"></span></span>
         <% } else { %>
-        <span class="label label-default">НЕТ</span><% } %>
+        <span class="label label-default"><span class="glyphicon glyphicon-minus"></span></span><% } %>
+    </td>
+    <td>
+        <% if (description != null) { %>
+        <span class="label label-success"><span class="glyphicon glyphicon-ok"></span></span>
+        <% } else { %>
+        <span class="label label-default"><span class="glyphicon glyphicon-minus"></span></span><% } %>
     </td>
     <td>
         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editProductModal">

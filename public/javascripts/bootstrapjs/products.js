@@ -167,8 +167,9 @@ var ProductsView = Backbone.View.extend({
         th.append(checkAll);
         tr.append(th);
         tr.append('<th  class="col-md-5">Наименование товара</th>');
-        tr.append('<th class="col-md-3">Цена</th>');
+        tr.append('<th class="col-md-2">Цена</th>');
         tr.append('<th class="col-md-2">Опубликован</th>');
+        tr.append('<th class="col-md-1">Описание</th>');
         tr.append('<th class="col-md-1"></th>');
         this.$el.append(tr);
         console.log("Header is rendered...");
