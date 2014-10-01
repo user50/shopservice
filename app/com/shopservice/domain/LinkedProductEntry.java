@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by user50 on 13.07.2014.
  */
 
-@Entity
+@Entity(name = "linked_product_entry")
 @Access(AccessType.FIELD)
 public class LinkedProductEntry {
 
@@ -29,11 +29,11 @@ public class LinkedProductEntry {
 
     @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "product_provider_id")
     public ProductProvider productProvider;
 
     @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "product_entry_id")
     public ProductEntry productEntry;
-
-
 }

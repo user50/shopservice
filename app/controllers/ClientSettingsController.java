@@ -17,11 +17,11 @@ public class ClientSettingsController extends Controller {
 
     public static Result getClientSettings()
     {
-        return ok(Json.toJson(clientSettingsRepository.getAll()));
+        return ok(Json.toJson(clientSettingsRepository.get()));
     }
 
     public static Result getClientSetting(String id) throws SQLException {
-        Object response = clientSettingsRepository.findById(id);
+        Object response = clientSettingsRepository.get(id);
 
         if (response == null)
             return status(404);

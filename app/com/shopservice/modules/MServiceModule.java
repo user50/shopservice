@@ -10,14 +10,15 @@ import javax.inject.Singleton;
 public class MServiceModule extends AbstractModule {
     @Override
     protected void configure() {
-        bind(ProductGroupRepository.class).to(EbeanProductGroupRepository.class).in(Singleton.class);
-        bind(Group2ProductRepository.class).to(EbeanGroup2ProductRepository.class).in(Singleton.class);
-        bind(ProductEntryRepository.class).to(EbeanProductEntryRepository.class).in(Singleton.class);
-        bind(ProductProviderRepository.class).to(EbeanProductProviderRepository.class).in(Singleton.class);
-        bind(LinkedProductEntryRepository.class).to(EbeanLinkedProductEntryRepository.class).in(Singleton.class);
+        bind(ProductGroupRepository.class).to(HibernateProductGroupRepository.class).in(Singleton.class);
+        bind(Group2ProductRepository.class).to(HibernateGroup2ProductRepository.class).in(Singleton.class);
+        bind(ProductEntryRepository.class).to(HibernateProductEntryRepository.class).in(Singleton.class);
+        bind(ProductProviderRepository.class).to(HibernateProductProviderRepository.class).in(Singleton.class);
+        bind(LinkedProductEntryRepository.class).to(HibernateLinkedProductEntryRepository.class).in(Singleton.class);
+        bind(ClientsCategoryRepository.class).to(HibernateClientsCategoryRepository.class).in(Singleton.class);
 
-        bind(ClientSettingsRepository.class).to(CachedClientSettingsRepository.class).in(Singleton.class);
-        bind(ClientSettingsRepository.class).annotatedWith(Names.named(CachedClientSettingsRepository.BASE)).to(EbeanClientSettingsRepository.class).in(Singleton.class);
+        bind(ClientSettingsRepository.class).to(HibernateClientSettingsRepository.class).in(Singleton.class);
+        bind(ClientSettingsRepository.class).annotatedWith(Names.named(CachedClientSettingsRepository.BASE)).to(HibernateClientSettingsRepository.class).in(Singleton.class);
 
         bind(ProductAssembler.class).in(Singleton.class);
     }

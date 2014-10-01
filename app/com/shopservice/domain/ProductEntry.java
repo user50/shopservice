@@ -1,6 +1,5 @@
 package com.shopservice.domain;
 
-import com.avaje.ebean.SqlRow;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shopservice.transfer.Product;
 import tyrex.services.UUID;
@@ -8,7 +7,7 @@ import tyrex.services.UUID;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity(name = "product_entry")
 @Access(AccessType.FIELD)
 public class ProductEntry {
 
@@ -16,9 +15,17 @@ public class ProductEntry {
     public String id;
 
     @JsonIgnore
+    @Column(name = "product_id")
     public String productId;
 
+    @Column(name = "category_id")
     public String categoryId;
+
+    @Column(name = "custom_category_id")
+    public String customCategoryId;
+
+    @Column(columnDefinition="TEXT")
+    public String description;
 
     @Transient
     public String productName;
@@ -33,25 +40,23 @@ public class ProductEntry {
     public Boolean published = false;
 
     @Transient
-    public boolean checked;
+    public Boolean checked;
 
     @Transient
     public String categoryName;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productEntry")
     public List<Group2Product> checks;
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productEntry")
+    public List<LinkedProductEntry> linkedProductEntries;
 
-
-    public ProductEntry(SqlRow row) {
-        id = row.getString("id");
-        categoryId = row.getString("category_id");
-        productId = row.getString("product_id");
-
-        if (row.getString("checked") != null)
-            checked = row.getString("checked").equals("1") ;
-    }
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_settings_id")
+    public ClientSettings clientSettings;
 
     @Override
     public boolean equals(Object o) {

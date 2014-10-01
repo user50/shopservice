@@ -44,4 +44,9 @@ public abstract class ProductGroupWrapper implements ProductGroupRepository  {
     public ProductGroup get(Long groupId) {
         return repository.get(groupId);
     }
+
+    @Override
+    public void update(ProductGroup group) {
+        repository.update(group);
+    }
 }

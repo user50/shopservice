@@ -3,19 +3,17 @@ package com.shopservice.refreshers;
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
-import com.shopservice.dao.EbeanProductGroupRepository;
-import com.shopservice.dao.JdbcProductRepository;
+import com.shopservice.dao.ClientsCategoryRepository;
+import com.shopservice.dao.HibernateProductGroupRepository;
 import com.shopservice.domain.*;
 import com.shopservice.pricelist.models.yml.*;
 import com.shopservice.pricelist.models.yml.Currency;
 import com.shopservice.transfer.Category;
 import com.shopservice.transfer.Product;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+import static com.shopservice.MServiceInjector.injector;
 import static com.shopservice.Util.marshal;
 
 /**
@@ -26,10 +24,12 @@ import static com.shopservice.Util.marshal;
  * To change this template use File | Settings | File Templates.
  */
 public class YMLFormatRefresher extends AbstractPriceListRefresher {
+    private static ClientsCategoryRepository clientsCategoryRepository = injector.getInstance(ClientsCategoryRepository.class);
+
     @Override
     public byte[] generate(String clientId, int groupId) throws Exception {
-        ClientSettings clientSettings = clientSettingsRepository.findById(clientId);
-        ProductGroup group = MServiceInjector.injector.getInstance(EbeanProductGroupRepository.class).get(new Long(groupId));
+        ClientSettings clientSettings = clientSettingsRepository.get(clientId);
+        ProductGroup group = MServiceInjector.injector.getInstance(HibernateProductGroupRepository.class).get(new Long(groupId));
 
         YmlCatalog ymlCatalog = new YmlCatalog();
         Shop shop = new Shop();
@@ -50,14 +50,27 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         Set<Category> categories = new HashSet<Category>();
 
         ProductConditions query = new ProductConditions();
-        query.productIds = getProductIds(clientId, groupId);
+        query.productIds = getProductIds(clientId, groupId, group.useCustomCategories);
 
-        for (Product product : Services.getProductDAO(clientId).find(query)) {
-            ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name()));
-            categories.add( product.category );
+        if (group.useCustomCategories)
+        {
+            Map<String,Category> idToCategory = getCategories(clientId, query.productIds);
+            for (Product product : Services.getProductDAO(clientId).find(query)) {
+                ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name(), idToCategory.get(product.id).id ));
+                categories.add( idToCategory.get(product.id) );
+            }
+        }
+        else
+        {
+            for (Product product : Services.getProductDAO(clientId).find(query)) {
+                ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name(), product.category.id));
+                categories.add( product.category );
+            }
         }
 
-        Set<Category> relatedCategories = getCategories(categories, clientId);
+        CategorySource categorySource = group.useCustomCategories ? new CustomCategorySource():new DefaultCategorySource(clientId);
+
+        Set<Category> relatedCategories = getCategories(categories, clientId, categorySource);
 
         shop.categories = convertToYmlCategories(relatedCategories);
 
@@ -65,12 +78,12 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
 
     }
 
-    private Offer createOffer(Product product, String currency) {
+    private Offer createOffer(Product product, String currency, String categoryId) {
         Offer offer = new Offer();
         offer.price = product.price;
         offer.currencyId = currency;
         offer.id = product.id + product.category.id;
-        offer.categoryId = product.category.id;
+        offer.categoryId = categoryId;
         offer.description = product.description;
         offer.vendor = product.manufacturer;
         offer.name = product.name;
@@ -90,6 +103,28 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
             ymlCategory.name = relatedCategory.name;
             ymlCategory.parentId = relatedCategory.parentId;
             result.add(ymlCategory);
+        }
+
+        return result;
+    }
+
+    private Map<String,Category> getCategories(String clientId, Collection<String> productIds)
+    {
+        Map<String, ClientsCategory> productIdToClientsCategory =
+                clientsCategoryRepository.getByProductIds(clientId, productIds);
+
+        Map<String, Category> result = new HashMap<>();
+
+        for (Map.Entry<String, ClientsCategory> entry : productIdToClientsCategory.entrySet()) {
+            String productId = entry.getKey();
+
+            Category category = new Category(entry.getValue().id.toString());
+            category.name = entry.getValue().name;
+
+            if (entry.getValue().parentId != null)
+                category.parentId = entry.getValue().parentId.toString();
+
+            result.put(productId, category);
         }
 
         return result;

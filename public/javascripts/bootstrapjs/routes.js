@@ -7,6 +7,12 @@ var Router = Backbone.Router.extend({
         'groups/:groupId' : 'showGroup',
         'groups/:groupId/search=*searchText' : 'searchProduct'
     },
+
+    initialize: function(){
+        this.EditProduct = new EditProduct({model: new Product()});
+        this.listenTo(vent, 'product:edit', this.renderEditProductView);
+    },
+
     start: function(){
         console.log('Hello!');
     },
@@ -16,7 +22,7 @@ var Router = Backbone.Router.extend({
         new BreadcrumbsView({categoryName: app.categories.get(categoryId).get('name'),
                              groupName: app.Groups.get(currentGroupId).get('name')});
         app.SearchView.hideResults();
-        app.categoriesView.$el.hide();
+        $('#categoriesTabs').hide();
         vent.trigger('selectedCategory');
         app.ProductsView.$el.show();
         app.pagination.$el.show();
@@ -29,13 +35,18 @@ var Router = Backbone.Router.extend({
         app.ProductsView.$el.hide();
         app.pagination.$el.hide();
         app.SearchView.hideResults();
-        app.categoriesView.$el.show();
+        $('#categoriesTabs').show();
     },
 
     searchProduct: function(groupId, searchText){
-        app.categoriesView.$el.hide();
+        $('#categoriesTabs').hide();
         app.ProductsView.$el.hide();
         app.pagination.$el.hide();
+    },
+
+    renderEditProductView: function(modelId){
+        this.EditProduct.updateModel(modelId);
+        this.EditProduct.render();
     }
 });
 

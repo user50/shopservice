@@ -22,16 +22,16 @@ public class CachedClientSettingsRepository implements ClientSettingsRepository 
     }
 
     @Override
-    public ClientSettings findById(String id) {
+    public ClientSettings get(String id) {
         if (!clientSettings.containsKey(id))
-            clientSettings.put(id, wrapped.findById(id));
+            clientSettings.put(id, wrapped.get(id));
 
         return clientSettings.get(id);
     }
 
     @Override
-    public List<ClientSettings> getAll() {
-        return wrapped.getAll();
+    public List<ClientSettings> get() {
+        return wrapped.get();
     }
 
     @Override

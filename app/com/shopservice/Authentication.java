@@ -17,7 +17,7 @@ public class Authentication extends Action.Simple {
     public F.Promise<SimpleResult> call(final Http.Context context) throws Throwable {
         final Http.Cookie cookie = context.request().cookie("key");
 
-        if (cookie == null || Cache.get(cookie.value()) == null || repository.findById((String) Cache.get(cookie.value())) == null )
+        if (cookie == null || Cache.get(cookie.value()) == null || repository.get((String) Cache.get(cookie.value())) == null )
             return F.Promise.promise( new F.Function0<play.mvc.SimpleResult>()
             {
                 @Override
@@ -38,7 +38,7 @@ public class Authentication extends Action.Simple {
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    if(repository.findById("demo") != null)
+                    if(repository.get("demo") != null)
                         Services.getCategoryDAO("demo").getCategories();
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -15,7 +15,8 @@ import java.util.List;
 
 import static com.shopservice.MServiceInjector.injector;
 
-@Entity
+@Entity(name = "product_group")
+@Access(AccessType.FIELD)
 public class ProductGroup {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,16 +24,29 @@ public class ProductGroup {
     public Integer id;
     public String name;
 
+    @Enumerated(EnumType.ORDINAL)
     public PriceListType format;
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "regional_currency")
     public Currency regionalCurrency;
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "product_currency")
     public Currency productCurrency;
 
     public String rate;
 
+    @Column(name = "use_custom_categories")
+    public boolean useCustomCategories;
+
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_settings_id")
+    public ClientSettings clientSettings;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productGroup")
     public List<Group2Product> checks = new ArrayList<Group2Product>();
 
 

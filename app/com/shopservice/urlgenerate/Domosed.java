@@ -16,12 +16,12 @@ public class Domosed extends UrlGenerator {
 
     @Override
     public String generateProductUrl(Product product) {
-        return clientSettingsRepository.findById(getClientId()).pathToProductPage + product.url;
+        return clientSettingsRepository.get(getClientId()).pathToProductPage + product.url;
 
     }
 
     @Override
     public String generateProductImageUrl(Product product) {
-        return clientSettingsRepository.findById(getClientId()).pathToProductImage + product.imageUrl;
+        return clientSettingsRepository.get(getClientId()).pathToProductImage + product.imageUrl;
     }
 }

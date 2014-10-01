@@ -2,8 +2,8 @@ package com.shopservice.refreshers;
 
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
-import com.shopservice.dao.EbeanProductGroupRepository;
 import com.shopservice.dao.JdbcProductRepository;
+import com.shopservice.dao.ProductGroupRepository;
 import com.shopservice.domain.ClientSettings;
 import com.shopservice.transfer.Product;
 import com.shopservice.domain.ProductGroup;
@@ -30,8 +30,8 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
 
     @Override
     public byte[] generate(String clientId, int groupId) throws Exception {
-        ClientSettings clientSettings = clientSettingsRepository.findById(clientId);
-        ProductGroup group = MServiceInjector.injector.getInstance(EbeanProductGroupRepository.class).get(new Long(groupId));
+        ClientSettings clientSettings = clientSettingsRepository.get(clientId);
+        ProductGroup group = MServiceInjector.injector.getInstance(ProductGroupRepository.class).get(new Long(groupId));
 
         Price price = new Price();
         price.setName( clientSettings.siteName ) ;
@@ -41,7 +41,7 @@ public class PriceFormatRefresher extends AbstractPriceListRefresher {
         Set<Category> categories = new HashSet<Category>();
 
         ProductConditions query = new ProductConditions();
-        query.productIds = getProductIds(clientId, groupId);
+        query.productIds = getProductIds(clientId, groupId, false);
 
         for (Product product : new JdbcProductRepository(clientId).find( query)) {
             price.addItem( createItem(clientId, product) );

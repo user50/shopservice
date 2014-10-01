@@ -16,4 +16,6 @@ public interface ProductGroupRepository {
     void remove(int id);
 
     ProductGroup get(Long groupId);
+
+    void update(ProductGroup group);
 }

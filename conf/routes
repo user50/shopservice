@@ -28,7 +28,7 @@ PUT     /clients/:id/groups/:groupId/products                                   
 GET     /clients/:id/categories                                                    controllers.CategoryController.getCategories(id, groupId)
 
 # PriceList operations
-GET    /client/:id/groups/:groupId/pricelist                                       controllers.PriceListController.generatePriceList( id, groupId:Long)
+GET    /client/:id/groups/:groupId/pricelist                                       controllers.PriceListController.generatePriceList( id, groupId:Long, useCustomCategories: Boolean ?= false )
 GET    /formats                                                                    controllers.PriceListController.getPriceListFormats()
 
 # Group operations
@@ -53,6 +53,12 @@ GET    /clients/:id/providers/:providerId/linkedProductEntries                  
 POST   /clients/:id/providers/:providerId/linkedProductEntries                     controllers.LinkedProductController.create( id, providerId: Integer)
 DELETE /clients/:id/providers/:providerId/linkedProductEntries/:linedEntryId       controllers.LinkedProductController.remove( id, providerId: Integer, linedEntryId:Integer)
 PUT    /clients/:id/providers/:providerId/linkedProductEntries/:linedEntryId       controllers.LinkedProductController.update( id, providerId: Integer, linedEntryId:Integer)
+
+#ClientsCategory operations
+GET    /clients/:id/clientsCategories                                              controllers.ClientsCategoryController.get(id)
+POST   /clients/:id/clientsCategories                                              controllers.ClientsCategoryController.create(id)
+PUT    /clients/:id/clientsCategories/:clientsCategoryId                           controllers.ClientsCategoryController.update(id, clientsCategoryId)
+DELETE /clients/:id/clientsCategories/:clientsCategoryId                           controllers.ClientsCategoryController.delete(id, clientsCategoryId : Integer)
 
 POST /authentication                                                               controllers.LoginController.authentication()
 POST /logout                                                                       controllers.LoginController.logout()
