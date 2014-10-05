@@ -106,8 +106,8 @@ public class DefaultDataSource implements PriceListGenerator.DataSource {
     public Set<Category> getCategories() throws Exception {
 
         PriceListGenerator.CategorySource categorySource = productGroupRepository.get(Long.valueOf(groupId)).useCustomCategories
-                ? new PriceListGenerator.DefaultCategorySource(clientId)
-                : new PriceListGenerator.CustomCategorySource();
+                ? new PriceListGenerator.CustomCategorySource()
+                : new PriceListGenerator.DefaultCategorySource(clientId);
 
         return Sets.union(new HashSet<Category>(categories.values()), getRelatedCategories(new HashSet<Category>(categories.values()), clientId, categorySource));
     }
