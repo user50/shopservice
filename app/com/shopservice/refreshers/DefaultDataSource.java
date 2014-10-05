@@ -65,6 +65,9 @@ public class DefaultDataSource implements PriceListGenerator.DataSource {
             categories.put(product.category.id, product.category);
             if(productMap.get(product.id).description != null)
                 product.description = productMap.get(product.id).description;
+
+            if (productMap.get(product.id).imageUrl != null)
+                product.imageUrl = productMap.get(product.id).imageUrl;
         }
 
         return products;
@@ -77,6 +80,9 @@ public class DefaultDataSource implements PriceListGenerator.DataSource {
             product.category = categories.get(product.id);
             if(productMap.get(product.id).description != null)
                 product.description = productMap.get(product.id).description;
+
+            if (productMap.get(product.id).imageUrl != null)
+                product.imageUrl = productMap.get(product.id).imageUrl;
         }
 
         return products;

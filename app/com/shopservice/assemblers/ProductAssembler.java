@@ -51,5 +51,8 @@ public class ProductAssembler {
         if (productEntry.description == null)
             productEntry.description = product.description;
 
+        if (productEntry.imageUrl == null)
+            productEntry.imageUrl = product.imageUrl;
+
     }
 }
