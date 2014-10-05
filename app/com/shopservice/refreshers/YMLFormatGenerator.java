@@ -23,7 +23,7 @@ import static com.shopservice.Util.marshal;
  * Time: 14:06
  * To change this template use File | Settings | File Templates.
  */
-public class YMLFormatRefresher extends AbstractPriceListRefresher {
+public class YMLFormatGenerator extends PriceListGenerator {
     private static ClientsCategoryRepository clientsCategoryRepository = injector.getInstance(ClientsCategoryRepository.class);
 
     @Override
@@ -82,7 +82,7 @@ public class YMLFormatRefresher extends AbstractPriceListRefresher {
         Offer offer = new Offer();
         offer.price = product.price;
         offer.currencyId = currency;
-        offer.id = product.id + product.category.id;
+        offer.id = product.id + categoryId;
         offer.categoryId = categoryId;
         offer.description = product.description;
         offer.vendor = product.manufacturer;

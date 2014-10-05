@@ -1,8 +1,8 @@
 package com.shopservice;
 
-import com.shopservice.refreshers.PriceFormatRefresher;
+import com.shopservice.refreshers.PriceFormatGenerator;
 import com.shopservice.refreshers.PriceListRefresher;
-import com.shopservice.refreshers.YMLFormatRefresher;
+import com.shopservice.refreshers.YmlGenerator;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,7 +12,7 @@ import com.shopservice.refreshers.YMLFormatRefresher;
  * To change this template use File | Settings | File Templates.
  */
 public enum PriceListType {
-    price(new PriceFormatRefresher()), YML(new YMLFormatRefresher() );
+    price(new PriceFormatGenerator()), YML(new YmlGenerator() );
 
     private PriceListRefresher refresher;
 

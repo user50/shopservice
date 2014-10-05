@@ -9,7 +9,6 @@ public class Group2Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int id;
-    public boolean checked;
 
     @ManyToOne
     @JoinColumn(name = "product_group_id")
