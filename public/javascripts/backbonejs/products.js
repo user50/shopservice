@@ -226,7 +226,7 @@ var PaginationView = Backbone.View.extend({
 
     gotoFirst: function () {
 //        e.preventDefault();
-        this.collection.goTo(this.collection.information.firstPage);
+        this.collection.goTo(1);
     },
 
     gotoLast: function (e) {

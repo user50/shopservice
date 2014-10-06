@@ -173,7 +173,7 @@ var CustomCategoriesSelectForEditView = Backbone.View.extend({
     render: function(){
         console.log('Rendering of CustomCategoriesSelectView...');
         this.$el.find('option').remove()
-            .end().append('<option value="null" selected>Такая же</option>');
+            .end().append('<option value="null" selected>Не определена</option>');
         this.collection.each(this.addOne, this);
         return this;
     }
