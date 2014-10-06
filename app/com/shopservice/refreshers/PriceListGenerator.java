@@ -3,6 +3,7 @@ package com.shopservice.refreshers;
 import com.google.common.collect.Sets;
 import com.shopservice.MServiceInjector;
 import com.shopservice.MailService;
+import com.shopservice.ProductConditions;
 import com.shopservice.Services;
 import com.shopservice.dao.ClientSettingsRepository;
 import com.shopservice.dao.ClientsCategoryRepository;
@@ -10,13 +11,14 @@ import com.shopservice.dao.ProductEntryRepository;
 import com.shopservice.domain.ClientsCategory;
 import com.shopservice.transfer.Category;
 import com.shopservice.domain.ProductEntry;
+import com.shopservice.transfer.Product;
 import play.Logger;
 
 import java.util.*;
 
 import static com.shopservice.MServiceInjector.injector;
 
-public abstract class AbstractPriceListRefresher implements PriceListRefresher {
+public abstract class PriceListGenerator implements PriceListRefresher {
 
     protected ProductEntryRepository productEntryRepository = injector.getInstance(ProductEntryRepository.class);
     protected ClientSettingsRepository clientSettingsRepository = injector.getInstance(ClientSettingsRepository.class);
@@ -56,12 +58,12 @@ public abstract class AbstractPriceListRefresher implements PriceListRefresher {
         return ids;
     }
 
-    protected static interface CategorySource
+    public static interface CategorySource
     {
         Set<Category> getParents(Collection<String> categoryIds);
     }
 
-    protected static class DefaultCategorySource implements CategorySource
+    public static class DefaultCategorySource implements CategorySource
     {
         private String clientId;
 
@@ -82,7 +84,7 @@ public abstract class AbstractPriceListRefresher implements PriceListRefresher {
         }
     }
 
-    protected static class CustomCategorySource implements CategorySource
+    public static class CustomCategorySource implements CategorySource
     {
         ClientsCategoryRepository repository = MServiceInjector.injector.getInstance(ClientsCategoryRepository.class);
 
@@ -102,5 +104,14 @@ public abstract class AbstractPriceListRefresher implements PriceListRefresher {
 
             return categories;
         }
+    }
+
+    protected static interface DataSource
+    {
+        List<Product> getProducts() throws Exception;
+
+        Set<Category> getCategories() throws Exception;
+
+
     }
 }

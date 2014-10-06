@@ -102,7 +102,7 @@ public class HibernateClientsCategoryRepository implements ClientsCategoryReposi
                 ScrollableResults results = session.createSQLQuery("SELECT product_entry.product_id, " +
                         "clients_category.id, clients_category.name, clients_category.parent_id, clients_category.client_settings_id " +
                         "FROM clients_category " +
-                        "left join product_entry on clients_category.id = product_entry.custom_category_id " +
+                        "join product_entry on clients_category.id = product_entry.custom_category_id " +
                         "where clients_category.client_settings_id = '" + clientId + "'").scroll();
 
                 Map<String, ClientsCategory> output = new HashMap<>();

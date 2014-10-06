@@ -50,6 +50,7 @@ public class ProductController extends Controller {
         ProductEntry entryFromDb = productEntryRepository.find(entryFromBody.id);
         entryFromDb.description = entryFromBody.description;
         entryFromDb.customCategoryId = entryFromBody.customCategoryId;
+        entryFromDb.imageUrl = entryFromBody.imageUrl;
 
         productEntryRepository.update(entryFromDb);
 

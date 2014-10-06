@@ -27,6 +27,8 @@ public class ProductEntry {
     @Column(columnDefinition="TEXT")
     public String description;
 
+    public String imageUrl;
+
     @Transient
     public String productName;
 

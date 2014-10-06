@@ -48,7 +48,11 @@ public class ProductAssembler {
         productEntry.productName = product.name;
         productEntry.published = product.published;
         productEntry.categoryName = product.category.name;
-        productEntry.description = product.description;
+        if (productEntry.description == null)
+            productEntry.description = product.description;
+
+        if (productEntry.imageUrl == null)
+            productEntry.imageUrl = product.imageUrl;
 
     }
 }

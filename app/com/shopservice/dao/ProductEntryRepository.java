@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 public interface ProductEntryRepository {
-    List<ProductEntry> findSelected(String clientSettingsId, int siteId, boolean useCustomCategories) throws Exception;
+    List<ProductEntry> findSelected(String clientSettingsId, int groupId, boolean useCustomCategories) throws Exception;
 
     void add(String clientsId, Collection<ProductEntry> productsToAdd) throws Exception;
 

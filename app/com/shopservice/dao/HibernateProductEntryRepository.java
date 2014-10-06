@@ -67,7 +67,9 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
         return execute(new Query() {
             @Override
             public List<ProductEntry> execute(Session session) {
-                ScrollableResults results = session.createSQLQuery("SELECT product_entry.*, group2product.id IS NOT NULL AS checked FROM product_entry " +
+                ScrollableResults results = session.createSQLQuery("SELECT product_entry.id, " +
+                        "product_entry.product_id, product_entry.category_id, product_entry.custom_category_id, " +
+                        "product_entry.description, product_entry.imageUrl, group2product.id IS NOT NULL AS checked FROM product_entry " +
                         "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = '" + groupId + "' " +
                         "WHERE client_settings_id = '" + clientId + "' AND category_id = '" + categoryId + "' ")
                         .scroll();
@@ -77,10 +79,11 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
                 while (results.next()){
                     ProductEntry productEntry = new ProductEntry();
                     productEntry.id = (String) results.get(0);
-                    productEntry.productId = (String) results.get(2);
-                    productEntry.categoryId = (String) results.get(3);
-                    productEntry.customCategoryId = (String) results.get(4);
-                    productEntry.description = (String) results.get(5);
+                    productEntry.productId = (String) results.get(1);
+                    productEntry.categoryId = (String) results.get(2);
+                    productEntry.customCategoryId = (String) results.get(3);
+                    productEntry.description = (String) results.get(4);
+                    productEntry.imageUrl = (String) results.get(5);
                     productEntry.checked = results.get(6).toString().equals("1");
 
                     productEntries.add(productEntry);
@@ -160,9 +163,9 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
                 if (ids.isEmpty())
                     idsToQuery.append("''");
 
-                ScrollableResults results = session.createSQLQuery("SELECT\n" +
-                        "  product_entry.id, product_entry.product_id, product_entry.category_id," +
-                        " product_entry.custom_category_id, product_entry.description, \n" +
+                ScrollableResults results = session.createSQLQuery("SELECT " +
+                        " product_entry.id, product_entry.product_id, product_entry.category_id," +
+                        " product_entry.custom_category_id, product_entry.description, product_entry.imageUrl, \n" +
                         "  group2product.id IS NOT NULL AS checked\n" +
                         "FROM product_entry\n" +
                         "  LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = '"+groupId+"'\n" +
@@ -177,7 +180,8 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
                     productEntry.categoryId = (String) results.get(2);
                     productEntry.customCategoryId = (String) results.get(3);
                     productEntry.description = (String) results.get(4);
-                    productEntry.checked = results.get(5).toString().equals("1");
+                    productEntry.imageUrl = (String) results.get(5);
+                    productEntry.checked = results.get(6).toString().equals("1");
 
                     productEntries.add(productEntry);
                 }
@@ -192,7 +196,9 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
         return execute(new Query() {
             @Override
             public List<ProductEntry> execute(Session session) {
-                ScrollableResults results = session.createSQLQuery("SELECT product_entry.*, group2product.id IS NOT NULL AS checked FROM product_entry " +
+                ScrollableResults results = session.createSQLQuery("SELECT product_entry.id, " +
+                        "product_entry.product_id, product_entry.category_id, product_entry.custom_category_id, " +
+                        "product_entry.description, product_entry.imageUrl, group2product.id IS NOT NULL AS checked FROM product_entry " +
                         "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = '"+groupId+"' " +
                         "WHERE client_settings_id = '"+clientId+"'  AND category_id = '"+categoryId+"'  LIMIT "+limit+"  OFFSET "+offset+" ")
                         .scroll();
@@ -202,10 +208,11 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
                 while (results.next()){
                     ProductEntry productEntry = new ProductEntry();
                     productEntry.id = (String) results.get(0);
-                    productEntry.productId = (String) results.get(2);
-                    productEntry.categoryId = (String) results.get(3);
-                    productEntry.customCategoryId = (String) results.get(4);
-                    productEntry.description = (String) results.get(5);
+                    productEntry.productId = (String) results.get(1);
+                    productEntry.categoryId = (String) results.get(2);
+                    productEntry.customCategoryId = (String) results.get(3);
+                    productEntry.description = (String) results.get(4);
+                    productEntry.imageUrl = (String) results.get(5);
                     productEntry.checked = results.get(6).toString().equals("1");
 
                     productEntries.add(productEntry);

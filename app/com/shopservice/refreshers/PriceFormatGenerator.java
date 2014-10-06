@@ -25,7 +25,7 @@ import static com.shopservice.Util.marshal;
  * Time: 14:05
  * To change this template use File | Settings | File Templates.
  */
-public class PriceFormatRefresher extends AbstractPriceListRefresher {
+public class PriceFormatGenerator extends PriceListGenerator {
 
 
     @Override
