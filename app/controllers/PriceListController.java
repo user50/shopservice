@@ -22,8 +22,7 @@ public class PriceListController extends Controller {
 
         ClientSettings clientSettings = clientSettingsRepository.get(clientId);
 
-        response().setHeader("Content-Disposition", "attachment; filename=\""+clientSettings.siteName+"-"+ productGroupRepository.getName(groupId.intValue())+".xml\"" );
-        return ok(priceList).as("application/force-download");
+        return ok(priceList).as("application/xml");
     }
 
     public static Result getPriceListFormats()
