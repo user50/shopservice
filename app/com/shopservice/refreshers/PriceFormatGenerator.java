@@ -2,6 +2,7 @@ package com.shopservice.refreshers;
 
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
+import com.shopservice.Services;
 import com.shopservice.dao.JdbcProductRepository;
 import com.shopservice.dao.ProductGroupRepository;
 import com.shopservice.domain.ClientSettings;
@@ -43,7 +44,7 @@ public class PriceFormatGenerator extends PriceListGenerator {
         ProductConditions query = new ProductConditions();
         query.productIds = getProductIds(clientId, groupId, false);
 
-        for (Product product : new JdbcProductRepository(clientId).find( query)) {
+        for (Product product : Services.getProductDAO(clientId).find(query)) {
             price.addItem( createItem(clientId, product) );
             categories.add( new Category( product.category.id, product.category.name) );
         }
