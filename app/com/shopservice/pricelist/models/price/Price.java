@@ -16,7 +16,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "price")
 public class Price {
-    @XmlAttribute
+    @XmlElement
     private String date;
 
     private String firmName;
