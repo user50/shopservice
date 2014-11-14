@@ -3,7 +3,6 @@ package com.shopservice.refreshers;
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
 import com.shopservice.Services;
-import com.shopservice.dao.JdbcProductRepository;
 import com.shopservice.dao.ProductGroupRepository;
 import com.shopservice.domain.ClientSettings;
 import com.shopservice.transfer.Product;
@@ -35,7 +34,7 @@ public class PriceFormatGenerator extends PriceListGenerator {
         ProductGroup group = MServiceInjector.injector.getInstance(ProductGroupRepository.class).get(new Long(groupId));
 
         Price price = new Price();
-        price.setName( clientSettings.siteName ) ;
+        price.setFirmName(clientSettings.siteName) ;
         price.setUrl( clientSettings.siteUrl );
         price.setRate(group.rate == null ? null : group.rate);
 

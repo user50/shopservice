@@ -1,9 +1,6 @@
 package com.shopservice.pricelist.models.price;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,13 +12,13 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Category {
 
-    @XmlAttribute
+    @XmlElement
     private String id;
 
-    @XmlAttribute(name = "parentID")
+    @XmlElement
     private String parentId;
 
-    @XmlValue
+    @XmlElement
     private String name;
 
     public Category() {

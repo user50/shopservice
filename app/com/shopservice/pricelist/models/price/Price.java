@@ -16,16 +16,16 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "price")
 public class Price {
-    @XmlAttribute
+    @XmlElement
     private String date;
 
-    private String name;
+    private String firmName;
 
     private String url;
 
     private String rate;
 
-    @XmlElementWrapper(name="catalog")
+    @XmlElementWrapper(name="categories")
     @XmlElements({
             @XmlElement(name="category") }
     )
@@ -46,8 +46,8 @@ public class Price {
         return date;
     }
 
-    public String getName() {
-        return name;
+    public String getFirmName() {
+        return firmName;
     }
 
     public String getUrl() {
@@ -86,8 +86,8 @@ public class Price {
         this.catalog = catalog;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirmName(String firmName) {
+        this.firmName = firmName;
     }
 
     public void setUrl(String url) {
