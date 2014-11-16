@@ -9,13 +9,24 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
 
+    private static HikariConnectionPool pool;
+
     static {
         try {
+//            pool = new HikariConnectionPool("jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d?useUnicode=yes&characterEncoding=utf8" +
+//                    "&user=b02276676df1a5&password=2c270044");
+
+            pool = new HikariConnectionPool("jdbc:mysql://localhost:3306/shopservice?" +
+                    "user=root&password=neuser50");
+
             Configuration configuration = new Configuration();
             addAnnotatedClasses( configuration );
             addProperties( configuration );
             StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            sessionFactory = configuration.buildSessionFactory(ssrb.build());
+            sessionFactory = configuration.buildSessionFactory(ssrb.applySetting(Environment.DATASOURCE, pool.dataSource).build());
+
+
+
         } catch (ExceptionInInitializerError ex) {
             System.err.println("Initial SessionFactory creation failed: " + ex);
             throw new ExceptionInInitializerError(ex);
@@ -35,11 +46,8 @@ public class HibernateUtil {
 
     private static void addProperties(Configuration configuration)
     {
-        configuration.setProperty( "hibernate.connection.url", "jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d?useUnicode=yes&characterEncoding=utf8" )
-                .setProperty( "hibernate.connection.username", "b02276676df1a5" )
-                .setProperty( "hibernate.connection.password", "2c270044" )
-                .setProperty( "hibernate.connection.autocommit", "true" )
-                .setProperty( "show_sql", "true" )
+        configuration
+                .setProperty("show_sql", "true")
                 .setProperty( "dialect", "org.hibernate.dialect.MySQLDialect" );
 //                .setProperty( "hibernate.c3p0.min_size", "5" )
 //                .setProperty( "hibernate.c3p0.max_size", "20" )
@@ -65,6 +73,7 @@ public class HibernateUtil {
         session.close();
 
         return result;
+
     }
 
     public static void execute(Update update)
