@@ -40,11 +40,11 @@ public class HibernateUtil {
                 .setProperty( "hibernate.connection.password", "2c270044" )
                 .setProperty( "hibernate.connection.autocommit", "true" )
                 .setProperty( "show_sql", "true" )
-                .setProperty( "dialect", "org.hibernate.dialect.MySQLDialect" )
-                .setProperty( "hibernate.c3p0.min_size", "2" )
-                .setProperty( "hibernate.c3p0.max_size", "2" )
-                .setProperty( "hibernate.c3p0.timeout", "1800" )
-                .setProperty( "hibernate.c3p0.max_statements", "50" );
+                .setProperty( "dialect", "org.hibernate.dialect.MySQLDialect" );
+//                .setProperty( "hibernate.c3p0.min_size", "5" )
+//                .setProperty( "hibernate.c3p0.max_size", "20" )
+//                .setProperty( "hibernate.c3p0.timeout", "1800" )
+//                .setProperty( "hibernate.c3p0.max_statements", "50" )
 //                .setProperty("hibernate.hbm2ddl.auto", "update");
     }
 
