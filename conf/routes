@@ -68,3 +68,8 @@ POST /logout                                                                    
 GET    /clients/:id/products                                                       controllers.ClientProductController.find(id, like : String ?= null, contain : String ?= null, offset: Integer ?= 0, limit: Integer ?= 100 )
 
 POST /assets/contact                                                               controllers.FeedbackController.feedbackNotify()
+
+# Domosed
+GET /domosed/manufacturers                                                         controllers.domosed.ManufacturerController.get()
+
+
