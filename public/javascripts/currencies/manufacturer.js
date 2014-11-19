@@ -2,12 +2,13 @@
 var ManufacturersPage = Backbone.View.extend({
     tagName: 'div',
      initialize: function(){
-        this.Manufacturers = new Manufacturers(manufacturers);
-
+        this.Manufacturers = new Manufacturers();
         this.ManufacturersView = new ManufacturersView({collection: this.Manufacturers});
      },
 
     render: function(){
+        this.Manufacturers.fetch({wait: true});
+
         this.ProductSearch = new ProductSearch();
         this.$el.append(this.ProductSearch.render().el);
 
@@ -27,7 +28,7 @@ var Manufacturers = Backbone.Collection.extend({
     model: Manufacturer,
 
     url: function(){
-        return '/clients/'+clientId+'/manufacturers';
+        return '/domosed/manufacturers';
     }
 });
 
@@ -38,10 +39,40 @@ var ManufacturerView = Backbone.View.extend({
         this.template = _.template(tpl.get('manufacturerViewTpl').text);
     },
 
+    events : {
+        'click .btn-info' : 'updateRate'
+    },
+
     render: function(){
         var template = this.template(this.model.toJSON());
         this.$el.html( template );
         return this;
+    },
+
+    updateRate: function(){
+        var newRate = this.$el.find('input').val();
+
+        if (newRate <= 0){
+            $.bootstrapGrowl("Недопустимое значения курса! \n " +
+                             "Установите значения курса больше 0!",
+                {ele: 'body', type: 'danger', width: 350});
+            return;
+        }
+        console.log('New rate for ' + this.model.get('name') + ' is ' + newRate);
+
+        this.model.set('rate', newRate);
+
+        this.model.save(
+            {
+                error: function(model, response){
+                    $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],
+                        {ele: 'body', type: 'danger', width: 350});
+                },
+                success: function(model, response){
+                    $.bootstrapGrowl("Изменения успешно сохранены!",
+                        {ele: 'body', type: 'success', width: 350});
+                }
+            });
     }
 });
 

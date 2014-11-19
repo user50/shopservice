@@ -71,5 +71,7 @@ POST /assets/contact                                                            
 
 # Domosed
 GET /domosed/manufacturers                                                         controllers.domosed.ManufacturerController.get()
+PUT /domosed/manufacturers/:id                                                   controllers.domosed.ManufacturerController.update(id)
+GET /domosed/products                                                              controllers.domosed.ProductController.get(words : String ?= null, offset: Long ?= 0, limit: Long ?= 10)
 
 

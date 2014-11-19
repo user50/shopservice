@@ -1,19 +1,19 @@
 
-var Product = Backbone.Model.extend({});
+var Product = Backbone.Model.extend({
+    urlRoot: function(){
+        return '/domosed/products';
+    }
+});
 
 var SearchResultProducts = Backbone.Collection.extend({
     model: Product,
 
     url: function(){
-        return '/clients/' + clientId + '/products?offset=0&limit=10&like=' + this.searchExpression;
+        return '/domosed/products?offset=0&limit=10&words=' + this.searchExpression;
     },
 
     setText: function(searchExpression){
         this.searchExpression = searchExpression;
-    },
-
-    parse: function (response) {
-        return response.collectionResult;
     }
 });
 
@@ -24,10 +24,29 @@ var SearchResultView = Backbone.View.extend({
         this.template = _.template(tpl.get('searchResultViewTpl').text);
     },
 
+    events: {
+        'click .btn-info' : 'updatePrice'
+    },
+
     render: function(){
         var template = this.template(this.model.toJSON());
         this.$el.html( template );
         return this;
+    },
+
+    updatePrice: function(){
+        var newPrice = this.$el.find('input').val();
+
+        if (newPrice < 0){
+            $.bootstrapGrowl("Недопустимое значения курса! \n " +
+                "Установите положительное значение цены!",
+                {ele: 'body', type: 'danger', width: 350});
+            return;
+        }
+
+        console.log('New price for ' + this.model.get('name') + ' is ' + newPrice);
+
+        this.model.save();
     }
 });
 
@@ -58,9 +77,10 @@ var  SearchResultsView = Backbone.View.extend({
         var thead = $('<thead/>');
         var tr = $('<tr/>');
 
-        var th = $('<th class="col-md-3">Название</th>');
+        var th = $('<th class="col-md-4">Название</th>');
         tr.append(th);
         tr.append('<th  class="col-md-1">Цена, у.е.</th>');
+        tr.append('<th  class="col-md-1"></th>');
         this.$el.append(tr);
         console.log("Header is rendered...");
     }

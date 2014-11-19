@@ -14,4 +14,8 @@ public class ManufacturerRepository {
         return Services.getDataBaseManager("client1").executeQueryForList(new GetManufacturers());
     }
 
+    public Manufacturer update(Manufacturer manufacturer) throws SQLException {
+        Services.getDataBaseManager("client1").executeUpdate(new ManufacturerUpdateRate(manufacturer));
+        return manufacturer;
+    }
 }

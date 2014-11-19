@@ -4,6 +4,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 import com.shopservice.assemblers.ProductAssembler;
 import com.shopservice.dao.*;
+import com.shopservice.domosed.DomosedProductRepository;
 import com.shopservice.domosed.ManufacturerRepository;
 
 import javax.inject.Singleton;
@@ -25,5 +26,6 @@ public class MServiceModule extends AbstractModule {
 
         /* domosed */
         bind(ManufacturerRepository.class).in(Singleton.class);
+        bind(DomosedProductRepository.class).in(Singleton.class);
     }
 }

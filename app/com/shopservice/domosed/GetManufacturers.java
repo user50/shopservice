@@ -16,7 +16,7 @@ public class GetManufacturers implements Query<Manufacturer> {
 
         manufacturer.id = resultSet.getString("manufacturers_id");
         manufacturer.name = resultSet.getString("manufacturers_name");
-
+        manufacturer.rate = resultSet.getDouble("manufacturers_rate");
         return manufacturer;
     }
 
