@@ -38,7 +38,7 @@ var SearchResultView = Backbone.View.extend({
         var newPrice = this.$el.find('input').val();
 
         if (newPrice < 0){
-            $.bootstrapGrowl("Недопустимое значения курса! \n " +
+            $.bootstrapGrowl("Недопустимое значение! \n " +
                 "Установите положительное значение цены!",
                 {ele: 'body', type: 'danger', width: 350});
             return;
@@ -46,7 +46,19 @@ var SearchResultView = Backbone.View.extend({
 
         console.log('New price for ' + this.model.get('name') + ' is ' + newPrice);
 
-        this.model.save();
+        this.model.set('usdPrice', newPrice);
+
+        this.model.save( this.model.toJSON(),
+            {
+                error: function(model, response){
+                    $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],
+                        {ele: 'body', type: 'danger', width: 350});
+                },
+                success: function(model, response){
+                    $.bootstrapGrowl("Изменения успешно сохранены!",
+                        {ele: 'body', type: 'success', width: 350});
+                }
+            });
     }
 });
 

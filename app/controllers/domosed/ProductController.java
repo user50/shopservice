@@ -3,6 +3,8 @@ package controllers.domosed;
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
 import com.shopservice.domosed.DomosedProductRepository;
+import com.shopservice.domosed.Manufacturer;
+import com.shopservice.transfer.Product;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -33,5 +35,12 @@ public class ProductController extends Controller {
         return ok(Json.toJson(productRepository.get(conditions)));
     }
 
+    public static Result update(String id) throws SQLException {
+        Product body = Json.fromJson(request().body().asJson(), Product.class );
 
+        if (!id.equals(body.id))
+            return badRequest();
+
+        return ok(Json.toJson(productRepository.update(body)));
+    }
 }

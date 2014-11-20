@@ -62,7 +62,7 @@ var ManufacturerView = Backbone.View.extend({
 
         this.model.set('rate', newRate);
 
-        this.model.save(
+        this.model.save( this.model.toJSON(),
             {
                 error: function(model, response){
                     $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],

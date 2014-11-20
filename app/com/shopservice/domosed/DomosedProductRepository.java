@@ -22,4 +22,11 @@ public class DomosedProductRepository {
         return Services.getDataBaseManager(DOMOSED_CLIENT_ID)
                 .executeQueryForList(new JdbcProductQuery(DOMOSED_CLIENT_ID, productConditions));
     }
+
+    public Product update(Product product) throws SQLException {
+        Services.getDataBaseManager(DOMOSED_CLIENT_ID)
+                .executeUpdate(new ProductUSDPriceUpdate(product));
+
+        return product;
+    }
 }

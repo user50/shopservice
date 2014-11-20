@@ -46,7 +46,7 @@
     <td><input type="text" class="form-control" value="<%= rate %>"></td>
     <td>
         <button class="btn btn-info btn-md" type="button">
-            <span class="glyphicon glyphicon-refresh" data-toggle="tooltip" data-placement="top" title="Обновить цену товаров в гривнах">
+            <span class="glyphicon glyphicon-refresh" data-toggle="tooltip" data-placement="top" title="Пересчитать цены товаров в грн.">
             </span>
         </button>
     </td>
@@ -67,11 +67,20 @@
 
 <script type="text/template" id="searchResultViewTpl">
     <td><%= name %></td>
-    <td><input type="text" class="form-control" value="<%= price %>"></td>
+    <td><input type="text" class="form-control" value="<%= usdPrice %>"></td>
     <td>
         <button class="btn btn-info btn-md" type="button">
-            <span class="glyphicon glyphicon-refresh" data-toggle="tooltip" data-placement="top" title="Обновить цену товара">
+            <span class="glyphicon glyphicon-refresh" data-toggle="tooltip" data-placement="top" title="Обновить цену товара в у.е.">
             </span>
         </button>
     </td>
+</script>
+
+<script type="text/template" id="toManufacturerBtn">
+    <div class="col-md-6">
+        <button id="toManufacturersList" type="button" class="btn btn-default btn-sm pull-left">
+            <span data-toggle="tooltip" data-placement="top" title="К списку производителей" class="glyphicon glyphicon-arrow-left"></span>
+            К производителям &nbsp;
+        </button>
+    </div>
 </script>
