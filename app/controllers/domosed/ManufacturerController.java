@@ -17,7 +17,7 @@ public class ManufacturerController extends Controller {
     private static ManufacturerRepository manufacturerRepository = MServiceInjector.injector.getInstance(ManufacturerRepository.class);
 
     public static Result get() throws SQLException {
-        return ok(Json.toJson(manufacturerRepository.get()));
+        return ok(Json.toJson(manufacturerRepository.list()));
     }
 
     public static Result update(String id) throws SQLException {
@@ -27,5 +27,14 @@ public class ManufacturerController extends Controller {
             return badRequest();
 
         return ok(Json.toJson(manufacturerRepository.update(body)));
+    }
+
+    public static Result calculatePrices(String id) throws SQLException {
+        if(id == null || id.equals(""))
+            return badRequest();
+
+        manufacturerRepository.calculatePrices(manufacturerRepository.find(id));
+
+        return ok();
     }
 }

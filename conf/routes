@@ -74,5 +74,6 @@ GET /domosed/manufacturers                                                      
 PUT /domosed/manufacturers/:id                                                     controllers.domosed.ManufacturerController.update(id)
 GET /domosed/products                                                              controllers.domosed.ProductController.get(words : String ?= null, offset: Long ?= 0, limit: Long ?= 10)
 PUT /domosed/products/:id                                                          controllers.domosed.ProductController.update(id)
+POST /domosed/manufacturers/:id/calculatePrice                                     controllers.domosed.ManufacturerController.calculatePrices(id)
 
 

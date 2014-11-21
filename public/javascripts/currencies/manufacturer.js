@@ -40,7 +40,7 @@ var ManufacturerView = Backbone.View.extend({
     },
 
     events : {
-        'click .btn-info' : 'updateRate'
+        'click .btn-info' : function(){ this.updateRate(); this.calculateProductsPrices();}
     },
 
     render: function(){
@@ -62,17 +62,37 @@ var ManufacturerView = Backbone.View.extend({
 
         this.model.set('rate', newRate);
 
+        var model = this.model;
+
         this.model.save( this.model.toJSON(),
             {
-                error: function(model, response){
-                    $.bootstrapGrowl("Ошибка! " + errorMessages[response.responseJSON.code],
+                error: function(){
+                    $.bootstrapGrowl("Ошибка!",
                         {ele: 'body', type: 'danger', width: 350});
                 },
-                success: function(model, response){
-                    $.bootstrapGrowl("Изменения успешно сохранены!",
+                success: function(){
+                    $.bootstrapGrowl("Новое значения курса у.е для " + model.get('name') + " успешно сохранено!",
                         {ele: 'body', type: 'success', width: 350});
-                }
+                },
+                wait: true
             });
+    },
+
+    calculateProductsPrices: function(){
+        var url = "/domosed/manufacturers/" + this.model.id + "/calculatePrice";
+
+        $.ajax({
+            url: url,
+            type: 'post',
+            success: function(){
+                $.bootstrapGrowl("Цены успешно обновлены!",
+                {ele: 'body', type: 'success', width: 350})
+            },
+            error: function(){
+                $.bootstrapGrowl("Ошибка!",
+                {ele: 'body', type: 'danger', width: 350});
+            }
+        });
     }
 });
 
