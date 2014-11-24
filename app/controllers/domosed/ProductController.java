@@ -3,7 +3,6 @@ package controllers.domosed;
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
 import com.shopservice.domosed.DomosedProductRepository;
-import com.shopservice.domosed.Manufacturer;
 import com.shopservice.transfer.Product;
 import play.libs.Json;
 import play.mvc.Controller;

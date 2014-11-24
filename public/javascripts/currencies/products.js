@@ -25,7 +25,7 @@ var SearchResultView = Backbone.View.extend({
     },
 
     events: {
-        'click .btn-info' : 'updatePrice'
+        'click .btn-default' : 'updatePrice'
     },
 
     render: function(){

@@ -56,7 +56,7 @@
     <div class="col-md-6 column">
         <div class="form-group">
             <div class="input-group">
-                <input type="text" class="form-control" id="searchPhrase" value="<%= text%>">
+                <input type="text" class="form-control" id="searchPhrase" placeholder="Поиск товаров" value="<%= text%>">
                     <span class="input-group-btn">
                       <button id="searchBtn" class="btn btn-default" type="button"><i class="fa fa-search"></i>&nbsp;</button>
                     </span>
@@ -69,8 +69,8 @@
     <td><%= name %></td>
     <td><input type="text" class="form-control" value="<%= usdPrice %>"></td>
     <td>
-        <button class="btn btn-info btn-md" type="button">
-            <span class="glyphicon glyphicon-refresh" data-toggle="tooltip" data-placement="top" title="Обновить цену товара в у.е.">
+        <button class="btn btn-default btn-md" type="button">
+            <span class="glyphicon glyphicon-floppy-save" data-toggle="tooltip" data-placement="top" title="Обновить цену товара в у.е.">
             </span>
         </button>
     </td>
