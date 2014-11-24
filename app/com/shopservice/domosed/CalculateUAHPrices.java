@@ -16,7 +16,7 @@ public class CalculateUAHPrices implements Update {
     public String getRawSql() {
         return "UPDATE `products` \n" +
                 "SET `products_price` = products_usd_price * ?\n" +
-                "WHERE manufacturers_id = ? AND products_usd_price is not null";
+                "WHERE manufacturers_id = ? AND products_usd_price is not null AND products_usd_price > 0";
     }
 
     @Override
