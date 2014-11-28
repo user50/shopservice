@@ -66,11 +66,11 @@ var ManufacturerView = Backbone.View.extend({
 
         this.model.save( this.model.toJSON(),
             {
-                error: function(){
-                    $.bootstrapGrowl("Ошибка!",
+                error: function(model, response, options){
+                    $.bootstrapGrowl("Ошибка! Не удалось установить новый курс!",
                         {ele: 'body', type: 'danger', width: 350});
                 },
-                success: function(){
+                success: function(model, response, options){
                     $.bootstrapGrowl("Новое значения курса у.е для " + model.get('name') + " успешно сохранено!",
                         {ele: 'body', type: 'success', width: 350});
                 },
@@ -89,7 +89,7 @@ var ManufacturerView = Backbone.View.extend({
                 {ele: 'body', type: 'success', width: 350})
             },
             error: function(){
-                $.bootstrapGrowl("Ошибка!",
+                $.bootstrapGrowl("Ошибка во время расчета цен по новому курсу!",
                 {ele: 'body', type: 'danger', width: 350});
             }
         });
