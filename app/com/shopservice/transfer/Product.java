@@ -16,6 +16,7 @@ public class Product {
     public String sku;
     public boolean available;
     public double price;
+    public double usdPrice;
     public String shortDescription;
     public String description;
     public String warranty;

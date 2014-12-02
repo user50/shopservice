@@ -38,6 +38,7 @@ public class JdbcProductQuery implements Query<Product> {
         product.manufacturer = resultSet.getString("manufacturer");
         product.name = resultSet.getString("name");
         product.price = resultSet.getDouble("price");
+        product.usdPrice = resultSet.getDouble("usdPrice");
         //product.available = resultSet.getBoolean("available");
         product.shortDescription = resultSet.getString("shortDescription");
         product.description = resultSet.getString("description");

@@ -6,7 +6,8 @@
 GET     /                                   controllers.Application.index()
 GET     /price                              controllers.Application.price()
 GET     /priceUpdated                       controllers.Application.priceUpdated()
-GET     /actualization                       controllers.Application.actualization()
+GET     /actualization                      controllers.Application.actualization()
+GET     /currencies                         controllers.Application.currencies()
 
 
 # Map static resources from the /public folder to the /assets URL path
@@ -67,3 +68,12 @@ POST /logout                                                                    
 GET    /clients/:id/products                                                       controllers.ClientProductController.find(id, like : String ?= null, contain : String ?= null, offset: Integer ?= 0, limit: Integer ?= 100 )
 
 POST /assets/contact                                                               controllers.FeedbackController.feedbackNotify()
+
+# Domosed
+GET /domosed/manufacturers                                                         controllers.domosed.ManufacturerController.get()
+PUT /domosed/manufacturers/:id                                                     controllers.domosed.ManufacturerController.update(id)
+GET /domosed/products                                                              controllers.domosed.ProductController.get(words : String ?= null, offset: Long ?= 0, limit: Long ?= 10)
+PUT /domosed/products/:id                                                          controllers.domosed.ProductController.update(id)
+POST /domosed/manufacturers/:id/calculatePrice                                     controllers.domosed.ManufacturerController.calculatePrices(id)
+
+
