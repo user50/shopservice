@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class HikariConnectionPool implements ConnectionPool {
 
-    private static final int CONNECTION_POOL_SIZE = 1;
+    private static final int CONNECTION_POOL_SIZE = 5;
 
     DataSource dataSource;
 
