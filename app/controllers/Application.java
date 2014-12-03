@@ -30,4 +30,9 @@ public class Application extends Controller {
         return ok(actualization.render());
     }
 
+    @With(Authentication.class)
+    public static Result currencies() throws SQLException {
+        return ok(currencies.render());
+    }
+
 }
