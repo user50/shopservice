@@ -49,7 +49,7 @@ public class HibernateUtil {
     {
         configuration
                 .setProperty("show_sql", "true")
-                .setProperty( "hibernate.dialect", "org.hibernate.dialect.MySQLDialect" );
+                .setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
 //                .setProperty( "hibernate.c3p0.min_size", "5" )
 //                .setProperty( "hibernate.c3p0.max_size", "20" )
 //                .setProperty( "hibernate.c3p0.timeout", "1800" )
