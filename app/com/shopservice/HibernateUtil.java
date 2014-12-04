@@ -7,8 +7,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
-import java.sql.SQLException;
-
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
 
@@ -27,8 +25,6 @@ public class HibernateUtil {
             addProperties( configuration );
             StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
             sessionFactory = configuration.buildSessionFactory(ssrb.applySetting(Environment.DATASOURCE, pool.dataSource).build());
-
-
 
         } catch (ExceptionInInitializerError ex) {
             System.err.println("Initial SessionFactory creation failed: " + ex);
@@ -77,6 +73,11 @@ public class HibernateUtil {
 
         return result;
 
+    }
+
+    public static void stop()
+    {
+        sessionFactory.close();
     }
 
     public static void execute(Update update)
