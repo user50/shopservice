@@ -15,8 +15,8 @@ public class HibernateUtil {
 
     static {
         try {
-//            pool = new HikariConnectionPool("jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d?useUnicode=yes&characterEncoding=utf8" +
-//                    "&user=b02276676df1a5&password=2c270044");
+            pool = new HikariConnectionPool("jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d?useUnicode=yes&characterEncoding=utf8" +
+                    "&user=b02276676df1a5&password=2c270044");
 
 //            pool = new HikariConnectionPool("jdbc:mysql://localhost:3306/shopservice?" +
 //                    "user=root&password=neuser50");
@@ -26,7 +26,7 @@ public class HibernateUtil {
             addAnnotatedClasses( configuration );
             addProperties( configuration );
             StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            sessionFactory = configuration.buildSessionFactory(ssrb.applySetting(Environment.DATASOURCE, DB.getDataSource()).build());
+            sessionFactory = configuration.buildSessionFactory(ssrb.applySetting(Environment.DATASOURCE, pool.dataSource).build());
 
         } catch (ExceptionInInitializerError ex) {
             System.err.println("Initial SessionFactory creation failed: " + ex);
