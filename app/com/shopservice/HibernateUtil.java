@@ -26,8 +26,6 @@ public class HibernateUtil {
             StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
             sessionFactory = configuration.buildSessionFactory(ssrb.applySetting(Environment.DATASOURCE, pool.dataSource).build());
 
-
-
         } catch (ExceptionInInitializerError ex) {
             System.err.println("Initial SessionFactory creation failed: " + ex);
             throw new ExceptionInInitializerError(ex);
@@ -75,6 +73,11 @@ public class HibernateUtil {
 
         return result;
 
+    }
+
+    public static void stop()
+    {
+        sessionFactory.close();
     }
 
     public static void execute(Update update)

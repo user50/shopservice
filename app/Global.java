@@ -1,5 +1,7 @@
+import com.shopservice.HibernateUtil;
 import com.shopservice.MailService;
 import com.shopservice.exception.ValidationException;
+import play.Application;
 import play.GlobalSettings;
 import play.Play;
 import play.api.mvc.RequestHeader;
@@ -29,5 +31,10 @@ public class Global extends GlobalSettings {
             MailService.getInstance().report(exception);
 
         return super.onError(requestHeader, throwable);
+    }
+
+    @Override
+    public void onStop(Application application) {
+        HibernateUtil.stop();
     }
 }
