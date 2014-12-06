@@ -28,8 +28,8 @@ public class HibernateUtil {
 //            ds.setIdleTimeout(3600);  // Specified in seconds.
 //            ds.setValidationQuery("SELECT 1 ");
 
-            pool = new HikariConnectionPool("jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d?useUnicode=yes&characterEncoding=utf8" +
-                    "&user=b02276676df1a5&password=2c270044");
+//            pool = new HikariConnectionPool("jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d?useUnicode=yes&characterEncoding=utf8" +
+//                    "&user=b02276676df1a5&password=2c270044");
 
 //            pool = new HikariConnectionPool("jdbc:mysql://localhost:3306/shopservice?" +
 //                    "user=root&password=neuser50");
@@ -39,7 +39,8 @@ public class HibernateUtil {
             addAnnotatedClasses( configuration );
             addProperties( configuration );
             StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            sessionFactory = configuration.buildSessionFactory(ssrb.applySetting(Environment.DATASOURCE, pool.dataSource).build());
+//            sessionFactory = configuration.buildSessionFactory(ssrb.applySetting(Environment.DATASOURCE, pool.dataSource).build());
+            sessionFactory = configuration.buildSessionFactory();
 
         } catch (ExceptionInInitializerError ex) {
             System.err.println("Initial SessionFactory creation failed: " + ex);
@@ -62,12 +63,12 @@ public class HibernateUtil {
     {
         configuration
                 .setProperty("show_sql", "true")
-                .setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
-//                .setProperty( "hibernate.c3p0.min_size", "5" )
-//                .setProperty( "hibernate.c3p0.max_size", "20" )
-//                .setProperty( "hibernate.c3p0.timeout", "1800" )
-//                .setProperty( "hibernate.c3p0.max_statements", "50" )
-//                .setProperty("hibernate.hbm2ddl.auto", "update");
+                .setProperty("dialect", "org.hibernate.dialect.MySQLDialect")
+                .setProperty( "hibernate.c3p0.min_size", "3" )
+                .setProperty( "hibernate.c3p0.max_size", "5" )
+                .setProperty( "hibernate.c3p0.timeout", "1800" )
+                .setProperty( "hibernate.c3p0.max_statements", "50" )
+                .setProperty("hibernate.hbm2ddl.auto", "update");
     }
 
     /**
