@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
-import play.db.DB;
+import snaq.db.DBPoolDataSource;
 
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
@@ -15,8 +15,21 @@ public class HibernateUtil {
 
     static {
         try {
-            pool = new HikariConnectionPool("jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d?useUnicode=yes&characterEncoding=utf8" +
-                    "&user=b02276676df1a5&password=2c270044");
+            DBPoolDataSource ds = new DBPoolDataSource();
+            ds.setName("pool-ds");
+            ds.setDescription("Pooling DataSource");
+            ds.setDriverClassName("com.mysql.jdbc.Driver");
+            ds.setUrl("jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d?useUnicode=yes&characterEncoding=utf8");
+            ds.setUser("b02276676df1a5");
+            ds.setPassword("2c270044");
+            ds.setMinPool(2);
+            ds.setMaxPool(5);
+            ds.setMaxSize(30);
+            ds.setIdleTimeout(3600);  // Specified in seconds.
+            ds.setValidationQuery("SELECT 1 ");
+
+//            pool = new HikariConnectionPool("jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d?useUnicode=yes&characterEncoding=utf8" +
+//                    "&user=b02276676df1a5&password=2c270044");
 
 //            pool = new HikariConnectionPool("jdbc:mysql://localhost:3306/shopservice?" +
 //                    "user=root&password=neuser50");
@@ -26,7 +39,7 @@ public class HibernateUtil {
             addAnnotatedClasses( configuration );
             addProperties( configuration );
             StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            sessionFactory = configuration.buildSessionFactory(ssrb.applySetting(Environment.DATASOURCE, pool.dataSource).build());
+            sessionFactory = configuration.buildSessionFactory(ssrb.applySetting(Environment.DATASOURCE, ds).build());
 
         } catch (ExceptionInInitializerError ex) {
             System.err.println("Initial SessionFactory creation failed: " + ex);
@@ -49,7 +62,7 @@ public class HibernateUtil {
     {
         configuration
                 .setProperty("show_sql", "true")
-                .setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
+                .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 //                .setProperty( "hibernate.c3p0.min_size", "5" )
 //                .setProperty( "hibernate.c3p0.max_size", "20" )
 //                .setProperty( "hibernate.c3p0.timeout", "1800" )
