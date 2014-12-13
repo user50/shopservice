@@ -2,6 +2,8 @@ package com.shopservice;
 
 import com.shopservice.assemblers.CategoryAssembler;
 import com.shopservice.dao.*;
+import com.shopservice.datasources.ApacheDataSourceProvider;
+import com.shopservice.datasources.SnaqDataSourceProvider;
 import com.shopservice.urlgenerate.UrlGenerator;
 import com.shopservice.urlgenerate.UrlGeneratorStorage;
 
@@ -34,7 +36,7 @@ public class Services {
 
     public static DatabaseManager getDataBaseManager(String clientId) throws SQLException {
         if (!databaseManagers.containsKey(clientId))
-            databaseManagers.put(clientId, new DatabaseManager(new HikariConnectionPool(clientSettingsRepository.get(clientId).databaseUrl)));
+            databaseManagers.put(clientId, new DatabaseManager(new SnaqDataSourceProvider(clientSettingsRepository.get(clientId).databaseUrl, 5).provide()));
 
         return databaseManagers.get(clientId);
     }
@@ -57,7 +59,7 @@ public class Services {
             if (clientId.equals("artem"))
                 productDAOs.put(clientId, new SynchronizeProducts( new FlorangeProductRepositoryByMongo(), clientId ));
             else
-                productDAOs.put(clientId, new CachedProductRepository(new SynchronizeProducts(new JdbcProductRepository(clientId), clientId)));
+                productDAOs.put(clientId, new CachedProductRepository(new JdbcProductRepository(clientId)));
         }
 
         return productDAOs.get(clientId);

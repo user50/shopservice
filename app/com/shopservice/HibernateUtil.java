@@ -2,6 +2,7 @@ package com.shopservice;
 
 import com.shopservice.datasources.ApacheDataSourceProvider;
 import com.shopservice.datasources.DataSourceProvider;
+import com.shopservice.datasources.Urls;
 import com.shopservice.domain.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,8 +13,7 @@ import org.hibernate.cfg.Environment;
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
 
-    private static DataSourceProvider dataSourceProvider = new ApacheDataSourceProvider("jdbc:mysql://us-cdbr-east-05.cleardb.net:3306/heroku_20e5b087480e48d?useUnicode=yes&characterEncoding=utf8" +
-            "&user=b02276676df1a5&password=2c270044", 5);
+    private static DataSourceProvider dataSourceProvider = new ApacheDataSourceProvider(Urls.heroku.getUrl(), 5);
 
     static {
         try {

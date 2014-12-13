@@ -2,7 +2,9 @@ package com.shopservice;
 
 import com.shopservice.queries.Query;
 import com.shopservice.queries.Update;
+import play.Logger;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,14 +21,18 @@ import java.util.List;
  */
 public class DatabaseManager {
 
-    private ConnectionPool connectionPool;
+    private DataSource dataSource;
 
-    public DatabaseManager(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
+    public DatabaseManager(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public <T> List<T> executeQueryForList(Query<T> query) throws SQLException {
-        Connection connection = connectionPool.getConnection();
+
+        long start = System.currentTimeMillis();
+        Connection connection = dataSource.getConnection();
+        Logger.info("Get connection "+(System.currentTimeMillis() - start));
+
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
@@ -51,7 +57,7 @@ public class DatabaseManager {
                 preparedStatement.close();
             }
 
-            connectionPool.releaseConnection(connection);
+            connection.close();
         }
     }
 
@@ -68,7 +74,7 @@ public class DatabaseManager {
     }
 
     public int executeUpdate(Update update) throws SQLException {
-        Connection connection = connectionPool.getConnection();
+        Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = null;
         try {
             String rawSql = update.getRawSql();
@@ -81,11 +87,7 @@ public class DatabaseManager {
                 preparedStatement.close();
             }
 
-            connectionPool.releaseConnection(connection);
+            connection.close();
         }
-    }
-
-    public void setConnectionPool(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
     }
 }
