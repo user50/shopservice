@@ -15,7 +15,8 @@ libraryDependencies ++= Seq(
   "org.jsoup" % "jsoup" % "1.7.2",
   "org.mongodb" % "mongo-java-driver" % "2.10.1",
   "org.hibernate" % "hibernate-entitymanager" % "4.3.6.Final",
-  "net.snaq" % "dbpool" % "5.1"
+  "net.snaq" % "dbpool" % "5.1",
+  "commons-dbcp" % "commons-dbcp" % "1.4"
 )
 
 play.Project.playJavaSettings
