@@ -3,6 +3,7 @@ package com.shopservice;
 import com.shopservice.assemblers.CategoryAssembler;
 import com.shopservice.dao.*;
 import com.shopservice.datasources.ApacheDataSourceProvider;
+import com.shopservice.datasources.OneConnectionDataSourceProvider;
 import com.shopservice.datasources.SnaqDataSourceProvider;
 import com.shopservice.urlgenerate.UrlGenerator;
 import com.shopservice.urlgenerate.UrlGeneratorStorage;
