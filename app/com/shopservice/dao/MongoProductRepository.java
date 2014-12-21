@@ -1,29 +1,30 @@
 package com.shopservice.dao;
 
 import com.mongodb.*;
-import com.mongodb.util.JSON;
 import com.shopservice.MongoDataBase;
 import com.shopservice.ProductConditions;
-import com.shopservice.Util;
 import com.shopservice.transfer.Product;
 import play.libs.Json;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
  * Created by user50 on 09.08.2014.
  */
-public class FlorangeProductRepositoryByMongo implements ProductRepository {
+public class MongoProductRepository implements ProductRepository {
 
-    private final static String COLLECTION_NAME = "products";
+    private String collectionName;
     private DB dataBase = MongoDataBase.get();
+
+    public MongoProductRepository(String collectionName) {
+        this.collectionName = collectionName;
+    }
 
     @Override
     public List<Product> find(ProductConditions conditions) {
 
-        DBCursor cursor = dataBase.getCollection(COLLECTION_NAME).find(makeMongoQuery(conditions));
+        DBCursor cursor = dataBase.getCollection(collectionName).find(makeMongoQuery(conditions));
 
         if (conditions.limit != null)
             cursor = cursor.limit(conditions.limit);
@@ -41,7 +42,7 @@ public class FlorangeProductRepositoryByMongo implements ProductRepository {
 
     @Override
     public int size(ProductConditions conditions) {
-        return dataBase.getCollection(COLLECTION_NAME).find(makeMongoQuery(conditions)).count();
+        return dataBase.getCollection(collectionName).find(makeMongoQuery(conditions)).count();
     }
 
     private BasicDBObject makeMongoQuery(ProductConditions conditions)

@@ -2,9 +2,7 @@ package com.shopservice;
 
 import com.shopservice.assemblers.CategoryAssembler;
 import com.shopservice.dao.*;
-import com.shopservice.datasources.ApacheDataSourceProvider;
 import com.shopservice.datasources.OneConnectionDataSourceProvider;
-import com.shopservice.datasources.SnaqDataSourceProvider;
 import com.shopservice.urlgenerate.UrlGenerator;
 import com.shopservice.urlgenerate.UrlGeneratorStorage;
 
@@ -47,6 +45,8 @@ public class Services {
         if (!categoryDAOs.containsKey(clientId)) {
             if (clientId.equals("artem"))
                 categoryDAOs.put(clientId, new PersistCategoryByFile(new FlorangeCategoryRepository() ) );
+            else if (clientId.equals("demo"))
+                categoryDAOs.put(clientId, new DemoCategoryRepository());
             else
                 categoryDAOs.put(clientId, new CachedCategoryRepository(new JdbcCategoryRepository(clientId)));
         }
@@ -58,7 +58,9 @@ public class Services {
     {
         if (!productDAOs.containsKey(clientId)) {
             if (clientId.equals("artem"))
-                productDAOs.put(clientId, new SynchronizeProducts( new FlorangeProductRepositoryByMongo(), clientId ));
+                productDAOs.put(clientId, new SynchronizeProducts( new MongoProductRepository("products"), clientId ));
+            else if (clientId.equals("demo"))
+                productDAOs.put(clientId, new MongoProductRepository("demoProducts"));
             else
                 productDAOs.put(clientId, new CachedProductRepository(new JdbcProductRepository(clientId)));
         }

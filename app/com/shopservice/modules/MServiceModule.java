@@ -19,7 +19,7 @@ public class MServiceModule extends AbstractModule {
         bind(LinkedProductEntryRepository.class).to(HibernateLinkedProductEntryRepository.class).in(Singleton.class);
         bind(ClientsCategoryRepository.class).to(HibernateClientsCategoryRepository.class).in(Singleton.class);
 
-        bind(ClientSettingsRepository.class).to(HibernateClientSettingsRepository.class).in(Singleton.class);
+        bind(ClientSettingsRepository.class).to(CachedClientSettingsRepository.class).in(Singleton.class);
         bind(ClientSettingsRepository.class).annotatedWith(Names.named(CachedClientSettingsRepository.BASE)).to(HibernateClientSettingsRepository.class).in(Singleton.class);
 
         bind(ProductAssembler.class).in(Singleton.class);

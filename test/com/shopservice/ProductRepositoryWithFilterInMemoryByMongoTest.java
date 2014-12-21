@@ -1,17 +1,17 @@
 package com.shopservice;
 
-import com.shopservice.dao.FlorangeProductRepositoryByMongo;
+import com.shopservice.dao.MongoProductRepository;
 import org.junit.Test;
 
 /**
  * Created by user50 on 09.08.2014.
  */
-public class FlorangeProductRepositoryByMongoTest {
+public class ProductRepositoryWithFilterInMemoryByMongoTest {
 
     @Test
     public void testName() throws Exception {
 
-        FlorangeProductRepositoryByMongo repo = new FlorangeProductRepositoryByMongo();
+        MongoProductRepository repo = new MongoProductRepository("products");
 
         ProductConditions conditions = new ProductConditions();
 //        conditions.productIds.add("1784303933");
