@@ -15,11 +15,13 @@ import java.util.List;
 /**
  * Created by user50 on 06.08.2014.
  */
-public class FlorangeProductRepository implements ProductRepository {
+public class ProductRepositoryWithFilterInMemory implements ProductRepository {
 
-    private static final String FILE_TO_STORE = System.getProperty("user.dir")+File.separator+"florange"+ File.separator+"products";
+    private ProductSource source;
 
-    private ProductSource source = new PersistByMongo( new Florange());
+    public ProductRepositoryWithFilterInMemory(ProductSource source) {
+        this.source = source;
+    }
 
     @Override
     public List<Product> find(ProductConditions conditions) {

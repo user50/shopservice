@@ -1,14 +1,12 @@
 package com.shopservice.dao;
 
 import com.mongodb.*;
-import com.mongodb.util.JSON;
 import com.shopservice.MongoDataBase;
 import com.shopservice.ProductConditions;
 import com.shopservice.transfer.Product;
 import play.libs.Json;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,13 +14,17 @@ import java.util.List;
  */
 public class MongoProductRepository implements ProductRepository {
 
-    private final static String COLLECTION_NAME = "products";
+    private String collectionName;
     private DB dataBase = MongoDataBase.get();
+
+    public MongoProductRepository(String collectionName) {
+        this.collectionName = collectionName;
+    }
 
     @Override
     public List<Product> find(ProductConditions conditions) {
 
-        DBCursor cursor = dataBase.getCollection(COLLECTION_NAME).find(makeMongoQuery(conditions));
+        DBCursor cursor = dataBase.getCollection(collectionName).find(makeMongoQuery(conditions));
 
         if (conditions.limit != null)
             cursor = cursor.limit(conditions.limit);
@@ -40,7 +42,7 @@ public class MongoProductRepository implements ProductRepository {
 
     @Override
     public int size(ProductConditions conditions) {
-        return dataBase.getCollection(COLLECTION_NAME).find(makeMongoQuery(conditions)).count();
+        return dataBase.getCollection(collectionName).find(makeMongoQuery(conditions)).count();
     }
 
     private BasicDBObject makeMongoQuery(ProductConditions conditions)
@@ -58,21 +60,15 @@ public class MongoProductRepository implements ProductRepository {
 
         if (!conditions.words.isEmpty())
         {
-            BasicDBObject search = new BasicDBObject("$search", toString(conditions.words));
-            query.append("$text", search);
+            BasicDBList list = new BasicDBList();
+
+            for (String word : conditions.words)
+                list.add(new BasicDBObject("name", new BasicDBObject("$regex", ".*"+word+".*").append("$options", "-i")) );
+
+            query.append("$and", list);
         }
 
         return query;
-    }
-
-    private String toString(Collection<String> words)
-    {
-        StringBuilder buffer = new StringBuilder();
-        for (String word : words) {
-            buffer.append(word).append(" ");
-        }
-
-        return buffer.toString();
     }
 
     private List<Product> toProductList(List<DBObject> objects)

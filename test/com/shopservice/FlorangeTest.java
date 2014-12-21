@@ -1,23 +1,12 @@
 package com.shopservice;
 
 import com.shopservice.dao.FlorangeCategoryRepository;
-import com.shopservice.dao.FlorangeProductRepository;
+import com.shopservice.dao.ProductRepositoryWithFilterInMemory;
 import com.shopservice.productsources.Florange;
-import com.shopservice.productsources.PersistenceByFile;
-import com.shopservice.productsources.ProductSource;
+import com.shopservice.productsources.PersistByMongo;
 import com.shopservice.transfer.Product;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Attributes;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.junit.Test;
-import play.Logger;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,7 +22,7 @@ public class FlorangeTest {
         conditions.offset = 123;
         conditions.limit = 3333;
 
-        FlorangeProductRepository repository = new FlorangeProductRepository();
+        ProductRepositoryWithFilterInMemory repository = new ProductRepositoryWithFilterInMemory(new PersistByMongo( new Florange()));
         repository.find(conditions);
     }
 
