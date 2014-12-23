@@ -150,7 +150,7 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
     }
 
     @Override
-    public List<ProductEntry> get(final int groupId, final Collection<String> ids) {
+    public List<ProductEntry> get(final String clientId, final int groupId, final Collection<String> ids) {
         return execute(new Query() {
             @Override
             public List<ProductEntry> execute(Session session) {
@@ -169,7 +169,7 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
                         "  group2product.id IS NOT NULL AS checked\n" +
                         "FROM product_entry\n" +
                         "  LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = '"+groupId+"'\n" +
-                        "WHERE product_entry.product_id IN(" + idsToQuery + " ) ").scroll();
+                        "WHERE product_entry.product_id IN(" + idsToQuery + " )  and product_entry.client_settings_id = '"+clientId+"'").scroll();
 
                 List<ProductEntry> productEntries = new ArrayList<ProductEntry>();
 

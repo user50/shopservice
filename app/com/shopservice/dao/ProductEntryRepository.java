@@ -22,7 +22,7 @@ public interface ProductEntryRepository {
 
     Set<ProductEntry> get(String clientId);
 
-    List<ProductEntry> get(int groupId, Collection<String> ids);
+    List<ProductEntry> get(String clientId, int groupId, Collection<String> ids);
 
     List<ProductEntry> getWithCheckedPage(String clientId, String categoryId, int groupId, int offset, int limit);
 

@@ -31,7 +31,7 @@ public class ProductAssembler {
         });
 
         Map<String,ProductEntry> productEntriesPage = new LinkedHashMap<String,ProductEntry>();
-        for (ProductEntry entry : productEntryRepository.get(groupId, productIds) )
+        for (ProductEntry entry : productEntryRepository.get(clientId, groupId, productIds) )
             productEntriesPage.put(entry.productId, entry );
 
         for (Product product : products) {
