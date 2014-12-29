@@ -42,6 +42,7 @@ public class DatabaseManager {
 
             start = System.currentTimeMillis();
             resultSet = preparedStatement.executeQuery();
+            Logger.info("Execute Query "+ preparedStatement.toString());
             Logger.info("Execute Query "+(System.currentTimeMillis() - start));
 
             List<T> list = new ArrayList<T>();

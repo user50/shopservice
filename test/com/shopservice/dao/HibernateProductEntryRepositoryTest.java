@@ -133,30 +133,6 @@ public class HibernateProductEntryRepositoryTest {
         repository.get(settings.id, categoryId);
     }
 
-    @Test
-    public void testGetByIdList() throws Exception {
-        ProductEntry productEntry = new ProductEntry();
-        productEntry.id = UUID.randomUUID().toString();
-        productEntry.productId = UUID.randomUUID().toString();
-        productEntry.categoryId = UUID.randomUUID().toString();
-
-        ProductEntry productEntry1 = new ProductEntry();
-        productEntry1.id = UUID.randomUUID().toString();
-        productEntry1.productId = UUID.randomUUID().toString();
-        productEntry1.categoryId = productEntry.categoryId;
-
-        repository.add(settings.id, Arrays.asList(productEntry, productEntry1));
-
-        ProductGroup group = new ProductGroup();
-        group.name = "foo";
-        group.clientSettings = settings;
-
-        productGroupRepository.save(group);
-        group2ProductRepository.set(productEntry.id, group.id, true);
-
-        repository.get(group.id, Arrays.asList(productEntry.productId, productEntry1.productId));
-
-    }
 
     @Test
     public void testGetWithCheckedPage() throws Exception {

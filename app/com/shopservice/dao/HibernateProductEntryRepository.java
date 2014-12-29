@@ -57,7 +57,7 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
             @Override
             public void execute(Session session) {
                 session.createSQLQuery("DELETE FROM product_entry  WHERE product_entry.id IN (:values)")
-                        .setParameter("values", ids ).executeUpdate();
+                        .setParameterList("values", ids ).executeUpdate();
             }
         });
     }

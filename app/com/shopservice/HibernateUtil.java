@@ -1,6 +1,5 @@
 package com.shopservice;
 
-import com.shopservice.datasources.ApacheDataSourceProvider;
 import com.shopservice.datasources.DataSourceProvider;
 import com.shopservice.datasources.OneConnectionDataSourceProvider;
 import com.shopservice.datasources.Urls;
@@ -45,6 +44,8 @@ public class HibernateUtil {
     {
         configuration
                 .setProperty("show_sql", "true")
+                .setProperty("hibernate.show_sql", "true")
+                .setProperty("hibernate.format_sql=true", "true")
                 .setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
 //                .setProperty( "hibernate.c3p0.min_size", "5" )
 //                .setProperty( "hibernate.c3p0.max_size", "20" )
