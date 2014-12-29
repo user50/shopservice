@@ -14,40 +14,17 @@ import java.util.Set;
 /**
  * Created by user50 on 21.06.2014.
  */
-public class SynchronizeProducts extends ProductRepositoryWrapper {
+public class SynchronizeProducts {
 
     ProductEntryRepository productEntryRepository = MServiceInjector.injector.getInstance(ProductEntryRepository.class);
-    ProductRepository productRepository;
 
-    private String clientId;
+    public SynchronizeProducts() {}
 
-    public SynchronizeProducts(ProductRepository productRepository, String clientId) {
-        super(productRepository);
-        this.clientId = clientId;
-
-        if (clientId.equals("artem"))
-            this.productRepository = productRepository;
-        else
-            this.productRepository = new JdbcProductRepository(clientId);
-    }
-
-    @Override
-    public List<Product> find(ProductConditions query) {
-        syncProducts();
-        return super.find(query);
-    }
-
-    @Override
-    public List<Product> find() {
-        syncProducts();
-        return super.find();
-    }
-
-    private void syncProducts() {
+    public void syncProducts(final ProductRepository productRepository, final String clientId) {
         Runnable runnable = new Runnable() {
             public void run() {
                 List<Product> products = productRepository.find();
-                Set<ProductEntry> productEntriesFromClient = new HashSet<ProductEntry>();
+                Set<ProductEntry> productEntriesFromClient = new HashSet<>();
                 for (Product product : products)
                     productEntriesFromClient.add(new ProductEntry(product));
 

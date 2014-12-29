@@ -58,7 +58,7 @@ public class Services {
     {
         if (!productDAOs.containsKey(clientId)) {
             if (clientId.equals("artem"))
-                productDAOs.put(clientId, new SynchronizeProducts( new MongoProductRepository("products"), clientId ));
+                productDAOs.put(clientId, new MongoProductRepository("products"));
             else if (clientId.equals("demo"))
                 productDAOs.put(clientId, new MongoProductRepository("demoProducts"));
             else
