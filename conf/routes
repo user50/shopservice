@@ -76,4 +76,6 @@ GET /domosed/products                                                           
 PUT /domosed/products/:id                                                          controllers.domosed.ProductController.update(id)
 POST /domosed/manufacturers/:id/calculatePrice                                     controllers.domosed.ManufacturerController.calculatePrices(id)
 
+#Sync
+POST /clients/:clientId/products/sync                                              controllers.SyncController.sync(clientId)
 

@@ -8,6 +8,7 @@ import com.shopservice.transfer.Product;
 import org.hibernate.FetchMode;
 import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 
@@ -36,6 +37,8 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
         execute(new Update() {
             @Override
             public void execute(Session session) {
+                Transaction transaction = session.beginTransaction();
+
                 ClientSettings clientSettings = (ClientSettings) session.get(ClientSettings.class, clientsId);
 
                 for (ProductEntry productEntry : productEntries)
@@ -43,12 +46,17 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
 
                 clientSettings.productEntries.addAll(productEntries);
                 session.save(clientSettings);
+
+                transaction.commit();
             }
         });
     }
 
     @Override
     public void delete(final Collection<ProductEntry> productsToDelete) throws Exception {
+        if (productsToDelete.isEmpty())
+            return;
+
         final List<String> ids = new ArrayList<>();
         for (ProductEntry productEntry : productsToDelete)
             ids.add(productEntry.id);
@@ -57,7 +65,7 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
             @Override
             public void execute(Session session) {
                 session.createSQLQuery("DELETE FROM product_entry  WHERE product_entry.id IN (:values)")
-                        .setParameter("values", ids ).executeUpdate();
+                        .setParameterList("values", ids ).executeUpdate();
             }
         });
     }

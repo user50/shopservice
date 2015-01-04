@@ -38,4 +38,9 @@ public class FlorangeTest {
         Florange florange = new Florange();
         List<Product> products = florange.getProducts(url);
     }
+
+    @Test
+    public void testProducts() throws Exception {
+        new Florange().get(null);
+    }
 }
