@@ -1,5 +1,6 @@
 package com.shopservice;
 
+import com.shopservice.datasources.ApacheDataSourceProvider;
 import com.shopservice.datasources.DataSourceProvider;
 import com.shopservice.datasources.OneConnectionDataSourceProvider;
 import com.shopservice.datasources.Urls;
@@ -13,7 +14,7 @@ import org.hibernate.cfg.Environment;
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
 
-    private static DataSourceProvider dataSourceProvider = new OneConnectionDataSourceProvider(Urls.heroku.getUrl());
+    private static DataSourceProvider dataSourceProvider = new ApacheDataSourceProvider(Urls.heroku.getUrl(), 5);
 
     static {
         try {

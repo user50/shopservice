@@ -1,7 +1,7 @@
 package controllers;
 
 import com.shopservice.Services;
-import com.shopservice.dao.SynchronizeProducts;
+import com.shopservice.sync.DefaultSyncProducts;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -14,12 +14,8 @@ import play.mvc.Result;
  */
 public class SyncController extends Controller {
 
-    private static SynchronizeProducts synchronizeProducts = new SynchronizeProducts();
-
     public static Result sync(String clientId){
-
-        synchronizeProducts.syncProducts(Services.getProductDAO(clientId), clientId);
-
+        Services.getSyncProduct(clientId).execute();
         return ok();
     }
 }
