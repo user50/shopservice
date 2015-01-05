@@ -9,8 +9,7 @@ var ManufacturersPage = Backbone.View.extend({
     render: function(){
         this.Manufacturers.fetch({wait: true});
 
-        this.ProductSearch = new ProductSearch();
-        this.$el.append(this.ProductSearch.render().el);
+        this.$el.append(new SwitchButtons().render().el);
 
         var rowDiv = $('<div class="row clearfix">');
         var colDiv = $('<div class="col-md-6 column">');

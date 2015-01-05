@@ -8,6 +8,8 @@ var SearchPage = Backbone.View.extend({
     },
 
     render: function(text){
+        this.$el.append(new SwitchButtons().render().el);
+
         this.ProductSearch = new ProductSearch();
         this.$el.append(this.ProductSearch.render(text).el);
 
@@ -20,7 +22,6 @@ var SearchPage = Backbone.View.extend({
         rowDiv.append(colDiv);
         this.$el.append(rowDiv);
 
-        this.$el.append(new BackButton().render().el);
         return this;
     }
 });

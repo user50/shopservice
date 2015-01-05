@@ -2,6 +2,8 @@
 var CurrenciesRouter = Backbone.Router.extend({
    routes: {
        '' : 'start',
+       'manufacturers' : 'manufacturers',
+       'products' : 'products',
        'search/:text' : 'search'
    },
 
@@ -10,12 +12,25 @@ var CurrenciesRouter = Backbone.Router.extend({
     },
 
     start: function(){
-        console.log('Hello!');
+        $('#content').html(new SwitchButtons().render().el);
+    },
+
+    manufacturers: function(){
+        console.log('Manufacturers page');
         if (this.ManufacturersPage != null){
             this.ManufacturersPage.remove();
         }
         this.ManufacturersPage = new ManufacturersPage();
         $('#content').html(this.ManufacturersPage.render().el);
+    },
+
+    products: function(){
+        console.log('Products page');
+        if (this.ProductsPage != null){
+            this.ProductsPage.remove();
+        }
+        this.ProductsPage = new ProductsPage();
+        $('#content').html(this.ProductsPage.render().el);
     },
 
     search: function(text){
