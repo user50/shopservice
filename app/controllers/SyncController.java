@@ -16,6 +16,7 @@ public class SyncController extends Controller {
 
     public static Result sync(String clientId){
         Services.getSyncProduct(clientId).execute();
+
         return ok();
     }
 }
