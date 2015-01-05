@@ -1,6 +1,8 @@
 package com.shopservice.dao;
 
 import com.shopservice.HibernateUtil;
+import com.shopservice.dao.productentry.*;
+import com.shopservice.dao.productentry.quesries.*;
 import com.shopservice.domain.ClientSettings;
 import com.shopservice.domain.ProductEntry;
 import com.shopservice.domain.ProductGroup;
@@ -17,144 +19,47 @@ import java.util.*;
 import static com.shopservice.HibernateUtil.*;
 
 public class HibernateProductEntryRepository implements ProductEntryRepository {
+    private FindSelectedProductEntry findSelectedProductEntry = new FindSelectedProductEntry();
+    private AddProductEntries addProductEntries = new AddProductEntries();
+    private DeleteProductEntries deleteProductEntries = new DeleteProductEntries();
+    private GetCheckedProductEntries getCheckedProductEntries = new GetCheckedProductEntries();
+    private GetCountPerCategory getCountPerCategory = new GetCountPerCategory();
+    private GetProductEntries getProductEntries = new GetProductEntries();
+
     @Override
     public List<ProductEntry> findSelected(final String clientSettingsId, final int groupId, final boolean useCustomCategories) throws Exception {
-        return execute(new Query() {
-            @Override
-            public List<ProductEntry> execute(Session session) {
-                return session.createSQLQuery("SELECT product_entry.* FROM product_entry " +
-                        "JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = :groupId " +
-                        "WHERE client_settings_id = :clientSettingsId " + (useCustomCategories ? "AND custom_category_id IS NOT NULL" : "") ).addEntity(ProductEntry.class)
-                        .setParameter("groupId", groupId)
-                        .setParameter("clientSettingsId", clientSettingsId)
-                        .list();
-            }
-        });
+        return findSelectedProductEntry.execute(new FindSelectedProductEntryQuery(clientSettingsId, groupId, useCustomCategories));
     }
 
     @Override
     public void add(final String clientsId, final Collection<ProductEntry> productEntries) throws Exception {
-        execute(new Update() {
-            @Override
-            public void execute(Session session) {
-                Transaction transaction = session.beginTransaction();
-
-                ClientSettings clientSettings = (ClientSettings) session.get(ClientSettings.class, clientsId);
-
-                for (ProductEntry productEntry : productEntries)
-                    productEntry.clientSettings = clientSettings;
-
-                clientSettings.productEntries.addAll(productEntries);
-                session.save(clientSettings);
-
-                transaction.commit();
-            }
-        });
+        addProductEntries.execute(new AddProductEntriesQuery(clientsId, productEntries));
     }
 
     @Override
     public void delete(final Collection<ProductEntry> productsToDelete) throws Exception {
-        if (productsToDelete.isEmpty())
-            return;
-
-        final List<String> ids = new ArrayList<>();
-        for (ProductEntry productEntry : productsToDelete)
-            ids.add(productEntry.id);
-
-        execute(new Update() {
-            @Override
-            public void execute(Session session) {
-                session.createSQLQuery("DELETE FROM product_entry  WHERE product_entry.id IN (:values)")
-                        .setParameterList("values", ids ).executeUpdate();
-            }
-        });
+        deleteProductEntries.execute(productsToDelete);
     }
 
     @Override
     public List<ProductEntry> getWithChecked(final String clientId, final String categoryId, final int groupId) throws Exception {
-        return execute(new Query() {
-            @Override
-            public List<ProductEntry> execute(Session session) {
-                ScrollableResults results = session.createSQLQuery("SELECT product_entry.id, " +
-                        "product_entry.product_id, product_entry.category_id, product_entry.custom_category_id, " +
-                        "product_entry.description, product_entry.imageUrl, group2product.id IS NOT NULL AS checked FROM product_entry " +
-                        "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = '" + groupId + "' " +
-                        "WHERE client_settings_id = '" + clientId + "' AND category_id = '" + categoryId + "' ")
-                        .scroll();
-
-                List<ProductEntry> productEntries = new ArrayList<ProductEntry>();
-
-                while (results.next()){
-                    ProductEntry productEntry = new ProductEntry();
-                    productEntry.id = (String) results.get(0);
-                    productEntry.productId = (String) results.get(1);
-                    productEntry.categoryId = (String) results.get(2);
-                    productEntry.customCategoryId = (String) results.get(3);
-                    productEntry.description = (String) results.get(4);
-                    productEntry.imageUrl = (String) results.get(5);
-                    productEntry.checked = results.get(6).toString().equals("1");
-
-                    productEntries.add(productEntry);
-                }
-
-                return productEntries;
-            }
-        });
+        return getCheckedProductEntries.execute(new GetCheckedProductEntriesQuery(clientId, categoryId, groupId));
     }
 
     @Override
     public Map<String, Integer> getCountPerCategory(final String clientId, final String groupId) {
-        return execute(new Query() {
-            @Override
-            public Map<String, Integer> execute(Session session) {
-                ScrollableResults results = session.createSQLQuery("SELECT\n" +
-                        "  category_id,\n" +
-                        "  count(product_entry.id) AS total\n" +
-                        "FROM product_entry\n" +
-                        "  JOIN group2product ON group2product.product_entry_id = product_entry.id\n" +
-                        "WHERE client_settings_id = '" + clientId + "' AND product_group_id = '" + groupId + "'\n" +
-                        "GROUP BY category_id")
-                        .scroll();
-
-                Map<String, Integer> output = new HashMap<String, Integer>();
-
-                while (results.next()) {
-                    output.put((String)results.get(0), Integer.valueOf(results.get(1).toString()));
-                }
-
-                return output;
-            }
-        });
+        return getCountPerCategory.execute(new GetCountPerCategoryQuery(clientId, groupId));
     }
 
     @Override
     public Set<ProductEntry> get(final String clientId, final String categoryId)
     {
-        return execute(new Query() {
-            @Override
-            public Set<ProductEntry> execute(Session session) {
-                return new HashSet<ProductEntry>((List<ProductEntry>) session.createCriteria(ProductEntry.class, "productEntry")
-                        .setFetchMode("productEntry.clientSettings", FetchMode.JOIN)
-                        .createAlias("productEntry.clientSettings", "settings", CriteriaSpecification.LEFT_JOIN)
-                        .add(Restrictions.eq("settings.id", clientId))
-                        .add(Restrictions.eq("categoryId", categoryId))
-                        .list()) ;
-            }
-        });
+        return getProductEntries.execute(new GetProductEntriesQuery(clientId, categoryId));
     }
 
     @Override
     public Set<ProductEntry> get(final String clientId) {
-        return execute(new Query() {
-            @Override
-            public Set<ProductEntry> execute(Session session) {
-                return new HashSet<ProductEntry>((List<ProductEntry>) session.createCriteria(ProductEntry.class, "productEntry")
-                        .setFetchMode("productEntry.clientSettings", FetchMode.JOIN)
-                        .createAlias("productEntry.clientSettings", "settings", CriteriaSpecification.LEFT_JOIN)
-                        .add(Restrictions.eq("settings.id", clientId))
-                        .list()) ;
-            }
-        });
+        return getProductEntries.execute(new GetProductEntriesQuery(clientId));
     }
 
     @Override
