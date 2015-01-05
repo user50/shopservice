@@ -27,7 +27,10 @@ public class GetCheckedProductEntries implements ExternalCall<List<ProductEntry>
                         "product_entry.product_id, product_entry.category_id, product_entry.custom_category_id, " +
                         "product_entry.description, product_entry.imageUrl, group2product.id IS NOT NULL AS checked FROM product_entry " +
                         "LEFT JOIN group2product ON group2product.product_entry_id = product_entry.id AND group2product.product_group_id = '" + query.getGroupId() + "' " +
-                        "WHERE client_settings_id = '" + query.getClientId() + "' AND category_id = '" + query.getCategoryId() + "' ";
+                        "WHERE client_settings_id = '" + query.getClientId() + "' ";
+
+                if (query.getCategoryId()!= null)
+                    sqlQuery += " AND category_id = '" + query.getCategoryId() + "' ";
 
                 if (query.getIds() != null && !query.getIds().isEmpty()) {
                     StringBuilder idsToQuery = new StringBuilder();
@@ -36,8 +39,14 @@ public class GetCheckedProductEntries implements ExternalCall<List<ProductEntry>
                     while (iterator.hasNext())
                         idsToQuery.append("'" + iterator.next() + "'").append(iterator.hasNext() ? "," : "");
 
-                    sqlQuery += "AND product_entry.product_id IN(" + idsToQuery + " )";
+                    sqlQuery += " AND product_entry.product_id IN(" + idsToQuery + " ) ";
                 }
+
+                if (query.getLimit() > -1)
+                    sqlQuery += "'  LIMIT " + query.getLimit();
+
+                if (query.getOffset() > -1)
+                    sqlQuery += "  OFFSET " + query.getOffset() + " ";
 
                 ScrollableResults results = session.createSQLQuery(sqlQuery).scroll();
 

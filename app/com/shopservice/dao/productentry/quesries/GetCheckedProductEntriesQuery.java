@@ -10,6 +10,8 @@ public class GetCheckedProductEntriesQuery {
     private String categoryId;
     private int groupId;
     private Collection<String> ids;
+    private int limit;
+    private int offset;
 
     public GetCheckedProductEntriesQuery(String clientId, String categoryId, int groupId) {
         this.clientId = clientId;
@@ -17,11 +19,18 @@ public class GetCheckedProductEntriesQuery {
         this.groupId = groupId;
     }
 
-    public GetCheckedProductEntriesQuery(String clientId, String categoryId, int groupId, Collection<String> ids) {
+    public GetCheckedProductEntriesQuery(String clientId, int groupId, Collection<String> ids) {
+        this.clientId = clientId;
+        this.groupId = groupId;
+        this.ids = ids;
+    }
+
+    public GetCheckedProductEntriesQuery(String clientId, String categoryId, int groupId, int offset, int limit) {
         this.clientId = clientId;
         this.categoryId = categoryId;
         this.groupId = groupId;
-        this.ids = ids;
+        this.offset = offset;
+        this.limit = limit;
     }
 
     public String getClientId() {
@@ -38,5 +47,13 @@ public class GetCheckedProductEntriesQuery {
 
     public Collection<String> getIds() {
         return ids;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public int getOffset() {
+        return offset;
     }
 }
