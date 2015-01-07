@@ -3,6 +3,9 @@ package com.shopservice;
 import com.shopservice.assemblers.CategoryAssembler;
 import com.shopservice.dao.*;
 import com.shopservice.datasources.OneConnectionDataSourceProvider;
+import com.shopservice.sync.ArtemSyncProduct;
+import com.shopservice.sync.DefaultSyncProducts;
+import com.shopservice.sync.SyncProduct;
 import com.shopservice.urlgenerate.UrlGenerator;
 import com.shopservice.urlgenerate.UrlGeneratorStorage;
 
@@ -58,7 +61,7 @@ public class Services {
     {
         if (!productDAOs.containsKey(clientId)) {
             if (clientId.equals("artem"))
-                productDAOs.put(clientId, new SynchronizeProducts( new MongoProductRepository("products"), clientId ));
+                productDAOs.put(clientId, new MongoProductRepository("products"));
             else if (clientId.equals("demo"))
                 productDAOs.put(clientId, new MongoProductRepository("demoProducts"));
             else
@@ -78,4 +81,10 @@ public class Services {
         return URL_GENERATOR_STORAGE.get(clientId);
     }
 
+    public static SyncProduct getSyncProduct(String clientId) {
+        if (clientId.equals("artem"))
+            return new ArtemSyncProduct();
+        else
+            return new DefaultSyncProducts(clientId);
+    }
 }

@@ -4,10 +4,12 @@ var SearchPage = Backbone.View.extend({
 
     initialize: function(){
         this.SearchResultProducts = new SearchResultProducts();
-        this.SearchResultsView = new SearchResultsView({collection: this.SearchResultProducts});
+        this.ProductsView = new ProductsView({collection: this.SearchResultProducts});
     },
 
     render: function(text){
+        this.$el.append(new SwitchButtons().render().el);
+
         this.ProductSearch = new ProductSearch();
         this.$el.append(this.ProductSearch.render(text).el);
 
@@ -15,12 +17,11 @@ var SearchPage = Backbone.View.extend({
         this.SearchResultProducts.fetch({wait: true});
 
         var rowDiv = $('<div class="row clearfix">');
-        var colDiv = $('<div class="col-md-6 column">');
-        colDiv.append(this.SearchResultsView.render().el);
+        var colDiv = $('<div class="col-md-8 column">');
+        colDiv.append(this.ProductsView.render().el);
         rowDiv.append(colDiv);
         this.$el.append(rowDiv);
 
-        this.$el.append(new BackButton().render().el);
         return this;
     }
 });

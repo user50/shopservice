@@ -65,7 +65,7 @@
     </div>
 </script>
 
-<script type="text/template" id="searchResultViewTpl">
+<script type="text/template" id="productViewTpl">
     <td><%= name %></td>
     <td><input type="text" class="form-control" value="<%= usdPrice %>"></td>
     <td>
@@ -82,5 +82,52 @@
             <span data-toggle="tooltip" data-placement="top" title="К списку производителей" class="glyphicon glyphicon-arrow-left"></span>
             К производителям &nbsp;
         </button>
+    </div>
+</script>
+
+<script type="text/template" id="switchBtnTpl">
+    <div class="col-md-6">
+        <div class="btn-group" role="group">
+            <button id="manufacturersBtn" type="button" class="btn btn-default btn-md">&nbsp; Производители &nbsp;</button>
+            <button id="productsBtn" type="button" class="btn btn-default btn-md">&nbsp; Товары &nbsp;</button>
+        </div>
+        <p>
+    </div>
+</script>
+
+
+<script type="text/template" id="paginationTpl">
+    <div class="col-md-12 column">
+        <ul id="paginationView" class="pagination pagination-sm">
+            <% if (currentPage > firstPage) { %>
+            <li>
+                <a href="#" class="serverprevious">Пред.</a>
+            </li>
+            <% } else { %>
+            <li>
+                <a href="">Пред.</a>
+            </li>
+            <% } %>
+
+            <% for(p=1;p<=totalPages;p++){
+            %>
+            <% if (currentPage == p) { %>
+            <li class="active">
+                <a href="#"><%= p %></a>
+            </li>
+            <% } else { %>
+            <li>
+                <a href="#" class="page"><%= p %></a>
+            </li>
+            <% } %>
+            <%
+            }%>
+
+            <% if (currentPage < totalPages) { %>
+            <li>
+                <a href="#" class="servernext">След.</a>
+            </li>
+            <% } %>
+        </ul>
     </div>
 </script>
