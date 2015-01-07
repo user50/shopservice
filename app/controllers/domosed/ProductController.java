@@ -2,6 +2,7 @@ package controllers.domosed;
 
 import com.shopservice.MServiceInjector;
 import com.shopservice.ProductConditions;
+import com.shopservice.assemblers.PaginationResult;
 import com.shopservice.domosed.DomosedProductRepository;
 import com.shopservice.transfer.Product;
 import play.libs.Json;
@@ -32,6 +33,19 @@ public class ProductController extends Controller {
         conditions.limit = limit.intValue();
 
         return ok(Json.toJson(productRepository.get(conditions)));
+    }
+
+    public static Result getPage(String categoryId, Long offset, Long limit) throws SQLException {
+        if (categoryId == null || categoryId.equals(""))
+            return badRequest();
+
+        ProductConditions conditions = new ProductConditions();
+        conditions.categoryId = categoryId;
+        conditions.offset = offset.intValue();
+        conditions.limit = limit.intValue();
+
+        return ok(Json.toJson(productRepository.get(conditions)));
+
     }
 
     public static Result update(String id) throws SQLException {

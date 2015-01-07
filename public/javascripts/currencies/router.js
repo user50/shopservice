@@ -3,7 +3,8 @@ var CurrenciesRouter = Backbone.Router.extend({
    routes: {
        '' : 'start',
        'manufacturers' : 'manufacturers',
-       'products' : 'products',
+       'categories' : 'categories',
+       'products/:categoryId' : 'products',
        'search/:text' : 'search'
    },
 
@@ -24,12 +25,21 @@ var CurrenciesRouter = Backbone.Router.extend({
         $('#content').html(this.ManufacturersPage.render().el);
     },
 
-    products: function(){
+    categories: function(){
         console.log('Products page');
+        if (this.CategoriesPage != null){
+            this.CategoriesPage.remove();
+        }
+        this.CategoriesPage = new CategoriesPage();
+        $('#content').html(this.CategoriesPage.render().el);
+    },
+
+    products: function(categoryId){
+        console.log('Products Page');
         if (this.ProductsPage != null){
             this.ProductsPage.remove();
         }
-        this.ProductsPage = new ProductsPage();
+        this.ProductsPage = new ProductsPage({categoryId : categoryId});
         $('#content').html(this.ProductsPage.render().el);
     },
 

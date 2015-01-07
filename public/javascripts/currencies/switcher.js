@@ -9,7 +9,7 @@ var SwitchButtons = Backbone.View.extend({
 
     events: {
         'click #manufacturersBtn' : function(){ currenciesRouter.navigate("/manufacturers", {trigger: true});},
-        'click #productsBtn' : function(){ currenciesRouter.navigate("/products", {trigger: true});}
+        'click #productsBtn' : function(){ currenciesRouter.navigate("/categories", {trigger: true});}
     },
 
     render: function(){

@@ -14,14 +14,56 @@ var SearchResultProducts = Backbone.Collection.extend({
 
     setText: function(searchExpression){
         this.searchExpression = searchExpression;
+    },
+
+    parse: function(responce){
+        return responce.collectionResult;
     }
 });
 
-var SearchResultView = Backbone.View.extend({
+var Products = Backbone.Paginator.requestPager.extend({
+    model: Product,
+
+    initialize: function(models, options){
+        this.options = options;
+    },
+
+    url: function(){
+        return '/domosed/categories/' + this.options.categoryId;
+    },
+
+    paginator_core: {
+        type: 'GET',
+        dataType: 'json',
+        url: function(){
+            return this.url();
+        }
+    },
+
+    paginator_ui: {
+        firstPage: 1,
+        currentPage: 1,
+        perPage: 15,
+        totalPages: 10
+    },
+
+    server_api: {
+        'offset': function() { return this.currentPage * this.perPage - this.perPage},
+        'limit' : function() { return this.perPage}
+    },
+
+    parse: function (response) {
+        this.totalPages = Math.floor(response.totalCount/this.perPage) + 1;
+        this.totalRecords = this.totalPages * this.perPage;
+        return response.collectionResult;
+    }
+});
+
+var ProductView = Backbone.View.extend({
     tagName: 'tr',
 
     initialize: function(){
-        this.template = _.template(tpl.get('searchResultViewTpl').text);
+        this.template = _.template(tpl.get('productViewTpl').text);
     },
 
     events: {
@@ -62,7 +104,7 @@ var SearchResultView = Backbone.View.extend({
     }
 });
 
-var  SearchResultsView = Backbone.View.extend({
+var  ProductsView = Backbone.View.extend({
     tagName: 'table',
     className: 'table table-striped',
 
@@ -73,12 +115,13 @@ var  SearchResultsView = Backbone.View.extend({
     },
 
     addOne : function ( item ) {
-        var view = new SearchResultView({model:item});
+        console.log("Render product with id : " + item.id);
+        var view = new ProductView({model:item});
         this.$el.append(view.render().el);
     },
 
     render: function(){
-        console.log('Rendering of SearchResultsView...');
+        console.log('Rendering of ProductsView...');
         this.$el.empty();
         this.renderHeader();
         this.collection.each(this.addOne, this);
@@ -94,6 +137,5 @@ var  SearchResultsView = Backbone.View.extend({
         tr.append('<th  class="col-md-1">Цена, у.е.</th>');
         tr.append('<th  class="col-md-1"></th>');
         this.$el.append(tr);
-        console.log("Header is rendered...");
     }
 });
