@@ -19,6 +19,8 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
     private GetCheckedProductEntries getCheckedProductEntries = new GetCheckedProductEntries();
     private GetCountPerCategory getCountPerCategory = new GetCountPerCategory();
     private GetProductEntries getProductEntries = new GetProductEntries();
+    private FindProductEntry findProductEntry = new FindProductEntry();
+    private UpdateProductEntry updateProductEntry = new UpdateProductEntry();
 
     @Override
     public List<ProductEntry> findSelected(final String clientSettingsId, final int groupId, final boolean useCustomCategories) throws Exception {
@@ -33,11 +35,6 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
     @Override
     public void delete(final Collection<ProductEntry> productsToDelete) throws Exception {
         deleteProductEntries.execute(productsToDelete);
-    }
-
-    @Override
-    public List<ProductEntry> getWithChecked(final String clientId, final String categoryId, final int groupId) throws Exception {
-        return getCheckedProductEntries.execute(new GetCheckedProductEntriesQuery(clientId, categoryId, groupId));
     }
 
     @Override
@@ -68,36 +65,16 @@ public class HibernateProductEntryRepository implements ProductEntryRepository {
 
     @Override
     public ProductEntry find(final String productEntryId) {
-        return execute(new Query() {
-            @Override
-            public ProductEntry execute(Session session) {
-                return (ProductEntry) session.get(ProductEntry.class, productEntryId);
-            }
-        });
+        return findProductEntry.execute(new FindProductEntryQuery(productEntryId));
     }
 
     @Override
     public ProductEntry find(final String clientId, final String clientsProductId) {
-        return execute(new Query() {
-            @Override
-            public ProductEntry execute(Session session) {
-                return (ProductEntry) session.createCriteria(ProductEntry.class, "productEntry")
-                        .setFetchMode("productEntry.clientSettings", FetchMode.JOIN)
-                        .createAlias("productEntry.clientSettings", "settings", CriteriaSpecification.LEFT_JOIN)
-                        .add(Restrictions.eq("settings.id", clientId))
-                        .add(Restrictions.eq("clientsProductId", clientsProductId))
-                        .uniqueResult();
-            }
-        });
+      return findProductEntry.execute(new FindProductEntryQuery(clientId, clientsProductId));
     }
 
     @Override
     public void update(final ProductEntry entry) {
-        execute(new Update() {
-            @Override
-            public void execute(Session session) {
-                session.update(entry);
-            }
-        });
+        updateProductEntry.execute(entry);
     }
 }

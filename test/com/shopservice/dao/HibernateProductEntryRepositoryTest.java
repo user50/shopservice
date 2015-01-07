@@ -68,27 +68,6 @@ public class HibernateProductEntryRepositoryTest {
     }
 
     @Test
-    public void testGetWithChecked() throws Exception {
-        ProductEntry productEntry = new ProductEntry();
-        productEntry.id = UUID.randomUUID().toString();
-        productEntry.productId = UUID.randomUUID().toString();
-        productEntry.categoryId = UUID.randomUUID().toString();
-
-        repository.add(settings.id, Arrays.asList(productEntry));
-
-        ProductGroup group = new ProductGroup();
-        group.name = "foo";
-        group.clientSettings = settings;
-
-        productGroupRepository.save(group);
-
-        group2ProductRepository.set(productEntry.id, group.id, true);
-
-        repository.getWithChecked(settings.id, productEntry.categoryId,  group.id);
-
-    }
-
-    @Test
     public void testGetCountPerCategory() throws Exception {
         ProductEntry productEntry = new ProductEntry();
         productEntry.id = UUID.randomUUID().toString();

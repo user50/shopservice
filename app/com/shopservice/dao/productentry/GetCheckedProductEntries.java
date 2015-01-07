@@ -43,10 +43,10 @@ public class GetCheckedProductEntries implements ExternalCall<List<ProductEntry>
                 }
 
                 if (query.getLimit() > -1)
-                    sqlQuery += "'  LIMIT " + query.getLimit();
+                    sqlQuery += " LIMIT " + query.getLimit();
 
                 if (query.getOffset() > -1)
-                    sqlQuery += "  OFFSET " + query.getOffset() + " ";
+                    sqlQuery += " OFFSET " + query.getOffset() + " ";
 
                 ScrollableResults results = session.createSQLQuery(sqlQuery).scroll();
 

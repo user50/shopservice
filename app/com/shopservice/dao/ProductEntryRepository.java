@@ -14,8 +14,6 @@ public interface ProductEntryRepository {
 
     void delete(Collection<ProductEntry> productsToDelete) throws Exception;
 
-    List<ProductEntry> getWithChecked(String clientId, String categoryId, int groupId) throws Exception;
-
     Map<String,Integer> getCountPerCategory(String clientId, String groupId);
 
     Set<ProductEntry> get(String clientId, String categoryId);
