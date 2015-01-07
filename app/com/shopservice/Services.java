@@ -2,6 +2,7 @@ package com.shopservice;
 
 import com.shopservice.assemblers.CategoryAssembler;
 import com.shopservice.dao.*;
+import com.shopservice.datasources.ApacheDataSourceProvider;
 import com.shopservice.datasources.OneConnectionDataSourceProvider;
 import com.shopservice.sync.ArtemSyncProduct;
 import com.shopservice.sync.DefaultSyncProducts;
@@ -38,7 +39,7 @@ public class Services {
 
     public static DatabaseManager getDataBaseManager(String clientId) throws SQLException {
         if (!databaseManagers.containsKey(clientId))
-            databaseManagers.put(clientId, new DatabaseManager(new OneConnectionDataSourceProvider(clientSettingsRepository.get(clientId).databaseUrl).provide()));
+            databaseManagers.put(clientId, new DatabaseManager(new ApacheDataSourceProvider(clientSettingsRepository.get(clientId).databaseUrl, 5).provide()));
 
         return databaseManagers.get(clientId);
     }

@@ -14,7 +14,7 @@ import org.hibernate.cfg.Environment;
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
 
-    private static DataSourceProvider dataSourceProvider = new ApacheDataSourceProvider(Urls.local.getUrl(), 5);
+    private static DataSourceProvider dataSourceProvider = new ApacheDataSourceProvider(Urls.heroku.getUrl(), 5);
 
     static {
         try {
@@ -45,7 +45,7 @@ public class HibernateUtil {
     {
         configuration
                 .setProperty("show_sql", "true")
-                .setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
+                .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 //                .setProperty( "hibernate.c3p0.min_size", "5" )
 //                .setProperty( "hibernate.c3p0.max_size", "20" )
 //                .setProperty( "hibernate.c3p0.timeout", "1800" )
