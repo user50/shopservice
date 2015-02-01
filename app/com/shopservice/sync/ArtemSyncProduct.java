@@ -9,6 +9,8 @@ import com.shopservice.dao.ProductEntryRepository;
 import com.shopservice.dao.ProductRepository;
 import com.shopservice.domain.ProductEntry;
 import com.shopservice.productsources.Florange;
+import com.shopservice.productsources.PersistByMongo;
+import com.shopservice.productsources.ProductSource;
 import com.shopservice.transfer.Product;
 
 import java.util.HashSet;
@@ -22,7 +24,7 @@ public class ArtemSyncProduct implements SyncProduct {
     private static ProductEntryRepository productEntryRepository = MServiceInjector.injector.getInstance(ProductEntryRepository.class);
 
     private final String clientId = "artem";
-    private final Florange productRepository = new Florange();
+    private final ProductSource productRepository = new PersistByMongo(new Florange());
 
     public ArtemSyncProduct() {
     }
