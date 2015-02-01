@@ -25,16 +25,12 @@ public class PersistByMongo extends ProductSourceWrapper {
 
     @Override
     public List<Product> get(Integer providerId) {
-        if (!dataBase.collectionExists("products"))
-        {
-            List<Product> products = super.get(providerId);
-            dataBase.getCollection("products").insert(toList(products));
-            return products;
-        }
+        dataBase.getCollection("products").drop();
 
-        List<DBObject> objects = dataBase.getCollection("products").find().toArray();
+        List<Product> products = super.get(providerId);
+        dataBase.getCollection("products").insert(toList(products));
 
-        return toProductList(objects);
+        return products;
     }
 
     private List<DBObject> toList(List<Product> products)

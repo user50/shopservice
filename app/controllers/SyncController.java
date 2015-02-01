@@ -15,7 +15,7 @@ import play.mvc.Result;
 public class SyncController extends Controller {
 
     public static Result sync(String clientId){
-//        Services.getSyncProduct(clientId).execute();
+        Services.getSyncProduct(clientId).execute();
 
         return ok();
     }
