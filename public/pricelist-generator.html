@@ -8,6 +8,12 @@
     <meta name="author" content="">
 
 
+    <script type="text/javascript" src="javascripts/backbonejs/jquery-1.10.2.js"></script>
+
+    <!-- Свіжа збірка мінімізованої JavaScript -->
+
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
     <!-- Свіжа збірка мінімізованих CSS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
     <!-- Додаткові теми -->
@@ -58,154 +64,168 @@
 
     <div class="row clearfix">
         <div class="col-md-12 column ">
-            <div class="jumbotron">
-                <h2 class="page-header">Генератор прайс-листов</h2>
-                <p class="text-justify"><i class="fa fa-list pull-left fa-3x"></i>
-                    Прайс-листы - это то, без чего сложно обойтись при работе
-                    с партнерами и клиентами, или если вы хотите разместить информацию про ваши товары
-                    на сайтах контекстной рекламы (Яндекс.Макрет, Hotline, Price, Prom). Мы предалагаем
-                    вам быстрый и удобный инструмент, которы поможет легко сгенерировать прайс-лист для
-                    любого набора товаров из вашего интернет-магазина.</p>
-                <p><a class="btn btn-primary btn-lg" href="/priceUpdated" role="button">Перейти к генератору</a></p>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p> <b>Генератор прайс-листов </b>  - быстрый и удобный инструмент, позволяющий создавать прайс-листы
+                        из любого набора товаров вашего интернет-магазина, для работы
+                        с партнерами и клиентами, или если вы хотите разместить информацию про ваши товары
+                        на сайтах контекстной рекламы (Яндекс.Макрет, Hotline, Price, Prom и т.п.).</p>
+                    <p><a class="btn btn-primary btn-md pull-right" href="/priceUpdated" role="button">Перейти к генератору</a></p>
+                </div>
             </div>
         </div>
-        <div class="col-md-6 column">
-            <p  class="text-justify"><i class="fa fa-check"></i>&nbsp; Прайс-листы генерируються непосредственно из товаров, находящихся в базе данных вашего магазина.
-            Таким образом, не нужно никаких промежуточных прайсов или дополнительных модулей. Плюс в прайсе всегда будет актуальная иформация о товарных позициях.</p>
-        </div>
-        <div class="col-md-6 column">
-            <p  class="text-justify"><i class="fa fa-check"></i>&nbsp; Не нужно каждый раз составлять список товаров для прайса, достаточно один раз
-                выбрать товарные позици, которые вы хотите добавить в прайс и указать его настройки. После этого вы сможете
-                получать прайс-лист выбранных товаров сколько  угодно, лишь по нажатию одной кнопки. Также можно легко и быстро добавлять или исключать
-                товары из прайс-листа.</p>
-        </div>
-        <div class="col-md-6 column">
-            <p  class="text-justify"><i class="fa fa-check"></i>&nbsp;
-                Все прайс-листы будут доступны по ссылке в Интернете, которую можна предоставить сайтам контекстной рекламы,
-                чтобы они могли автоматически получать свежий прайс-лист, с учетом всех последних обновлений товаров.</p>
-        </div>
-        <div class="col-md-6 column">
-            <p  class="text-justify"><i class="fa fa-check"></i>&nbsp;
-                Вы сможете легко работать со многими прайсами, быстро переключаясь между ними, и видеть все последние изменения, сделанные
-                в вашем интернет-магазине.</p>
+        <div class="col-md-12 column">
+            <div role="tabpanel">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#capabilities" aria-controls="capabilities" role="tab" data-toggle="tab">Возможности</a></li>
+                    <li role="presentation"><a href="#prices" aria-controls="prices" role="tab" data-toggle="tab">Стоимость</a></li>
+                    <li role="presentation"><a href="#example" aria-controls="example" role="tab" data-toggle="tab">Пример создания прайс-листа</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="capabilities">
+                        <p></p>
+                        <div class="col-md-6 column">
+                            <p  class="text-justify"><i class="fa fa-check"></i>&nbsp; Прайс-листы генерируються непосредственно из товаров, находящихся в базе данных вашего магазина.
+                                Таким образом, не нужно никаких промежуточных прайсов или дополнительных модулей. Плюс в прайсе всегда будет актуальная иформация о товарных позициях.</p>
+                        </div>
+                        <div class="col-md-6 column">
+                            <p  class="text-justify"><i class="fa fa-check"></i>&nbsp; Не нужно каждый раз составлять список товаров для прайса, достаточно один раз
+                                выбрать товарные позици, которые вы хотите добавить в прайс и указать его настройки. После этого вы сможете
+                                получать прайс-лист выбранных товаров сколько  угодно, лишь по нажатию одной кнопки. Также можно легко и быстро добавлять или исключать
+                                товары из прайс-листа.</p>
+                        </div>
+                        <div class="col-md-6 column">
+                            <p  class="text-justify"><i class="fa fa-check"></i>&nbsp;
+                                Все прайс-листы будут доступны по ссылке в Интернете, которую можна предоставить сайтам контекстной рекламы,
+                                чтобы они могли автоматически получать свежий прайс-лист, с учетом всех последних обновлений товаров.</p>
+                        </div>
+                        <div class="col-md-6 column">
+                            <p  class="text-justify"><i class="fa fa-check"></i>&nbsp;
+                                Вы сможете легко работать со многими прайсами, быстро переключаясь между ними, и видеть все последние изменения, сделанные
+                                в вашем интернет-магазине.</p>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="prices">
+                        <div class="col-md-12 column">
+                            Подключение Вашего интернет-магазина к сервису бесплатно.</br>
+                            После подключения у Вас будет <b> 7 дней триального периода </b>, чтобы ознакомиться с возможностями сервиса.</br>
+                            После триального периода стоимось использования составляет: </br>
+                            - <b> $5 за 1 месяц </b></br>
+                            - <b> $9 за 3 месяца </b> </br>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="example">
+
+                        <div class="col-md-12 column">
+                            <p></p>
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><em>Для демонстрации того, как генерировать прайс-листы
+                                при помощи веб-сервиса, мы будем использовать демо-аккаунт, который подключен к тестовому магазину
+                                (чтобы получить собственный аккаунт и подключть к сервису ваш интернет-магазин,
+                                <a href="/assets/contact.html"> свяжитесь с нами </a>).</em></b>
+                                Итак, чтобы перейти на страницу веб-сервиса для генерации прайсов,
+                                выберете <em>Сервисы > Генератор прайс-листов </em> в верхнем меню или нажмите кнопку
+                                "Перейти к генератору" вверху этой страницы. Перед тем как
+                                попасть на страницу сервиса, вы увидите сраницу авторизации. </br> Введите<strong> логин и пароль
+                                    для демо аккаунта: логин - demo, пароль - demo. </strong> </p>
+                            <hr><p><img class="img-responsive img-customer" src="/assets/images/generator/login-form.jpg"></p><hr>
+                            <p> После успешной авторизации вы попадете на страницу веб-сервиса генератора прайс-листов.</p>
+                            <hr><p><img class="img-responsive img-customer" src="/assets/images/generator/page-of-generator.jpg"></p>
+                        </div>
+                        <div class="col-md-12">
+                            <h4 class="page-header">Добавление нового прайс-листа</h4>
+                        </div>
+                        <div class="col-md-12 column">
+                            Чтобы создать новый прайс-лист, нажмите кнопку “Добавить прайс”.
+                            <img class="img-responsive img-customer" src="/assets/images/generator/add-price.jpg">
+                            <p>После этого, вы увидите пустую форму для создания нового прайса.<hr></p>
+                            <p><img class="img-responsive img-customer" src="/assets/images/generator/add-price-empty-form.jpg"><hr></p>
+                            <p>Заполните форму, указав:
+                            <ul>
+                                <li>Название прайс-листа (обязательно)</li>
+                                <li>Формат прайс-листа (обязательно). Укажите прайс-лист какого формата вы хотите получить.
+                                    На данный момент, доступные форматы - YML, XML (для Hotline.ua)</li>
+                                <li>Настройки валюты:<ul>
+                                    <li>Валюта страны, региона (обязательно)</li>
+                                    <li>Валюта товаров прайс-листа (обязательно) - валюта, в которой указаны цены на ваши товары </li>
+                                    <li>Курс валюты - курс валюты прайса по отношению к валюте региона (указываеться,
+                                        если валюта страны или региона не совпадает с валютой товаров прайс-листа)
+                                    </li>
+                                </ul></li>
+                            </ul>
+                            <hr>
+                            </p>
+                            <p><img class="img-responsive img-customer" src="/assets/images/generator/add-price-filled-form.jpg"><hr></p>
+                            <p>Нажмите кнопку “Сохранить”,  чтобы сохранить прайс.
+                                Если форма была заполнена правильно, вы должны увидите сообщение об успешном сохранении нового прайса.</p>
+                            <p>
+                            <hr><img class="img-responsive img-customer" src="/assets/images/generator/add-price-ok.jpg"><hr>
+                            </p>
+                            <p>После успешного сохранения прайса, нажмите “Закрыть”.
+                                Вы должны увидеть только что созданный прайс в списке прайс-листов:
+                            <p><hr>
+                            <img class="img-responsive img-customer" src="/assets/images/generator/new-price-in-list.jpg">
+                            </p>
+                            </p>
+                        </div>
+
+                        <div class="col-md-12">
+                            <h4 class="page-header"> Добавления товаров в прайс-лист</h4>
+                        </div>
+
+                        <div class="col-md-12 column">
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Выберете, только что созданный прайс-лист (нажмите на кнопку с его названием).
+                                После этого, вы увидите список категорий вашего интернет-магазина, а также форму для поиска товаров по их названию.</p>
+                            <p><hr><img class="img-responsive img-customer" src="/assets/images/generator/list-of-categories.jpg"><hr></p>
+                            </p>
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Давайте добавим несколько товаров из первой категории в нашем списке ("Парты детские")
+                                в выбраный прайс-лист ("Прайс лист для Яндекс.Маркета"). Первое что нужно сделать -
+                                это выбрать необходимую категорию, нажав на ее название. После этого вы увидите таблицу с товарами выбранной категории.<p></p>
+                            <p><hr><img class="img-responsive img-customer" src="/assets/images/generator/table-of-products.jpg"><hr></p>
+                            </p>
+                            <p>Чтобы добавить товары в прайс-лист, достаточно поставить напротив них галочку.<p></p>
+                            <p><hr><img class="img-responsive img-customer" src="/assets/images/generator/check-products.jpg"> <hr></p>
+                            </p>
+                            <p>Вот и все, товары добавлены. Можна переходить к генерации прайс-листа.</p>
+                        </div>
+
+                        <div class="col-md-12">
+                            <h4 class="page-header"> Генерация прайс-листа</h4>
+                        </div>
+
+                        <div class="col-md-12 column">
+                            <p>Чтобы сгенерировать прайс-лист, нажмите кнопку “Скачать прайс”. После чего, вы увидите диалоговое окно для сохранения файла прайса-листа.</p>
+                            <p>
+                            <hr> <img class="img-responsive img-customer" src="/assets/images/generator/download-price.jpg"><hr>
+                            </p>
+                            В результате мы получили следующий прайс, который уже можна использовать , к примеру , для размещения информации
+                            о товарах вашего магазина на рекламных площадках.
+                            <p>
+                            <hr><img class="img-responsive img-customer" src="/assets/images/generator/price.jpg">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
     <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="well">Этот веб-сервис на этапе <em><strong>бета-тестирования</strong></em>.
-                Пользование веб-сервисом <em><strong>бесплатно.</strong></em></div>
-        </div>
-    </div>
 
-    <div class="row">
-
-        <div class="col-md-12">
-            <h3 class="page-header">Пример создания прайс-листа</h3>
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Company 2014</p>
+            </div>
         </div>
-
-        <div class="col-md-12 column">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Для демонстрации того, как генерировать прайс-листы
-            при помощи веб-сервиса, мы будем использовать демо-аккаунт (чтобы получить собстевнный
-                аккаунт и подключться к сервису , <a href="/assets/contact.html"> свяжитесь с нами </a>).
-                Итак, чтобы перейти на страницу веб-сервиса для генерации прайсов,
-                    выберете <em>Сервисы > Генератор прайс-листов </em> в верхнем меню или нажмите кнопку
-                    "Перейти к генератору" вверху этой страницы. Перед тем как
-            попасть на страницу сервиса, вы увидите сраницу авторизации. </br> Введите<strong> логин и пароль
-                        для демо аккаунта: логин - demo, пароль - demo. </strong> </p>
-            <hr><p><img class="img-responsive img-customer" src="/assets/images/generator/login-form.jpg"></p><hr>
-            <p> После успешной авторизации вы попадете на страницу веб-сервиса генератора прайс-листов.</p>
-            <hr><p><img class="img-responsive img-customer" src="/assets/images/generator/page-of-generator.jpg"></p>
-        </div>
-        <div class="col-md-12">
-            <h4 class="page-header">Добавление нового прайс-листа</h4>
-        </div>
-        <div class="col-md-12 column">
-                Чтобы создать новый прайс-лист, нажмите кнопку “Добавить прайс”.
-                <img class="img-responsive img-customer" src="/assets/images/generator/add-price.jpg">
-                <p>После этого, вы увидите пустую форму для создания нового прайса.<hr></p>
-                <p><img class="img-responsive img-customer" src="/assets/images/generator/add-price-empty-form.jpg"><hr></p>
-                <p>Заполните форму, указав:
-                <ul>
-                    <li>Название прайс-листа (обязательно)</li>
-                    <li>Формат прайс-листа (обязательно). Укажите прайс-лист какого формата вы хотите получить.
-                        На данный момент, доступные форматы - YML, XML (для Hotline.ua)</li>
-                    <li>Настройки валюты:<ul>
-                            <li>Валюта страны, региона (обязательно)</li>
-                            <li>Валюта товаров прайс-листа (обязательно) - валюта, в которой указаны цены на ваши товары </li>
-                            <li>Курс валюты - курс валюты прайса по отношению к валюте региона (указываеться,
-                                если валюта страны или региона не совпадает с валютой товаров прайс-листа)
-                            </li>
-                    </ul></li>
-                </ul>
-            <hr>
-            </p>
-            <p><img class="img-responsive img-customer" src="/assets/images/generator/add-price-filled-form.jpg"><hr></p>
-            <p>Нажмите кнопку “Сохранить”,  чтобы сохранить прайс.
-                Если форма была заполнена правильно, вы должны увидите сообщение об успешном сохранении нового прайса.</p>
-            <p>
-                <hr><img class="img-responsive img-customer" src="/assets/images/generator/add-price-ok.jpg"><hr>
-            </p>
-            <p>После успешного сохранения прайса, нажмите “Закрыть”.
-                Вы должны увидеть только что созданный прайс в списке прайс-листов:
-            <p><hr>
-                <img class="img-responsive img-customer" src="/assets/images/generator/new-price-in-list.jpg">
-            </p>
-            </p>
-        </div>
-
-        <div class="col-md-12">
-            <h4 class="page-header"> Добавления товаров в прайс-лист</h4>
-        </div>
-
-        <div class="col-md-12 column">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Выберете, только что созданный прайс-лист (нажмите на кнопку с его названием).
-            После этого, вы увидите список категорий вашего интернет-магазина, а также форму для поиска товаров по их названию.</p>
-            <p><hr><img class="img-responsive img-customer" src="/assets/images/generator/list-of-categories.jpg"><hr></p>
-            </p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Давайте добавим несколько товаров из первой категории в нашем списке ("Парты детские")
-                в выбраный прайс-лист ("Прайс лист для Яндекс.Маркета"). Первое что нужно сделать -
-                это выбрать необходимую категорию, нажав на ее название. После этого вы увидите таблицу с товарами выбранной категории.<p></p>
-            <p><hr><img class="img-responsive img-customer" src="/assets/images/generator/table-of-products.jpg"><hr></p>
-            </p>
-            <p>Чтобы добавить товары в прайс-лист, достаточно поставить напротив них галочку.<p></p>
-            <p><hr><img class="img-responsive img-customer" src="/assets/images/generator/check-products.jpg"> <hr></p>
-            </p>
-            <p>Вот и все, товары добавлены. Можна переходить к генерации прайс-листа.</p>
-        </div>
-
-        <div class="col-md-12">
-            <h4 class="page-header"> Генерация прайс-листа</h4>
-        </div>
-
-        <div class="col-md-12 column">
-            <p>Чтобы сгенерировать прайс-лист, нажмите кнопку “Скачать прайс”. После чего, вы увидите диалоговое окно для сохранения файла прайса-листа.</p>
-            <p>
-            <hr> <img class="img-responsive img-customer" src="/assets/images/generator/download-price.jpg"><hr>
-            </p>
-            В результате мы получили следующий прайс, который уже можна использовать , к примеру , для размещения информации
-            о товарах вашего магазина на рекламных площадках.
-            <p>
-            <hr><img class="img-responsive img-customer" src="/assets/images/generator/price.jpg">
-            </p>
-        </div>
-    </div>
-
-<footer>
-<div class="row">
-    <div class="col-lg-12">
-    <p>Copyright &copy; Company 2014</p>
-</div>
-</div>
-</footer>
+    </footer>
 
 </div><!-- /.container -->
-
-<script type="text/javascript" src="javascripts/backbonejs/jquery-1.10.2.js"></script>
-
-<!-- Свіжа збірка мінімізованої JavaScript -->
-
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 </body>
 </html>
