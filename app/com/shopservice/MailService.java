@@ -28,11 +28,8 @@ public class MailService {
     }
 
     public void report(String subject, String body, List<String> recipients) throws MessagingException {
-        if (true)
-            return;
-
-        final String username = "oleg@themidnightcoders.com";
-        final String password = "Changeme123";
+        final String username = "momentomori007@gmail.com";
+        final String password = "23111989kjpjd";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -49,21 +46,12 @@ public class MailService {
 
         try {
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("from-email@gmail.com"));
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
             message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients.toString().replace("[", "").replace("]", "")));
 
-            Multipart multipart = new MimeMultipart();
-
-            if (body != null) {
-                MimeBodyPart textPart = new MimeBodyPart();
-                textPart.setContent(body, "text/plain; charset=utf-8");
-                multipart.addBodyPart(textPart);
-            }
-
-            message.setContent(multipart);
-
-            message.setHeader("Content-Type", "text/html; charset=UTF-8");
+            message.setSubject(subject, "UTF-8");
+            message.setText(body, "UTF-8");
 
             Transport.send(message);
 
