@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FeedbackController extends Controller {
-    private static final List<String> OWNERS = Arrays.asList("jmen7070@gmail.com", "oleogin@gmail.com");
+    private static final List<String> OWNERS = Arrays.asList("jmen7070@gmail.com");
 
     public static Result feedbackNotify(){
 
@@ -25,7 +25,7 @@ public class FeedbackController extends Controller {
             body.append("\n" + message );
 
         try {
-            MailService.getInstance().report("From a visitor", body.toString(), OWNERS);
+            MailService.getInstance().report("from a visitor", body.toString(), OWNERS);
             return ok();
 
         } catch (MessagingException e) {
