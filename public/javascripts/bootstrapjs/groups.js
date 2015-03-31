@@ -16,21 +16,25 @@ var app = app || {};
 
         initialize: function(){
             this.collection.on('add', this.addOne, this);
+            this.collection.on('destroy', this.render, this);
         },
 
         events: {
-            'click label': 'setSelectedGroup'
+            'change': 'setSelectedGroup'
         },
 
         setSelectedGroup: function(e){
-            var selectedGroupId = e.currentTarget.firstElementChild.attributes.siteid.value;
+            var selectedGroupId = $(e.target).val();
+            vent.trigger('group: selected');
             currentGroupId = selectedGroupId;
             app.router.navigate('groups/' + selectedGroupId, {trigger: true});
         },
 
         render: function(){
             this.$el.empty();
+            this.$el.append('<option value="none" disabled>Выберите прайс</option>');
             this.collection.each(this.addOne, this);
+            this.$el.val('none');
             return this;
         },
         addOne: function(group){
@@ -40,23 +44,27 @@ var app = app || {};
     });
 
     var GroupView = Backbone.View.extend({
-        tagName: 'label',
-        className : 'btn btn-default btn-md',
-
-        events: {
-            'click' : function(){vent.trigger('group: selected')}
+        tagName: 'option',
+//        className : 'btn btn-default btn-md',
+        attributes: function(){
+            return {
+                value: this.model.id
+            }
         },
+//        events: {
+//            'click' : function(){vent.trigger('group: selected')}
+//        },
 
-        template: _.template($('#groupViewTemplate').html()),
+//        template: _.template($('#groupViewTemplate').html()),
 
         initialize: function(){
             this.model.on('change', this.render, this);
-            this.model.on('destroy', this.remove, this);
+//            this.model.on('destroy', this.remove, this);
         },
 
         render: function(){
-            var template = this.template(this.model.toJSON());
-            this.$el.html( template );
+//            var template = this.template(this.model.get('name'));
+            this.$el.html( this.model.get('name') );
             return this;
         }
     });
