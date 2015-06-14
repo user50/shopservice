@@ -46,6 +46,7 @@ public class YMLFormatGenerator extends PriceListGenerator {
 
         shop.name = clientSettings.siteName;
         shop.url = clientSettings.siteUrl;
+        shop.company = clientSettings.siteName;
 
         Set<Category> categories = new HashSet<Category>();
 

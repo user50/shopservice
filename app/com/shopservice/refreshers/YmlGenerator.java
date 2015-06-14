@@ -41,6 +41,7 @@ public class YmlGenerator extends PriceListGenerator {
 
         shop.name = clientSettings.siteName;
         shop.url = clientSettings.siteUrl;
+        shop.company = clientSettings.siteName;
 
         for (Product product : dataSource.getProducts())
             ymlCatalog.shop.offers.add(createOffer(product, group.regionalCurrency.name()));

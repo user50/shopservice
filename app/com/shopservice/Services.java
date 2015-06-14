@@ -55,7 +55,7 @@ public class Services {
             else if (clientId.equals("demo"))
                 categoryDAOs.put(clientId, new DemoCategoryRepository());
             else
-                categoryDAOs.put(clientId, new CachedCategoryRepository(new JdbcCategoryRepository(clientId)));
+                categoryDAOs.put(clientId, new JdbcCategoryRepository(clientId));
         }
 
         return categoryDAOs.get(clientId);
@@ -69,7 +69,7 @@ public class Services {
             else if (clientId.equals("demo"))
                 productDAOs.put(clientId, new MongoProductRepository("demoProducts"));
             else
-                productDAOs.put(clientId, new CachedProductRepository(new JdbcProductRepository(clientId)));
+                productDAOs.put(clientId, new JdbcProductRepository(clientId));
         }
 
         return productDAOs.get(clientId);

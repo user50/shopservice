@@ -49,7 +49,7 @@ public class JdbcProductQuery implements Query<Product> {
         product.available = resultSet.getBoolean("available");
 
         Category category = new Category();
-        category.id = resultSet.getString("categoryId");
+              category.id = resultSet.getString("categoryId");
         category.name = resultSet.getString("categoryName");
         category.parentId = resultSet.getString("categoryParentId");
 
@@ -77,12 +77,12 @@ public class JdbcProductQuery implements Query<Product> {
             String[] abc = new String[this.conditions.productIds.size()];
             Arrays.fill(abc, "?");
 
-            conditions.add("products_id IN("+Arrays.asList(abc).toString().replace("[","").replace("]","")+")");
+            conditions.add("id IN("+Arrays.asList(abc).toString().replace("[","").replace("]","")+")");
         }
 
         if (this.conditions.words != null )
             for (String word : this.conditions.words)
-                conditions.add("products_name LIKE ?");
+                conditions.add("name LIKE ?");
 
         Iterator<String> iterator = conditions.iterator();
         while (iterator.hasNext())
