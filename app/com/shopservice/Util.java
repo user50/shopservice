@@ -19,12 +19,15 @@ import java.util.regex.Pattern;
 
 public class Util {
 
+    private static final String DTD_DECLARATION = "<!DOCTYPE yml_catalog SYSTEM \"shops.dtd\">\n";
+
     public static  <T> byte[] marshal(T t, String encoding) throws JAXBException, FileNotFoundException {
         JAXBContext context = JAXBContext.newInstance( t.getClass() );
 
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, true );
         marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding);
+        marshaller.setProperty("com.sun.xml.internal.bind.xmlHeaders", DTD_DECLARATION);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
