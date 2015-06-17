@@ -8,6 +8,7 @@ import com.shopservice.queries.JdbcProductQuery;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 public class JdbcProductRepository implements ProductRepository {
 
@@ -28,6 +29,15 @@ public class JdbcProductRepository implements ProductRepository {
     public List<Product> find(ProductConditions query) {
         try {
             return databaseManager.executeQueryForList(new JdbcProductQuery( clientId, query));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Set<Product> findUnique(ProductConditions query) {
+        try {
+            return databaseManager.executeQueryForSet(new JdbcProductQuery( clientId, query));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -44,6 +44,11 @@ public class CachedProductRepository extends ProductRepositoryWrapper {
     }
 
     @Override
+    public List<Product> find() {
+        return super.find();
+    }
+
+    @Override
     public int size(ProductConditions conditions) {
         Http.Cookie cookie = Http.Context.current().request().cookie("key");
 

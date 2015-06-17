@@ -56,7 +56,7 @@ public class DefaultDataSource implements PriceListGenerator.DataSource {
         for (ProductEntry productEntry : productEntries)
             productConditions.productIds.add(productEntry.productId);
 
-        List<Product> products = Services.getProductDAO(clientId).find(productConditions);
+        Set<Product> products = Services.getProductDAO(clientId).findUnique(productConditions);
         Util.removeNotAvailable(products);
 
         if (useCustomCategories)
@@ -66,7 +66,7 @@ public class DefaultDataSource implements PriceListGenerator.DataSource {
 
     }
 
-    private List<Product> getProductsForOriginalCategories(List<Product> products, ProductConditions productConditions, Map<String, ProductEntry> productMap) {
+    private List<Product> getProductsForOriginalCategories(Set<Product> products, ProductConditions productConditions, Map<String, ProductEntry> productMap) {
         categories = new HashMap<>();
         for (Product product : products) {
             categories.put(product.category.id, product.category);
@@ -77,10 +77,10 @@ public class DefaultDataSource implements PriceListGenerator.DataSource {
                 product.imageUrl = productMap.get(product.id).imageUrl;
         }
 
-        return products;
+        return new ArrayList<>(products);
     }
 
-    private List<Product> getProductsForCustomCategories(List<Product> products, ProductConditions productConditions, Map<String, ProductEntry> productMap) {
+    private List<Product> getProductsForCustomCategories(Set<Product> products, ProductConditions productConditions, Map<String, ProductEntry> productMap) {
         Map<String, Category> categories = getCategories(clientId, productConditions.productIds);
 
         for (Product product : products) {
@@ -92,7 +92,7 @@ public class DefaultDataSource implements PriceListGenerator.DataSource {
                 product.imageUrl = productMap.get(product.id).imageUrl;
         }
 
-        return products;
+        return new ArrayList<>(products);
     }
 
     private Map<String,Category> getCategories(String clientId, Collection<String> productIds)

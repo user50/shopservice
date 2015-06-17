@@ -4,6 +4,7 @@ import com.shopservice.ProductConditions;
 import com.shopservice.transfer.Product;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by user50 on 21.06.2014.
@@ -20,6 +21,11 @@ public class ProductRepositoryWrapper implements ProductRepository  {
     @Override
     public List<Product> find(ProductConditions query) {
         return productRepository.find(query);
+    }
+
+    @Override
+    public Set<Product> findUnique(ProductConditions conditions) {
+        return productRepository.findUnique(conditions);
     }
 
     @Override

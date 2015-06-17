@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -93,7 +94,7 @@ public class Util {
         return buffer.toString();
     }
 
-    public static void removeNotAvailable(List<Product> products) {
+    public static void removeNotAvailable(Set<Product> products) {
         Iterator<Product> iterator = products.iterator();
         while (iterator.hasNext()){
             Product product = iterator.next();

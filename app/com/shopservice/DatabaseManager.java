@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -52,6 +54,43 @@ public class DatabaseManager {
             }
 
             return list;
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            connection.close();
+        }
+    }
+
+    public <T> Set<T> executeQueryForSet(Query<T> query) throws SQLException {
+
+        long start = System.currentTimeMillis();
+        Connection connection = dataSource.getConnection();
+        Logger.info("Get connection "+(System.currentTimeMillis() - start));
+
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            String rawSql = query.getRawSql();
+            preparedStatement = connection.prepareStatement(rawSql);
+            query.prepare(preparedStatement);
+
+            start = System.currentTimeMillis();
+            resultSet = preparedStatement.executeQuery();
+            Logger.info("Execute Query "+ preparedStatement.toString());
+            Logger.info("Execute Query "+(System.currentTimeMillis() - start));
+
+            Set<T> set = new HashSet<>();
+
+            while (resultSet.next()){
+                set.add(query.fill(resultSet));
+            }
+
+            return set;
         } finally {
             if (resultSet != null) {
                 resultSet.close();

@@ -11,6 +11,7 @@ import com.shopservice.transfer.Product;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by user50 on 06.08.2014.
@@ -54,6 +55,11 @@ public class ProductRepositoryWithFilterInMemory implements ProductRepository {
     @Override
     public List<Product> find() {
         return find(new ProductConditions());
+    }
+
+    @Override
+    public Set<Product> findUnique(ProductConditions conditions) {
+        throw new UnsupportedOperationException();
     }
 
     @Override

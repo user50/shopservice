@@ -8,6 +8,7 @@ import play.libs.Json;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by user50 on 09.08.2014.
@@ -38,6 +39,12 @@ public class MongoProductRepository implements ProductRepository {
     @Override
     public List<Product> find() {
         return find(new ProductConditions());
+    }
+
+
+    @Override
+    public Set<Product> findUnique(ProductConditions conditions) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
