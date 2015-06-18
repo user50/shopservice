@@ -1,9 +1,7 @@
 package com.shopservice.refreshers;
 
 import com.google.common.collect.Sets;
-import com.shopservice.ProductConditions;
-import com.shopservice.Services;
-import com.shopservice.Util;
+import com.shopservice.*;
 import com.shopservice.dao.ClientsCategoryRepository;
 import com.shopservice.dao.ProductEntryRepository;
 import com.shopservice.dao.ProductGroupRepository;
@@ -57,7 +55,8 @@ public class DefaultDataSource implements PriceListGenerator.DataSource {
             productConditions.productIds.add(productEntry.productId);
 
         List<Product> products = Services.getProductDAO(clientId).find(productConditions);
-        Util.removeNotAvailable(products);
+        products = new FilterNotAvailable().filter(products);
+        products = new RemoveDuplicatesFilter().filter(products);
 
         if (useCustomCategories)
             return getProductsForCustomCategories(products, productConditions, productMap);
