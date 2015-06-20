@@ -56,7 +56,7 @@ public class YmlGenerator extends PriceListGenerator {
         Offer offer = new Offer();
         offer.price = product.price;
         offer.currencyId = currency;
-        offer.id = product.id + product.category.id;
+        offer.id = product.id;
         offer.categoryId = product.category.id;
         offer.description = product.description;
         offer.vendor = product.manufacturer;

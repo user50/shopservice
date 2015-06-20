@@ -58,6 +58,17 @@ public class DefaultDataSource implements PriceListGenerator.DataSource {
         products = new FilterNotAvailable().filter(products);
         products = new RemoveDuplicatesFilter().filter(products);
 
+        if (clientId.equals("client3")){
+            products = new CollectionTransformer().transform(products, new CollectionTransformer.Transformer<Product, Product>()
+            {
+                @Override
+                public Product transform(Product product) {
+                    product.available = false;
+                    return product;
+                }
+            });
+        }
+
         if (useCustomCategories)
             return getProductsForCustomCategories(products, productConditions, productMap);
         else
