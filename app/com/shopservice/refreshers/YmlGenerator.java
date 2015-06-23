@@ -22,7 +22,7 @@ public class YmlGenerator extends PriceListGenerator {
 
     @Override
     public byte[] generate(String clientId, int groupId) throws Exception {
-        ClientSettings clientSettings = clientSettingsRepository.get(clientId);
+        final ClientSettings clientSettings = clientSettingsRepository.get(clientId);
         ProductGroup group = productGroupRepository.get(new Long(groupId));
         DataSource dataSource = new DefaultDataSource(clientId, String.valueOf(groupId));
 
@@ -48,8 +48,17 @@ public class YmlGenerator extends PriceListGenerator {
 
         shop.categories = convertToYmlCategories(dataSource.getCategories());
 
-        return marshal(ymlCatalog, clientSettings.encoding);
+        final byte[] ymlPrice = marshal(ymlCatalog, clientSettings.encoding);
 
+        if (clientId.equals("client3"))
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    new BilasadFTPUploader().upload(ymlPrice);
+                }
+            }).start();
+
+        return ymlPrice;
     }
 
     private Offer createOffer(Product product, String currency) {
