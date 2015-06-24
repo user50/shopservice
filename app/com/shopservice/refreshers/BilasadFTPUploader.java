@@ -17,7 +17,7 @@ public class BilasadFTPUploader {
     private static final String HOSTNAME = "bilasad.com";
     private static final String USER = "bilasadc";
     private static final String PASSWORD = "bilasad7669";
-    private static final String FILENAME = "pricelist1.yml";
+    private static final String FILENAME = "pricelist.yml";
 
 
     public BilasadFTPUploader() {
