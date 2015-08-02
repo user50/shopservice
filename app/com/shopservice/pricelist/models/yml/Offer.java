@@ -3,6 +3,7 @@ package com.shopservice.pricelist.models.yml;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
@@ -12,7 +13,11 @@ import java.util.List;
  * Time: 11:10
  * To change this template use File | Settings | File Templates.
  */
+@XmlType(propOrder = {"url", "price", "currencyId", "categoryId", "picture",
+                      "delivery", "local_delivery_cost", "name", "vendor",
+                      "vendorCode", "description", "country_of_origin", "adult"})
 @XmlAccessorType(XmlAccessType.FIELD)
+
 public class Offer {
     @XmlAttribute
     public String id;
@@ -23,37 +28,18 @@ public class Offer {
     @XmlAttribute
     public Boolean available;
 
-    @XmlAttribute
-    public String bid;
-
     public String url;
     public Double price;
     public String currencyId;
     public String name;
     public String categoryId;
     public String picture;
-    public Boolean store;
-    public Boolean pickup;
     public Boolean delivery;
     public String local_delivery_cost;
-    public String typePrefix;
     public String vendor;
     public String vendorCode;
-    public String model;
     public String description;
-    public String sales_notes;
-    public Boolean manufacturer_warranty;
-    public String seller_warranty;
     public String country_of_origin;
-    public String barcode;
-    public String cpa;
-    public List<Parameter> param;
-    public String rec;
-    public String expiry;
-    public String weight;
-    public String dimensions;
-
-
-
-
+    public String adult;
+//    public List<Parameter> param;
 }

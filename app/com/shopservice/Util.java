@@ -1,6 +1,7 @@
 package com.shopservice;
 
 
+import com.shopservice.transfer.Product;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import play.cache.Cache;
@@ -13,11 +14,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Util {
+
+    private static final String DTD_DECLARATION = "<!DOCTYPE yml_catalog SYSTEM \"shops.dtd\">\n";
 
     public static  <T> byte[] marshal(T t, String encoding) throws JAXBException, FileNotFoundException {
         JAXBContext context = JAXBContext.newInstance( t.getClass() );
@@ -25,6 +29,7 @@ public class Util {
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, true );
         marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding);
+        marshaller.setProperty("com.sun.xml.internal.bind.xmlHeaders", DTD_DECLARATION);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -88,4 +93,12 @@ public class Util {
         return buffer.toString();
     }
 
+    public static void removeNotAvailable(List<Product> products) {
+        Iterator<Product> iterator = products.iterator();
+        while (iterator.hasNext()){
+            Product product = iterator.next();
+            if (!product.available)
+                iterator.remove();
+        }
+    }
 }

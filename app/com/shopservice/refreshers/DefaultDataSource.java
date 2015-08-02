@@ -1,8 +1,7 @@
 package com.shopservice.refreshers;
 
 import com.google.common.collect.Sets;
-import com.shopservice.ProductConditions;
-import com.shopservice.Services;
+import com.shopservice.*;
 import com.shopservice.dao.ClientsCategoryRepository;
 import com.shopservice.dao.ProductEntryRepository;
 import com.shopservice.dao.ProductGroupRepository;
@@ -37,7 +36,12 @@ public class DefaultDataSource implements PriceListGenerator.DataSource {
     @Override
     public List<Product> getProducts() throws Exception {
         boolean useCustomCategories = productGroupRepository.get(Long.valueOf(groupId)).useCustomCategories;
-        List<ProductEntry> productEntries = productEntryRepository.findSelected(clientId, Integer.valueOf(groupId),useCustomCategories);
+        List<ProductEntry> productEntries = new ArrayList<>();
+        productEntries.addAll(productEntryRepository.findSelected(clientId, Integer.valueOf(groupId),useCustomCategories));
+
+        if (productEntries.isEmpty()){
+            productEntries.addAll(productEntryRepository.get(clientId));
+        }
 
         Map<String, ProductEntry> productMap = new HashMap<>();
 
@@ -51,6 +55,19 @@ public class DefaultDataSource implements PriceListGenerator.DataSource {
             productConditions.productIds.add(productEntry.productId);
 
         List<Product> products = Services.getProductDAO(clientId).find(productConditions);
+        products = new FilterNotAvailable().filter(products);
+        products = new RemoveDuplicatesFilter().filter(products);
+
+        if (clientId.equals("client3")){
+            products = new CollectionTransformer().transform(products, new CollectionTransformer.Transformer<Product, Product>()
+            {
+                @Override
+                public Product transform(Product product) {
+                    product.available = false;
+                    return product;
+                }
+            });
+        }
 
         if (useCustomCategories)
             return getProductsForCustomCategories(products, productConditions, productMap);

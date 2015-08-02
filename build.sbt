@@ -16,7 +16,8 @@ libraryDependencies ++= Seq(
   "org.mongodb" % "mongo-java-driver" % "2.10.1",
   "org.hibernate" % "hibernate-entitymanager" % "4.3.6.Final",
   "net.snaq" % "dbpool" % "5.1",
-  "commons-dbcp" % "commons-dbcp" % "1.4"
+  "commons-dbcp" % "commons-dbcp" % "1.4",
+  "commons-net" % "commons-net" % "3.3"
 )
 
 play.Project.playJavaSettings
