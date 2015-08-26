@@ -247,6 +247,18 @@
         </div>
     </div>
 
+    <div class="row clearfix" id="demoAlert">
+        <div class="col-md-12 column">
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Вы зашли на сервис в демо режиме!</strong><br>
+                Вы сможете видеть только демо данные и выполнять действия только над демо данными (например, згенерировать прайс).
+                Для того, чтобы в сервисе отображалась информация про Ваши товары, а также,
+                чтобы Вы могли генерировать прайсы для Ваших товаров, <a href="/assets/contact.html" class="alert-link">свяжитесь с нами для подключения Вашего
+                интернет-магазина к сервису</a>.
+            </div>
+        </div>
+    </div>
     <!-- breadcrumbs -->
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -697,6 +709,10 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
+
+        if (clientId != 'demo')
+            $('#demoAlert').hide();
+
         // Activates Tooltips for Social Links
         $('.btn').tooltip({
             selector: "span[data-toggle=tooltip]"
