@@ -14,7 +14,7 @@ import org.hibernate.cfg.Environment;
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
 
-    private static DataSourceProvider dataSourceProvider = new ApacheDataSourceProvider(Urls.local.getUrl(), 5);
+    private static DataSourceProvider dataSourceProvider = new ApacheDataSourceProvider(Urls.bilasad.getUrl(), 5);
 
     static {
         try {
