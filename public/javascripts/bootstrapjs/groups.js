@@ -8,6 +8,11 @@ var app = app || {};
 
         url: function(){
             return '/clients/'+clientId+'/groups';
+        },
+
+        parse: function(resp){
+            resp.unshift({id: -1, name: "Выберите прайс"});
+            return resp;
         }
     });
 
@@ -32,9 +37,9 @@ var app = app || {};
 
         render: function(){
             this.$el.empty();
-            this.$el.append('<option value="none" disabled>Выберите прайс</option>');
+            // this.$el.append('<option value="none" disabled>Выберите прайс</option>');
             this.collection.each(this.addOne, this);
-            this.$el.val('none');
+            // this.$el.val('none');
             return this;
         },
         addOne: function(group){
